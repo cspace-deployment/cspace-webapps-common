@@ -1,0 +1,29 @@
+# "generic" list of dependencies (i.e. not OS-specific)
+# Python>=3.6
+Django>=2.2.0
+Pillow
+PyGreSQL
+Pygments
+Wand
+certifi
+chardet
+colour
+dirq
+django-extensions
+django-filter
+django-positions
+djangorestframework
+idna
+itsdangerous
+numpy
+psycopg2
+pyasn1
+pymongo
+pysmb
+requests
+six
+solrpy
+static-ranges
+typing
+urllib3
+# wsgiref
