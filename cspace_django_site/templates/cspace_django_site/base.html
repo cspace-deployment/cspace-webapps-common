@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block scripts %}
+        <script type="text/javascript" src="{% static 'app.bundle.js' %}"></script>
+        <script type="text/javascript">
+            var trackingid = '{{ UA_TRACKING_ID }}';
+            // if there is a tracking id, go ahead and create a tracking object...
+            if (trackingid != '') {
+                xga('create', trackingid, 'auto', trackingid);
+                xga('send', 'pageview', undefined, trackingid);
+            }
+        </script>
+    {% endblock %}
+    {% block extrascript %}{% endblock %}
+
+    <link rel="shortcut icon" type="image/png" href="{% static "cspace_django_site/images/cspace_fav.png" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/reset.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static 'cspace_django_site/css/base.css' %}{% endblock %}"/>
+    <!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static 'admin/css/ie.css' %}{% endblock %}" />
+    <![endif]-->
+    <!-- {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="
+        {% block stylesheet_rtl %}{% static 'admin/css/rtl.css' %}{% endblock %}" />{% endif %} -->
+    <link rel="stylesheet" type="text/css" href="{% static 'common/css/theme.blue.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/smoothness/jquery-ui-1.10.3.custom.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'common/css/PublicSearch.css' %}"/>
+    <!-- the following link may be used if you want to include device-specific styles, based on the device detected by the backend -->
+    <!-- link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/' %}{{ device }}.css"/ -->
+    {% block extrastyle %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/print.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+    {% block extrahead %}{% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Container -->
+<div id="container">
+
+    {% if not is_popup %}
+        <!-- Header -->
+        <div id="header">
+            <div id="branding" class="line">
+                {% block branding %}{% endblock %}
+            </div>
+            {% block nav-global %}{% endblock %}
+        </div>
+        <!-- END Header -->
+    {% endif %}
+
+    <!-- Content -->
+    <div id="content" {% block coltype %}class="line"{% endblock %}>
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}{% endblock %}
+        {% block content %}
+            {% block object-tools %}{% endblock %}
+            {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear"/>
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+{% block footerScript %}
+{% endblock %}
+</html>

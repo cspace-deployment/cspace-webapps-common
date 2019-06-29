@@ -1,0 +1,20 @@
+{% load i18n admin_static %}
+
+{% if user.is_active and user.is_staff %}
+    {% block userlinks %}
+            <a href="{% url 'landing:index' %}" class="expandInfo">All webapps</a>
+            <span class="expandInfo">||</span>
+            <a href="/" class="expandInfo">Home</a>
+            <span class="expandInfo">||</span>
+            <img style="vertical-align: middle; height: 21px;  padding-left: 15px;"
+                 src="{% static "cspace_django_site/images/usericon.jpg" %}"
+                 title="{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}"/>
+            <a href={% url 'logout' %}?next={% url 'landing:index' %} id="logout" class="expandInfo">{% trans 'Sign out' %}</a>
+    {% endblock %}
+{% else %}
+    <a href="{% url 'landing:index' %}" class="expandInfo">All webapps</a>
+    <span class="expandInfo">||</span>
+    <a href="/" class="expandInfo">Home</a>
+    <span class="expandInfo">||</span>
+    <a href="{% url 'login' %}?next={{ request.path }}" id="login" class="expandInfo">{% trans 'Sign in' %}</a>
+{% endif %}
