@@ -1,0 +1,82 @@
+<hr/>
+<h1>{{ jobcount }} job{{ jobcount|pluralize }} in the queue.
+    {% if jobcount > jobs|length %}
+        Only the most recent {{ jobs|length }} jobs displayed.
+    {% endif %}
+</h1>
+<table cellspace="1" id="resultsListing" class="tablesorter">
+    <thead>
+    <tr>
+        <th>Job Number</th>
+        <th>Job Summary</th>
+        <th>Job Errors</th>
+        <th>Job Flag</th>
+        <th>Download Job Files</th>
+        <th/>
+        <th>View Job Files</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for jobno,jobfailed,jobinfo,jobsummary in jobs %}
+        <tr>
+            <td>{{ jobno }}</td>
+            <td>
+                {% if jobsummary.4 == 'completed' %}
+                    all {{ jobsummary.0 }} ingested.
+                {% else %}
+                    {{ jobsummary.0 }} submitted, {{ jobsummary.1 }} ingested.
+                {% endif %}
+            </td>
+            {% if jobsummary.4 == 'problem' %}
+                <td style="max-width: 600px;">
+                    <span style="color: red">{{ jobsummary.2 }} media file{{ jobsummary.2|pluralize }} failed to load.</span>
+                    {% for image in jobsummary.3 %}
+                        {{ image }}
+                    {% endfor %}
+                </td>
+            {% else %}
+                <td/>
+            {% endif %}
+            {% if jobfailed %}
+                <td><span style="color: red">failed</span></td>
+            {% else %}
+                <td>
+                {% if jobsummary.4 == 'problem' %}
+                    <span style="color: red; font-weight: bold">{{ jobsummary.4 }}</span>
+                {% elif jobsummary.4 == 'in progress' or jobsummary.4 == 'pending' %}
+                    <span style="color: green">{{ jobsummary.4 }}</span>
+                {% endif %}
+                </td>
+            {% endif %}
+            <td>
+                {% for j in jobinfo %}
+                    <a href="downloadresults/{{ j.0 }}">{{ j.1 }}</a>
+                    {% if j.1 == 'pending' %}
+                        <a class="button" href="{% url 'uploadmedia:deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this job)</span></a>
+                    {% elif j.1 == 'check' and jobinfo|length == 1 %}
+                        <a class="button" href="{% url 'uploadmedia:deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this qc file)</span></a>
+                    {% endif %}
+
+                {% endfor %}
+            </td>
+            <td/>
+            <td>
+                {% for j in jobinfo %}
+                    <a href="showresults/?filename={{ j.0 }}&status={{ j.1 }}">{{ j.1 }}</a>
+                {% endfor %}
+            </td>
+            <td>
+                {% for j in jobinfo %}
+                    {% if j.1 == 'ingested' %}
+                        <!-- a href="showresults/?filename={{ j.0 }}&status=showinportal">In Portal</a -->
+                        <a href="showresults/?filename={{ j.0 }}&status=showmedia">View Media</a>
+                    {% elif j.1 == 'pending' %}
+                        <a href="checkimagefilenames/?filename={{ j.0 }}">Check File</a>
+                    {% endif %}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

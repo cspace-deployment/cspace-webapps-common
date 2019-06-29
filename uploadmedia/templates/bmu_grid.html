@@ -1,0 +1,38 @@
+{% load staticfiles %}
+<div class="grid-wrapper">
+    {% for item in items %}
+    <div class="grid">
+        <div class="tiny" style="padding-bottom: 4px;">
+            <a target="portal" href="/{{ institution }}/internal/search?maxresults=1&displayType=full&csid={{ item.csid }}">{{ item.accession }}</a>
+            <a target="cspace" href="{{ cspaceserver }}/collectionspace/ui/{{ institution }}/html/{{ csrecordtype }}.html?csid={{ item.media }}">
+                <img src="{% static 'common/images/open_cspace.png' %}" class="cspaceLink"></a>
+        </div>
+        {% if item.blobs %}
+            <div>
+                {% for t in item.blobs %}
+                    <a target="image" href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img style="max-height:{{ sizegrid }}; padding: 0px 4px 4px 0px;" src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativegrid }}/content"/></a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div style="height: {{ sizegrid }}; width: {{ sizegrid }}; background-color: lightgray">
+            <br/>&nbsp;[no image]
+            </div>
+        {% endif %}
+        <p><h4>{{ item.mainentry|safe }}</h4></p>
+        {% for i in item.otherfields %}
+            {% if i.value %}
+                {% if i.multi %}
+                    <p class="tiny">{{ i.label }}:</p>
+                        <ul style="text-indent: 15px">
+                        {% for t in i.value %}
+                            <li><p class="tiny">{{ t|safe }}</p></li>
+                        {% endfor %}
+                        </ul>
+                {% else %}
+                    <p class="tiny">{{ i.label }}: {{ i.value|safe }}</p>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endfor %}
+</div>

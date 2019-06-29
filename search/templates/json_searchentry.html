@@ -1,0 +1,170 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{% static "app.bundle.js" %}"></script>
+  <script type="text/javascript">
+      var trackingid = '{{ UA_TRACKING_ID }}';
+      // if there is a tracker id, go ahead and create a tracking object...
+      if (trackingid != '') {
+          xga('create', trackingid, 'auto', true);
+          xga('send', 'pageview', undefined, trackingid);
+      }
+  </script>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+  <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+  <!-- // <script type="text/javascript" src="{% static "searchResults.jsx" %}"></script> -->
+{% endblock %}
+
+
+{% block content %}
+  <div id="searchForm">
+  </div>
+  <div id="resultsForm">
+  </div>
+  <div id="searchResults">
+  </div>
+  <div id="facets">
+  </div>
+{% endblock %}
+
+{% block footerScript %}
+
+<script type="text/babel">
+
+  var ResultRow = React.createClass({
+    render: function() {
+      var cells = []
+      if ('otherfields' in this.props.data) {
+        for (var i=0; i<this.props.data.otherfields.length; i++) {
+          var field = this.props.data.otherfields[i];
+          cells.push((<td key={field.name}><a className="facet-item" data-facettype={field.name}>{field.value}</a></td>))
+        }
+      }
+      return (
+        <tr className="searchResult">
+          <td><input type="checkbox" className="sel-item" name="item-{this.props.data.counter}" value={this.props.data.csid} checked=""/></td>
+          {cells}
+        </tr>
+      )
+    }
+  });
+
+  var Facets = React.createClass({
+    getInitialState: function() {
+      return {fields: [], facets: []};
+    },
+    componentDidMount: function() {
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json',
+        cache: false,
+        success: function(data) {
+          this.setState({fields: data.fields, facets: data.facets});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    },
+    render: function() {
+      var tableHeaders = []
+      for (var i=0; i<this.state.fields.length; i++) {
+        tableHeaders.push(<th key={i}>{this.state.fields[i]}</th>);
+      }
+      var tableCells = []
+      for (var i=0; i<this.state.facets.length; i++) {
+        var facet = this.state.facets[i]
+
+        tableCells.push(
+          <td key={facet[0]}>
+            <table id="Facet.{facet[0]}" className="tablesorter-blue">
+              <thead><tr><th>Value</th><th>F</th></tr></thead>
+              <tbody>{facet[1].map((f) => {
+                return (
+                  <tr key={ f[0] }>
+                    <td className="facet">
+                      <a href="#" className="facet-item" data-facetType={ facet[0] }>{ f[0] }</a>
+                    </td>
+                    <td>{ f[1] }</td>
+                  </tr>
+                )
+              })}
+              </tbody>
+            </table>
+          </td>
+        );
+      }
+      return (
+        <table width="100%" id="facetListing">
+          <thead>
+            <tr>{tableHeaders}</tr>
+          </thead>
+          <tbody>
+            <tr>{tableCells}</tr>
+          </tbody>
+        </table>
+      );
+    }
+  });
+
+  var SearchResults = React.createClass({
+    getInitialState: function() {
+      return {labels: [], items: []};
+    },
+    componentDidMount: function() {
+      $.ajax({
+        url: this.props.url,
+        dataType: 'json', 
+        cache: false,
+        success: function(data) {
+          this.setState({labels: data.labels, items: data.items});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+      });
+    },
+    render: function() {
+      var tableHeaders = [(<th key="checkboxes"></th>)]
+      var tableRows = []
+      for (var i=0; i<this.state.labels.length; i++) {
+        tableHeaders.push(<th key={this.state.labels[i]}>{this.state.labels[i]}</th>);
+      }
+      for (var i=0; i<this.state.items.length; i++) {
+        tableRows.push(<ResultRow key={i} data={this.state.items[i]}/>);
+      }
+      return (
+        <div id="results">
+          <table id="resultsListing" className="tablesorter-blue">
+            <thead>
+              <tr>
+                {tableHeaders}
+              </tr>
+            </thead>
+            <tbody>
+              {tableRows}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+  });
+
+  ReactDOM.render(
+    <SearchResults url="/search/json/?displayType=list&flowercolor=red%20white&flowercolor_qualifier=keyword&maxresults=100&start=1&family=SAXIFRAGACEAE" />,
+    document.getElementById('searchResults')
+  );
+
+  ReactDOM.render(
+    <Facets url="/search/json/facet/?displayType=list&flowercolor=red%20white&flowercolor_qualifier=keyword&maxresults=100&start=1&family=SAXIFRAGACEAE" />,
+    document.getElementById('facets')
+  );
+</script>
+
+<script type="text/javascript" src="{% static "toolbox.bundle.js" %}"></script>
+
+{% endblock %}

@@ -1,0 +1,176 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="content-main">
+        {% include "toggled.html" %}
+            <form enctype="multipart/form-data" action="{% url 'uploadmedia:uploadfiles' %}" method="post">
+                {% csrf_token %}
+        <ol style="margin-left: 20px;">
+            <h2>
+                <li>Select Files to Upload</li>
+            </h2>
+
+                {% if status == 'down' %}
+                    <h2><span style="color:red">System is down, please standby!</span></h2>
+                {% else %}
+                    <input type="file" name="imagefiles" multiple>
+                    <input type="checkbox" name="validateonly"> Validate files and filenames only, do not process.
+                    <hr/>
+                    {% if dropdowns.usebmuoptions %}
+                        <h2>
+                            <li>Specify how to handle these images</li>
+                        </h2>
+                        <table>
+                            {% for imageoption in dropdowns.bmuoptions %}
+                                <tr>
+                                    <td><input type="radio" name="handling" value="{{ imageoption.1 }}"> {{ imageoption.0 }}</td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                        <h2>
+                            <li>Decide whether to publish these media or not</li>
+                        </h2>
+                    <table>
+                        <tr>
+                            <td><input type="checkbox" name="approvedforweb" checked> Check this box if you want these
+                                media marked "Approved for Web"
+                            </td>
+                        </tr>
+                    </table>
+                    {% if dropdowns.allowintervention %}
+                        <h2>
+                            <li>Override values in image files, if desired</li>
+                        </h2>
+                        <table>
+                            <tr>
+                                <th>Field</th>
+                                <th width="380px">Value</th>
+                                <th>Override Conditions</th>
+                            </tr>
+                            {% for override in dropdowns.overrides %}
+                            <tr>
+                                <td>{{ override.0 }}</td>
+                                <td>
+                                    {% if override.1 == "dropdown" %}
+                                    <select id="{{ override.2 }}" name="{{ override.2 }}">
+                                        <option value="">Please select</option>
+                                        {% for displayname,refname in override.4 %}
+                                            <option value="{{ displayname }}">{{ displayname }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    {% elif override.1 == "text" %}
+                                        <input type="text" style="width:360px" name="{{ override.2 }}" value="{{ override.3 }}">
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <select id="override{{ override.2 }}" name="override{{ override.2 }}">
+                                        <option value="">No Action</option>
+                                        {% for option in override_options %}
+                                            <option value="{{ option.0 }}" {% if option.0 == 'ifblank' %} selected{% endif %}>
+                                                {{ option.1 }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                    <h2>
+                        <li>Select action to perform</li>
+                    </h2>
+                    <input class="prettyBtn" type="submit" name="createmedia"
+                           value="Upload to CSpace and Create Media Records NOW (100 media files max)">
+                    <span class="error">&nbsp;Only click once, please, then be patient!</span>
+                    <br/><br/>
+                    <input class="prettyBtn" type="submit" name="uploadmedia"
+                           value="Upload to CSpace and Queue for LATER CSpace Ingestion"></td>
+
+                    {% if images %}
+                        {% include "images.html" %}
+                    {% endif %}
+
+                    {% if jobinfo %}
+                        <hr/>
+                        {% if jobinfo.status == 'uploadmedia' %}
+                            <h2>Job {{ jobinfo.jobnumber }} enqueued; {{ count }} image{{ count|pluralize }}.</h2>
+                            <!-- h2>Job {{ jobinfo.jobnumber }} enqueued. Estimated time to
+                            run: {{ jobinfo.estimatedtime }} minutes.</h2 -->
+                        {% endif %}
+                        {% if jobinfo.status == 'createmedia' %}
+                            <h2>Job {{ jobinfo.jobnumber }} completed. Time required: {{ elapsedtime }} seconds.</h2>
+                        {% endif %}
+                        {% if jobinfo.status == 'jobfailed' %}
+                            <h2 class="error">Job {{ jobinfo.jobnumber }} failed.<br/>
+                                Please click <a href="showresults/?filename={{ jobinfo.jobnumber }}.check.csv&status=check}">here</a> or consult the 'check' file in job queue for details. Sorry!</h2>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+        </ol>
+            </form>
+        <hr/>
+        <ul style="margin-left: 20px;">
+            <h2>
+                <li>Check on jobs and uploads</li>
+            </h2>
+            <form action="{% url 'uploadmedia:showqueue' %}" method="post">
+                {% csrf_token %}
+                <input class="prettyBtn" type="submit" name="checkjobs" value="View the Job Queue">
+                (display the most recent <select id="num2display" name="num2display">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="500">500</option>
+                </select> jobs.)
+                <input class="prettyBtn" type="submit" name="showerrors" value="List Images That Failed to Load">
+                {% if display == 'showerrors' %}
+                    {% include "showerrors.html" %}
+                {% elif display == 'checkjobs' %}
+                    {% include "showqueue.html" %}
+                {% endif %}
+            </form>
+        {% if items %}
+            <h2>{{ filename }}</h2>
+            {% include "bmu_grid.html" %}
+        {% endif %}
+        {% if filecontent %}
+            <hr/>
+            <h2>{{ filename }} (status: {{ status }})</h2>
+            <pre>{{ filecontent|safe }}</pre>
+        {% endif %}
+        {% if objectnumbers %}
+            <hr/>
+             <h1>Image File Check: {{ jobnumber }}</h1>
+             <h2><li>number of image files checked: {{ objectnumbers|length }}</li></h2>
+            <hr/>
+                <table>
+                    <tr>
+                        <th>filename</th>
+                        <th>object number</th>
+                        <th>image number</th>
+                        <th> </th>
+                        <th>Found in CSpace?</th>
+                    </tr>
+                    {% for o in objectnumbers %}
+                        <tr>
+                            <td>{{ o.0 }}</td>
+                            <td>{{ o.1 }}</td>
+                            <td>{{ o.2 }}</td>
+                            <td>{{ o.3 }}</td>
+                            <td>
+                                {% if o.4 == 0 %}
+                                    <span class="error">Not Found</span>
+                                {% else %}
+                                    <span style="color: green">Found</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+        {% endif %}
+        <hr/>
+        </ul>
+    </div>
+{% endblock %}

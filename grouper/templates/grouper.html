@@ -1,0 +1,67 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/jquery-ui-1.8.22.custom.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    {% include "toggled.html" %}
+    {% if error %}
+        <p style="color: red;">Please submit a search term.</p>
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td><label for="text-input">Group Title</label></td>
+                <td><input source="postgres" type="text" name="gr.group" size="63" id="group"
+                           value="{{ group }}"></td>
+                <td>Title for new group, or Title of existing group (to add or modify).</td>
+            </tr>
+            <tr>
+                <td><label for="text-input">List of Object Numbers</label></td>
+                <td><textarea aria-labelledby="text-input" name="objects" rows="8" cols="60"
+                              id="objects" value="{{ objects }}">{{ objects }}</textarea></td>
+                <td>Separated by blanks, or on multiple lines.<br/>These will be merged in to the existing group
+                    or become the members of the new group.
+                </td>
+            </tr>
+            <tr>
+                <td><input class="prettyBtn" type="submit" name="submit" value="Check input" style="margin: 10px;"></td>
+                <td colspan="2">
+
+                </td>
+            </tr>
+        </table>
+        {% for field in form.hidden_fields %}
+            <div style="display:none;">{{ field }}</div>
+        {% endfor %}
+
+        <div>
+            {% if messages %}
+                <hr/>
+                {% for m in messages %}
+                    <span style="color: red">{{ m }}</span><br/>
+                {% endfor %}
+            {% endif %}
+            {% if count > 0 %}
+                <hr/>
+                {{ count }} items found.
+                {% if time %}
+                    (in {{ time }} seconds.)
+                {% endif %}
+                <hr/>
+                {%  if groupaction %}
+                    <input class="prettyBtn" type="submit" name="updategroup" value="{{ groupaction }}">
+                    <b>"{{ group }}"</b>
+                    (Uncheck members below to delete members from group)
+                {% else %}
+                    <b>Please address issues above in order to update or create a group.</b>
+                {% endif %}
+                {% include "results.html" %}
+            {% endif %}
+        </div>
+    </form>
+{% endblock %}

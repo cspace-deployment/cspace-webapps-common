@@ -1,0 +1,45 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block content %}
+    {% include "toggled.html" %}
+    {% if error %}
+        <p style="color: red;">Please submit a search term.</p>
+    {% endif %}
+    <form action="" method="get">
+        <div style="text-align: center">
+            <label for="text-input">&nbsp;</label>
+            <input aria-labelledby="text-input" type="text" name="keyword" size="40" id="keyword" value="{{ keyword }}"><br/>
+            <!-- input type="hidden" name="maxresults" value="{{ maxresults }}" -->
+            <!-- input class="prettyBtn" type="submit" name="submit" value="I'm feeling lucky" style="margin: 20px;" -->
+            <input class="prettyBtn" type="submit" name="submit" value="Search the Metadata" style="margin: 20px;">
+            <input class="prettyBtn" type="submit" name="submit" value="Search for Images" style="margin: 20px;">
+        </div>
+        {% for field in form.hidden_fields %}
+            <div style="display:none;">{{ field }}</div>
+        {% endfor %}
+
+        <div>
+            {% if errormsg %}
+                <hr/>
+                <span style="color: red">{{ errormsg }}</span>
+            {% endif %}
+            {% if count > 0 %}
+                <hr/>
+                {{ count }} items found. {{ recordlimit }}
+                {% if time %}
+                    (in {{ time }} seconds.)
+                {% endif %}
+                <hr/>
+            {% elif keyword %}
+                no items found.
+            {% endif %}
+        </div>
+    </form>
+    {% if resultType == 'metadata' %}
+        {% include "compact.html" %}
+    {% else %}
+        {% include "masonrycontainer.html" %}
+    {% endif %}
+{% endblock %}
