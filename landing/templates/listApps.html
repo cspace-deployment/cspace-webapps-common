@@ -1,0 +1,33 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="content-main">
+        {% if appList %}
+            <table>
+                <tr>
+                    <th scope="row"></th>
+                </tr>
+                {% for app in appList %}
+                    <tr>
+                        <td><a href="{{ app.1 }}">{{ app.0 }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br><br>
+        {% else %}
+            <p>{% trans "No apps" %}</p>
+        {% endif %}
+        {% if not user.is_active %}
+            <b><a href="{% url 'login' %}?next={% url request.resolver_match.view_name %}" id="login">{% trans 'Sign in' %}</a></b>
+            to view all available applications.
+        {% endif %}
+        <hr/>
+        <div>
+            Visit the "standard" <a target="_new" href="https://{{ hostname }}">CollectionSpace UI ({{ hostname }})</a>
+            (login required!)
+        </div>
+        <hr/>
+    </div>
+{% endblock %}
