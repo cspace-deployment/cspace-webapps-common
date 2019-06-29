@@ -1,0 +1,47 @@
+{% include "searchStats.html" %}
+{% if errormsg %}
+   <span style="color: red">{{ errormsg }}</span>
+{% endif %}
+{% if count > 0 %}
+    <form method="post" class="grouperForm" id="grouperForm" action="../../grouper/">
+        {% csrf_token %}
+        <input type="hidden" name="objects" id="objects"/>
+        <input type="hidden" name="gr.group" id="gr.group"/>
+    </form>
+<form method="post" class="searchForm" id="selectedItems" action="../dispatch/">
+    {% csrf_token %}
+    <input type="hidden" name="count" value="{{ count }}"/>
+    <input type="hidden" name="lastpage" id="lastpage" value="{{ lastpage }}"/>
+    <input type="hidden" name="start" value="{{ start }}"/>
+    <input type="hidden" name="querystring" value="{{ querystring }}"/>
+    <input type="hidden" name="url" value="{{ url }}"/>
+
+        <div id="tabs">
+            <ul>
+                <li><a href="#results">Results</a></li>
+                <li><a href="#facets">Facets</a></li>
+                <li><a href="#maps">Maps</a></li>
+                {% if count <= resultlimit %}
+                <li><a href="#statistics">Statistics</a></li>
+                {% endif %}
+                <!-- li><a href="#configuration">Configuration</a></li -->
+            </ul>
+            <div id="selectedresults">
+            <input type="checkbox" id="select-items" name="select-items" checked/> select all
+            <button type="submit" name="csv" id="search-csv" class="prettyBtn">download selected as csv</button>
+            {% if user.is_active and user.is_staff and count <= 1000 %}
+                <button id="grouper-btn" class="prettyBtn">make a group of the {% if count > maxresults %}{{ maxresults }}{% else %}{{ count }}{% endif %} result{{ count|pluralize }} on this page</button>
+            {% endif %}
+            <!-- button type="submit" name="pdf" id="search-pdf" class="prettyBtn">Print PDF</button -->
+            <!-- button type="submit" name="preview" id="search-preview" class="prettyBtn">printable version</button -->
+            </div>
+            {% include "results.html" %}
+            {% include "facets.html" %}
+            {% include "maps.html" %}
+            {% if count <= resultlimit %}
+                {% include "statistics.html" %}
+            {% endif %}
+            <!--  include "configuration.html"  -->
+        </div>
+</form>
+{% endif %}

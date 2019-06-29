@@ -1,0 +1,39 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="content-main">
+        {% include "toggled.html" %}
+        {% if resultsOnly %}
+            {% include "shrine.html" %}
+        {% else %}
+            <div class="searchPanel">
+                <form class="searchForm" id="search">
+                    {% csrf_token %}
+                    <div id="searchfieldsTarget">
+                        {% include "fields.html" %}
+                        {% include "buttons.html" %}
+                    </div>
+                </form>
+            </div>
+            <div id="waitingImage" style="display: none">
+                <h1><img style="vertical-align: middle"
+                         src="{% static "cspace_django_site/images/timer-animated.gif" %}"
+                         alt="Searching..."/> Searching...</h1>
+            </div>
+            <div id="resultsPanel">
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% if count > 0 %}
+                    {% include "searchResults.html" %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

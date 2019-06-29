@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<div id="searchstats" style="display: flex; align-items: flex-end; width: 100%; margin-bottom: 5px; margin-top: 13px;">
+    {% if url %}
+        {% if count > 0 %}
+            <div style="flex: 1 1 auto; padding-right: 10px;">
+                <h2 style="display: inline">{{ count }} item{{ count|pluralize }} found.</h2>
+                {% if pagesummary %}{{ pagesummary }}{% endif %}
+                {% if recordlimit %}<span style="color: red;">{{ recordlimit }}</span>{% endif %}
+            </div>
+        {% else %}
+            <div style="flex: 1 1 auto; padding-right: 10px;">
+                <h2 style="display: inline">no items found.</h2>
+            </div>
+        {% endif %}
+        <div style="flex: 0 1 auto; padding-right: 10px; margin-bottom: 1px;">
+            <div>
+                <!-- Target -->
+                <input style="padding: 7px 8px; width: 300px" id="emailableurl" value="{{ request.environ.HTTP_REFERER }}?{{ url }}">
+                <!-- Trigger -->
+                <button class="cbbtn" data-clipboard-target="#emailableurl">
+                    <img width="13" src="{% static "cspace_django_site/images/clippy.svg" %}" alt="Copy to clipboard">
+                </button>
+            </div>
+        </div>
+        <div id="permalink" style="flex: 0 1 auto; margin-bottom: 1px;">
+            <div>
+                <a target= "_new" href="?{{ url }}">Permalink</a> to this query<br/>
+                {% if querystring %}
+                <a onclick="$('#solrquery').toggle(); return false;" id="showquery">Solr query</a>
+                <span id="solrquery" style="display: none"><b><i>{{ querystring }}</i></b></span>  took {{ time }} seconds.
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

@@ -1,0 +1,102 @@
+{% load staticfiles %}
+{% spaceless %}
+
+{% for item in items %}
+    <div style="overflow: auto;">
+        <div style="float: left; ; width: 50%;">
+            <div class="result-title">
+                <input type="checkbox" name="item-{{ item.counter }}" value="{{ item.csid }}" checked/>
+                &nbsp;
+                <b><a href="?maxresults=1&displayType=full&{{ item.accessionfield }}={{ item.accession }}">{{ item.accession }}</a></b>
+                <a title="permalink" target=_new href="/{{ institution }}/objects/{{ item.accession }}"><img src="{% static "common/images/permalink.svg" %}" class="cspaceLink"></a>
+                {% if user.is_active and user.is_staff %}
+                <a target="cspace" href="{{ cspaceserver }}/collectionspace/ui/{{ institution }}/html/{{ csrecordtype }}.html?csid={{ item.csid }}">
+                    <img src="{% static "common/images/open_cspace.png" %}" class="cspaceLink">Open in CSpace</a>
+                {% endif %}
+                <h2 style="padding: 9px 0px;">{{ item.mainentry|safe }}</h2>
+            </div>
+            <table border="1" class="otheritems">
+            {% if item.location %}
+                <tr><td><i>Lat / Long</i></td>
+                    <td>{{ item.location }}
+                    {% if item.marker %}
+                        <a class="map-item">[click for map]</a>
+                        <div data-marker="{{ item.location }}" class="small-map" style="display:none; margin-bottom:10px;">
+                            <div class="map-replace"></div>
+                            {% for i in item.mapfields %}
+                                {% if i.value %}
+                                    <div>{{ i.label }}: <span>{{ i.value|safe }}</span></div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+            {% for i in item.otherfields %}
+                {% if 'subheader' in i.name %}
+                    <tr><td class="subheader" colspan="2"><h3>{{ i.label }}</h3></td></tr>
+                {% elif i.value %}
+                    {% if i.multi == 0 %}
+                        {% if 'mailto:' in i.value %}
+                            <tr><td><i>{{ i.label }}:</i></td><td><a href="{{ i.value }}{{ item.accession }}">click here</a></td></tr>
+                        {% comment %}
+                        {% elif i.value == 'true' or i.value == 'false' and '?' in i.label %}
+                            {% if i.value == 'true' %}
+                                <tr><td><i>{{ i.label }}</i></td></tr>
+                            {% endif %}
+                        {% endcomment %}
+                        {% else %}
+                            <tr><td><i>{{ i.label }}:</i></td><td><a class="facet-item" data-facetType="{{ i.name }}">{{ i.value|safe }}</a></td></tr>
+                        {% endif %}
+                    {% elif i.multi == 1 %}
+                        {% for t in i.value %}
+                            <tr><td><i>{{ i.label }}:</i></td><td><a class="facet-item" data-facetType="{{ i.name }}">{{ t|safe }}</a></td></tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr><td><i>{{ i.label }}:</i></td><td>
+                            {% if i.special %}
+                                <table border="1">
+                                    <tr>
+                                        {% for t in i.value %}
+                                            <td><span style="background-color:{{ t }}; width:20px">&nbsp;&nbsp;&nbsp;&nbsp;</span></td>
+                                        {% endfor %}
+                                    </tr>
+                                </table>
+                            {% else %}
+                                <ul style="list-style: disc; list-style-position: inside; padding-left: 1.4em; text-indent: -1.4em;">
+                                    {% for t in i.value %}
+                                        <li><a class="facet-item" data-facetType="{{ i.name }}">{{ t|safe }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </td></tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </table>
+        </div>
+
+        <div style="float: right; width: 50%;">
+        {% if item.blobs %}
+            <div style="text-align: right;">
+                {% for t in item.blobs %}
+                    <a target="image" href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img style="max-width: 600px; height: {{ sizecompact }}; padding: 0px 4px 4px 0px;" src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativecompact }}/content"/></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if item.cards and item.blobs%}
+            <hr/>
+        {% endif %}
+        {% if item.cards %}
+            <div style="text-align: right;">
+                {% for t in item.cards %}
+                    <a target="image" href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img style="max-width: 600px; height: {{ sizecompact }}" src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativecompact }}/content"/></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+        <hr/>
+{% endfor %}
+{% endspaceless %}

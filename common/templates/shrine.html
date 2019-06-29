@@ -1,0 +1,107 @@
+{% load staticfiles %}
+
+<a class="cbbtn" href="../search">Click here to start a new search</a>
+{% for item in items %}
+    <div style="overflow: auto;">
+        <div style="width: 1000px; text-align: right;">
+            <hr/><span style="padding:2px; font-size:xx-large; font-weight: bold">{{ item.mainentry|safe }}</span><hr/>
+        </div>
+        <div style="float: left; min-width: 350px; padding-right: 10px;">
+        {% if item.blobs %}
+            <div style="text-align: left; padding-bottom: 10px; ">
+                <a target="image" href="{{ imageserver }}/blobs/{{ item.blobs.0 }}/derivatives/OriginalJpeg/content"><img style="max-width: 600px; height: 380px;" src="{{ imageserver }}/blobs/{{ item.blobs.0 }}/derivatives/Medium/content"/></a>
+            </div>
+            <div style="text-align: left; max-width: 500px;">
+                {% for t in item.blobs %}
+                    {% if forloop.counter != 1 %}
+                    <a target="image" href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img style="max-width: 600px; height: {{ sizecompact }}" src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativecompact }}/content"/></a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        </div>
+
+        <div style="float: left; ; width: 450px;">
+            <div class="result-title">
+                <h2>{{ item.accession }}</h2>
+            </div>
+            <table class="xxx">
+            {% if item.location %}
+                <tr><td><i>Lat / Long</i></td>
+                    <td>{{ item.location }}
+                    {% if item.marker %}
+                        <a class="map-item">[click for map]</a>
+                        <div data-marker="{{ item.location }}" class="small-map" style="display:none; margin-bottom:10px;">
+                            <div class="map-replace"></div>
+                            {% for i in item.mapfields %}
+                                {% if i.value %}
+                                    <div>{{ i.label }}: <span>{{ i.value|safe }}</span></div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endif %}
+
+            {% for i in item.otherfields %}
+                {% if i.value %}
+                    {% if i.multi == 0 %}
+                        {% if 'mailto:' in i.value %}
+                            <tr><td><i>{{ i.label }}:</i></td><td><span><a href="{{ i.value }}">click here</a></span></td></tr>
+                        {% else %}
+                            <tr><td><i>{{ i.label }}:</i></td><td><span>{{ i.value|safe }}</span></td></tr>
+                        {% endif %}
+                    {% elif i.multi == 1 %}
+                        <tr><td><i>{{ i.label }}:</i></td>
+                            <td>
+                                {% if i.value|length == 1 %}
+                                    <span>{{ i.value.0|safe }}</span>
+                                {% else %}
+                                    {% for t in i.value %}
+                                        <li><span>{{ t|safe }}</span></li>
+                                    {% endfor %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr><td><i>{{ i.label }}:</i></td><td>
+                            {% if i.special %}
+                                <table border="1">
+                                    <tr><td>
+                                        {% for t in i.value %}
+                                            <span style="background-color:{{ t }}; width:20px">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                        {% endfor %}
+                                    </td></tr>
+                                </table>
+                            {% else %}
+                                <ul style="text-indent: 15px">
+                                    {% for t in i.value %}
+                                        <li><span>{{ t|safe }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </td></tr>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% if item.cards %}
+            <tr><td>
+            <hr/>
+            <h5>Catalog Card{{ item.cards|pluralize }}:</h5>
+            <div style="text-align: left;">
+                {% for t in item.cards %}
+                    <a target="image" href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img style="max-width: 600px; height: {{ sizecompact }}" src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativecompact }}/content"/></a>
+                {% endfor %}
+            </div>
+            </td></tr>
+        {% endif %}
+            </table>
+        </div>
+    </div>
+        <i>Permanent link (use as citation in Wikipedia and other reference sources):</i>
+        <a title="permalink" target=_new href="/{{ institution }}/objects/{{ item.accession }}">
+            {{ request.environ.HTTP_HOST }}/{{ institution }}/objects/{{ item.accession }}
+        </a>
+
+{% endfor %}
