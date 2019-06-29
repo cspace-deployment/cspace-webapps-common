@@ -13,7 +13,7 @@
 {% block content %}
     <div id="login" class="line">
         <div class="unit size1of3">
-            <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+            <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div id="login-header">Sign In</div>
                 <div id="login-form">
@@ -39,7 +39,7 @@
         </div>
         <div id="login-content" class="unit size2of3 lastUnit">
             <p>Sign in to the <strong>CollectionSpace Webapps</strong> using the same login and password you use to login to the CollectionSpace system itself.</p>
-            <p>Or, if you want to see what is available without signing in, click <b><a href="{% url 'landing:index' %}">here</a></b>.</p>
+            <p>Or, if you want to see what is available without signing in, click <b><a href="{% url 'index' %}">here</a></b>.</p>
         </div>
     </div>
 {% endblock %}

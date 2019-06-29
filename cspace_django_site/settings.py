@@ -53,7 +53,11 @@ ROOT_URLCONF = 'cspace_django_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'cspace_django_site/templates/admin'),
+            os.path.join(BASE_DIR, 'cspace_django_site/templates/registration'),
+            os.path.join(BASE_DIR, 'cspace_django_site/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -67,6 +71,7 @@ TEMPLATES = [
 ]
 
 # WSGI_APPLICATION = 'cspace_django_site.wsgi.application'
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'common/templates')]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -149,7 +154,6 @@ SITE_ID = 2
 #
 # AuthN backends
 #
-# noinspection PyUnresolvedReferences
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'authn.authn.CSpaceAuthN',

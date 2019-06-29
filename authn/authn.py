@@ -192,7 +192,7 @@ class CSpaceAuthN(object):
     # Django AuthN/AuthZ methods to implement.
     #
 
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, request, username=None, password=None):
         """
             Called by Django's AuthN/AuthZ framework to authenticate a user with username and password credentials.
             This method attempts to authenticate with the specified CollectionSpace Services instance.  If authenti-

@@ -5,7 +5,6 @@ import solr
 from os import path, popen
 import json
 
-from django.core.urlresolvers import reverse
 from cspace_django_site import settings
 from common import cspace  # we use the config file reading function
 from json import loads
@@ -139,7 +138,7 @@ def parseRows(rows, prmz):
 
 
 def loadConfiguration(configFileName):
-    config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), configFileName)
+    config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), configFileName)
 
 # holder for global variables and other parameters
     class prmz:
@@ -188,7 +187,7 @@ def loadConfiguration(configFileName):
         prmz.VERSION = getversion()
 
     except:
-        print('ERROR in configuration file %s' % path.join(settings.BASE_PARENT_DIR, 'config/' + configFileName + '.cfg'))
+        print('ERROR in configuration file %s' % path.join(settings.BASE_DIR, 'config/' + configFileName + '.cfg'))
         print('this webapp will probably not work.')
         raise
 
@@ -201,13 +200,13 @@ def loadConfiguration(configFileName):
 
 def loadFields(fieldFile, prmz):
     # get "frontend" configuration from the ... frontend configuration file
-    print('Reading field definitions from %s' % path.join(settings.BASE_PARENT_DIR, 'config/' + fieldFile))
+    print('Reading field definitions from %s' % path.join(settings.BASE_DIR, 'config/' + fieldFile))
 
     prmz.LOCATION = ''
     prmz.DROPDOWNS = []
     prmz.FACETS = {}
 
-    prmz = getParms(path.join(settings.BASE_PARENT_DIR, 'config/' + fieldFile), prmz)
+    prmz = getParms(path.join(settings.BASE_DIR, 'config/' + fieldFile), prmz)
 
     for p in prmz.PARMS:
         if 'dropdown' in prmz.PARMS[p][1]:
@@ -247,7 +246,8 @@ def loadFields(fieldFile, prmz):
             _v = []
             for k, v in values.items():
                 _v.append((k, v))
-            _facets[key] = sorted(_v, key=lambda (a, b): b, reverse=True)
+
+            _facets[key] = sorted(_v, key=lambda ab: (ab[1]), reverse=True)
         facets = _facets
 
         for facet, values in facets.items():
@@ -283,7 +283,7 @@ def loadFields(fieldFile, prmz):
 def getversion():
     try:
         # version = open('VERSION','r').read().strip()
-        version = open(path.join(settings.BASE_PARENT_DIR, 'VERSION'), 'r').read().strip()
+        version = open(path.join(settings.BASE_DIR, 'VERSION'), 'r').read().strip()
         # version_file.close()
     except:
         raise

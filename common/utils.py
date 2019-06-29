@@ -71,7 +71,7 @@ def getfacets(response):
         _v = []
         for k, v in values.items():
             _v.append((k, v))
-        _facets[key] = sorted(_v, key=lambda (a, b): b, reverse=True)
+        _facets[key] = sorted(_v, key=lambda ab: (ab[1]), reverse=True)
     return _facets
 
 
@@ -725,8 +725,7 @@ def doSearch(context, prmz, request):
         response = s.query(querystring, facet='true', facet_field=facetfields, fq={}, fields=solrfl2,
                            rows=context['maxresults'], facet_limit=prmz.MAXFACETS, sort=context['sortkey'],
                            facet_mincount=1, start=startpage)
-        print('Solr search succeeded, %s results, %s rows requested starting at %s; %8.2f seconds.' % ()
-            response.numFound, context['maxresults'], startpage, time.time() - solrtime)
+        print('Solr search succeeded, %s results, %s rows requested starting at %s; %8.2f seconds.' % (response.numFound, context['maxresults'], startpage, time.time() - solrtime))
     # except:
     except Exception as inst:
         # raise

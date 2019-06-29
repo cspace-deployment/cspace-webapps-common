@@ -72,20 +72,20 @@ def make_get_request(realm, uri, hostname, protocol, port, username, password):
         server = protocol + "://" + hostname + ":" + port
 
     # this is a bit elaborate because otherwise
-    # the urllib.error approach to basicauth is to first try the request without the credentials, get a 401
+    # the urllib approach to basicauth is to first try the request without the credentials, get a 401
     # then retry the request with the credentials... who know why...
-    passMgr = urllib.error.HTTPPasswordMgr()
+    passMgr = urllib.request.HTTPPasswordMgr()
     passMgr.add_password(realm, server, username, password)
-    authhandler = urllib.error.HTTPBasicAuthHandler(passMgr)
-    opener = urllib.error.build_opener(authhandler)
+    authhandler = urllib.request.HTTPBasicAuthHandler(passMgr)
+    opener = urllib.request.build_opener(authhandler)
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(unencoded_credentials).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
     opener.addheaders = [('Authorization', auth_value)]
-    urllib.error.install_opener(opener)
+    urllib.request.install_opener(opener)
     url = "%s/%s" % (server, uri)
 
     try:
-        f = urllib.error.urlopen(url)
+        f = urllib.request.urlopen(url)
         statusCode = f.getcode()
         data = f.read()
         result = (url, data, statusCode)
@@ -112,26 +112,26 @@ def postxml(realm, uri, hostname, protocol, port, username, password, payload, r
         server = protocol + "://" + hostname + ":" + port
 
     # this is a bit elaborate because otherwise
-    # the urllib.error approach to basicauth is to first try the request without the credentials, get a 401
+    # the urllib approach to basicauth is to first try the request without the credentials, get a 401
     # then retry the request with the credentials... who know why...
-    passMgr = urllib.error.HTTPPasswordMgr()
+    passMgr = urllib.request.HTTPPasswordMgr()
     passMgr.add_password(realm, server, username, password)
-    authhandler = urllib.error.HTTPBasicAuthHandler(passMgr)
-    opener = urllib.error.build_opener(authhandler)
+    authhandler = urllib.request.HTTPBasicAuthHandler(passMgr)
+    opener = urllib.request.build_opener(authhandler)
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(unencoded_credentials).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
     opener.addheaders = [('Authorization', auth_value)]
-    urllib.error.install_opener(opener)
+    urllib.request.install_opener(opener)
     url = "%s/%s" % (server, uri)
 
     elapsedtime = time.time()
-    request = urllib.error.Request(url, payload, {'Content-Type': 'application/xml'})
-    # default method for urllib.error with payload is POST
+    request = urllib.request.Request(url, payload, {'Content-Type': 'application/xml'})
+    # default method for urllib.request with payload is POST
     if requestType == 'PUT': request.get_method = lambda: 'PUT'
     elif requestType == 'DELETE': request.get_method = lambda: 'DELETE'
 
     try:
-        f = urllib.error.urlopen(request)
+        f = urllib.request.urlopen(request)
         statusCode = f.getcode()
         data = f.read()
         info = f.info()
