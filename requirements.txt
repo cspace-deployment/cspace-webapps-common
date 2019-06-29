@@ -26,4 +26,5 @@ solrpy
 static-ranges
 typing
 urllib3
+django-mobileesp
 # wsgiref
