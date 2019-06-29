@@ -20,6 +20,7 @@ cspace_django_site/extra_settings.py
 cspace_django_site/main.cfg
 
 # npm / webpack stuff
+webpack_dist
 node_modules
 package-lock.json
 
