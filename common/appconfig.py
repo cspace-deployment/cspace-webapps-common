@@ -282,9 +282,7 @@ def loadFields(fieldFile, prmz):
 
 def getversion():
     try:
-        # version = open('VERSION','r').read().strip()
         version = open(path.join(settings.BASE_DIR, 'VERSION'), 'r').read().strip()
-        # version_file.close()
     except:
         raise
         version = 'Unknown'
