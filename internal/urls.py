@@ -6,7 +6,7 @@ from internal import views
 urlpatterns = [
     path('', views.direct, name='direct'),
     path('search/', views.search, name='search'),
-    path('search/(?P<fieldfile>[\w-]+)', views.loadNewFields, name='loadNewFields'),
+    path('search/<fieldfile>', views.loadNewFields, name='loadNewFields'),
     path('results/', views.retrieveResults, name='retrieveResults'),
     path('bmapper/', views.bmapper, name='bmapper'),
     path('kml/', views.bmapper, name='kml'),

@@ -4,7 +4,7 @@ from service import views
 
 urlpatterns = [
     # ex: /service/intakes
-    path('(?P<service>[\w-]+)/', views.get_list, name='get_list'),
+    path('<service>', views.get_list, name='get_list'),
     # ex: /service/intakes/a123-b345-456d
-    path('(?P<service>[\w-]+)/(?P<item_csid>[\w-]+)/', views.get_item, name='get_item'),
+    path('<service>', views.get_item, name='get_item'),
 ]
