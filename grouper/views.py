@@ -8,22 +8,22 @@ import urllib
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 
-from common.utils import setConstants
+from common.utils import setConstants, loginfo
 from common.appconfig import loadConfiguration, loadFields, getParms
 from common import cspace # we use the config file reading function
-from grouputils import find_group, create_group, add2group, delete_from_group, setup_solr_search
+from grouper.grouputils import find_group, create_group, add2group, delete_from_group, setup_solr_search
 from cspace_django_site import settings
 from os import path
 from .models import AdditionalInfo
 
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'grouper')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'grouper')
 
 # read common config file
 common = 'common'
 prmz = loadConfiguration(common)
-print 'Configuration for %s successfully read' % common
+loginfo('grouper','Configuration for %s successfully read' % 'grouper', {}, {})
 
-groupConfig = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'grouper')
+groupConfig = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'grouper')
 prmz.FIELDDEFINITIONS = groupConfig.get('grouper', 'FIELDDEFINITIONS')
 
 # add in the the field definitions...
@@ -35,7 +35,6 @@ prmz.TITLE = groupConfig.get('grouper', 'TITLE')
 prmz.NUMBERFIELD = groupConfig.get('grouper', 'NUMBERFIELD')
 prmz.CSIDFIELD = groupConfig.get('grouper', 'CSIDFIELD')
 
-print 'Configuration for %s successfully read' % 'grouper'
 
 def remove_items(context):
     for item in 'groupaction items labels count'.split(' '):

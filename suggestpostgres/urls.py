@@ -1,9 +1,9 @@
 __author__ = 'jblowe'
 
-from django.conf.urls import patterns, url
-import views
+from django.urls import include, path
+from suggestpostgres import views
 
-urlpatterns = patterns('',
-                       # ex: /suggestpostgres?q=ASPARAG&elementID=ta.taxon
-                       url(r'^', views.postgresrequest, name='postgresrequest'),
-                       )
+urlpatterns = [
+    # ex: /suggestpostgres?q=ASPARAG&elementID=ta.taxon
+    path('', views.postgresrequest, name='postgresrequest'),
+]

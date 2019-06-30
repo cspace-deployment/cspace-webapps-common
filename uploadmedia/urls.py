@@ -1,16 +1,16 @@
 __author__ = 'jblowe'
 
-from django.conf.urls import patterns, url
+from django.urls import include, path
 from uploadmedia import views
 
-urlpatterns = patterns('',
-                       url(r'^/?$', views.uploadfiles),
-                       url(r'^uploadfiles', views.uploadfiles, name='uploadfiles'),
-                       url(r'^rest/(?P<action>[\w\-\.]+)$', views.rest, name='rest'),
-                       url(r'^checkimagefilenames', views.checkimagefilenames, name='checkimagefilenames'),
-                       url(r'^showqueue', views.showqueue, name='showqueue'),
-                       url(r'^downloadresults/(?P<filename>[\w\-\.]+)$', views.downloadresults, name='downloadresults'),
-                       url(r'^showresults', views.showresults, name='showresults'),
-                       url(r'^deletejob/(?P<filename>[\w\-\.]+)?$', views.deletejob, name='deletejob'),
-                       #url(r'createmedia', views.createmedia, name='createmedia'),
-                       )
+urlpatterns = [
+    path('', views.uploadfiles),
+    path('uploadfiles', views.uploadfiles, name='uploadfiles'),
+    path('rest/(?P<action>[\w\-\.]+)', views.rest, name='rest'),
+    path('checkimagefilenames', views.checkimagefilenames, name='checkimagefilenames'),
+    path('showqueue', views.showqueue, name='showqueue'),
+    path('downloadresults/(?P<filename>[\w\-\.]+)', views.downloadresults, name='downloadresults'),
+    path('showresults', views.showresults, name='showresults'),
+    path('deletejob/(?P<filename>[\w\-\.]+)?', views.deletejob, name='deletejob'),
+    # path('createmedia', views.createmedia, name='createmedia'),
+]

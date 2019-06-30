@@ -7,7 +7,7 @@ import time
 from os import path
 from xml.sax.saxutils import escape
 import traceback
-import ConfigParser
+import configparser
 
 from cswaExtras import postxml, relationsPayload, getCSID
 
@@ -97,8 +97,8 @@ def mediaPayload(mh, institution):
     payload = payload.replace('#LOCALITY#', '')
     payload = payload.replace('INSTITUTION', institution)
 
-    # print "mediaPayload..."
-    # print payload
+    # print("mediaPayload...")
+    # print(payload)
     return payload
 
 def uploadblob(mediaElements, config, http_parms):
@@ -112,14 +112,14 @@ def uploadblob(mediaElements, config, http_parms):
     elapsedtime = time.time()
     response = requests.post(url, data=payload, files=files, auth=HTTPBasicAuth(http_parms.username, http_parms.password))
     if response.status_code != 201:
-        print "blob creation failed!"
-        print "response: %s" % response.status_code
-        print response.content
+        print("blob creation failed!")
+        print("response: %s" % response.status_code)
+        print(response.content)
     response.raise_for_status()
 
     blobURL = response.headers['location']
     blobCSID = blobURL.split('/')[-1:][0]
-    print 'blobcsid %s elapsedtime %s ' % (blobCSID, time.time() - elapsedtime)
+    print('blobcsid %s elapsedtime %s ' % (blobCSID, time.time() - elapsedtime))
     mediaElements['blobCSID'] = blobCSID
     return mediaElements
 
@@ -154,7 +154,7 @@ def uploadmedia(mediaElements, config, http_parms):
                 pass
                 # postxml('POST', 'batch/563d0999-d29e-4888-b58d', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, primary_payload)
             except:
-                print "batch job to set primary image failed."
+                print("batch job to set primary image failed.")
 
         else:
             pass
@@ -166,7 +166,7 @@ def uploadmedia(mediaElements, config, http_parms):
             # try to relate media record to collection object if needed
             objectCSID = getCSID('objectnumber', mediaElements['objectnumber'], config)
             if objectCSID == [] or objectCSID is None:
-                print "could not get (i.e. find) objectnumber's csid: %s." % mediaElements['objectnumber']
+                print("could not get (i.e. find) objectnumber's csid: %s." % mediaElements['objectnumber'])
                 mediaElements['objectCSID'] = 'not found'
                 # raise Exception("<span style='color:red'>Object Number not found: %s!</span>" % mediaElements['objectnumber'])
             else:
@@ -204,7 +204,7 @@ def uploadmedia(mediaElements, config, http_parms):
                 mediaElements['obj2mediaCSID'] = csid
                 #messages.append("relations REST API post succeeded...")
                 for m in messages:
-                    print "   %s" % m
+                    print("   %s" % m)
     return mediaElements
 
 
@@ -240,20 +240,20 @@ def getRecords(rawFile):
 if __name__ == "__main__":
 
     if len(sys.argv) == 3:
-        print "MEDIA: input  file (fully qualified path): %s" % sys.argv[1]
-        print "MEDIA: config file (fully qualified path): %s" % sys.argv[2]
+        print("MEDIA: input  file (fully qualified path): %s" % sys.argv[1])
+        print("MEDIA: config file (fully qualified path): %s" % sys.argv[2])
     else:
         print
-        print "usage: %s <jobname> <config file>" % sys.argv[0]
-        print "e.g.   %s 2017-02-05 pahma_Uploadmedia_dev.cfg" % sys.argv[0]
+        print("usage: %s <jobname> <config file>" % sys.argv[0])
+        print("e.g.   %s 2017-02-05 pahma_Uploadmedia_dev.cfg" % sys.argv[0])
         print
         sys.exit(1)
 
     try:
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         config.read(sys.argv[2] + '.cfg')
     except:
-        print "MEDIA: could not get configuration from %s" % sys.argv[2]
+        print("MEDIA: could not get configuration from %s" % sys.argv[2])
         sys.exit(1)
 
     class http_parms:
@@ -280,17 +280,17 @@ if __name__ == "__main__":
         http_parms.cache_path = config.get('files', 'directory')
 
     except:
-        print "could not get at least one of alwayscreatemedia, realm, hostname, port, protocol, username, password or institution from config file."
-        # print "can't continue, exiting..."
+        print("could not get at least one of alwayscreatemedia, realm, hostname, port, protocol, username, password or institution from config file.")
+        # print("can't continue, exiting...")
         sys.exit(1)
 
-    # print 'config',config
+    # print('config',config)
     records, columns = getRecords(sys.argv[1])
     if columns == -1:
-        print 'MEDIA: Error! %s' % records
+        print('MEDIA: Error! %s' % records)
         sys.exit()
 
-    print 'MEDIA: %s columns and %s lines found in file %s' % (columns, len(records), sys.argv[1])
+    print('MEDIA: %s columns and %s lines found in file %s' % (columns, len(records), sys.argv[1]))
     outputFile = sys.argv[1].replace('.inprogress.csv', '.step3.csv')
     outputFile = outputFile.replace('.step1.csv', '.step3.csv')
     outputfh = csv.writer(open(outputFile, 'wb'), delimiter="\t")
@@ -311,25 +311,25 @@ if __name__ == "__main__":
         for v1, v2 in enumerate(columns):
             mediaElements[v2] = r[v1]
         mediaElements['approvedforweb'] = 'true' if mediaElements['approvedforweb'] == 'on' else 'false'
-        print 'MEDIA: uploading media for filename %s, objectnumber: %s' % (mediaElements['name'], mediaElements['objectnumber'])
+        print('MEDIA: uploading media for filename %s, objectnumber: %s' % (mediaElements['name'], mediaElements['objectnumber']))
         try:
             mediaElements = uploadblob(mediaElements, config, http_parms)
             mediaElements = uploadmedia(mediaElements, config, http_parms)
-            print "MEDIA: objectnumber %s, objectcsid: %s, mediacsid: %s, %8.2f" % (
+            print("MEDIA: objectnumber %s, objectcsid: %s, mediacsid: %s, %8.2f" % (
                 mediaElements['objectnumber'], mediaElements['objectCSID'], mediaElements['mediaCSID'],
-                (time.time() - elapsedtimetotal))
+                (time.time() - elapsedtimetotal)))
             r.append(mediaElements['mediaCSID'])
             r.append(mediaElements['objectCSID'])
             r.append(mediaElements['blobCSID'])
             outputfh.writerow(r)
         except:
-            print "%s" % traceback.format_exc()
-            print "MEDIA: create failed for blob or media. objectnumber %s, %8.2f" % (
-                mediaElements['objectnumber'], (time.time() - elapsedtimetotal))
+            print("%s" % traceback.format_exc())
+            print("MEDIA: create failed for blob or media. objectnumber %s, %8.2f" % (
+                mediaElements['objectnumber'], (time.time() - elapsedtimetotal)))
             # delete the blob if we did not manage to make a media record for it...
             try:
                 (url, data, deletedCSID, elapsedtime) = postxml('DELETE', 'blobs/%s' % mediaElements['blobCSID'], http_parms.realm, http_parms.server, http_parms.username,
                                                           http_parms.password, '')
-                print "MEDIA: deleted blob %s" % mediaElements['blobCSID']
+                print("MEDIA: deleted blob %s" % mediaElements['blobCSID'])
             except:
-                print "MEDIA: failed to delete blob %s" % mediaElements['blobCSID']
+                print("MEDIA: failed to delete blob %s" % mediaElements['blobCSID'])

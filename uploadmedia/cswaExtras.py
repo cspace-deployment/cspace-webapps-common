@@ -5,7 +5,7 @@ import os
 import sys
 
 import time
-import urllib2
+import urllib
 import re
 import psycopg2
 import base64
@@ -61,26 +61,26 @@ except ImportError:
 
 def postxml(requestType, uri, realm, server, username, password, payload):
 
-    passman = urllib2.HTTPPasswordMgr()
+    passman = urllib.request.HTTPPasswordMgr()
     passman.add_password(realm, server, username, password)
-    authhandler = urllib2.HTTPBasicAuthHandler(passman)
-    opener = urllib2.build_opener(authhandler)
+    authhandler = urllib.request.HTTPBasicAuthHandler(passman)
+    opener = urllib.request.build_opener(authhandler)
 
     unencoded_credentials = "%s:%s" % (username, password)
     auth_value = 'Basic %s' % base64.b64encode(unencoded_credentials).strip()
     opener.addheaders = [('Authorization', auth_value)]
-    urllib2.install_opener(opener)
+    urllib.request.install_opener(opener)
     url = "%s/cspace-services/%s" % (server, uri)
-    request = urllib2.Request(url, payload, {'Content-Type': 'application/xml'})
+    request = urllib.request.Request(url, payload, {'Content-Type': 'application/xml'})
 
-    # default method for urllib2 with payload is POST
+    # default method for urllib.request with payload is POST
     if requestType == 'PUT': request.get_method = lambda: 'PUT'
     elapsedtime = 0.00
     try:
         elapsedtime = time.time()
-        f = urllib2.urlopen(request)
+        f = urllib.request.urlopen(request)
         elapsedtime = time.time() - elapsedtime
-    except urllib2.URLError, e:
+    except urllib.error.URLError as e:
         if hasattr(e, 'reason'):
             sys.stderr.write('We failed to reach a server.\n')
             sys.stderr.write('Reason: ' + str(e.reason) + '\n')

@@ -1,11 +1,11 @@
 import time
-import logging
-import urllib2
+import urllib
 from cspace_django_site.main import cspace_django_site
 from common import cspace
 from toolbox.cswaUtils import relationsPayload
 from common.utils import doSearch, loginfo
 
+loginfo('grouper', '%s :: %s :: %s' % ('startup', '-', '%s | %s' % ('', '')), {}, {})
 
 # alas, there are many ways the XML parsing functionality might be installed.
 # the following code attempts to find and import the best...
@@ -35,10 +35,6 @@ except ImportError:
 
 # global variables (at least to this module...)
 config = cspace_django_site.getConfig()
-
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('grouper startup', '-', '%s | %s' % ('', '')))
 
 
 def add2group(groupcsid, list_of_objects, request):
@@ -138,7 +134,7 @@ def find_group(request, grouptitle, pgSz):
         totalItems = groupmembers.find('.//totalItems')
         totalItems = int(totalItems.text)
         objectcsids = [e.text for e in groupmembers.findall('.//csid')]
-    except urllib2.HTTPError, e:
+    except urllib.request.HTTPError as e:
         return (None, None, 0, [], 'Error: we could not make list of group members')
 
     return (grouptitle, groupcsid, totalItems, objectcsids, None)
@@ -195,5 +191,5 @@ def setup_solr_search(queryterms, context, prmz, request):
     context['searchValues']['querystring'] = ' OR '.join(queryterms)
     context['searchValues']['url'] = ''
     context['searchValues']['maxresults'] = prmz.MAXRESULTS
-    loginfo(logger, 'start grouper search', context, request)
+    loginfo('grouper', 'start grouper search', context, request)
     return doSearch(context, prmz, request)

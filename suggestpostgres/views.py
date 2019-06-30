@@ -16,7 +16,7 @@ from os import path
 from common import cspace # we use the config file reading function
 from cspace_django_site import settings
 
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'suggestpostgres')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'suggestpostgres')
 connect_string = config.get('connect', 'connect_string')
 institution = config.get('connect', 'institution')
 
@@ -151,7 +151,7 @@ def dbtransaction(q, elementID, connect_string):
 
         return json.dumps(result)    # or "json.dump(result, sys.stdout)"
 
-    except psycopg2.DatabaseError, e:
+    except psycopg2.DatabaseError as e:
         sys.stderr.write('autosuggest select error: %s' % e)
         return None
     except:

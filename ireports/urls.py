@@ -1,9 +1,9 @@
 __author__ = 'jblowe'
 
-from django.conf.urls import patterns, url
+from django.urls import include, path
 from ireports import views
 
-urlpatterns = patterns('',
-                       url(r'^$', views.index, name='index'),
-                       url(r'^(?P<report_csid>[\w-]+)/$', views.ireport, name='report'),
-                       )
+urlpatterns = [
+    path('', views.index, name='index'),
+    path('(?P<report_csid>[\w-]+)/', views.ireport, name='report'),
+]

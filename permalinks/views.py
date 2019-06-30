@@ -10,16 +10,14 @@ from common import cspace # we use the config file reading function
 from cspace_django_site import settings
 from common.utils import doSearch, loginfo
 
-searchConfig = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'search')
+searchConfig = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'search')
 FIELDDEFINITIONS = searchConfig.get('search', 'FIELDDEFINITIONS')
 
 # add in the the field definitions...
 prmz = loadConfiguration('common')
 prmz = loadFields(FIELDDEFINITIONS, prmz)
+loginfo('permalinks', '%s :: %s :: %s' % ('permalink startup', '-', '%s | %s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER, prmz.BMAPPERSERVER)), {}, {})
 
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('permalink startup', '-', '%s | %s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER, prmz.BMAPPERSERVER)))
 
 def get_item(request, itemid):
 
@@ -35,5 +33,5 @@ def get_item(request, itemid):
         context = {'searchValues': requestObject}
         context = doSearch(context, prmz, request)
 
-        loginfo(logger, 'results.%s' % context['displayType'], context, request)
+        loginfo('permalinks', 'results.%s' % context['displayType'], context, request)
         return render(request, 'search.html', context)

@@ -6,7 +6,7 @@ import re
 
 from PIL import Image
 from PIL.ExifTags import TAGS
-import ConfigParser
+import configparser
 
 import time
 
@@ -71,7 +71,6 @@ def checkCompression(img):
     elif cell == "IMAG PAC":
         return True
     else:
-        # print "Unknown compression format:", cell
         return False
 
 
@@ -104,7 +103,6 @@ def checkSyntax(parsedName, n, value):
     if parsedName is None:
         return False
     else:
-        # print '%s :: %s' % (parsedName.group(n),value)
         if parsedName.group(n) in value:
             return True
         else:
@@ -114,17 +112,17 @@ def checkSyntax(parsedName, n, value):
 def getConfig(form):
     try:
         fileName = form.get('webapp') + '.cfg'
-        config = ConfigParser.RawConfigParser()
+        config = configparser.RawConfigParser()
         filesread = config.read(fileName)
         if filesread == []:
-            print 'No parameters found in %s.' % fileName
+            print('No parameters found in %s.' % fileName)
         return config
     except:
-        print 'Problem reading config file.'
+        print('Problem reading config file.')
         sys.exit()
 
 
-class CleanlinesFile(file):
+class CleanlinesFile():
     def next(self):
         line = super(CleanlinesFile, self).next()
         return line.replace('\r', '').replace('\n', '') + '\n'
@@ -183,7 +181,7 @@ def getBlobsFromDB(config, startdate, enddate, binariesrepo):
             records.append(tif)
         return records
 
-    except psycopg2.DatabaseError, e:
+    except psycopg2.DatabaseError as e:
         sys.stderr.write('getBlobsFromDB error: %s\n' % e)
         sys.exit()
     except:
@@ -196,7 +194,7 @@ def get_tifftags(fn, ret):
     try:
         im = Image.open(fn)
     except:
-        print 'imagemagick could not open file %s' % fn
+        print('imagemagick could not open file %s' % fn)
         for key in 'imageOK isTiff sizeOK syntaxOK resolutionOK isCompressed depthOK colorOK'.split(' '):
             ret[key] = False
         return
@@ -223,7 +221,6 @@ def get_tifftags(fn, ret):
     checks = checkImage(ret, im)
     for k in checks.keys():
         ret[k] = checks[k]
-        # print ret
     ret['imageOK'] = True
     for flag in 'resolutionOK isTiff sizeOK isCompressed depthOK colorOK syntaxOK'.split(' '):
         if ret[flag] == False:
@@ -263,7 +260,6 @@ def getRecords(rawFile):
 
 
 def getBloblist(blobpath):
-    # filelist = [ f for f in listdir(blobpath) if isfile(join(blobpath,f)) and ('.csv' in f or 'trace.log' in f) ]
     filelist = [f for f in listdir(blobpath) if isfile(join(blobpath, f))]
     records = []
     for f in sorted(filelist):
@@ -302,21 +298,20 @@ def doChecks(args):
             sys.exit('Usage: %s db config-file startdate enddate reportname' % args[0])
 
         try:
-            # form = {'webapp': '/var/www/cgi-bin/' + args[2]}
             form = {'webapp': args[2]}
             config = getConfig(form)
         except:
-            print "could not get configuration from %s.cfg. Does it exist?" % args[2]
+            print("could not get configuration from %s.cfg. Does it exist?" % args[2])
             sys.exit()
         try:
             connect_str = config.get('connect', 'connect_string')
         except:
-            print "%s.cfg does not contain a parameter called 'connect_string'" % args[2]
+            print("%s.cfg does not contain a parameter called 'connect_string'" % args[2])
             sys.exit()
         try:
             binariesrepo = config.get('connect', 'binariesrepo')
         except:
-            print "%s.cfg does not contain a parameter called 'binariesrepo'" % args[2]
+            print("%s.cfg does not contain a parameter called 'binariesrepo'" % args[2])
             sys.exit()
 
         startdate = args[3]
@@ -333,7 +328,7 @@ def doChecks(args):
 
         blobpath = args[2]
         records, count = getBloblist(blobpath)
-        print 'MEDIA: %s files found in directory %s' % (count, args[2])
+        print('MEDIA: %s files found in directory %s' % (count, args[2]))
         outputFile = args[3]
 
     elif args[1] == 'file':
@@ -345,10 +340,10 @@ def doChecks(args):
         inputFile = args[3]
         outputFile = args[4]
         records, count = getListOfFiles(blobpath, inputFile)
-        print 'MEDIA: %s files found in file %s' % (count, args[3])
+        print('MEDIA: %s files found in file %s' % (count, args[3]))
 
     else:
-        print 'datasource must be "db", "file" or "dir"'
+        print('datasource must be "db", "file" or "dir"')
         sys.exit()
 
     columns = 'name imageOK isTiff sizeOK syntaxOK resolutionOK isCompressed depthOK colorOK imagesize filesize updatedat updatedby format mode palette compression dpi blobcsid fullpathtofile'.split(' ')
@@ -360,14 +355,10 @@ def doChecks(args):
         elapsedtimetotal = time.time()
         row = []
         try:
-            # print "checking file", i, tif['fullpathtofile']
             get_tifftags(tif['fullpathtofile'], tif)
         except:
-            print "image file info extract failed on file", i, tif['fullpathtofile']
+            print("image file info extract failed on file", i, tif['fullpathtofile'])
             file_is_OK = False
-            # raise
-            # tif['istiff'] = 'Error'
-            # print '%s: no tiff data' % tif['name']
 
         for v1, v2 in enumerate(columns):
             try:
@@ -381,7 +372,7 @@ def doChecks(args):
         try:
             outputfh.writerow(row)
         except:
-            print "failed to write data for file %s, %8.2f" % (tif['name'], (time.time() - elapsedtimetotal))
+            print("failed to write data for file %s, %8.2f" % (tif['name'], (time.time() - elapsedtimetotal)))
 
     return file_is_OK
 

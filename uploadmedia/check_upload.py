@@ -18,4 +18,4 @@ password = 'xxxx'
 files = {'file': (filename, open(fullpath, 'rb'), 'image/jpeg', {'Expires': '0'})}
 
 response = requests.post(url, data=payload, files=files, auth=HTTPBasicAuth(username, password))
-print response
+print(response)

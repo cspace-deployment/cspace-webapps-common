@@ -25,12 +25,12 @@ from common.appconfig import getParms, loadConfiguration
 
 import solr
 
-searchConfig = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'suggestsolr')
+searchConfig = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'suggestsolr')
 FIELDEFINITIONS = searchConfig.get('solr', 'FIELDDEFINITIONS')
 
 # read this app's config file
 prmz = loadConfiguration('common')
-prmz = getParms(path.join(settings.BASE_PARENT_DIR, 'config/' + FIELDEFINITIONS), prmz)
+prmz = getParms(path.join(settings.BASE_DIR, 'config/' + FIELDEFINITIONS), prmz)
 
 # create a connection to a solr server
 s = solr.SolrConnection(url='%s/%s' % (prmz.SOLRSERVER, prmz.SOLRCORE))
@@ -66,7 +66,7 @@ def solrtransaction(q, elementID):
         q3 = [x + '*' for x in q2]
         querystring = searchfield + ':' + (' AND %s:' % searchfield).join(q3)
         #querystring = '%s:%s*' % (searchfield,q)
-        print querystring
+        loginfo('',querystring, request)
         response = s.query(querystring, facet='true', facet_field=[ suggestfield ], fq={},
                            rows=0, facet_limit=30,
                            facet_mincount=1)

@@ -7,16 +7,16 @@ import sys
 import traceback
 #from common.cspace import logged_in_or_basicauth
 from django.shortcuts import render, HttpResponse, redirect
-from django.core.servers.basehttp import FileWrapper
+
 from os import path, remove
 import logging
 import time, datetime
-from getNumber import getNumber
-from utils import SERVERLABEL, SERVERLABELCOLOR, POSTBLOBPATH, INSTITUTION, BATCHPARAMETERS, FIELDS2WRITE, JOBDIR
-from utils import getBMUoptions, handle_uploaded_file, assignValue, get_exif, writeCsv
-from utils import getJobfile, getJoblist, loginfo, reformat, rendermedia
-from specialhandling import specialhandling
-from checkBlobs import doChecks
+from uploadmedia.getNumber import getNumber
+from uploadmedia.utils import SERVERLABEL, SERVERLABELCOLOR, POSTBLOBPATH, INSTITUTION, BATCHPARAMETERS, FIELDS2WRITE, JOBDIR
+from uploadmedia.utils import getBMUoptions, handle_uploaded_file, assignValue, get_exif, writeCsv
+from uploadmedia.utils import getJobfile, getJoblist, loginfo, reformat, rendermedia
+from uploadmedia.specialhandling import specialhandling
+from uploadmedia.checkBlobs import doChecks
 
 from grouper.grouputils import getfromCSpace
 
@@ -81,9 +81,8 @@ def prepareFiles(request, BMUoptions, context):
     jobinfo = {}
     images = []
     for lineno, afile in enumerate(request.FILES.getlist('imagefiles')):
-        # print afile
         try:
-            print "%s %s: %s %s (%s %s)" % ('id', lineno + 1, 'name', afile.name, 'size', afile.size)
+            loginfo('',"%s %s: %s %s (%s %s)" % ('id', lineno + 1, 'name', afile.name, 'size', afile.size), request)
             image = get_exif(afile)
             filename, objectnumber, imagenumber, extra = getNumber(afile.name, INSTITUTION)
             datetimedigitized, dummy = assignValue('', 'ifblank', image, 'DateTimeDigitized', {})
@@ -292,7 +291,7 @@ def checkimagefilenames(request):
 @login_required()
 def downloadresults(request, filename):
     f = open(getJobfile(filename), "rb")
-    response = HttpResponse(FileWrapper(f), content_type='text/csv')
+    response = HttpResponse(f, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
     return response
 

@@ -4,6 +4,7 @@ import time, datetime
 import csv
 import solr
 import cgi
+import logging
 
 from os import path, popen
 from copy import deepcopy
@@ -16,13 +17,19 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 SolrIsUp = True  # an initial guess! this is verified below...
 
+# Get an instance of a logger, log some startup info
+logger = logging.getLogger(__name__)
 
-def loginfo(logger, infotype, context, request):
+
+def loginfo(webapp, infotype, context, request):
+    if webapp: pass
     logdata = ''
     # user = getattr(request, 'user', None)
-    if request.user and not request.user.is_anonymous():
+    try:
+    #if request.user and not request.user.is_anonymous():
         username = request.user.username
-    else:
+    #else:
+    except:
         username = '-'
     if 'count' in context:
         count = context['count']

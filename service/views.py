@@ -8,7 +8,7 @@ from cspace_django_site.main import cspace_django_site
 
 
 @login_required()
-def get_list(request, service):
+def get_request. service:
     config = cspace_django_site.getConfig()
     connection = cspace.connection.create_connection(config, request.user)
     (url, data, statusCode,elapsedtime) = connection.make_get_request('cspace-services/%s' % service)

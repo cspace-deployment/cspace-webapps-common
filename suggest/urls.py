@@ -1,9 +1,9 @@
 __author__ = 'jblowe'
 
-from django.conf.urls import patterns, url
-import views
+from django.urls import include, path
+from suggest import views
 
-urlpatterns = patterns('',
-                       # ex: /suggest?q=ASPARAG&elementID=family&source=solr
-                       url(r'^', views.suggest, name='suggest'),
-                       )
+urlpatterns = [
+    # ex: /suggest?q=ASPARAG&elementID=family&source=solr
+    path('', views.suggest, name='suggest'),
+]

@@ -29,7 +29,7 @@ def get_special(label, labels, row):
 
 def getParms(parmFile, prmz):
     try:
-        f = open(parmFile, 'rb')
+        f = open(parmFile, 'r')
         csvfile = csv.reader(f, delimiter="\t")
     except IOError:
         raise
@@ -173,7 +173,7 @@ def loadConfiguration(configFileName):
         # SOLRCORE = config.get('search', 'SOLRCORE')
         prmz.LOCALDIR = config.get('search', 'LOCALDIR')
         prmz.SEARCH_QUALIFIERS = config.get('search', 'SEARCH_QUALIFIERS').split(',')
-        prmz.SEARCH_QUALIFIERS = [unicode(x) for x in prmz.SEARCH_QUALIFIERS]
+        prmz.SEARCH_QUALIFIERS = [str(x) for x in prmz.SEARCH_QUALIFIERS]
         #prmz.FIELDDEFINITIONS = config.get('search', 'FIELDDEFINITIONS')
         prmz.CSVPREFIX = config.get('search', 'CSVPREFIX')
         prmz.CSVEXTENSION = config.get('search', 'CSVEXTENSION')

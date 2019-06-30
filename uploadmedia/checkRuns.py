@@ -11,12 +11,12 @@ def pluralize(n, w):
 def checkJobs(jobs, joberrors, report_type):
     totals = {}
 
-    print "Bulk Media Uploader Progress Report\n"
-    print "job directory: %s" % DIR
+    print("Bulk Media Uploader Progress Report\n")
+    print("job directory: %s" % DIR)
 
     columnheaders = 'step1 original processed inprogress discrepancy error messages seen'.split(' ')
     print
-    # print "\t".join(columnheaders)
+    # print("\t".join(columnheaders))
     for c in columnheaders: totals[c] = 0
 
     output_lines = []
@@ -64,14 +64,14 @@ def checkJobs(jobs, joberrors, report_type):
         else:
             output_lines.append(output_line)
 
-    if report_type == 'summary': print 'most recent %s jobs:\n' % len(output_lines)
-    print '\n'.join(output_lines)
+    if report_type == 'summary': print('most recent %s jobs:\n' % len(output_lines))
+    print('\n'.join(output_lines))
 
-    print "\ntotal number of jobs found: %s " % len(jobs.keys())
-    print "\ngrand totals:\n\n",
+    print("\ntotal number of jobs found: %s " % len(jobs.keys()))
+    print("\ngrand totals:\n\n",)
     for step in columnheaders:
         if totals[step] != 0:
-            print '%s %s ' % (step, totals[step])
+            print('%s %s ' % (step, totals[step]))
     print
 
 
@@ -84,39 +84,39 @@ def checkMissing(images, missing):
             for step in steps:
                 if step in 'processed|step1|inprogress'.split('|'): isMissing = False
 
-    if isMissing: print name, '::: \tmissingname\n'
+    if isMissing: print(name, '::: \tmissingname\n')
 
 
 def checkDuplicates(images, duplicates):
     for name in sorted(duplicates):
-        if duplicates[name] > 1: print '%s duplicated %s times' % (name, duplicates[name])
+        if duplicates[name] > 1: print('%s duplicated %s times' % (name, duplicates[name]))
     print
 
 
 def checkCsids(csids):
     for name in sorted(csids):
-        print name + "\t",
+        print(name + "\t",)
         CSIDlist = csids[name]
-        print CSIDlist['objectnumber'] + '\t',
+        print(CSIDlist['objectnumber'] + '\t',)
         for type in 'blob media object'.split(' '):
-            print ','.join(CSIDlist[type]),'\t',
+            print(','.join(CSIDlist[type]),'\t',)
         print
 
 
 def checkSteps(images):
     for name in sorted(images):
-        print name + "\t",
+        print(name + "\t",)
         runs = images[name]
         for run in runs:
-            print run + "\t",
+            print(run + "\t",)
             steps = runs[run]
             for step in steps:
-                print step + "\t",
+                print(step + "\t",)
         print
 
 
 def usage():
-    print "usage: python checkRuns.py <bmu_directory> <jobs missing duplicates images csids> <full summary>"
+    print("usage: python checkRuns.py <bmu_directory> <jobs missing duplicates images csids> <full summary>")
 
 
 ########## Main ##############
@@ -140,7 +140,7 @@ if (sys.argv[1]):  # if we have a single job, just do stats for it..
 if (sys.argv[3] in ['full', 'summary']):
     report_type = sys.argv[3]
 else:
-    print 'report type must be either "full" or "summary".'
+    print('report type must be either "full" or "summary".')
     sys.exit(1)
 
 files = []
@@ -214,10 +214,10 @@ for filename in os.listdir(DIR):
                                 (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber,
                                  handling, approvedforweb, copyright, imagetype, source, locality) = line.split('|')
                             except:
-                                print 'skipped', filename, line
+                                print('skipped', filename, line)
                                 continue
         except:
-            print 'problem with file %s' % filename
+            print('problem with file %s' % filename)
             continue
         if objectCSID == 'not found': continue
         if not run in jobs: jobs[run] = {}
@@ -252,10 +252,10 @@ for filename in os.listdir(DIR):
         if 'Post did not return a 201 status code' in line: error = True
         if 'No output file' in line: error = True
         if error:
-            # print _."\n"
+            # print(_."\n")
             name = line.split(' ')
             joberrors[filename] += 1
-            # print "error filename :: name :: error\n"
+            # print("error filename :: name :: error\n")
             errors[name] += error
 
 if (sys.argv[2] == 'jobs'):

@@ -18,9 +18,8 @@ TEMPLATE_DEBUG = DEBUG
 ALLOWED_HOSTS = ['*']
 
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BASE_PARENT_DIR = os.path.dirname(BASE_DIR)
-PROJECT_NAME = os.path.basename(BASE_PARENT_DIR)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_NAME = os.path.basename(BASE_DIR)
 
 CACHES = {
     'default': {

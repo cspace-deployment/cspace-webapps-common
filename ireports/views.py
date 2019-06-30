@@ -17,7 +17,7 @@ from .models import AdditionalInfo
 
 mainConfig = cspace_django_site.getConfig()
 
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'ireports')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'ireports')
 
 JRXMLDIRPATTERN = config.get('connect', 'JRXMLDIRPATTERN')
 # alas, there are many ways the XML parsing functionality might be installed.
@@ -81,7 +81,7 @@ def getReportparameters(filename):
     except:
         #raise
         # indicate that .jrxml file was not found...
-        print 'jrxml file not found, no parms extracted.'
+        loginfo('','jrxml file not found, no parms extracted.', request)
     return parms,csidParms,fileFound
 
 

@@ -10,10 +10,10 @@ from os.path import isfile, isdir, join
 from xml.sax.saxutils import escape
 
 from common import cspace  # we use the config file reading function
-from common.utils import deURN
+from common.utils import deURN, loginfo
 from cspace_django_site import settings
 
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'uploadmedia')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'uploadmedia')
 TEMPIMAGEDIR = config.get('files', 'directory')
 POSTBLOBPATH = config.get('info', 'postblobpath')
 BATCHPARAMETERS = config.get('info', 'batchparameters')
@@ -24,9 +24,9 @@ INSTITUTION = config.get('info', 'institution')
 FIELDS2WRITE = 'name size objectnumber date creator contributor rightsholder imagenumber handling approvedforweb'.split(' ')
 
 if isdir(TEMPIMAGEDIR):
-    print "Using %s as working directory for images and metadata files" % TEMPIMAGEDIR
+    loginfo('bmu',"Using %s as working directory for images and metadata files" % TEMPIMAGEDIR, {}, {})
 else:
-    print "%s is not an existing directory, using /tmp instead" % TEMPIMAGEDIR
+    loginfo('bmu',"%s is not an existing directory, using /tmp instead" % TEMPIMAGEDIR, {}, {})
     TEMPIMAGEDIR  = '/tmp'
     # raise Exception("BMU working directory %s does not exist. this webapp will not work without it!" % TEMPIMAGEDIR)
 
@@ -129,16 +129,6 @@ def checkFile(filename):
     return len(lines), images
 
 
-def loginfo(infotype, line, request):
-    logdata = ''
-    # user = getattr(request, 'user', None)
-    if request.user and not request.user.is_anonymous():
-        username = request.user.username
-    else:
-        username = '-'
-    logger.info('%s :: %s :: %s' % (infotype, line, logdata))
-
-
 def getQueue(jobtypes):
     return [x for x in listdir(JOBDIR % '') if '%s.csv' % jobtypes in x]
 
@@ -162,16 +152,16 @@ def getBMUoptions():
             bmuoptions = config.get('info', 'bmuoptions')
             bmuoptions = json.loads(bmuoptions.replace('\n', ''))
         except:
-            print "Could not find or could not parse BMU options (parameter 'bmuoptions'), defaults will be taken!"
-            if bmuoptions: print bmuoptions
+            loginfo('bmu',"Could not find or could not parse BMU options (parameter 'bmuoptions'), defaults will be taken!", {}, {})
+            if bmuoptions: loginfo('',bmuoptions, {}, {})
             bmuoptions = []
         # a dict of dicts...
         try:
             bmuconstants = config.get('info', 'bmuconstants')
             bmuconstants = json.loads(bmuconstants.replace('\n', ''))
         except:
-            print "Could not find or could not parse BMU constants (parameter 'bmuconstants'), none will be inserted into media records!"
-            if bmuconstants: print bmuconstants
+            loginfo('bmu',"Could not find or could not parse BMU constants (parameter 'bmuconstants'), none will be inserted into media records!", {}, {})
+            if bmuconstants: loginfo('',bmuconstants, {}, {})
             bmuconstants = {}
 
         # add the columns for these constants to the list of output values
@@ -180,15 +170,15 @@ def getBMUoptions():
                 if not constants in FIELDS2WRITE:
                     FIELDS2WRITE.append(constants)
     else:
-        print "No BMU options are not enabled. No defaults or special handling of media."
+        loginfo('bmu',"No BMU options are not enabled. No defaults or special handling of media.", {}, {})
 
     try:
         overrides = config.get('info', 'overrides')
         overrides = json.loads(overrides.replace('\n', ''))
         for o in overrides:
-            print 'BMU will attempt to configure overrides for %s' % o[0]
+            loginfo('bmu','BMU will attempt to configure overrides for %s' % o[0], {}, {})
     except:
-        print "Could not find or could not parse BMU overrides (parameter 'overrides'). Please check your JSON!"
+        loginfo('bmu',"Could not find or could not parse BMU overrides (parameter 'overrides'). Please check your JSON!", {}, {})
         overrides = []
 
     for override in overrides:
@@ -202,13 +192,13 @@ def getBMUoptions():
                 dropdown = config.get('info', override[2] + 's')
                 dropdown = json.loads(dropdown)
                 override.append(dropdown)
-                print 'BMU override configured for %ss' % override[2]
+                loginfo('bmu','BMU override configured for %ss' % override[2], {}, {})
             except:
-                print 'Could not parse overrides for %ss, please check your JSON.' % override[2]
-                if dropdown: print dropdown
+                loginfo('bmu','Could not parse overrides for %ss, please check your JSON.' % override[2], {}, {})
+                if dropdown: loginfo('bmu',dropdown, {}, {})
         else:
             # add an empty dropdown element -- has to be a dict
-            print 'BMU override configured for %s' % override[2]
+            loginfo('bmu','BMU override configured for %s' % override[2], {}, {})
             override.append({})
     return {
         'allowintervention': allowintervention,

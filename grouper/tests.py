@@ -94,7 +94,7 @@ class SimpleTest(TestCase):
             totalItems = groupmembers.find('.//totalItems')
             totalItems = int(totalItems.text)
             objectcsids = [e.text for e in groupmembers.findall('.//csid')]
-        except urllib2.HTTPError, e:
+        except:
             return (None, None, 0, [], 'Error: we could not make list of group members')
 
         return grouptitle, groupcsid, totalItems, objectcsids, None

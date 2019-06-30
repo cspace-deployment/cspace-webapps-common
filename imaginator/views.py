@@ -3,7 +3,6 @@ __author__ = 'jblowe'
 import os
 import re
 import time
-import logging
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
@@ -15,14 +14,13 @@ from cspace_django_site import settings
 from os import path
 from .models import AdditionalInfo
 
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'imaginator')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'imaginator')
 
 # read common config file
-common = 'common'
-prmz = loadConfiguration(common)
-print 'Configuration for %s successfully read' % common
+prmz = loadConfiguration('common')
+#loginfo('imaginator', '%s :: %s :: %s' % ('imaginator startup', '-', '%s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER)), {}, {})
 
-searchConfig = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'imaginator')
+searchConfig = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'imaginator')
 prmz.FIELDDEFINITIONS = searchConfig.get('imaginator', 'FIELDDEFINITIONS')
 
 # add in the the field definitions...
@@ -31,12 +29,6 @@ prmz = loadFields(prmz.FIELDDEFINITIONS, prmz)
 # override a couple parameters for this app
 prmz.MAXRESULTS = int(searchConfig.get('imaginator', 'MAXRESULTS'))
 prmz.TITLE = searchConfig.get('imaginator', 'TITLE')
-
-print 'Configuration for %s successfully read' % 'imaginator'
-
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('imaginator startup', '-', '%s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER)))
 
 
 def index(request):
@@ -68,7 +60,7 @@ def index(request):
             context['resultType'] = 'metadata'
 
         # do search
-        loginfo(logger, 'start imaginator search', context, request)
+        loginfo('imaginator', 'start imaginator search', context, request)
         context = doSearch(context, prmz, request)
         context['additionalInfo'] = AdditionalInfo.objects.filter(live=True)
 

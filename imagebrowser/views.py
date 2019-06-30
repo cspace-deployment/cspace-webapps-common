@@ -15,12 +15,14 @@ from cspace_django_site import settings
 from os import path
 from .models import AdditionalInfo
 
+loginfo('imagebrowser', 'imagebrowser startup', {}, {})
+
 # read common config file
 common = 'common'
 prmz = loadConfiguration(common)
-print 'Configuration for %s successfully read' % common
+loginfo('imagebrowser','Configuration for %s successfully read' % common, {}, {})
 
-searchConfig = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'imagebrowser')
+searchConfig = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'imagebrowser')
 prmz.FIELDDEFINITIONS = searchConfig.get('imagebrowser', 'FIELDDEFINITIONS')
 
 # add in the the field definitions...
@@ -29,11 +31,6 @@ prmz = loadFields(prmz.FIELDDEFINITIONS, prmz)
 # override these two values if they were set above
 prmz.MAXRESULTS = int(searchConfig.get('imagebrowser', 'MAXRESULTS'))
 prmz.TITLE = searchConfig.get('imagebrowser', 'TITLE')
-
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('imagebrowser startup', '-', '-'))
-
 
 # @login_required()
 def images(request):
@@ -66,7 +63,7 @@ def images(request):
         context['pixonly'] = 'true'
 
         # do search
-        loginfo(logger, 'start imagebrowser search', context, request)
+        loginfo('start imagebrowser search', request)
         context = doSearch(context, prmz, request)
         context['additionalInfo'] = AdditionalInfo.objects.filter(live=True)
 

@@ -25,16 +25,12 @@ from cspace_django_site import settings
 
 # read common config file
 prmz = loadConfiguration('common')
-print 'Configuration for common successfully read'
+#loginfo('internal','%s :: %s :: %s' % ('internal portal startup', '-', '%s | %s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER, prmz.BMAPPERSERVER)), {}, {})
 
 # on startup, setup this webapp layout...
-config = cspace.getConfig(path.join(settings.BASE_PARENT_DIR, 'config'), 'internal')
+config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'internal')
 fielddefinitions = config.get('search', 'FIELDDEFINITIONS')
 prmz = loadFields(fielddefinitions, prmz)
-
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('internal portal startup', '-', '%s | %s | %s' % (prmz.SOLRSERVER, prmz.IMAGESERVER, prmz.BMAPPERSERVER)))
 
 
 def direct(request):
@@ -44,13 +40,13 @@ def direct(request):
 @login_required()
 def search(request):
     if request.method == 'GET' and request.GET != {}:
-        context = {'searchValues': dict(request.GET.iteritems())}
+        context = {'searchValues': request.GET}
         context = doSearch(context, prmz, request)
 
     else:
         context = setConstants({}, prmz, request)
 
-    loginfo(logger, 'start search', context, request)
+    loginfo('internal', 'start search', context, request)
     context['additionalInfo'] = AdditionalInfo.objects.filter(live=True)
     return render(request, 'search.html', context)
 
@@ -58,21 +54,21 @@ def search(request):
 @login_required()
 def retrieveResults(request):
     if request.method == 'POST' and request.POST != {}:
-        requestObject = dict(request.POST.iteritems())
+        requestObject = request.POST
         form = forms.Form(requestObject)
 
         if form.is_valid():
             context = {'searchValues': requestObject}
             context = doSearch(context, prmz, request)
 
-            loginfo(logger, 'results.%s' % context['displayType'], context, request)
+            loginfo('internal', 'results.%s' % context['displayType'], context, request)
             return render(request, 'searchResults.html', context)
 
 
 @login_required()
 def bmapper(request):
     if request.method == 'POST' and request.POST != {}:
-        requestObject = dict(request.POST.iteritems())
+        requestObject = request.POST
         form = forms.Form(requestObject)
 
         if form.is_valid():
@@ -80,24 +76,24 @@ def bmapper(request):
 
             if 'kml' in request.path:
                 response = setupKML(request, requestObject, context, prmz)
-                loginfo(logger, 'kml', context, request)
+                loginfo('internal', 'kml', context, request)
                 return response
             else:
                 context = setupBMapper(request, requestObject, context, prmz)
-                loginfo(logger, 'bmapper', context, request)
+                loginfo('internal', 'bmapper', context, request)
                 return HttpResponse(context['bmapperurl'])
 
 @login_required()
 def gmapper(request):
     if request.method == 'POST' and request.POST != {}:
-        requestObject = dict(request.POST.iteritems())
+        requestObject = request.POST
         form = forms.Form(requestObject)
 
         if form.is_valid():
             context = {'searchValues': requestObject}
             context = setupGoogleMap(request, requestObject, context, prmz)
 
-            loginfo(logger, 'gmapper', context, request)
+            loginfo('internal', 'gmapper', context, request)
             return render(request, 'maps.html', context)
 
 
@@ -105,7 +101,7 @@ def gmapper(request):
 def dispatch(request):
 
     if request.method == 'POST' and request.POST != {}:
-        requestObject = dict(request.POST.iteritems())
+        requestObject = request.POST
         form = forms.Form(requestObject)
 
     if 'csv' in request.POST or 'downloadstats' in request.POST:
@@ -114,7 +110,7 @@ def dispatch(request):
             try:
                 context = {'searchValues': requestObject}
                 csvformat, fieldset, csvitems = setupCSV(request, requestObject, context, prmz)
-                loginfo(logger, 'csv', context, request)
+                loginfo('internal', 'csv', context, request)
 
                 # create the HttpResponse object with the appropriate CSV header.
                 response = HttpResponse(content_type='text/csv')
@@ -131,7 +127,7 @@ def dispatch(request):
         if form.is_valid():
             try:
                 context = {'searchValues': requestObject}
-                loginfo(logger, 'pdf', context, request)
+                loginfo('internal', 'pdf', context, request)
                 return setup4PDF(request, context, prmz)
 
             except:
@@ -140,7 +136,7 @@ def dispatch(request):
                 return search(request)
 
     elif 'preview' in request.POST:
-        messages.error(request, 'Problem creating print version. Sorry!')
+        messages.error(request, 'Problem creating print version. Sorry!', request)
         context = {'messages': messages}
         return search(request)
 
@@ -153,16 +149,16 @@ def dispatch(request):
 @login_required()
 def statistics(request):
     if request.method == 'POST' and request.POST != {}:
-        requestObject = dict(request.POST.iteritems())
+        requestObject = request.POST
         form = forms.Form(requestObject)
 
         if form.is_valid():
             elapsedtime = time.time()
             try:
                 context = {'searchValues': requestObject}
-                loginfo(logger, 'statistics1', context, request)
+                loginfo('internal', 'statistics1', context, request)
                 context = computeStats(request, requestObject, context, prmz)
-                loginfo(logger, 'statistics2', context, request)
+                loginfo('internal', 'statistics2', context, request)
                 context['summarytime'] = '%8.2f' % (time.time() - elapsedtime)
                 # 'downloadstats' is handled in writeCSV, via post
                 return render(request, 'statsResults.html', context)
@@ -175,5 +171,5 @@ def loadNewFields(request, fieldfile, prmx):
     loadFields(fieldfile + '.csv', prmx)
 
     context = setConstants({}, prmx, request)
-    loginfo(logger, 'loaded fields', context, request)
+    loginfo('internal', 'loaded fields', context, request)
     return render(request, 'search.html', context)
