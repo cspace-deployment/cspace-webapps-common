@@ -1,0 +1,52 @@
+{% extends "cspace_django_site/base_site.html" %}
+{% load i18n admin_static %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'cspace_django_site/css/jquery-ui-1.8.22.custom.css' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div id="content-main">
+<style>
+.ui-autocomplete-loading { background: white url("{% static 'cspace_django_site/images/ui-anim_basic_16x16.gif' %}") right center no-repeat; }
+
+ ul.tree, ul.tree ul {
+     list-style-type: none;
+     background: url({% static 'cspace_django_site/images/vline.png' %}) repeat-y;
+     margin: 0;
+     padding: 0;
+   }
+
+   ul.tree ul {
+     margin-left: 16px;
+   }
+
+   ul.tree li {
+     margin: 0;
+     padding: 0 18px;
+     line-height: 20px;
+     background: url({% static 'cspace_django_site/images/node.png' %}) no-repeat;
+     color: #369;
+     font-weight: bold;
+   }
+
+   ul.tree li:last-child {
+     background: #fff url({% static 'cspace_django_site/images/lastnode.png' %}) no-repeat;
+   }
+
+</style>
+<script type="text/javascript">
+function formSubmit(location)
+{
+    console.log(location);
+    document.getElementById('lo.location1').value = location
+    document.getElementById('lo.location2').value = location
+    //document.getElementById('actionbutton').value = "Next"
+    document.forms['ucbwebapp'].submit();
+}
+</script>
+<form id="ucbwebapp" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ html|safe }}
+{% endblock %}

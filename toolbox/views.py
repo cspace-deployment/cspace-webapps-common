@@ -24,12 +24,12 @@ hostname = cspace.getConfigOptionWithSection(config,
 TITLE = 'Tools Available'
 
 
-def index(request):
+def direct(request):
     context = configure_common_tools({}, request, 'landing', webappconfig)
     context['hostname'] = webappconfig.get('connect', 'hostname')
     context['html'], context['elapsedtime'] = main(request, 'landing', {}, webappconfig)
     context['extra_nav'] = {'href': './', 'id': 'switchtool', 'name': 'Switch Tool'}
-    return render(request, 'index.html', context)
+    return render(request, 'toolbox.html', context)
 
 
 def toolbox(request, action):
@@ -38,7 +38,7 @@ def toolbox(request, action):
     context = configure_common_tools({}, request, action, webappconfig)
 
     if webappconfig == False:
-        return render(request, 'index.html', {'html': '<h1>toolbox.cfg not found</h1>'})
+        return render(request, 'toolbox.html', {'html': '<h1>toolbox.cfg not found</h1>'})
 
     # NB we convert the request dict into a 'real' dict
     form = {'tool': action}
@@ -59,6 +59,6 @@ def toolbox(request, action):
                 return response
 
     context['extra_nav'] = {'href': './', 'id': 'switchtool', 'name': 'Switch Tool'}
-    return render(request, 'index.html', context)
+    return render(request, 'toolbox.html', context)
 
 
