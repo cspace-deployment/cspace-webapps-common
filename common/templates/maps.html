@@ -24,8 +24,11 @@
     <p>The <a target="new" href="https://developers.google.com/maps/documentation/staticmaps/intro">Google Static Maps API</a>
         lets you embed a Google Maps image on a web page (like this one) without requiring JavaScript or any dynamic page loading.
         The Static Maps API service creates your map based on URL parameters sent through a standard HTTP request and
-        returns the map as an image you can display on your web page.  Click on the link below to see the map and get the
-        embedabble link. NB: the limit on the number of points plotted is about 100 due to limits on the length of URLs.</p>
+        returns the map as an image you can copy and use in your own documents.  This widget only plots the points selected on the
+        first page of your search results, and at any rate the limit on the number of points plotted is about 100 due to limits
+        on the length of URLs. If items in the first page do not have coordinates, they will not be plotted, of course!
+        Click on the link below to see the map and get the embedabble link.
+    </p>
     <button type="button" name="map-google" id="map-google" class="prettyBtn">map selected with Google staticmaps API</button>
     <div style="height: 30px; padding-top: 15px;">
     {% for m in mapmsg %}
@@ -33,9 +36,9 @@
     {% endfor %}
     </div>
     {% if markerlist %}
-    <img src="https://maps.google.com/maps/api/staticmap?size=1000x800&maptype=roadmap&markers={{ markerlist }}&sensor=false"/>
+    <img src="https://maps.google.com/maps/api/staticmap?size=1000x800&maptype=roadmap&markers={{ markerlist }}&sensor=false&key=AIzaSyBeDzud2rQvl70-TFgsdlMa9vsUl_vidZk"/>
     <hr/>
-    <a target="new" href="https://maps.google.com/maps/api/staticmap?size=1000x800&maptype=roadmap&markers={{ markerlist }}&sensor=false">This is the link</a>
+    <a target="new" href="https://maps.google.com/maps/api/staticmap?size=1000x800&maptype=roadmap&markers={{ markerlist }}&sensor=false&key=AIzaSyBeDzud2rQvl70-TFgsdlMa9vsUl_vidZk">This is the link</a>
         for the map above, in case you want to keep it for future use.
     {% endif %}
 </div>
