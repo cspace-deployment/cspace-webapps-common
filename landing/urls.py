@@ -4,6 +4,6 @@ from django.urls import include, path
 from landing import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='landing'),
     path('applist/', views.applist, name='applist'),
 ]

@@ -225,7 +225,7 @@ def rest(request, action):
 
 
 @login_required()
-def uploadfiles(request):
+def uploadmedia(request):
     elapsedtime = time.time()
     context = setConstants(request, im)
     context['jobnumber'] = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())

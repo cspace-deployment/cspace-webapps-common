@@ -53,9 +53,9 @@
                 {% for j in jobinfo %}
                     <a href="downloadresults/{{ j.0 }}">{{ j.1 }}</a>
                     {% if j.1 == 'pending' %}
-                        <a class="button" href="{% url 'uploadmedia:deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this job)</span></a>
+                        <a class="button" href="{% url 'deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this job)</span></a>
                     {% elif j.1 == 'check' and jobinfo|length == 1 %}
-                        <a class="button" href="{% url 'uploadmedia:deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this qc file)</span></a>
+                        <a class="button" href="{% url 'deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this qc file)</span></a>
                     {% endif %}
 
                 {% endfor %}

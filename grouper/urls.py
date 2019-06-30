@@ -4,5 +4,5 @@ from django.urls import include, path
 from grouper import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.index, name='grouper'),
 ]

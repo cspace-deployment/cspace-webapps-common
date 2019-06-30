@@ -2,17 +2,17 @@
 
 {% if user.is_active and user.is_staff %}
     {% block userlinks %}
-            <a href="{% url 'index' %}" class="expandInfo">All webapps</a>
+            <a href="{% url 'landing' %}" class="expandInfo">All webapps</a>
             <span class="expandInfo">||</span>
             <a href="/" class="expandInfo">Home</a>
             <span class="expandInfo">||</span>
             <img style="vertical-align: middle; height: 21px;  padding-left: 15px;"
                  src="{% static "cspace_django_site/images/usericon.jpg" %}"
                  title="{% filter force_escape %}{% firstof user.get_short_name user.get_username %}{% endfilter %}"/>
-            <a href={% url 'logout' %}?next={% url 'index' %} id="logout" class="expandInfo">{% trans 'Sign out' %}</a>
+            <a href={% url 'logout' %}?next={% url 'landing' %} id="logout" class="expandInfo">{% trans 'Sign out' %}</a>
     {% endblock %}
 {% else %}
-    <a href="{% url 'index' %}" class="expandInfo">All webapps</a>
+    <a href="{% url 'landing' %}" class="expandInfo">All webapps</a>
     <span class="expandInfo">||</span>
     <a href="/" class="expandInfo">Home</a>
     <span class="expandInfo">||</span>

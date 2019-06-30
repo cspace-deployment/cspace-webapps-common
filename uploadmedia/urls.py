@@ -4,8 +4,8 @@ from django.urls import include, path
 from uploadmedia import views
 
 urlpatterns = [
-    path('', views.uploadfiles),
-    path('uploadfiles', views.uploadfiles, name='uploadfiles'),
+    path('', views.uploadmedia, name='uploadmedia'),
+    path('uploadfiles', views.uploadmedia, name='uploadfiles'),
     path('rest/(?P<action>[\w\-\.]+)', views.rest, name='rest'),
     path('checkimagefilenames', views.checkimagefilenames, name='checkimagefilenames'),
     path('showqueue', views.showqueue, name='showqueue'),
