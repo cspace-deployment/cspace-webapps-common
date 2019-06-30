@@ -256,7 +256,7 @@ def checkimagefilenames(request):
         (jobnumber, step, csv ) = filename.split('.')
         context['jobnumber'] = jobnumber
         context['filename'] = filename
-        file_handle = open(getJobfile(filename), "rb")
+        file_handle = open(getJobfile(filename), "'r'")
         lines = file_handle.read().splitlines()
         recordtypes = [f.split("|") for f in lines]
         filenames = [ r[0] for r in recordtypes[1:]]
@@ -290,7 +290,7 @@ def checkimagefilenames(request):
 
 @login_required()
 def downloadresults(request, filename):
-    f = open(getJobfile(filename), "rb")
+    f = open(getJobfile(filename), "'r'")
     response = HttpResponse(f, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
     return response
@@ -307,7 +307,7 @@ def showresults(request):
     filename = request.GET['filename']
     context['filename'] = filename
     context['jobstatus'] = request.GET['status']
-    f = open(getJobfile(filename), "rb")
+    f = open(getJobfile(filename), "'r'")
     filecontent = f.read()
     if status == 'showmedia':
         context['derivativegrid'] = 'Medium'

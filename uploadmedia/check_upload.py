@@ -15,7 +15,7 @@ url = 'https://ucjeps-dev.cspace.berkeley.edu/cspace-services/blobs'
 username = 'xxxx@berkeley.edu'
 password = 'xxxx'
 
-files = {'file': (filename, open(fullpath, 'rb'), 'image/jpeg', {'Expires': '0'})}
+files = {'file': (filename, open(fullpath, 'r'), 'image/jpeg', {'Expires': '0'})}
 
 response = requests.post(url, data=payload, files=files, auth=HTTPBasicAuth(username, password))
 print(response)

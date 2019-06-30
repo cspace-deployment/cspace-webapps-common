@@ -250,7 +250,7 @@ def writeCsv(filename, items, writeheader):
 def getRecords(rawFile):
     try:
         records = []
-        f = CleanlinesFile(rawFile, 'rb')
+        f = CleanlinesFile(rawFile, 'r')
         csvfile = csv.reader(f, delimiter="|")
         for row, values in enumerate(csvfile):
             records.append(values)
@@ -272,7 +272,7 @@ def getBloblist(blobpath):
 
 def getListOfFiles(blobpath, inputFile):
 
-    with open(join(blobpath, inputFile), 'rb') as csvfile:
+    with open(join(blobpath, inputFile), 'r') as csvfile:
         inputfh = csv.reader(csvfile,  delimiter="|")
         filelist = [cells[0] for cells in inputfh]
 
@@ -347,7 +347,7 @@ def doChecks(args):
         sys.exit()
 
     columns = 'name imageOK isTiff sizeOK syntaxOK resolutionOK isCompressed depthOK colorOK imagesize filesize updatedat updatedby format mode palette compression dpi blobcsid fullpathtofile'.split(' ')
-    outputfh = csv.writer(open(outputFile, 'wb'), delimiter="\t")
+    outputfh = csv.writer(open(outputFile, 'w'), delimiter="\t")
     outputfh.writerow(columns)
 
     for i, tif in enumerate(records):

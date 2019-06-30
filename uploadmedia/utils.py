@@ -255,7 +255,7 @@ def writeCsv(filename, items, writeheader):
 
 # following function borrowed from Django docs, w modifications
 def handle_uploaded_file(f):
-    destination = open(path.join(TEMPIMAGEDIR, '%s') % f.name, 'wb+')
+    destination = open(path.join(TEMPIMAGEDIR, '%s') % f.name, 'w+')
     with destination:
         for chunk in f.chunks():
             destination.write(chunk)

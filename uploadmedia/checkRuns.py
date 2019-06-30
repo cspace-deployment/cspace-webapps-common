@@ -152,7 +152,7 @@ for filename in os.listdir(DIR):
     except:
         # skip .csv files that don't match the pattern
         continue
-    FH = open(os.path.join(DIR, filename), "rb")
+    FH = open(os.path.join(DIR, filename), "'r'")
     # filename = filename.replace('.csv','')
     for i, line in enumerate(FH.readlines()):
         line = line.strip()
@@ -241,7 +241,7 @@ for filename in os.listdir(DIR):
 
 for filename in os.listdir(DIR):
     if not '.trace.log' in filename: continue
-    FH = open(os.path.join(DIR, filename), "rb")
+    FH = open(os.path.join(DIR, filename), "'r'")
     filename = filename.replace('.trace.log', '')
     joberrors[filename] = 0
     for i, line in enumerate(FH.readlines()):

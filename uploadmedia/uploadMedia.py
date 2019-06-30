@@ -9,7 +9,7 @@ from xml.sax.saxutils import escape
 import traceback
 import configparser
 
-from cswaExtras import postxml, relationsPayload, getCSID
+from uploadmedia.cswaExtras import postxml, relationsPayload, getCSID
 
 
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
@@ -106,7 +106,6 @@ def uploadblob(mediaElements, config, http_parms):
     filename = mediaElements['name']
     fullpath = path.join(http_parms.cache_path, filename)
     payload = {'submit': 'OK'}
-    #files = {'file': (filename, open(fullpath, 'rb'), 'image/jpeg')}
     files = {'file': (filename, open(fullpath, 'rb'))}
 
     elapsedtime = time.time()
@@ -134,10 +133,8 @@ def uploadmedia(mediaElements, config, http_parms):
         #messages.append("posting to media REST API...")
         payload = mediaPayload(mediaElements, http_parms.institution)
         (url, data, mediaCSID, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
-        # elapsedtimetotal += elapsedtime
         messages.append('mediacsid %s elapsedtime %s ' % (mediaCSID, elapsedtime))
         mediaElements['mediaCSID'] = mediaCSID
-        #messages.append("media REST API post succeeded...")
         # for PAHMA, each uploaded image becomes the primary, in turn
         # i.e. the last image in a set of images for the same object becomes the primary
         if http_parms.institution == 'pahma':
@@ -199,7 +196,6 @@ def uploadmedia(mediaElements, config, http_parms):
                 mediaElements['subjectDocumentType'] = 'CollectionObject'
                 payload = relationsPayload(mediaElements)
                 (url, data, csid, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
-                #elapsedtimetotal += elapsedtime
                 messages.append('relation obj2media csid %s elapsedtime %s ' % (csid, elapsedtime))
                 mediaElements['obj2mediaCSID'] = csid
                 #messages.append("relations REST API post succeeded...")
@@ -208,16 +204,16 @@ def uploadmedia(mediaElements, config, http_parms):
     return mediaElements
 
 
-class CleanlinesFile(file):
+class CleanlinesFile():
     def next(self):
         line = super(CleanlinesFile, self).next()
         return line.replace('\r', '').replace('\n', '') + '\n'
 
 
 def getRecords(rawFile):
-    # csvfile = csv.reader(codecs.open(rawFile,'rb','utf-8'),delimiter="\t")
+    # csvfile = csv.reader(codecs.open(rawFile,'r','utf-8'),delimiter="\t")
     try:
-        f = CleanlinesFile(rawFile, 'rb')
+        f = CleanlinesFile(rawFile, 'r')
         csvfile = csv.reader(f, delimiter="|")
     except IOError:
         message = 'Expected to be able to read %s, but it was not found or unreadable' % rawFile
@@ -243,10 +239,10 @@ if __name__ == "__main__":
         print("MEDIA: input  file (fully qualified path): %s" % sys.argv[1])
         print("MEDIA: config file (fully qualified path): %s" % sys.argv[2])
     else:
-        print
+        print()
         print("usage: %s <jobname> <config file>" % sys.argv[0])
         print("e.g.   %s 2017-02-05 pahma_Uploadmedia_dev.cfg" % sys.argv[0])
-        print
+        print()
         sys.exit(1)
 
     try:
@@ -293,7 +289,7 @@ if __name__ == "__main__":
     print('MEDIA: %s columns and %s lines found in file %s' % (columns, len(records), sys.argv[1]))
     outputFile = sys.argv[1].replace('.inprogress.csv', '.step3.csv')
     outputFile = outputFile.replace('.step1.csv', '.step3.csv')
-    outputfh = csv.writer(open(outputFile, 'wb'), delimiter="\t")
+    outputfh = csv.writer(open(outputFile, 'w'), delimiter="\t")
 
     # the first row of the file is a header
     columns = records[0]
