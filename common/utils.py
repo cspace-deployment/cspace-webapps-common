@@ -104,10 +104,9 @@ def makeMarker(location):
 
 def checkValue(cell):
     # the following few lines are a hack to handle non-unicode data which appears to be present in the solr datasource
-    if isinstance(cell, unicode):
+    if isinstance(cell, str):
         try:
-            cell = cell.translate({0xd7: u"x"})
-            cell = cell.decode('utf-8', 'ignore').encode('utf-8')
+            cell = str(cell)
         except:
             print('unicode problem', cell.encode('utf-8', 'ignore'))
             cell = cell.encode('utf-8', 'ignore')
@@ -230,7 +229,7 @@ def setupBMapper(request, requestObject, context, prmz):
     mappableitems, numSelected = getMapPoints(context, requestObject)
     context['mapmsg'] = []
     filename = 'bmapper%s.csv' % datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-    filehandle = open(path.join(prmz.LOCALDIR, filename), 'wb')
+    filehandle = open(path.join(prmz.LOCALDIR, filename), 'w')
     writeCsv(filehandle, getfields('bMapper', 'name', prmz), mappableitems, writeheader=False, csvFormat='bmapper')
     filehandle.close()
     context['mapmsg'].append('%s points of the %s selected objects examined had latlongs (%s in result set).' % (
@@ -271,7 +270,7 @@ def setupKML(request, requestObject, context, prmz):
     mappableitems, numSelected = getMapPoints(context, requestObject)
     context['mapmsg'] = []
     filename = 'kml-%s.kml' % datetime.datetime.utcnow().strftime("%Y%m%d%H%M%S")
-    #filehandle = open(path.join(prmz.LOCALDIR, filename), 'wb')
+    #filehandle = open(path.join(prmz.LOCALDIR, filename), 'w')
     response = HttpResponse(content_type='application/kml')
     response.write("""
 <?xml version="1.0" encoding="UTF-8"?>
