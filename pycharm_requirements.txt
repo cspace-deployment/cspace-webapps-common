@@ -1,2 +1,31 @@
-# Pycharm requirements, Mac OS
-# Python>=3.6
+certifi==2019.3.9
+chardet==3.0.4
+colour==0.1.5
+dirq==1.7.1
+Django==2.2.1
+django-extensions==2.1.9
+django-filter==2.1.0
+Django-Mobileesp==1.0.1
+django-positions==0.6.0
+djangorestframework==3.9.4
+future==0.17.1
+idna==2.8
+itsdangerous==1.1.0
+numpy==1.16.4
+Pillow==6.0.0
+psycopg2==2.8.3
+pyasn1==0.4.5
+Pygments==2.4.2
+PyGreSQL==5.1
+pymongo==3.8.0
+pysmb==1.1.27
+pysolr==3.8.1
+pytz==2019.1
+requests==2.22.0
+six==1.12.0
+solrpy==0.9.9
+sqlparse==0.3.0
+static-ranges==0.2.0
+typing==3.7.4
+urllib3==1.25.3
+Wand==0.5.4
