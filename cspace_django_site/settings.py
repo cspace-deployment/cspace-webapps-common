@@ -117,7 +117,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, '../static_root')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 # URL prefix for static files.
 # Example: "http://intakes.com/static/", "http://static.intakes.com/"
