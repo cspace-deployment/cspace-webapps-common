@@ -21,7 +21,7 @@
 # TODO: uncomment this someday when the script really can be expected to run to completion without errors
 # set -e
 
-PYTHON=python
+PYTHON=python3
 
 function buildjs()
 {
@@ -38,7 +38,8 @@ function buildjs()
 
 function deploy()
 {
-    $PYTHON manage.py syncdb --noinput
+    $PYTHON manage.py makemigrations
+    $PYTHON manage.py migrate --noinput
     # rebuild the js libraries in case the javascript has been tweaked
     buildjs $1
     # get rid of the existing static_root to force django to rebuild it from scratch
@@ -120,7 +121,7 @@ DEPLOYMENT=$2
 VERSION="$3"
 
 CURRDIR=`pwd`
-CONFIGDIR=~/django_example_config
+CONFIGDIR=~/razzle
 
 if [[ "${COMMAND}" = "disable" ]]; then
     perl -i -pe "s/('${WEBAPP}')/# \1/" cspace_django_site/installed_apps.py
@@ -207,8 +208,8 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
     echo "*************************************************************************************************"
     # just to be sure, we start over with the database...
     rm -f db.sqlite3
-    # $PYTHON manage.py migrate
-    $PYTHON manage.py syncdb --noinput
+    $PYTHON manage.py makemigrations
+    $PYTHON manage.py migrate --noinput
     $PYTHON manage.py loaddata fixtures/*.json
     # build js library, populate static dirs, rsync code to runtime dir, etc.
     deploy ${TENANT}
