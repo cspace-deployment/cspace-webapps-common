@@ -4,11 +4,11 @@ import os
 
 try:
     # get the tracking id for Prod
-    from trackingids import trackingids
+    from cspace_django_site.trackingids import trackingids
 
     UA_TRACKING_ID = trackingids['webapps-prod'][0]
 except:
-    print('UA tracking ID not found for Productioon. It should be "webapps-prod" in "trackingids.py"')
+    print('UA tracking ID not found for Production. It should be "webapps-prod" in "trackingids.py"')
     exit(0)
 
 DEBUG = False
