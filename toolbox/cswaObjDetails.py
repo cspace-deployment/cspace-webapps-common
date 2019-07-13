@@ -1,7 +1,4 @@
 # -*- coding: UTF-8 -*-
-import locale
-
-locale.setlocale(locale.LC_ALL, 'en_US')
 
 # the only other module: isolate postgres calls and connection
 import toolbox.cswaDBobjdetails as DBquery
