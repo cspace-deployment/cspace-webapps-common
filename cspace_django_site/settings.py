@@ -132,13 +132,10 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'logfile': {
+        'file': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
+            'class': 'logging.FileHandler',
             'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
-            'maxBytes': 10000000,
-            'backupCount': 10,
-            # 'formatter': 'standard',
         },
     },
     'loggers': {
