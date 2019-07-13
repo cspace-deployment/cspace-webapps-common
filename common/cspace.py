@@ -25,11 +25,11 @@ CSPACE_TENANT_PROPERTY = 'tenant'
 
 def getConfig(base_path, filename_nosuffix):
     """
-        Read in our config file.  Look for it to be a sibling of the current .py file (this authn.py file).
+        Read in the config file.  normally in this project's config directory
     :param filename_nosuffix:
     """
     fileName = filename_nosuffix + CONFIG_SUFFIX
-    relative_path = path.join(base_path, fileName)  # config file should be one of our siblings
+    relative_path = path.join(base_path, fileName)
     config = configparser.RawConfigParser()
     config.read(relative_path)
     theSections = config.sections()
