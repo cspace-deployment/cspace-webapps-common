@@ -4,9 +4,6 @@ import time
 import sys
 import cgi
 import psycopg2
-import locale
-
-locale.setlocale(locale.LC_ALL, 'en_US')
 
 timeoutcommand = 'set statement_timeout to 300000'
 
