@@ -72,7 +72,7 @@ def index(request):
                 if group == '':
                     messages = ['A value for group title (either an existing group or a potential new one) is required.']
                 else:
-                    grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.quote_plus(group), prmz.MAXRESULTS)
+                    grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.parse.quote_plus(group), prmz.MAXRESULTS)
 
                     if groupcsid is not None:
                         if len(list_of_objects) > 0:
@@ -122,7 +122,7 @@ def index(request):
             # it's complicated: we can't search in Solr for the group, as we may have just created or updated it.
             # so we have to do REST calls to find the group and its CSIDs, then we can search Solr
             # though we might still miss some... :-(
-            grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.quote_plus(group), prmz.MAXRESULTS)
+            grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.parse.quote_plus(group), prmz.MAXRESULTS)
             if groupcsid is None:
                 groupcsid = create_group(group, request)
                 context['items'] = []
@@ -153,7 +153,7 @@ def index(request):
 
             messages += add2group(groupcsid, items2add, request)
             messages += delete_from_group(groupcsid, items2delete, request)
-            grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.quote_plus(group), prmz.MAXRESULTS)
+            grouptitle, groupcsid, totalItems, list_of_objects, errormsg = find_group(request, urllib.parse.quote_plus(group), prmz.MAXRESULTS)
             if len(items_ignored) > 0 : messages += ['%s items in group untouched.' % len(items_ignored)]
             queryterms = [ '%s: (' % prmz.CSIDFIELD + " OR ".join(list_of_objects) + ')' ]
             context = setup_solr_search(queryterms, context, prmz, request)
