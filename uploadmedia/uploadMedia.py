@@ -2,6 +2,7 @@ import csv
 import sys
 import re
 import requests
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 from requests.auth import HTTPBasicAuth
 import time
 from os import path
@@ -102,14 +103,22 @@ def mediaPayload(mh, institution):
     return payload
 
 def uploadblob(mediaElements, config, http_parms):
+
     url = "%s/cspace-services/%s" % (http_parms.server, 'blobs')
     filename = mediaElements['name']
     fullpath = path.join(http_parms.cache_path, filename)
-    payload = {'submit': 'OK'}
-    files = {'file': (filename, open(fullpath, 'rb'))}
+
+    # by default, django processes multipart forms in memory
+    # we need to work around this for large BMU uploads. The MultipartEncoder is the answer!
+    m = MultipartEncoder(
+        fields={'submit': 'OK',
+                'file': (filename, open(fullpath, 'rb'))}
+    )
 
     elapsedtime = time.time()
-    response = requests.post(url, data=payload, files=files, auth=HTTPBasicAuth(http_parms.username, http_parms.password))
+
+    response = requests.post(url, data=m, headers={'Content-Type': m.content_type}, auth=HTTPBasicAuth(http_parms.username, http_parms.password))
+
     if response.status_code != 201:
         print("blob creation failed!")
         print("response: %s" % response.status_code)

@@ -4,19 +4,19 @@ import os
 
 try:
     # get the tracking id for Prod
-    from trackingids import trackingids
+    from cspace_django_site.trackingids import trackingids
+
     UA_TRACKING_ID = trackingids['webapps-prod'][0]
 except:
-    print('UA tracking ID not found for Productioon. It should be "webapps-prod" in "trackingids.py"')
+    print('UA tracking ID not found for Production. It should be "webapps-prod" in "trackingids.py"')
     exit(0)
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+# See https://docs.djangoproject.com/en/2.2/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_NAME = os.path.basename(BASE_DIR)
@@ -24,10 +24,10 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/home/app_webapps/cache/' + PROJECT_NAME + '/images',
+        'LOCATION': '/var/cspace/' + PROJECT_NAME + '/imagecache',
         'CULL_FREQUENCY': 100000,
-       'OPTIONS': {
-           'MAX_ENTRIES': 1000000
-       }
-   }
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000000
+        }
+    }
 }

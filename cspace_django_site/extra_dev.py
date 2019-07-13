@@ -2,7 +2,7 @@
 
 try:
     # get the tracking id for Dev
-    from trackingids import trackingids
+    from cspace_django_site.trackingids import trackingids
     UA_TRACKING_ID = trackingids['webapps-dev'][0]
 except:
     print('UA tracking ID not found for Development. It should be "webapps-dev" in "trackingids.py"')
