@@ -3,6 +3,8 @@ from authn.authn import CSpaceAuthN
 from common import cspace
 import logging
 
+from cspace_django_site.settings import BASE_DIR
+
 logger = logging.getLogger(__name__)
 
 class cspace_django_site:
@@ -16,7 +18,8 @@ class cspace_django_site:
 
     @classmethod
     def loadConfig(cls):
-        result = cspace.getConfig(path.dirname(__file__), "main")
+        relative_path = path.join(BASE_DIR, 'config')
+        result = cspace.getConfig(relative_path, "main")
         return result
 
     @classmethod
