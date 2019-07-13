@@ -1,3 +1,4 @@
+#!/bin/bash
 #
 # script to help deploy webapps
 #
@@ -9,17 +10,18 @@
 #
 # this bash script does the following:
 #
-# 1. 'configure' builds a django app within the repo directory in the usual way (using manage.py)
+# 1. 'configure' copies the appropriate "extra settings" file for the environment
 # 2. 'deploy':
-#     a. copies and configures the code for either 'default' or for one of the 5 UCB deployments
+#     a. copies and configures the code for one of the 5 UCB deployments
 #     b. "npm builds" the needed js components
-#     c. if running on a UCB server (which is detected automatically), copies the code in the runtime directory
+#     c. if running on a UCB server (which is detected automatically), rsyncs the code to the runtime directory
 # 3. other maintainance functions: 'updatejs' just rebuilds the webpack, 'disable' or 'enable' individual webapps
 #
 
 # exit on errors...
 # TODO: uncomment this someday when the script really can be expected to run to completion without errors
 # set -e
+set -x
 
 PYTHON=python3
 
@@ -32,31 +34,35 @@ function buildjs()
     npm install
     npm build
     ./node_modules/.bin/webpack
-    # disable this for now, until we address the errors it generates on the "legacy" servers
+    # disable this for now, until we address the errors it detects
     #./node_modules/.bin/eslint client_modules/js/app.js
 }
 
 function deploy()
 {
-    $PYTHON manage.py makemigrations
-    $PYTHON manage.py migrate --noinput
-    # rebuild the js libraries in case the javascript has been tweaked
     buildjs $1
-    # get rid of the existing static_root to force django to rebuild it from scratch
-    rm -rf static_root/
-    $PYTHON manage.py collectstatic --noinput
-    # update the version file
-    $PYTHON common/setversion.py
     # if this is running on a dev or prod system (evidenced by the presence of web-accessible
     # deployment directories, i.e. /var/www/*), then copy the needed files there
     # nb: the config directory and cspace_django_site/main.cfg are not overwritten!
     if [[ -e /var/www/$1 ]]; then
         # copy the built files to the runtime directory, but leave the config files as they are
-        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config --exclude main.cfg . /var/www/$1
+        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . /var/www/$1
+        if [[ ! -d /var/www/$1/config ]]; then
+            # if there isn't already a config directory in the destination, copy this one there
+	        cp -r config /var/www/$1
+        fi
+	    cd /var/www/$1
     fi
+
+    $PYTHON manage.py migrate --noinput
+    $PYTHON manage.py loaddata fixtures/*.json
+    # get rid of the existing static_root to force django to rebuild it from scratch
+    rm -rf static_root/
+    $PYTHON manage.py collectstatic --noinput
 
     # put things back the way they were...
     if [[ $VERSION != "" ]]; then
+	cd ${CURRDIR}
         git checkout master
         git branch -d deploy
     fi
@@ -167,51 +173,40 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
     # checkout correct version, if indicated...
     check_version
 
-    # for the generic "default" deployment, all the default apps and config are in this repo
-    # no need to refer to the UCB custom repos
-    if [[ "${COMMAND}" = "default" ]]; then
-        cp config.examples/*.cfg config
-        cp config.examples/*.csv config
-        cp config.examples/*.json fixtures
-        cp config.examples/project_urls.py cspace_django_site/urls.py
-        cp config.examples/project_apps.py cspace_django_site/installed_apps.py
-        cp client_modules/static_assets/cspace_django_site/images/CollectionToolzSmall.png client_modules/static_assets/cspace_django_site/images/header-logo.png
-    else
-        if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
-            echo "can't deploy tenant ${TENANT}: ${CONFIGDIR}/${TENANT} does not exist"
-            echo
-            exit
-        fi
-
-        # for now, until versions in both django_example_config and cspace_django_project are sync'd
-        # we don't check the version for the 'example' repo...
-        # cd ${CONFIGDIR}
-        # check_version
-        # cd ${CURRDIR}
-
-        rm config/*
-        rm fixtures/*
-
-        cp ${CONFIGDIR}/${TENANT}/config/* config
-        cp ${CONFIGDIR}/${TENANT}/fixtures/* fixtures
-        # note that in some cases, this cp will overwrite customized files in the underlying contributed apps
-        # in cspace_django_project. that is the intended behavior!
-        cp -r ${CONFIGDIR}/${TENANT}/apps/* .
-        cp ${CONFIGDIR}/${TENANT}/project_urls.py cspace_django_site/urls.py
-        cp ${CONFIGDIR}/${TENANT}/project_apps.py cspace_django_site/installed_apps.py
-        cp client_modules/static_assets/cspace_django_site/images/header-logo-${TENANT}.png client_modules/static_assets/cspace_django_site/images/header-logo.png
+    if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
+        echo "can't deploy tenant ${TENANT}: ${CONFIGDIR}/${TENANT} does not exist"
+        echo
+        exit
     fi
-    mv config/main.cfg cspace_django_site
+
+    # for now, until versions in both django_example_config and cspace_django_project are sync'd
+    # we don't check the version for the 'example' repo...
+    # cd ${CONFIGDIR}
+    # check_version
+    # cd ${CURRDIR}
+
+    rm config/*
+    rm fixtures/*
+
+    cp ${CONFIGDIR}/${TENANT}/config/* config
+    cp ${CONFIGDIR}/${TENANT}/fixtures/* fixtures
+    # note that in some cases, this cp will overwrite customized files in the underlying contributed apps
+    # in cspace_django_project. that is the intended behavior!
+    cp -r ${CONFIGDIR}/${TENANT}/apps/* .
+    cp ${CONFIGDIR}/${TENANT}/project_urls.py cspace_django_site/urls.py
+    cp ${CONFIGDIR}/${TENANT}/project_apps.py cspace_django_site/installed_apps.py
+    cp client_modules/static_assets/cspace_django_site/images/header-logo-${TENANT}.png client_modules/static_assets/cspace_django_site/images/header-logo.png
     echo "*************************************************************************************************"
     echo "configured system is:"
-    grep 'hostname' cspace_django_site/main.cfg
+    grep 'hostname' config/main.cfg
     echo "*************************************************************************************************"
     # just to be sure, we start over with the database...
     rm -f db.sqlite3
-    $PYTHON manage.py makemigrations
-    $PYTHON manage.py migrate --noinput
-    $PYTHON manage.py loaddata fixtures/*.json
-    # build js library, populate static dirs, rsync code to runtime dir, etc.
+
+    # update the version file
+    $PYTHON common/setversion.py
+
+    # build js library, populate static dirs, rsync code to runtime dir if needed, etc.
     deploy ${TENANT}
     echo
     echo "*************************************************************************************************"
