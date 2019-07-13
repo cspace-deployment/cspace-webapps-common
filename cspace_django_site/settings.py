@@ -138,7 +138,7 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
             'maxBytes': 10000000,
             'backupCount': 10,
-            'formatter': 'standard',
+            # 'formatter': 'standard',
         },
     },
     'loggers': {
