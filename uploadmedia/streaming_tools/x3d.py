@@ -35,7 +35,8 @@ def make_render_file(x3d_info):
     </x3d>
 </body>
 </html>""" % (x3d_info[1], x3d_info[1], x3d_info[6])
-    print >> f, html
+    print(html, file=open('%s.html' % x3d_info[0], 'a'))
+    # print(>> f, html)
     f.close()
 
 
@@ -53,13 +54,12 @@ for blob_csid in blobs.findall('.//csid'):
     md5keys.append(x3d_info)
     pass
 
-print '<html>'
-print '<h3>X3D images in PAHMA CSpace (up to 200 of the most recent)</h3>'
-print '<emph>%s</emph><hr/>' % datetime.datetime.now()
-print '<table cell-padding="3px">'
-print '<tr><th>'
-print '<th>'.join('X3D rendering,Blob Record,MD5 key,Size,Updated At,Raw X3D file'.split(','))
+print('<html>')
+print('<h3>X3D images in PAHMA CSpace (up to 200 of the most recent)</h3>')
+print('<emph>%s</emph><hr/>' % datetime.datetime.now())
+print('<table cell-padding="3px">')
+print('<tr><th>')
+print('<th>'.join('X3D rendering,Blob Record,MD5 key,Size,Updated At,Raw X3D file'.split(',')))
 for x3d_file_info in md5keys:
-    print '<tr><td><a href="%s.html" target="x3d">%s</a><td><a href="https://pahma.cspace.berkeley.edu/cspace-services%s" target="x3d">XML blob record</a><td>%s<td>%s<td>%s<td><a href="%s">raw x3d file</a>' % tuple(
-        x3d_file_info)
-print '</table>'
+    print('<tr><td><a href="%s.html" target="x3d">%s</a><td><a href="https://pahma.cspace.berkeley.edu/cspace-services%s" target="x3d">XML blob record</a><td>%s<td>%s<td>%s<td><a href="%s">raw x3d file</a>' % tuple(x3d_file_info))
+print('</table>')
