@@ -1,6 +1,6 @@
 __author__ = 'jblowe'
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, render_to_response, redirect
 import json
 from django.conf import settings
 from os import path
@@ -32,6 +32,9 @@ def getapplist(request):
 
 
 def index(request):
+    if request.path == '/':
+        response = redirect('landing')
+        return response
     appList = getapplist(request)
     if not request.user.is_authenticated:
         appList = [app for app in appList if app[0] in publicApps]
