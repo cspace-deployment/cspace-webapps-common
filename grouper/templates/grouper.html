@@ -11,7 +11,7 @@
     {% if error %}
         <p style="color: red;">Please submit a search term.</p>
     {% endif %}
-    <form action="" method="POST">
+    <form method="POST">
         {% csrf_token %}
         <table>
             <tr>
