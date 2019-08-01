@@ -105,7 +105,7 @@
                         {% endif %}
                         {% if jobinfo.status == 'jobfailed' %}
                             <h2 class="error">Job {{ jobinfo.jobnumber }} failed.<br/>
-                                Please click <a href="showresults/?filename={{ jobinfo.jobnumber }}.check.csv&status=check}">here</a> or consult the 'check' file in job queue for details. Sorry!</h2>
+                                Please click <a href="bmu_showresults/?filename={{ jobinfo.jobnumber }}.check.csv&status=check}">here</a> or consult the 'check' file in job queue for details. Sorry!</h2>
                         {% endif %}
                     {% endif %}
                 {% endif %}
@@ -116,7 +116,7 @@
             <h2>
                 <li>Check on jobs and uploads</li>
             </h2>
-            <form action="{% url 'showqueue' %}" method="post">
+            <form action="{% url 'bmu_showqueue' %}" method="post">
                 {% csrf_token %}
                 <input class="prettyBtn" type="submit" name="checkjobs" value="View the Job Queue">
                 (display the most recent <select id="num2display" name="num2display">

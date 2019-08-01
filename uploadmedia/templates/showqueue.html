@@ -51,11 +51,11 @@
             {% endif %}
             <td>
                 {% for j in jobinfo %}
-                    <a href="downloadresults/{{ j.0 }}">{{ j.1 }}</a>
+                    <a href="bmu_downloadresults/{{ j.0 }}">{{ j.1 }}</a>
                     {% if j.1 == 'pending' %}
-                        <a class="button" href="{% url 'deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this job)</span></a>
+                        <a class="button" href="bmu_deletejob/{{ j.0 }}"><span style="color: orange"> (delete this job)</span></a>
                     {% elif j.1 == 'check' and jobinfo|length == 1 %}
-                        <a class="button" href="{% url 'deletejob' %}{{ j.0 }}"><span style="color: orange"> (delete this qc file)</span></a>
+                        <a class="button" href="bmu_deletejob/{{ j.0 }}"><span style="color: orange"> (delete this qc file)</span></a>
                     {% endif %}
 
                 {% endfor %}
@@ -63,16 +63,16 @@
             <td/>
             <td>
                 {% for j in jobinfo %}
-                    <a href="showresults/?filename={{ j.0 }}&status={{ j.1 }}">{{ j.1 }}</a>
+                    <a href="bmu_showresults?filename={{ j.0 }}&status={{ j.1 }}">{{ j.1 }}</a>
                 {% endfor %}
             </td>
             <td>
                 {% for j in jobinfo %}
                     {% if j.1 == 'ingested' %}
                         <!-- a href="showresults/?filename={{ j.0 }}&status=showinportal">In Portal</a -->
-                        <a href="showresults/?filename={{ j.0 }}&status=showmedia">View Media</a>
+                        <a href="bmu_showresults?filename={{ j.0 }}&status=showmedia">View Media</a>
                     {% elif j.1 == 'pending' %}
-                        <a href="checkimagefilenames/?filename={{ j.0 }}">Check File</a>
+                        <a href="bmu_checkimagefilenames?filename={{ j.0 }}">Check File</a>
                     {% endif %}
                 {% endfor %}
             </td>
