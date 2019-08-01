@@ -8,7 +8,7 @@
                 <input type="checkbox" name="item-{{ item.counter }}" value="{{ item.csid }}" checked/>
                 &nbsp;
                 <b><a href="?maxresults=1&displayType=full&{{ item.accessionfield }}={{ item.accession }}">{{ item.accession }}</a></b>
-                <a title="permalink" target=_new href="/{{ institution }}/objects/{{ item.accession }}"><img src="{% static "common/images/permalink.svg" %}" class="cspaceLink"></a>
+                <a title="permalink" target=_new href="/{{ institution }}/object/{{ item.accession }}"><img src="{% static "common/images/permalink.svg" %}" class="cspaceLink"></a>
                 {% if user.is_active and user.is_staff %}
                 <a target="cspace" href="{{ cspaceserver }}/collectionspace/ui/{{ institution }}/html/{{ csrecordtype }}.html?csid={{ item.csid }}">
                     <img src="{% static "common/images/open_cspace.png" %}" class="cspaceLink">Open in CSpace</a>

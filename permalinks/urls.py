@@ -4,5 +4,5 @@ from permalinks import views
 urlpatterns = [
     # ex: /objects/9999.99
     # ex: /media/aaaa-aaaa-aaaa-aaaa
-    path('(.*)', views.get_item, name='get_item'),
+    path('<str:itemid>', views.get_item, name='get_item'),
 ]
