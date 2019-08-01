@@ -23,6 +23,18 @@
 # set -e
 set -x
 
+COMMAND=$1
+# the second parameter can stand for several different things!
+WEBAPP=$2
+TENANT=$2
+DEPLOYMENT=$2
+
+# nb: version is optional. if not present, current repo, with or without changes is used...
+VERSION="$3"
+
+CURRDIR=`pwd`
+CONFIGDIR=~/cspace-webapps-ucb
+
 PYTHON=python3
 
 function buildjs()
@@ -116,18 +128,6 @@ if [[ ! -e manage.py ]]; then
     echo
     exit 1
 fi
-
-COMMAND=$1
-# the second parameter can stand for several different things!
-WEBAPP=$2
-TENANT=$2
-DEPLOYMENT=$2
-
-# nb: version is optional. if not present, current repo, with or without changes is used...
-VERSION="$3"
-
-CURRDIR=`pwd`
-CONFIGDIR=~/razzle
 
 if [[ "${COMMAND}" = "disable" ]]; then
     perl -i -pe "s/('${WEBAPP}')/# \1/" cspace_django_site/installed_apps.py
