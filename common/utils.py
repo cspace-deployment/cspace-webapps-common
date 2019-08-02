@@ -152,10 +152,11 @@ def writeCsv(filehandle, fieldset, items, writeheader=False, csvFormat='csv'):
                     pass
                 cell = checkValue(x['value'])
                 row.append(cell)
+        row = [r.encode('ascii', 'xmlcharrefreplace').decode('ascii') for r in row]
         writer.writerow(row)
     return filehandle
 
-
+def getMapPoints(context, requestObject):
     mappableitems = []
     if 'select-items' in requestObject:
         mapitems = context['items']
