@@ -87,7 +87,7 @@ def get_image(request, image):
     try:
         # if the user is authenticated, they can see anything.
         # otherwise, they see only what the imageserver is configured to let them see.
-        if not request.user.is_authenticated():
+        if not request.user.is_authenticated:
             image_ok = False
             # if no list of authorized derivatives is set in the config file, all are available
             if not derivatives_served:
@@ -111,7 +111,7 @@ def get_image(request, image):
         opener = urllib.request.build_opener(authhandler)
 
         unencoded_credentials = "%s:%s" % (username, password)
-        auth_value = 'Basic %s' % base64.b64encode(unencoded_credentials).strip()
+        auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
         opener.addheaders = [('Authorization', auth_value)]
         urllib.request.install_opener(opener)
         url = "%s/cspace-services/%s" % (server, image)
@@ -120,19 +120,18 @@ def get_image(request, image):
         msg = 'image'
         data = f.read()
         headers = f.info()
-        content_type = headers.type
-        content_disposition = ''
-        for h in headers.headers:
-            if 'Content-Disposition' in h:
-                content_disposition = h
-                break
+        content_type = headers['Content-Type']
+        try:
+            content_disposition = headers['Content-Disposition']
+        except:
+            content_disposition = ''
         try:
             extractfilename = re.search('filename="(.*)"',content_disposition)
             filename = extractfilename.group(1)
         except:
             filename = ''
-
     except:
+        raise
         msg = 'image error'
         data = open(path.join(settings.STATIC_ROOT, 'cspace_django_site/images', imageunavailable), 'r').read()
         content_type = 'image/%s' % unavailable_mime_type
