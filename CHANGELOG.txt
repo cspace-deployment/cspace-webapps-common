@@ -1,0 +1,80 @@
+CHANGELOG for the cspace_django_webapps
+
+OK, it is not a *real* change log, but a list of changes resulting from git log
+with some human annotation after the fact.
+
+This is version 5.2.0-rc1
+Wed Aug  7 12:47:45 PDT 2019
+
+cc1345e (HEAD -> master, origin/master, origin/HEAD) CSW-99: update readme for new deployment options and repo names
+f5df950 CSW-101: landing page needs to point to correct webapp url
+ab2cc6f CSW-99: revise webapps deploy script
+3b5850c CSW-99: update version of django to 2.2.4
+b146a13 CSW-101: in python3, it seems response objects are in ascii. this fix is a placeholder
+56a501b CSW-101: somehow HttpResponse was missing here
+5c3cd54 CSW-101: imageserver requires some more python3 changes
+30b33a4 CSW-101: tweak templates and urls for 'permalinks' webapps
+d513498 CSW-101: make bmu urls unique; django2 requires this
+b394887 CSW-101: repair corner case in landing page urls
+efb8140 CSW-99: update setup.sh for new repos, etc.
+f7714a5 CSW-101: some django template need 'actions' revised
+1701cb4 CSW-91: this script now runs as python3
+bf894e5 CSW-83: make-django-release.pl can live here now
+35039b8 CSW-83: update deploy and helper scripts
+a0ae6f4 CSW-83: quote_plus has moved to another place in urllib for python3
+e24f158 CSW-83: object details tool webapp does not need to specify locale
+4463e32 CSW-83: object details tool webapp does not need to specify locale
+a040ac1 CSW-83: use /tmp for now for testing
+cba8de1 Merge branch 'master' of https://github.com/jblowe/dazzle
+7327a08 CSW-83: main.cfg now lives in config dir with rest of config files
+5633f3a CSW-83: improve inline documentation
+baa4181 CSW-83: back off to the basic logging for now
+6d71a08 CSW-83: try this log formatter
+69d82fb CSW-83: correctly import ua tracking ids
+2a64a4a CSW-83: revisions to settings: logging, upload tmp dir
+86e7c35 CSW-83: use 'new' cache locations for imageserver cache
+7e27725 CSW-83: initial python3+django2 revisions to setup.sh
+f33fe7b CSW-83: copy setup.sh from legacy django project
+87366b9 CSW-83: capture some enhancment from HMP-103, legacy BMU
+3736a26 CSW-83: seems we need this as static root on ubuntu
+e7cfeb4 CSW-83: revise python module requirements for ubuntu, django 2.2+
+eaefce9 CSW-77: correct typo in requirements.txt
+ee8b123 CSW-77: futher refinements to module requirements
+6c371e7 CSW-77: freeze requirements for pycharm (dev) deployments
+e7f3eac CSW-77: more cleanup of unicode handling
+75af7ae CSW-77: first almost working version of toolbox webapp
+b6104f4 CSW-77: output strings not bytes to csv downloads
+3a66cff CSW-77: read and write files handled by BMU in normal way -- python3 is fine with unicode
+0cd5920 CSW-77: comment cleanup only
+e3fa472 CWS-77: use proper django2 routes
+d5d3e14 CSW-77: fix maps rendering
+7fe0a2d CSW-77: refactor and correct starting points for various apps
+8e1f5c1 CSW-77: new requirement for django2
+60ac26e CSW-77: initial mostly working version of new webapps
+f7e01a8 Counter is included in python3
+3d80d80 CSW-77: add the 15 'core' webapps to the mix (still v2.7)
+fef3ed1 more .gitignore stuff
+c78694f CSW-77: update webpack vulnerability. again
+54146e5 CSW-77: need a logs directory
+a9e0098 CSW-77: no 'default' needed for urls.py
+9060ea9 CSW-77: add the hello webapp back in
+57074ee CSW-77: more refinements to gitignore
+ef3fc04 CSW-77: get CSpace authentiction working again
+3f9477c CSW-77: more webpack / package.json repairs
+fa577e5 CSW-77: add webpack-cli. build seems to want it
+3399086 CSW-77: most of the static content to support these webapps
+ef97eda CSW-77: more supporting templates
+a7fd6ee CSW-77: our cspace backend authentication, and other supporting modules and templates
+1181c20 CSW-77: these extra settings files are still good, it seems
+2823c66 CSW-77: add more of the cspace django scaffolding back in
+75be0c7 CSW-77: another new python3 dependency
+6f9c75d CSW-77: revisions to basic django project settings
+ebb0d31 CSW-77: update package.json for vulnerabilities
+a279784 CSW-77: update package.json (webpack version)
+9e52f55 CSW-77: various requirements.txt files
+0402b86 CSW-77: npm scaffolding
+9cc2524 CSW-77: a script to help with profiling
+9f21bb9 CSW-77: improve README
+5773390 CSW-77: improve .gitignore
+5038a78 CSW-77: initial commit of a working Python3/Django2 project
+ac95927 Initial commit
