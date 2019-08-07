@@ -3,10 +3,11 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc1
-Wed Aug  7 12:47:45 PDT 2019
+This is version 5.2.0-rc2
+Wed Aug  7 12:49:25 PDT 2019
 
-cc1345e (HEAD -> master, origin/master, origin/HEAD) CSW-99: update readme for new deployment options and repo names
+d437632 (HEAD -> master, origin/master, origin/HEAD) CSW-99: add the initial version of the CHANGELOG to this repo
+cc1345e (tag: 5.2.0-rc1) CSW-99: update readme for new deployment options and repo names
 f5df950 CSW-101: landing page needs to point to correct webapp url
 ab2cc6f CSW-99: revise webapps deploy script
 3b5850c CSW-99: update version of django to 2.2.4
