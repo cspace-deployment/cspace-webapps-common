@@ -1,4 +1,4 @@
-## cspace-django-project
+## cspace-webapps-common
 
 This Django project supports easy access to various CollectionSpace services. To preview
 several deployments of this project at UC Berkeley, visit: https://webapps.cspace.berkeley.edu.
@@ -49,8 +49,8 @@ The following dialog makes a number of assumptions -- that your system is alread
 
 ```bash
 # get the code. This is the bleeding edge development repo.
-git clone https://github.com/cspace-deployment/cspace_django_project
-cd cspace_django_project
+git clone https://github.com/cspace-deployment/cspace-webapps-common
+cd cspace-webapps-common
 # resolve the Python module requirements.
 # you'll need to have the PostgreSQL client code as well as the Python setuptools installed...
 # on a Mac *most* of this is in XCode Tools... consider 'sudo pip' if you know what you are doing
@@ -86,7 +86,7 @@ http://localhost:8000
 
 * A helper script called `setup.sh` is provided to help with all this. It is described in some detail below. You should use it -- there are lots of details in the setup process! Strictly speaking, thought, it is not required -- you can putter around with the files yourself if you know what you're doing. `setup.sh` remembers to perform all the little Django details required when setting up and maintaining the project, but note there may be times when you'll need to go around it, at least in development.
 
-* This project comes with **sample** configuration files that point to the development server at `nightly.collectionspace.org`. These are located in `config.examples/`, and you can deploy them by typing './setup.sh deploy default' on the command line when in the `cspace_django_project` directory. NB: the files in `config/` are 'git-ignored'. For your deployment, you'll need to modify these files for your deployment: to point to your real CollectSpace server, your logo, etc. And you'll need to keep track of your versions. We suggest making your own GitHub or other repo for your files; if you model the structure of the UCB configuration repo (e.g. https://github.com/cspace-deployment/django_example_config), you'll be able to use the `deploy` option in `setup.sh` to manage deployment of your own webapps.
+* This project comes with **sample** configuration files that point to the development server at `nightly.collectionspace.org`. These are located in `config.examples/`, and you can deploy them by typing './setup.sh deploy default' on the command line when in the `cspace-webapps-common` directory. NB: the files in `config/` are 'git-ignored'. For your deployment, you'll need to modify these files for your deployment: to point to your real CollectSpace server, your logo, etc. And you'll need to keep track of your versions. We suggest making your own GitHub or other repo for your files; if you model the structure of the UCB configuration repo (e.g. https://github.com/cspace-deployment/cspace-webapps-ucb), you'll be able to use the `deploy` option in `setup.sh` to manage deployment of your own webapps.
 
 * So. To summarize. Almost all webapps require a config file, some require two. Therefore, the `config` will be quite full of config files for the varioius apps. An example configuration file for each webapp is included, but you *will* eventually need to make your own. If the webapp is called `webapp`, the corresponding configuration file should be called `webapp.cfg` unless there is a good reason not to.
 
@@ -94,7 +94,7 @@ http://localhost:8000
 
 The following recipe assumes you are deploying in a development environment, on a Mac, RedHat, or Ubuntu system. And that you will use the development server that comes with Django or that you'll be using PyCharm as your IDE (it has a builtin server). If you are deploying in a UCB-managed server environment (i.e. Red Hat), see further below.
 
-First, fork the `cspace-deployment/cspace_django_project` in your own account on GitHub.
+First, fork the `cspace-deployment/cspace-webapps-common` in your own account on GitHub.
 
 Then on your development system, you'll want to clone your development fork of the repo in whatever directory you do your PyCharm development in. For me, I put them all in `~/PyCharmProjects`.
 
@@ -105,8 +105,10 @@ Note: Before running `pip install -r pycharm_requirements.txt`, make sure that y
 
 ```bash
 # clone your fork of the github repo to wherever you want to deploy the webapps
-cd ~/PycharmProjects
-git clone https://github.com/<mygithubid>/cspace_django_project.git my_test_project
+# by default, the two repos go in your home directory; if you change the
+# location, you'll need to edit setup.sh to indicate this.
+cd ~
+git clone https://github.com/<mygithubid>/cspace-webapps-common.git my_test_project
 cd my_test_project/
 # resolve the Python requirements
 pip install -r pycharm_requirements.txt
@@ -128,7 +130,7 @@ You are now ready to configure your environment and deploy your tenant-specific 
 
 ##### Using setup.sh
 
-There is no `make` or `mvn` build process for Django webapps, and the deployment process consists of placing the code where it can be executed and customizing the parameters used for your particular case, which means editing configuration files by hand, or using ones provided for you (if you are working with an existing CSpace deployment, e.g. at UCB).
+There is no `make` or `mvn` build/deploy process for Django webapps, and the deployment process consists of placing the code where it can be executed and customizing the parameters used for your particular case, which means editing configuration files by hand, or using ones provided for you (if you are working with an existing CSpace deployment, e.g. at UCB).
 
 Instead there is a shell script called `setup.sh` which does the steps required to make your webapps go.
 
@@ -167,15 +169,14 @@ to run them.
 ```bash
 # OPTION 2: deploy one of the UCB configurations
 # to deploy a specific tetant, you'll want to clone the repo with all the
-# example config files out side of this repo, i.e. in ~/django_example_config
-cd ; git clone https://github.com/cspace-deployment/django_example_project.git
+# example config files out side of this repo, i.e. in ~/cspace-webapps-ucb
+cd ; git clone https://github.com/cspace-deployment/cspace-webapps-ucb.git
 cd ~/PycharmProjects/my_test_project
 ./setup.sh deploy ucjeps
 # this will blow away whatever tenant was deployed previously and setup the UCJEPS tenant.
-# now do the initial Django magic to initialize the project (configure options are: prod, dev, pycharm)
 ```
 
-*NB: `setup.sh` expects this repo (`django_example_config`), with this exact name, to be in your home directory!*
+*NB: `setup.sh` expects this repo (`cspace-webapps-ucb`), with this exact name, to be in your home directory!*
 *If your configuration directory is somewhere else or has a different name, edit the `CONFIGDIR` variable in `setup.sh` to point to yours.*
 
 *NB: While most of the parameters for tenants are set up for Production, not all are. At any rate, you will need to make sure that the configuration files in `config` are indeed correct.*
@@ -207,6 +208,122 @@ To see which apps are enabled:
 NB: this will show *all* apps, including the various helper apps, Django admin apps, etc.
 
 (all the enable/disable functionality does is to comment out these webapps in `urls.py` and `installed_apps.py`; you *could* just do it yourself by hand.)
+
+
+##### Deploying on RTL servers
+
+*Caveat lector...these instructions are still quite raw, as is the deployment process itself. Suggestions welcome!*
+
+A few important details, but do please read this whole section before you attempt to deploy on RTL servers:
+
+* The actual recipe for a quick and painless deploment may be found [further below](#deploying-new-versions-on-rtl-servers). But do read on for the gory details.
+* It is expected that a "release document" has been prepared in advance for any particular release, and a "deployment JIRA" exists as well. Please do check for these before attempting to deploy a new version!
+* The Django webapps expected to deployed as user `app_webapps` using WSGI on RTL servers, and currently expects the deployed code to be in a tenant subdirectories in `/var/www`.  The application also *runs* under user `app_webapps`.
+* The instructions below assume that you have followed the [initial instructions](#initial-setup-for-deployments-on-rtl-servers) (below) to set up the deployment scripts from the two repos.
+* However, you should check to ensure that you have the latest versions of these scripts before deploying. Catch-22, sorry!
+* Hope that's all clear!
+
+###### Initial setup for deployments on RTL servers
+
+If you haven't already done so, clone the two needed reports
+
+```
+ssh blacklight-prod.ets.berkeley.edu
+
+sudo su - app_webapps
+
+# only do this if it hasn't been done already...
+git clone https://github.com/cspace-deployment/
+cp radiance/*.sh .
+```
+
+There is a helper script for use in making Dev and Prod
+deployments on RTL servers.
+
+`deploy-ucb.sh` - deploys a particular version for specified museums
+
+For initial setup, you'll need to:
+
+* A Python virtual environment installed
+* Requirements installed via pip.
+* Have Apache configured appropriately (e.g. wsgi, etc.)
+
+E.g.
+
+```
+$ ssh blacklight-dev.ets.berkeley.edu
+
+[...]
+
+Last login: Tue Mar  5 10:54:19 2019 from 128.32.202.5
+jblowe@blacklight-dev:~$ sudo su - blacklight
+
+```
+
+Then you can deploy and start up the application.
+
+###### Deploying new versions on RTL servers
+
+On the RTL servers, you may assume that the two repos and scripts have
+been set up in in the home directory of user `app_webapps` and are ready to use. In theory, only these two scripts are needed
+to do a complete deployment.
+
+First, stop Apache2 (see below).
+
+To deploy and build the code from GitHub for pahma and cinefiles:
+```
+./deploy-ucb.sh -v 5.2.0-rc1 pahma cinefiles
+```
+
+or, to deploy them all:
+
+```
+./deploy-ucb.sh -v 5.2.0-rc1 -a
+```
+
+... then start Apache2 (see below).
+
+NB:
+
+* This script make assumptions about the RTL servers in use...!
+
+Here's a recipe for actually deploying a new version on an RTL server:
+
+1. Sign in to blacklight server (dev or prod)
+1. Stop Apache
+1. sudo to the app_webapps user
+1. Deploy the new version
+1. Exit the  shell
+1. Start Apache
+1. Verify in a browser that the application works
+
+Here's a possible monologue:
+
+```
+ssh blacklight-dev.ets.berkeley.edu
+
+sudo apache2ctl stop
+
+sudo su - app_webappsp
+
+# use the helper script to get and configure the new version for all tenants
+./deploy-ucb.sh -v 5.2.0-rc1 -a
+ 
+exit
+
+sudo apache2ctl start
+
+# check in browser that the app works...
+
+exit
+```
+###### Rolling back on RTL servers
+
+Right now, there is no way to rollback a release.
+
+```
+# to roll back
+```
 
 ##### Configuration files
 
@@ -293,7 +410,7 @@ In the dialog window,
 Expand Defaults (by clicking on the little triangle)
 Select: Django Server
 Click + (to add a configuration)
-Give your configuration a name, e.g. “cspace_django_project”
+Give your configuration a name, e.g. “cspace-webapps-common”
 ```
 
 Environment variables:
@@ -317,3 +434,4 @@ You will be rewarded with a landing page. Or more likely, you will have failed t
 * The BMU and imageserver need to have directories created and accessible to work. If these are not there, the system will try to put files in `/tmp`.
 * The needed config files better exist and have all the parms specified that are needed for the app.
 * The additional module requirements (e.g. psycopg2 for Postgres) need to be met.
+* The various directories for temp files and caches had better be there.
