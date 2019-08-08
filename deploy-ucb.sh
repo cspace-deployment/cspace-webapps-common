@@ -45,7 +45,11 @@ do
   esac
 done
 
+cd ~/cspace-webapps-ucb/
+git pull -v
 cd ~/cspace-webapps-common/
+git pull -v
+
 for t in $MUSEUMS
 do
   # make sure the repo is clean and tidy
