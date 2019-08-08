@@ -112,7 +112,7 @@ def postxml(requestType, uri, realm, hostname, username, password, payload):
     elapsedtime = 0.0
 
     elapsedtime = time.time()
-    request = urllib.request.Request(url, payload, {'Content-Type': 'application/xml'})
+    request = urllib.request.Request(url, payload.encode('utf-8'), {'Content-Type': 'application/xml'})
     # default method for urllib2 with payload is POST
     if requestType == 'PUT': request.get_method = lambda: 'PUT'
     try:

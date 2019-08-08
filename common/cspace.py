@@ -125,7 +125,7 @@ def postxml(realm, uri, hostname, protocol, port, username, password, payload, r
     url = "%s/%s" % (server, uri)
 
     elapsedtime = time.time()
-    request = urllib.request.Request(url, payload, {'Content-Type': 'application/xml'})
+    request = urllib.request.Request(url, payload.encode('utf-8'), {'Content-Type': 'application/xml'})
     # default method for urllib.request with payload is POST
     if requestType == 'PUT': request.get_method = lambda: 'PUT'
     elif requestType == 'DELETE': request.get_method = lambda: 'DELETE'

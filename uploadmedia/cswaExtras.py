@@ -71,7 +71,7 @@ def postxml(requestType, uri, realm, server, username, password, payload):
     opener.addheaders = [('Authorization', auth_value)]
     urllib.request.install_opener(opener)
     url = "%s/cspace-services/%s" % (server, uri)
-    request = urllib.request.Request(url, payload, {'Content-Type': 'application/xml'})
+    request = urllib.request.Request(url, payload.encode('utf-8'), {'Content-Type': 'application/xml'})
 
     # default method for urllib.request with payload is POST
     if requestType == 'PUT': request.get_method = lambda: 'PUT'
