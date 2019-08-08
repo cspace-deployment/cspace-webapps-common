@@ -3,10 +3,16 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc2
-Wed Aug  7 12:49:25 PDT 2019
+This is version 5.2.0-rc3
+Thu Aug  8 10:25:56 PDT 2019
 
-d437632 (HEAD -> master, origin/master, origin/HEAD) CSW-99: add the initial version of the CHANGELOG to this repo
+fac3b62 (HEAD -> master, origin/master, origin/HEAD) CSW-101: a few more places to encode payload
+2c59ca6 CSW-101: toolbox needs to encode payload, too
+91385f5 CSW-101: dict keys sort differently in python3
+3a6f116 CSW-101: 'requests' returns a different 'info' object in python3
+c53aea0 CSW-99: use the setup script that is in the repo
+86ef2df (tag: 5.2.0-rc2) revise change log and VERSION file for version 5.2.0-rc2
+d437632 CSW-99: add the initial version of the CHANGELOG to this repo
 cc1345e (tag: 5.2.0-rc1) CSW-99: update readme for new deployment options and repo names
 f5df950 CSW-101: landing page needs to point to correct webapp url
 ab2cc6f CSW-99: revise webapps deploy script
