@@ -27,7 +27,7 @@ publicApps = landingConfig.get('landing', 'publicApps').split(',')
 def getapplist(request):
     appList = [app for app in settings.INSTALLED_APPS if not "django" in app and not app in hiddenApps]
 
-    appList.sort()
+    appList = sorted(appList)
     appList = [(app,path.join(settings.WSGI_BASE, app)) for app in appList]
     return appList
 

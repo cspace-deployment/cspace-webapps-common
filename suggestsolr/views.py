@@ -80,7 +80,7 @@ def solrtransaction(q, elementID):
                 if not missingatoken:
                     result.append(k)
 
-        result.sort(key=lambda v: v.upper())
+        result = sorted(result, key=lambda v: v.upper())
         result = [ {'value': v} for v in result]
         result.append({'s': solrField})
 

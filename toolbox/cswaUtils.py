@@ -231,7 +231,7 @@ def listSearchResults(authority, config, displaytype, form, rows):
     hasDups = False
 
     if not rows: rows = []
-    rows.sort()
+    rows = sorted(rows)
     rowcount = len(rows)
 
     label = authority
@@ -388,7 +388,7 @@ def doEnumerateObjects(form, config):
             locations[locationheader].append(formatRow({'rowtype': updateType, 'data': r}, form, config))
 
         locs = locations.keys()
-        locs.sort()
+        locs = sorted(locs)
         for header in locs:
             html += header
             html += '\n'.join(locations[header])
@@ -482,7 +482,7 @@ def doCheckMove(form, config):
         locations[locationheader].append(formatRow({'rowtype': 'inventory', 'data': r}, form, config))
 
     locs = locations.keys()
-    locs.sort()
+    locs = sorted(locs)
 
     if len(locs) == 0:
         return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
@@ -620,7 +620,7 @@ def doCheckPowerMove(form, config):
         locations[locationheader].append(formatRow({'rowtype': 'powermove', 'data': r}, form, config))
 
     locs = locations.keys()
-    locs.sort()
+    locs = sorted(locs)
 
     if len(locs) == 0:
         return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
@@ -1161,7 +1161,7 @@ def doPackingList(form, config):
                 locations[locationheader].append(formatRow({'rowtype': updateType, 'data': r}, form, config))
 
     locs = locations.keys()
-    locs.sort()
+    locs = sorted(locs)
     for header in locs:
         html += header.replace('zzz', '')
         html += '\n'.join(locations[header])
@@ -1445,7 +1445,7 @@ def doBedList(form, config):
         html += cswaConstants.getHeader(updateType + groupby, institution)
     else:
         html += '<table>'
-    rows.sort()
+    rows = sorted(rows)
     for headerid, l in enumerate(rows):
 
         try:
