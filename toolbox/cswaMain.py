@@ -129,9 +129,11 @@ def main(request, updateType, form, webappconfig):
         html += '''<h3><span class="error">So sorry! we have encountered a problem:</span></h3>
         <p>Can you please email <a href="mailto:cspace-support@lists.berkeley.edu?Subject=Webapp error: %s">cspace-support@lists.berkeley.edu</a> and let them know?
         Include the following error message and details of what you were doing (values entered in the page, etc.)</>
-        <p><b>%s</b></p>
-        ''' % (2 * (e.message.strip(),))
-        sys.stderr.write('error message: %s' % (e.message.strip()))
+        <p><b>'''
+        for message in e.args:
+            html += message
+            sys.stderr.write('error message: %s' % message)
+        html += '</b></p>'
 
     elapsedtime = time.time() - elapsedtime
 
