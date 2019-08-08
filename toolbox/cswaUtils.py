@@ -230,8 +230,7 @@ def listSearchResults(authority, config, displaytype, form, rows):
     institution, updateType, updateactionlabel = basicSetup(form, config)
     hasDups = False
 
-    if not rows: rows = []
-    rows = sorted(rows)
+    rows = sorted(rows, key=lambda tup: tup[0])
     rowcount = len(rows)
 
     label = authority
@@ -387,8 +386,7 @@ def doEnumerateObjects(form, config):
             totalobjects += 1
             locations[locationheader].append(formatRow({'rowtype': updateType, 'data': r}, form, config))
 
-        locs = locations.keys()
-        locs = sorted(locs)
+        locs = sorted(locations.keys())
         for header in locs:
             html += header
             html += '\n'.join(locations[header])
@@ -481,8 +479,7 @@ def doCheckMove(form, config):
         totalobjects += 1
         locations[locationheader].append(formatRow({'rowtype': 'inventory', 'data': r}, form, config))
 
-    locs = locations.keys()
-    locs = sorted(locs)
+    locs = sorted(locations.keys())
 
     if len(locs) == 0:
         return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
@@ -619,8 +616,7 @@ def doCheckPowerMove(form, config):
         totalobjects += 1
         locations[locationheader].append(formatRow({'rowtype': 'powermove', 'data': r}, form, config))
 
-    locs = locations.keys()
-    locs = sorted(locs)
+    locs = sorted(locations.keys())
 
     if len(locs) == 0:
         return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
@@ -1160,8 +1156,7 @@ def doPackingList(form, config):
 
                 locations[locationheader].append(formatRow({'rowtype': updateType, 'data': r}, form, config))
 
-    locs = locations.keys()
-    locs = sorted(locs)
+    locs = sorted(locations.keys())
     for header in locs:
         html += header.replace('zzz', '')
         html += '\n'.join(locations[header])
