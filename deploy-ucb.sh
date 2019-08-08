@@ -52,6 +52,6 @@ do
   git clean -fd
   git reset --hard
   # now set things up
-  ~/setup.sh configure prod $1
-  ~/setup.sh deploy ${t} $1
+  ./setup.sh configure prod $1
+  ./setup.sh deploy ${t} $1
 done
