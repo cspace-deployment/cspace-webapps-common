@@ -82,7 +82,7 @@ def prepareFiles(request, BMUoptions, context):
     images = []
     for lineno, afile in enumerate(request.FILES.getlist('imagefiles')):
         try:
-            loginfo('bmu', ("%s %s: %s %s (%s %s)" % ('id', lineno + 1, 'name', afile.name, 'size', afile.size)), request)
+            loginfo('bmu', ("%s %s: %s %s (%s %s)" % ('id', lineno + 1, 'name', afile.name, 'size', afile.size)), context, request)
             image = get_exif(afile)
             filename, objectnumber, imagenumber, extra = getNumber(afile.name, INSTITUTION)
             datetimedigitized, dummy = assignValue('', 'ifblank', image, 'DateTimeDigitized', {})
@@ -129,7 +129,7 @@ def prepareFiles(request, BMUoptions, context):
             images.append(imageinfo)
 
         except:
-            # raise
+            raise
             if not validateonly:
                 # we still upload the file, anyway...
                 try:
@@ -150,7 +150,7 @@ def prepareFiles(request, BMUoptions, context):
         if 'createmedia' in request.POST:
             jobinfo['status'] = 'createmedia'
             if not validateonly:
-                loginfo('start', getJobfile(jobnumber), request)
+                loginfo('start', getJobfile(jobnumber), context, request)
                 try:
                     file_is_OK = True
                     if INSTITUTION == 'cinefiles':
@@ -166,17 +166,17 @@ def prepareFiles(request, BMUoptions, context):
                             images = []
                             deletejob(request, jobnumber + '.step1.csv')
                             jobinfo['status'] = 'jobfailed'
-                            loginfo('process', jobnumber + " QC check failed.", request)
+                            loginfo('process', jobnumber + " QC check failed.", context, request)
                     if file_is_OK:
                         retcode = subprocess.call([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
                         if retcode < 0:
-                            loginfo('process', jobnumber + " Child was terminated by signal %s" % -retcode, request)
+                            loginfo('process', jobnumber + " Child was terminated by signal %s" % -retcode, context, request)
                         else:
-                            loginfo('process', jobnumber + ": Child returned %s" % retcode, request)
+                            loginfo('process', jobnumber + ": Child returned %s" % retcode, context, request)
                 except OSError as e:
                     jobinfo['status'] = 'jobfailed'
-                    loginfo('error', "Execution failed: %s" % e, request)
-                loginfo('finish', getJobfile(jobnumber), request)
+                    loginfo('error', "Execution failed: %s" % e, context, request)
+                loginfo('finish', getJobfile(jobnumber), context, request)
 
         elif 'uploadmedia' in request.POST:
             jobinfo['status'] = 'uploadmedia'

@@ -28,7 +28,6 @@ if isdir(TEMPIMAGEDIR):
 else:
     loginfo('bmu',"%s is not an existing directory, using /tmp instead" % TEMPIMAGEDIR, {}, {})
     TEMPIMAGEDIR  = '/tmp'
-    # raise Exception("BMU working directory %s does not exist. this webapp will not work without it!" % TEMPIMAGEDIR)
 
 JOBDIR = path.join(TEMPIMAGEDIR, '%s')
 
