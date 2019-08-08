@@ -429,7 +429,7 @@ def makeMH2R(updateItems, config, form):
 
 def postxml(requestType, uri, payload, form):
     connection = cspace.connection.create_connection(MAINCONFIG, form['userdata'])
-    return connection.postxml(uri="cspace-services/" + uri, payload=payload, requesttype=requestType)
+    return connection.postxml(uri="cspace-services/" + uri, payload=payload.encode('utf-8'), requesttype=requestType)
 
 
 def writeLog(updateItems, uri, httpAction, form, config):
