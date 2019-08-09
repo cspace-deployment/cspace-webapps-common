@@ -3,10 +3,18 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc3
-Thu Aug  8 10:25:56 PDT 2019
+This is version 5.2.0-rc4
+Fri Aug  9 10:13:07 PDT 2019
 
-fac3b62 (HEAD -> master, origin/master, origin/HEAD) CSW-101: a few more places to encode payload
+f9f5bb2 (HEAD -> master, origin/master, origin/HEAD) CSW-99: set default log level to 'WARNING'; add dir to template directories
+7ae38ee CSW-69: quote_plus encode objectnumber to ensure proper search
+ead0ce0 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
+eedc7cc CSW-99: deploy-ucb.sh should verify latest code
+07f7e0c CSW-101: use the 'modern' version of loginfo' for bmu
+429f32c CSW-101: need a lambda to make a sort go in toolbox; and a bit of refactoring
+6cd41eb python3 returns a tuple for an exceptions
+1ace66c (tag: 5.2.0-rc3) revise change log and VERSION file for version 5.2.0-rc3
+fac3b62 CSW-101: a few more places to encode payload
 2c59ca6 CSW-101: toolbox needs to encode payload, too
 91385f5 CSW-101: dict keys sort differently in python3
 3a6f116 CSW-101: 'requests' returns a different 'info' object in python3
