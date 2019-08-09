@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import sys
 import traceback
+import urllib.parse
 #from common.cspace import logged_in_or_basicauth
 from django.shortcuts import render, HttpResponse, redirect
 
@@ -267,7 +268,7 @@ def checkimagefilenames(request):
             if objitems[1] in seen:
                 objectnumbers.append(objitems + (seen[objitems[1]],))
             else:
-                asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', objitems[1], 10)
+                asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', urllib.parse.quote_plus(objitems[1]), 10)
                 (objecturl, objectx, dummy, itemtime) = getfromCSpace(asquery, request)
                 if objectx is None:
                     totalItems = 0
