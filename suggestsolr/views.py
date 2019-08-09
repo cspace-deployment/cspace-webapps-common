@@ -65,8 +65,6 @@ def solrtransaction(q, elementID):
         # make every token a left prefix...
         q3 = [x + '*' for x in q2]
         querystring = searchfield + ':' + (' AND %s:' % searchfield).join(q3)
-        #querystring = '%s:%s*' % (searchfield,q)
-        loginfo('',querystring, request)
         response = s.query(querystring, facet='true', facet_field=[ suggestfield ], fq={},
                            rows=0, facet_limit=30,
                            facet_mincount=1)
@@ -76,8 +74,13 @@ def solrtransaction(q, elementID):
         result = []
         for key, values in facets.items():
             for k, v in values.items():
-                missingatoken = filter(lambda x: x not in k.lower(), q2)
-                if not missingatoken:
+                # all search tokens must appear in the facet values...
+                is_in = True
+                for q in q2:
+                    if not q in k.lower():
+                        is_in = False
+                        break
+                if is_in:
                     result.append(k)
 
         result = sorted(result, key=lambda v: v.upper())
