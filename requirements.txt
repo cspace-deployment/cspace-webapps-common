@@ -21,6 +21,7 @@ pyasn1
 pymongo
 pysmb
 requests
+requests_toolbelt
 six
 solrpy
 static-ranges
