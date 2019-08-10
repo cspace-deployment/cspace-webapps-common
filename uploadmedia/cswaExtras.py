@@ -10,9 +10,6 @@ import re
 import psycopg2
 import base64
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
 timeoutcommand = "set statement_timeout to 240000; SET NAMES 'utf8';"
 
 
@@ -67,7 +64,7 @@ def postxml(requestType, uri, realm, server, username, password, payload):
     opener = urllib.request.build_opener(authhandler)
 
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(unencoded_credentials).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
     opener.addheaders = [('Authorization', auth_value)]
     urllib.request.install_opener(opener)
     url = "%s/cspace-services/%s" % (server, uri)

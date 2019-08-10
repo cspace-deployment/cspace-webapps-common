@@ -10,7 +10,7 @@ from xml.sax.saxutils import escape
 import traceback
 import configparser
 
-from uploadmedia.cswaExtras import postxml, relationsPayload, getCSID
+from cswaExtras import postxml, relationsPayload, getCSID
 
 
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
@@ -213,16 +213,9 @@ def uploadmedia(mediaElements, config, http_parms):
     return mediaElements
 
 
-class CleanlinesFile():
-    def next(self):
-        line = super(CleanlinesFile, self).next()
-        return line.replace('\r', '').replace('\n', '') + '\n'
-
-
 def getRecords(rawFile):
-    # csvfile = csv.reader(codecs.open(rawFile,'r','utf-8'),delimiter="\t")
     try:
-        f = CleanlinesFile(rawFile, 'r')
+        f = open(rawFile, 'r', encoding='utf-8')
         csvfile = csv.reader(f, delimiter="|")
     except IOError:
         message = 'Expected to be able to read %s, but it was not found or unreadable' % rawFile
