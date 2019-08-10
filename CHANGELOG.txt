@@ -3,10 +3,14 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc4
-Fri Aug  9 10:13:07 PDT 2019
+This is version 5.2.0-rc5
+Sat Aug 10 04:31:04 PDT 2019
 
-f9f5bb2 (HEAD -> master, origin/master, origin/HEAD) CSW-99: set default log level to 'WARNING'; add dir to template directories
+82e0c27 (HEAD -> master, origin/master, origin/HEAD) CSW-101: additional refactoring of bmu uploadMedia.py script for python3
+f5c1b43 CSW-101: 'request-toolbelt' module now needed by uploadMedia.py
+9a27b98 CSW-101: refactor solr autosuggest to not use 'filter'
+4fbea97 (tag: 5.2.0-rc4) revise change log and VERSION file for version 5.2.0-rc4
+f9f5bb2 CSW-99: set default log level to 'WARNING'; add dir to template directories
 7ae38ee CSW-69: quote_plus encode objectnumber to ensure proper search
 ead0ce0 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
 eedc7cc CSW-99: deploy-ucb.sh should verify latest code
