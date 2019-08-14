@@ -1068,7 +1068,7 @@ def doUpdateLocations(form, config):
         except:
             msg = '<span style="color:red;">location update failed!</span>'
         html += ('<tr>' + (4 * '<td class="ncell">%s</td>') + '</tr>\n') % (
-            makeObjectLink(config, objectCsid, updateItems['objectNumber']), updateItems['objectStatus'], updateItems['inventoryNote'], msg)\
+            makeObjectLink(config, objectCsid, updateItems['objectNumber']), updateItems['objectStatus'], updateItems['inventoryNote'], msg)
 
     html += "\n</table>"
     html += '<h4 style="margin-top: 20px">%s of %s objects had movements recorded</h4>' % (numUpdated, row + 1)
