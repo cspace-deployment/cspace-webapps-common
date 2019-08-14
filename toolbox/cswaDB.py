@@ -504,8 +504,6 @@ def getlocations(location1, location2, num2ret, config, updateType, institution)
     for loc in getloclist('set', location1, '', num2ret, config):
         getobjects = setquery(updateType, loc[0], '', institution)
 
-        sys.stderr.write("getloclist %s" % location1)
-
         try:
             elapsedtime = time.time()
             objects = setupcursor(config, getobjects)

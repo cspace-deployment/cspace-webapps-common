@@ -397,39 +397,43 @@ def createObjectXML(objectinfo):
 def makeMH2R(updateItems, config, form):
     institution = config.get('info', 'institution')
 
-    uri = 'movements'
+    try:
+        uri = 'movements'
 
-    # html += "<br>posting to movements REST API..."
-    payload = lmiPayload(updateItems, institution)
-    (url, data, csid, elapsedtime) = postxml('POST', uri, payload, form)
-    updateItems['subjectCsid'] = csid
+        # html += "<br>posting to movements REST API..."
+        payload = lmiPayload(updateItems, institution)
+        (url, data, movementcsid, elapsedtime) = postxml('POST', uri, payload, form)
+        updateItems['subjectCsid'] = movementcsid
 
-    uri = 'relations'
+        uri = 'relations'
 
-    # html += "<br>posting inv2obj to relations REST API..."
-    updateItems['subjectDocumentType'] = 'Movement'
-    updateItems['objectDocumentType'] = 'CollectionObject'
-    payload = relationsPayload(updateItems)
-    (url, data, ignorecsid, elapsedtime) = postxml('POST', uri, payload, form)
+        # html += "<br>posting inv2obj to relations REST API..."
+        updateItems['subjectDocumentType'] = 'Movement'
+        updateItems['objectDocumentType'] = 'CollectionObject'
+        payload = relationsPayload(updateItems)
+        (url, data, ignorecsid, elapsedtime) = postxml('POST', uri, payload, form)
 
-    # reverse the roles
-    # html += "<br>posting obj2inv to relations REST API..."
-    temp = updateItems['objectCsid']
-    updateItems['objectCsid'] = updateItems['subjectCsid']
-    updateItems['subjectCsid'] = temp
-    updateItems['subjectDocumentType'] = 'CollectionObject'
-    updateItems['objectDocumentType'] = 'Movement'
-    payload = relationsPayload(updateItems)
-    (url, data, ignorecsid, elapsedtime) = postxml('POST', uri, payload, form)
+        # reverse the roles
+        # html += "<br>posting obj2inv to relations REST API..."
+        temp = updateItems['objectCsid']
+        updateItems['objectCsid'] = updateItems['subjectCsid']
+        updateItems['subjectCsid'] = temp
+        updateItems['subjectDocumentType'] = 'CollectionObject'
+        updateItems['objectDocumentType'] = 'Movement'
+        payload = relationsPayload(updateItems)
+        (url, data, ignorecsid, elapsedtime) = postxml('POST', uri, payload, form)
 
-    writeLog(updateItems, uri, 'POST', form, config)
+        writeLog(updateItems, uri, 'POST', form, config)
 
-    # html += "<h3>Done w update!</h3>"
+        # html += "<h3>Done w update!</h3>"
+    except Exception as e:
+        print(e[0])
+        raise
 
 
 def postxml(requestType, uri, payload, form):
     connection = cspace.connection.create_connection(MAINCONFIG, form['userdata'])
-    return connection.postxml(uri="cspace-services/" + uri, payload=payload.encode('utf-8'), requesttype=requestType)
+    return connection.postxml(uri="cspace-services/" + uri, payload=payload, requesttype=requestType)
 
 
 def writeLog(updateItems, uri, httpAction, form, config):
