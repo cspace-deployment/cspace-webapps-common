@@ -40,7 +40,11 @@ def makeTemplate(table,term,expression):
             WHERE %s %s ORDER BY %s LIMIT 30;""" % (term,table,term,expression,term)
 
 def dbtransaction(q, elementID, connect_string):
-    postgresdb = psycopg2.connect(connect_string)
+    try:
+        postgresdb = psycopg2.connect(connect_string)
+    except Exception as e:
+        sys.stderr.write('autosuggest for postgres failed: %s' % e[0])
+        return None
     cursor = postgresdb.cursor()
 
     # elementID is of the form xx.csid, where xx is a 2-letter code and csid is the csid of the record
