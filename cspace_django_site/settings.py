@@ -161,8 +161,8 @@ else:
     WSGI_BASE = ''
 
 # logging.debug('WSGI_BASE =' + WSGI_BASE)
-LOGIN_URL = WSGI_BASE + '/accounts/login'
-LOGIN_REDIRECT_URL = WSGI_BASE + '/landing'
+LOGIN_URL = f'{PROJECT_NAME}/accounts/login'
+LOGIN_REDIRECT_URL = f'{PROJECT_NAME}/landing'
 
 SITE_ID = 2
 
