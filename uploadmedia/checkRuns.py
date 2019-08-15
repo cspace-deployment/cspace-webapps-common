@@ -152,7 +152,7 @@ for filename in os.listdir(DIR):
     except:
         # skip .csv files that don't match the pattern
         continue
-    FH = open(os.path.join(DIR, filename), "'r'")
+    FH = open(os.path.join(DIR, filename), 'r')
     # filename = filename.replace('.csv','')
     for i, line in enumerate(FH.readlines()):
         line = line.strip()
@@ -160,7 +160,7 @@ for filename in os.listdir(DIR):
         if i == 0: continue  # skip header rows
         try:
             if step == 'processed':
-                # sorry there are 4 different formats of processed files at this point...
+                # sorry there are 7 different formats of processed files at this point...
                 try:
                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber, handling,
                      approvedforweb, mediaCSID, objectCSID, blobCSID) = line.split('\t')
@@ -241,7 +241,7 @@ for filename in os.listdir(DIR):
 
 for filename in os.listdir(DIR):
     if not '.trace.log' in filename: continue
-    FH = open(os.path.join(DIR, filename), "'r'")
+    FH = open(os.path.join(DIR, filename), 'r')
     filename = filename.replace('.trace.log', '')
     joberrors[filename] = 0
     for i, line in enumerate(FH.readlines()):
