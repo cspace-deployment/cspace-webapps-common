@@ -3,13 +3,15 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc7
-Thu Aug 15 15:36:41 PDT 2019
+This is version 5.2.0-rc8
+Thu Aug 15 16:10:31 PDT 2019
 
-66e0194 (HEAD -> master) CSW-101: zip returns an iterator in python3
+e6a5315 (HEAD -> master) CSW-101: now use the right values for LOGIN_URL and LOGIN_REDIRECT_URL
+a34ff92 (tag: 5.2.0-rc7, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc7
+66e0194 CSW-101: zip returns an iterator in python3
 9abea72 CSW-101: LOGIN_URL and LOGIN_REDIRECT_URL seem to have changed
 12da851 CSW-101: the bmu 'check runs' script needs to open files properly
-62e63df (tag: 5.2.0-rc6, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc6
+62e63df (tag: 5.2.0-rc6) revise change log and VERSION file for version 5.2.0-rc6
 17f55d1 CSW-101: 'suggestpostres' should write error log if connection can't be made
 2aee3da CSW-101: small amount of refactoring and bulletproofing for move webapps
 6d02579 (tag: 5.2.0-rc5) revise change log and VERSION file for version 5.2.0-rc5
