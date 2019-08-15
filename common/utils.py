@@ -64,7 +64,7 @@ def getfields(fieldset, pickField, prmz):
         result.append([f[pick] for f in prmz.FIELDS[fieldset] if f['fieldtype'] not in ['constant', 'subheader']])
     if len(pickField) > 1:
         # is this right??
-        return zip(result[0], result[1])
+        return list(zip(result[0], result[1]))
     else:
         return result[0]
 

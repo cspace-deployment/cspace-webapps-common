@@ -139,7 +139,7 @@ def index(request):
             #print fileName
         except:
             fileNames.append('Error getting report payload from CSpace: %s' % csid)
-    reportData = zip(reportCsids, reportNames, fileNames)
+    reportData = list(zip(reportCsids, reportNames, fileNames))
     reportData = sorted(reportData, key=itemgetter(1))
     context = {'reportData': reportData, 'labels': 'name file'.split(' '), 'apptitle': TITLE}
     context['additionalInfo'] = AdditionalInfo.objects.filter(live=True)
