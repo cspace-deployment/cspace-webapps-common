@@ -128,25 +128,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'webpack_dist'),
 )
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
-        },
-    },
-}
-
 #
 # If the application's WSGI setup script added an environment variable to tell us
 # the WSGI mount point path then we should use it; otherwise, we'll assume that
@@ -166,6 +147,8 @@ LOGIN_REDIRECT_URL = f'/{PROJECT_NAME}/landing'
 
 # we use our special tmp dir for BMU file uploads
 FILE_UPLOAD_TEMP_DIR = '/var/cspace/bmutmp'
+
+# LOGGING is set up in the extra_*.py modules
 
 SITE_ID = 2
 
