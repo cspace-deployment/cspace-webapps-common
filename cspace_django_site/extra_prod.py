@@ -24,8 +24,7 @@ PROJECT_NAME = os.path.basename(BASE_DIR)
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        # 'LOCATION': '/var/cspace/' + PROJECT_NAME + '/imagecache',
-        'LOCATION': '/tmp',
+        'LOCATION': '/var/cspace/' + PROJECT_NAME + '/imagecache',
         'CULL_FREQUENCY': 100000,
         'OPTIONS': {
             'MAX_ENTRIES': 1000000
