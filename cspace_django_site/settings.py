@@ -164,6 +164,9 @@ else:
 LOGIN_URL = f'/{PROJECT_NAME}/accounts/login'
 LOGIN_REDIRECT_URL = f'/{PROJECT_NAME}/landing'
 
+# we use our special tmp dir for BMU file uploads
+FILE_UPLOAD_TEMP_DIR = '/var/cspace/bmutmp'
+
 SITE_ID = 2
 
 #
