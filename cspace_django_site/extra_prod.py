@@ -67,7 +67,7 @@ LOGGING = {
         # },
         'django': {
             'handlers': ['logfile'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
             'propagate': True,
         }
     }
