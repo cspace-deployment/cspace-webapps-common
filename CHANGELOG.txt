@@ -3,11 +3,15 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc9
-Fri Aug 16 10:11:42 PDT 2019
+This is version 5.2.0-rc10
+Thu Sep  5 07:37:27 PDT 2019
 
-5ed0713 (HEAD -> master) CSW-101: refactor logging: now 8 rotating logs 8 MB each
-ec6514f (origin/master, origin/HEAD) CSW-101: use our spiffy new image cache for prod deployments
+de75655 (HEAD -> master, origin/master, origin/HEAD) Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
+d2f166d CSW-55: ireports webapp now return the correct MIMEtype with response
+c873541 CSW-101: set logging to WARNING everywhere
+7a1d976 (tag: 5.2.0-rc9) revise change log and VERSION file for version 5.2.0-rc9
+5ed0713 CSW-101: refactor logging: now 8 rotating logs 8 MB each
+ec6514f CSW-101: use our spiffy new image cache for prod deployments
 a3bf6fa CSW-101: correct reference URL only
 5f84ac2 (tag: 5.2.0-rc8) revise change log and VERSION file for version 5.2.0-rc8
 e6a5315 CSW-101: now use the right values for LOGIN_URL and LOGIN_REDIRECT_URL
