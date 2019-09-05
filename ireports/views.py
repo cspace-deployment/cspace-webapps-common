@@ -109,7 +109,7 @@ def makePayload(parms):
         e.append(key)
         e.append(val)
         p.append(e)
-    return tostring(result)
+    return tostring(result).decode('utf-8')
 
 
 def fileNamereplace(param, param1):
@@ -154,6 +154,7 @@ def ireport(request, report_csid):
     (url, data, statusCode, elapsedtime) = connection.make_get_request('cspace-services/reports/%s' % report_csid)
     reportXML = fromstring(data)
     fileName = reportXML.find('.//filename')
+    outputMIME = reportXML.find('.//outputMIME').text
     fileName = fileName.text
     fileName = fileName.replace('.jasper','.jrxml')
     name = reportXML.find('.//name').text
@@ -168,7 +169,7 @@ def ireport(request, report_csid):
             connection = cspace.connection.create_connection(mainConfig, request.user)
             (url, data, csid, elapsedtime) = connection.postxml(uri='cspace-services/reports/%s' % report_csid,
                                                                 requesttype='POST', payload=payload)
-            response = HttpResponse(data, content_type='application/pdf')
+            response = HttpResponse(data, content_type=outputMIME)
             #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
             return response
     else:
@@ -180,7 +181,5 @@ def ireport(request, report_csid):
                 form.fields[p] = forms.CharField(initial=parms[p][0], widget=forms.widgets.HiddenInput(), required=True)
             else:
                 form.fields[p] = forms.CharField(initial=parms[p][0], help_text=parms[p][2], required=True)
-        
-    return render_to_response('getReportParms.html',
-                              {'report_csid': report_csid, 'form': form, 'report': name, 'apptitle': TITLE},
-                              context_instance=RequestContext(request))
+
+    return render(request, 'getReportParms.html', {'report_csid': report_csid, 'form': form, 'report': name, 'apptitle': TITLE})

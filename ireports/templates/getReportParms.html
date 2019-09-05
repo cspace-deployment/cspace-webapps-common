@@ -4,7 +4,7 @@
 {% block content %}
     <div id="report-params">
         <h2>{{ report }}</h2>
-        <form method="post" action=".">
+        <form method="post" action="{{ report_csid }}">
             {% csrf_token %}
             <table>
             {% for field in form.visible_fields %}
