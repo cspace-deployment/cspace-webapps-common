@@ -21,25 +21,7 @@ DIRQ = QueueSimple('/tmp/cswa')
 
 MAXLOCATIONS = 1000
 
-try:
-    import xml.etree.ElementTree as etree
-    # print("running with ElementTree")
-except ImportError:
-    try:
-        from lxml import etree
-        # print("running with lxml.etree")
-    except ImportError:
-        try:
-            # normal cElementTree install
-            import cElementTree as etree
-            # print("running with cElementTree")
-        except ImportError:
-            try:
-                # normal ElementTree install
-                import elementtree.ElementTree as etree
-                # print("running with ElementTree")
-            except ImportError:
-                print("Failed to import ElementTree from any known place")
+import xml.etree.ElementTree as etree
 
 def getWhen2Post(config):
 
@@ -202,7 +184,6 @@ def updateXML(fieldset, updateItems, xml):
             # hmmm ... we didn't find this element in the record. Make a note a carry on!
             # message += 'No "' + relationType + extra + listSuffix + '" element found to update.'
             continue
-        # print(etree.tostring(metadata))
         # html += ">>> ",relationType,':',updateItems[relationType]
         if relationType in ['assocPeople', 'objectName', 'pahmaAltNum', 'material', 'taxon', 'objectProductionPerson', 'objectProductionPlace']:
             # group = metadata.findall('.//'+relationType+'Group')
@@ -222,14 +203,12 @@ def updateXML(fieldset, updateItems, xml):
                 if len(Entries) == 1 and Entries[0].text is None:
                     # sys.stderr.write('reusing empty element: %s\n' % Entries[0].tag)
                     # sys.stderr.write('ents : %s\n' % Entries[0].text)
-                    # html += '<br>before',etree.tostring(metadata).replace('<','&lt;').replace('>','&gt;')
                     for child in metadata:
                         # html += '<br>tag: ', child.tag
                         if child.tag == tmprelationType + 'Group':
                             # html += '<br> found it! ',child.tag
                             metadata.remove(child)
                     metadata.insert(0, newElement)
-                    # html += '<br>after',etree.tostring(metadata).replace('<','&lt;').replace('>','&gt;')
                 else:
                     metadata.insert(0, newElement)
             else:
@@ -309,7 +288,6 @@ def updateXML(fieldset, updateItems, xml):
             newElement = etree.Element(relationType)
             newElement.text = updateItems[relationType]
             metadata.insert(0, newElement)
-            # print(etree.tostring(metadata, pretty_print=True))
     objectCount = root.find('.//numberOfObjects')
     if 'objectCount' in updateItems:
         if objectCount is None:
@@ -327,7 +305,6 @@ def updateXML(fieldset, updateItems, xml):
                 './/{http://collectionspace.org/services/collectionobject/local/pahma}collectionobjects_pahma')
             collectionobjects_pahma.insert(0, inventoryCount)
         inventoryCount.text = updateItems['inventoryCount']
-    # print(etree.tostring(root, pretty_print=True))
     if 'pahmaFieldLocVerbatim' in updateItems and updateItems['pahmaFieldLocVerbatim'] != '':
         pahmaFieldLocVerbatim = root.find('.//pahmaFieldLocVerbatim')
         if pahmaFieldLocVerbatim is None:
@@ -347,7 +324,7 @@ def updateXML(fieldset, updateItems, xml):
             message += " %s added as &lt;%s&gt;.<br/>" % (deURN(updateItems['collection']), 'collection')
         collection.text = updateItems['collection']
 
-    payload = '<?xml version="1.0" encoding="UTF-8"?>\n' + etree.tostring(root, encoding='utf-8')
+    payload = '<?xml version="1.0" encoding="UTF-8"?>\n' + etree.tostring(root, encoding='unicode')
     # update collectionobject..
     # html += "<br>pretending to post update to %s to REST API..." % updateItems['objectCsid']
     # elapsedtimetotal = time.time()
@@ -389,7 +366,6 @@ def createObjectXML(objectinfo):
     payload = '<?xml version="1.0" encoding="UTF-8"?>\n' + etree.tostring(root, encoding='utf-8')
     # update collectionobject..
     # sys.stderr.write("post new object %s to REST API..." % objectinfo['objectNumber'])
-    # sys.stderr.write(etree.tostring(root))
 
     return '', payload
 

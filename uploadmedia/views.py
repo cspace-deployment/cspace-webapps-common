@@ -21,11 +21,7 @@ from uploadmedia.checkBlobs import doChecks
 
 from grouper.grouputils import getfromCSpace
 
-try:
-    from xml.etree.ElementTree import tostring, parse, Element, fromstring
-except:
-    print("could not import with xml.etree.ElementTree")
-    raise
+from xml.etree.ElementTree import fromstring
 
 # read common config file, just for the version info
 from common.appconfig import loadConfiguration

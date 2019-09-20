@@ -369,36 +369,36 @@ def setRefnames(refNames2find, fieldset, form, config, index):
     if fieldset in ['namedesc', 'fullmonty']:
         pass
     if fieldset in ['registration', 'fullmonty']:
-        if not refNames2find.has_key(form.get('cl.' + index)):
+        if not form.get('cl.' + index) in refNames2find:
             refNames2find[form.get('cl.' + index)] = cswaDB.getrefname('collectionobjects_common_fieldcollectors', form.get('cl.' + index), config)
     if fieldset in ['keyinfo', 'fullmonty']:
-        if not refNames2find.has_key(form.get('cp.' + index)):
+        if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
-        if not refNames2find.has_key(form.get('cg.' + index)):
+        if not form.get('cg.' + index) in refNames2find:
             refNames2find[form.get('cg.' + index)] = cswaDB.getrefname('concepts_common', form.get('cg.' + index), config)
-        if not refNames2find.has_key(form.get('fc.' + index)):
+        if not form.get('fc.' + index) in refNames2find:
             refNames2find[form.get('fc.' + index)] = cswaDB.getrefname('concepts_common', form.get('fc.' + index), config)
     if fieldset in ['hsrinfo', 'fullmonty']:
-        if not refNames2find.has_key(form.get('cp.' + index)):
+        if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
     if fieldset in ['places', 'fullmonty']:
-        if not refNames2find.has_key(form.get('pp.' + index)):
+        if not form.get('pp.' + index) in refNames2find:
             refNames2find[form.get('pp.' + index)] = cswaDB.getrefname('places_common', form.get('pp.' + index), config)
-        if not refNames2find.has_key(form.get('cp.' + index)):
+        if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
-        if not refNames2find.has_key(form.get('pd.' + index)):
+        if not form.get('pd.' + index) in refNames2find:
             refNames2find[form.get('pd.' + index)] = cswaDB.getrefname('places_common', form.get('pd.' + index), config)
     if fieldset in ['objtypecm', 'fullmonty']:
-        if not refNames2find.has_key(form.get('cm.' + index)):
+        if not form.get('cm.' + index) in refNames2find:
             refNames2find[form.get('cm.' + index)] = cswaDB.getrefname('persons_common', form.get('cm.' + index), config)
-        if not refNames2find.has_key(form.get('cp.' + index)):
+        if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
     if fieldset in ['fullmonty', 'mattax']:
-        if not refNames2find.has_key(form.get('pe.' + index)):
+        if not form.get('pe.' + index) in refNames2find:
             refNames2find[form.get('pe.' + index)] = cswaDB.getrefname('persons_common', form.get('pe.' + index), config)
-        if not refNames2find.has_key(form.get('ma.' + index)):
+        if not form.get('ma.' + index) in refNames2find:
             refNames2find[form.get('ma.' + index)] = cswaDB.getrefname('concepts_common', form.get('ma.' + index), config)
-        if not refNames2find.has_key(form.get('ta.' + index)):
+        if not form.get('ta.' + index) in refNames2find:
             refNames2find[form.get('ta.' + index)] = cswaDB.getrefname('taxon_common', form.get('ta.' + index), config)
 
     return refNames2find
