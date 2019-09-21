@@ -1339,8 +1339,7 @@ def doBarCodes(form, config):
                 # hack: move the ethnographic file code to the right spot for this app... :-(
                 objects = [o[0:8] + [o[9]] for o in objects]
                 labelFilename = writeCommanderFile(r[0], form.get("printer"), 'objectLabels', 'objects', objects, config)
-                html += '<tr><td>%s</td><td>%s</td><tr><td colspan="4"><i>%s</i></td></tr>' % (
-                    r[0], len(objects), labelFilename)
+                html += '<tr><td>%s</td><td>%s</td><td colspan="4"><i>%s</i></td></tr>' % (r[0], len(objects), labelFilename)
 
     html += """<tr><td align="center" colspan="4"><td></tr>"""
     html += """<tr><td align="center" colspan="4">"""
