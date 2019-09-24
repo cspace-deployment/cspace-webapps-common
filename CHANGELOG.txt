@@ -3,12 +3,14 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc11
-Thu Sep 19 18:25:20 PDT 2019
+This is version 5.2.0-rc12
+Tue Sep 24 09:35:19 PDT 2019
 
-2f6d80d (HEAD -> master) CSW-55: incremental improvements to ireports webapp
+0fdd767 (HEAD -> master, origin/master, origin/HEAD) CSW-140: need to transfer barcode print file as binary
+24f9304 (tag: 5.2.0-rc11) revise change log and VERSION file for version 5.2.0-rc11
+2f6d80d CSW-55: incremental improvements to ireports webapp
 164abb3 CSW-135: fix Bulk Object Edit: XML and python3 dict handling
-a63f64e (tag: 5.2.0-rc10, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc10
+a63f64e (tag: 5.2.0-rc10) revise change log and VERSION file for version 5.2.0-rc10
 de75655 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
 d2f166d CSW-55: ireports webapp now return the correct MIMEtype with response
 c873541 CSW-101: set logging to WARNING everywhere
