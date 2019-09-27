@@ -3,13 +3,14 @@ __author__ = 'jblowe'
 from os import path, listdir
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseRedirect
 from django import forms
 
 from operator import itemgetter
 
+from common.utils import loginfo
 from common import cspace # we use the config file reading function
 from cspace_django_site import settings
 from cspace_django_site.main import cspace_django_site
@@ -62,7 +63,7 @@ def getReportparameters(filename):
     except:
         #raise
         # indicate that .jrxml file was not found...
-        loginfo('','jrxml file not found, no parms extracted.', request)
+        loginfo('ireports','jrxml file not found, no parms extracted.', {}, {})
     return parms,csidParms,fileFound
 
 
@@ -90,7 +91,7 @@ def makePayload(parms):
         e.append(key)
         e.append(val)
         p.append(e)
-    return tostring(result).decode('utf-8')
+    return tostring(result)
 
 
 def fileNamereplace(param, param1):
@@ -102,8 +103,14 @@ def index(request):
     connection = cspace.connection.create_connection(mainConfig, request.user)
     (url, data, statusCode, elapsedtime) = connection.make_get_request('cspace-services/reports')
     reportXML = fromstring(data)
-    reportCsids = [csidElement.text for csidElement in reportXML.findall('.//csid')]
-    reportNames = [csidElement.text for csidElement in reportXML.findall('.//name')]
+    reportCsids = []
+    reportNames = []
+    for r in reportXML.findall('.//list-item'):
+        reportCsids.append(r.find('csid').text)
+        try:
+            reportNames.append(r.find('name').text)
+        except:
+            reportNames.append('Name unknown')
     fileNames = []
     #print reportCsids
     for csid in reportCsids:
@@ -130,37 +137,41 @@ def index(request):
 @login_required()
 def ireport(request, report_csid):
 
+    form = forms.Form()
+
     # get the report metadata for this report
     connection = cspace.connection.create_connection(mainConfig, request.user)
     (url, data, statusCode, elapsedtime) = connection.make_get_request('cspace-services/reports/%s' % report_csid)
-    reportXML = fromstring(data)
-    fileName = reportXML.find('.//filename')
-    outputMIME = reportXML.find('.//outputMIME').text
-    fileName = fileName.text
-    fileName = fileName.replace('.jasper','.jrxml')
-    name = reportXML.find('.//name').text
-
-    if request.method == 'POST':
-        form = forms.Form(request.POST)
-
-        if form.is_valid():
-            # run the report
-            parms = [[p,request.POST[p]] for p in request.POST]
-            payload = makePayload(parms)
-            connection = cspace.connection.create_connection(mainConfig, request.user)
-            (url, data, csid, elapsedtime) = connection.postxml(uri='cspace-services/reports/%s' % report_csid,
-                                                                requesttype='POST', payload=payload)
-            response = HttpResponse(data, content_type=outputMIME)
-            #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
-            return response
+    if data is None or statusCode not in (200, 201):
+        error = 'status: %s' % statusCode
     else:
-        # for now, we have to get the parms by reading and parsing the .jrxml file ourselves
-        parms,displayReport,fileFound = getReportparameters(fileName)
-        form = forms.Form()
-        for p in parms:
-            if str(parms[p][1]) == 'false':
-                form.fields[p] = forms.CharField(initial=parms[p][0], widget=forms.widgets.HiddenInput(), required=True)
-            else:
-                form.fields[p] = forms.CharField(initial=parms[p][0], help_text=parms[p][2], required=True)
+        error = None
+        reportXML = fromstring(data)
+        fileName = reportXML.find('.//filename')
+        fileName = fileName.text
+        fileName = fileName.replace('.jasper','.jrxml')
+        name = reportXML.find('.//name').text
 
-    return render(request, 'getReportParms.html', {'report_csid': report_csid, 'form': form, 'report': name, 'apptitle': TITLE})
+        if request.method == 'POST':
+            form = forms.Form(request.POST)
+
+            if form.is_valid():
+                # run the report
+                parms = [[p,request.POST[p]] for p in request.POST]
+                payload = makePayload(parms)
+                connection = cspace.connection.create_connection(mainConfig, request.user)
+                (url, data, csid, elapsedtime) = connection.postxml(uri='cspace-services/reports/%s' % report_csid,
+                                                                    requesttype='POST', payload=payload.decode('utf-8'))
+                response = HttpResponse(data, content_type='application/pdf')
+                #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+                return response
+        else:
+            # for now, we have to get the parms by reading and parsing the .jrxml file ourselves
+            parms,displayReport,fileFound = getReportparameters(fileName)
+            for p in parms:
+                if str(parms[p][1]) == 'false':
+                    form.fields[p] = forms.CharField(initial=parms[p][0], widget=forms.widgets.HiddenInput(), required=True)
+                else:
+                    form.fields[p] = forms.CharField(initial=parms[p][0], help_text=parms[p][2], required=True)
+
+    return render(request, 'getReportParms.html',  {'report_csid': report_csid, 'form': form, 'report': name, 'apptitle': TITLE, 'error': error})
