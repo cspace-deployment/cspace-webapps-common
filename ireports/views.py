@@ -150,6 +150,7 @@ def ireport(request, report_csid):
         fileName = reportXML.find('.//filename')
         fileName = fileName.text
         fileName = fileName.replace('.jasper','.jrxml')
+        outputMIME = reportXML.find('.//outputMIME').text
         name = reportXML.find('.//name').text
 
         if request.method == 'POST':
@@ -162,8 +163,7 @@ def ireport(request, report_csid):
                 connection = cspace.connection.create_connection(mainConfig, request.user)
                 (url, data, csid, elapsedtime) = connection.postxml(uri='cspace-services/reports/%s' % report_csid,
                                                                     requesttype='POST', payload=payload.decode('utf-8'))
-                response = HttpResponse(data, content_type='application/pdf')
-                #response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+                response = HttpResponse(data, content_type=outputMIME)
                 return response
         else:
             # for now, we have to get the parms by reading and parsing the .jrxml file ourselves
