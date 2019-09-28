@@ -3,11 +3,13 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc13
-Fri Sep 27 11:28:51 PDT 2019
+This is version 5.2.0-rc14
+Fri Sep 27 22:08:42 PDT 2019
 
-511a45f (HEAD -> master) CWS-150: bulletproof iReports webapp a bit
-7b17ad4 (tag: 5.2.0-rc12, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc12
+0fb59d9 (HEAD -> master) CWS-150: recover ability to return reports with different mime types
+2fa32e9 (tag: 5.2.0-rc13, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc13
+511a45f CWS-150: bulletproof iReports webapp a bit
+7b17ad4 (tag: 5.2.0-rc12) revise change log and VERSION file for version 5.2.0-rc12
 0fdd767 CSW-140: need to transfer barcode print file as binary
 24f9304 (tag: 5.2.0-rc11) revise change log and VERSION file for version 5.2.0-rc11
 2f6d80d CSW-55: incremental improvements to ireports webapp
