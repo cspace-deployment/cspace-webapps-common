@@ -48,7 +48,7 @@ def accesscontrolalloworigin(stuff2return):
 
 def search(request):
     if request.method == 'GET' and request.GET != {}:
-        context = {'searchValues': request.POST}
+        context = {'searchValues': request.GET}
         context = doSearch(context, prmz, request)
 
     else:

@@ -4,7 +4,7 @@
             {% for value, label in buttonoptions %}
                 <button type="button" id="search-{{ value }}" name="search-{{ value }}" class="prettyBtn">{{ label }}</button>
             {% endfor %}
-            <button type="button" id="search-reset" name="reset-button" class="prettyBtn">Reset</button>
+            <button type="reset" id="search-reset" name="reset-button" class="prettyBtn">Reset</button>
             &nbsp;
             <select id="maxresults" name="maxresults">
                 {% for option in resultoptions %}

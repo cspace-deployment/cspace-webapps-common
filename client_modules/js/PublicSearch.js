@@ -380,7 +380,7 @@ $(document).ready(function () {
 // we need to make sure this gets done in the event the page is created anew (e.g. via a pasted URL)
 $('#tabs').tabs({ active: 0 });
 // nb: this is a newish browser feature -- HTML5. what it does is to clear the GET parms from the URL in the addr bar.
-// window.history.pushState({},'foo','.')
+window.history.pushState({},'foo','.')
 // on the first load (or a reload) of the page, clear the form...
 //clearForm($('#search')[0]);
 });
