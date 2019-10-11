@@ -3,11 +3,15 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc15
-Wed Oct  9 05:18:53 PDT 2019
+This is version 5.2.0-rc16
+Fri Oct 11 07:31:48 PDT 2019
 
-2142254 (HEAD -> master) CSW-156: make 'emailable URLs work again in portals
-3371f04 (tag: 5.2.0-rc14, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc14
+35d59df (HEAD -> master) CSW-157: improve portal search ux on 'reset': leave defaults in place
+9a92ab2 (origin/master, origin/HEAD) CSW-157: code reformat only
+75fb869 CSW-157: repair toolbox, broken by an earlier fix to Portals
+4b54dde (tag: 5.2.0-rc15) revise change log and VERSION file for version 5.2.0-rc15
+2142254 CSW-156: make 'emailable URLs work again in portals
+3371f04 (tag: 5.2.0-rc14) revise change log and VERSION file for version 5.2.0-rc14
 0fb59d9 CWS-150: recover ability to return reports with different mime types
 2fa32e9 (tag: 5.2.0-rc13) revise change log and VERSION file for version 5.2.0-rc13
 511a45f CWS-150: bulletproof iReports webapp a bit
