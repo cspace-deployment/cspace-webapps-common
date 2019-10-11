@@ -32,8 +32,11 @@ function getFormData(formId) {
 
 function chooseSlideDirection(targetId) {
     var Elem = $(targetId);
-    if ($(Elem).css("display") == "none") { Elem.slideDown(); }
-    else { Elem.slideUp(); }
+    if ($(Elem).css("display") == "none") {
+        Elem.slideDown();
+    } else {
+        Elem.slideUp();
+    }
 }
 
 
@@ -43,14 +46,14 @@ function clearForm(oForm) {
 
     oForm.reset();
 
-    for (i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
 
-        field_type = elements[i].type.toLowerCase();
+        var field_type = elements[i].type.toLowerCase();
 
         switch (field_type) {
 
             case "text":
-                if (elements[i].name == "start"){
+                if (elements[i].name == "start") {
                     elements[i].value = 1;
                     break;
                 }
@@ -81,15 +84,14 @@ function clearForm(oForm) {
     }
 }
 
-function checkPage(Page,increment) {
+function checkPage(Page, increment) {
     if (!$.isNumeric(Page)) {
         return false;
     }
     var pageNumber = Number(Page);
-    if (pageNumber + increment  >= 1 && pageNumber + increment <= Number($("#lastpage").val())) {
+    if (pageNumber + increment >= 1 && pageNumber + increment <= Number($("#lastpage").val())) {
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -108,25 +110,25 @@ $(document).ready(function () {
 
     new Clipboard('.cbbtn');
 
-    $('#next').click(function() {
+    $('#next').click(function () {
         var $n = $("#start");
-        if (checkPage($n.val(),1)) {
+        if (checkPage($n.val(), 1)) {
             $n.val(Number($n.val()) + 1);
             submitForm(display);
         }
     });
 
-    $('#prev').click(function() {
+    $('#prev').click(function () {
         var $n = $("#start");
-        if (checkPage($n.val(),-1)) {
+        if (checkPage($n.val(), -1)) {
             $n.val(Number($n.val()) - 1);
             submitForm(display);
         }
     });
 
-    $('.expandInfo').click(function() {
-      chooseSlideDirection("#" + $(this).attr('id') + "Target");
-      $('.expandedInfo').not("#" + $(this).attr('id') + "Target").slideUp();
+    $('.expandInfo').click(function () {
+        chooseSlideDirection("#" + $(this).attr('id') + "Target");
+        $('.expandedInfo').not("#" + $(this).attr('id') + "Target").slideUp();
     });
 
     $("#acceptterms").click(function () {
@@ -146,64 +148,64 @@ $(document).ready(function () {
 
     });
 
-    $('#search input[type=text]').keypress(function(event) {
+    $('#search input[type=text]').keypress(function (event) {
         if (event.which == 13) {
             submitForm('search-default');
         }
     });
 
     // TODO: source is not a valid HTML attribute, use data-source instead
-    $('[source], [data-source]').map(function() {
-      var elementID = $(this).attr('name');
-      var source = $(this).attr('source') ? $(this).attr('source') : $(this).data('source');
-      $(this).autocomplete({
-          source: function (request, response) {
-              $.ajax({
-                  url: "../../suggest/?",
-                  dataType: "json",
-                  data: {
-                      q: request.term,
-                      elementID: elementID,
-                      source: source
-                  },
-                  success: function (data) {
-                      response(data);
-                  }
-              });
-          },
-          minLength: 2
-      });
+    $('[source], [data-source]').map(function () {
+        var elementID = $(this).attr('name');
+        var source = $(this).attr('source') ? $(this).attr('source') : $(this).data('source');
+        $(this).autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "../../suggest/?",
+                    dataType: "json",
+                    data: {
+                        q: request.term,
+                        elementID: elementID,
+                        source: source
+                    },
+                    success: function (data) {
+                        response(data);
+                    }
+                });
+            },
+            minLength: 2
+        });
     });
-    
-    if($('#resultsListing').length > 0) {
-      $('#resultsListing').tablesorter({
-          theme: 'blue',
-          headers: {
-              1: { sorter:'sortkey' }
-          }
-      });
+
+    if ($('#resultsListing').length > 0) {
+        $('#resultsListing').tablesorter({
+            theme: 'blue',
+            headers: {
+                1: {sorter: 'sortkey'}
+            }
+        });
     }
-    
+
     if ($('[id^=Facet]').length > 0) {
-      $('[id^=Facet]').map(function () {
-         $(this).tablesorter({theme: 'blue'});
-      });
+        $('[id^=Facet]').map(function () {
+            $(this).tablesorter({theme: 'blue'});
+        });
     }
 
     $.tablesorter.addParser({
         id: 'sortkey',
-        is: function(s, table, cell) {
+        is: function (s, table, cell) {
             return false;
         },
-       format: function(s, table, cell, cellIndex) {
-           var $cell = $(cell);
-           return $cell.attr('data-sort') || s;
-           //return $(cell)[0].firstElementChild.getAttribute("data-sort");
+        format: function (s, table, cell, cellIndex) {
+            var $cell = $(cell);
+            return $cell.attr('data-sort') || s;
+            //return $(cell)[0].firstElementChild.getAttribute("data-sort");
         },
         type: 'text'
     });
 
-    var submitForm = function(displaytype) {
+    var submitForm = function (displaytype) {
         var formData = getFormData('#search');
         formData[displaytype] = '';
 
@@ -213,8 +215,7 @@ $(document).ready(function () {
                     background: "yellow",
                     border: "3px red solid"
                 });
-        }
-        else {
+        } else {
             $('#waitingImage').css({
                 display: "inline"
             });
@@ -225,15 +226,15 @@ $(document).ready(function () {
                 $('#resultsListing').tablesorter({
                     theme: 'blue',
                     headers: {
-                        1: { sorter:'sortkey' }
+                        1: {sorter: 'sortkey'}
                     }
                 });
 
                 $('[id^=Facet]').map(function () {
-                   $(this).tablesorter({theme: 'blue'});
+                    $(this).tablesorter({theme: 'blue'});
                 });
 
-                $('#tabs').tabs({ active: 0 });
+                $('#tabs').tabs({active: 0});
 
                 xga('send', 'pageview', undefined, trackingid);
 
@@ -241,11 +242,10 @@ $(document).ready(function () {
                     display: "none"
                 });
             });
-
-        };
+        }
     };
 
-    $(document).on('click', '#select-items', function() {
+    $(document).on('click', '#select-items', function () {
         if ($('#select-items').is(':checked')) {
             $('#selectedItems input:checkbox').prop('checked', true);
         } else {
@@ -276,13 +276,7 @@ $(document).ready(function () {
             $('#waitingImage').css({
                 display: "none"
             });
-//        } else if ($(this).attr('id') == 'downloadstats') {
-//            $.post("../statistics/", formData).done(function (data) {
-//                alert( "success" );
-//            });
-//            xga('send', 'pageview', undefined, trackingid);
         }
-//      xga('send', 'pageview', undefined, trackingid);
     });
 
     $(document).on('click', '.map-item', function () {
@@ -290,11 +284,10 @@ $(document).ready(function () {
         if ($(Elem).css("display") == "none") {
             var marker = ($(Elem).attr('data-marker'));
             console.log('img ' + marker);
-            $(Elem).html('<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q='+marker+'&key=AIzaSyBeDzud2rQvl70-TFgsdlMa9vsUl_vidZk&maptype=satellite" allowfullscreen></iframe>');
+            $(Elem).html('<iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=' + marker + '&key=AIzaSyBeDzud2rQvl70-TFgsdlMa9vsUl_vidZk&maptype=satellite" allowfullscreen></iframe>');
             Elem.slideDown();
             xga('send', 'pageview', undefined, trackingid);
-        }
-        else {
+        } else {
             Elem.slideUp();
         }
     });
@@ -304,7 +297,7 @@ $(document).ready(function () {
         var value = ($(this).text());
 
         // reset page number to 1 -- this is a new search!
-        $("#start").val( 1 );
+        $("#start").val(1);
 
         if (key != '') {
             console.log(key + ': ' + value);
@@ -330,15 +323,15 @@ $(document).ready(function () {
             $('#resultsListing').tablesorter({
                 theme: 'blue',
                 headers: {
-                    1: { sorter:'sortkey' }
+                    1: {sorter: 'sortkey'}
                 }
             });
 
             $('[id^=Facet]').map(function () {
-               $(this).tablesorter({theme: 'blue'});
+                $(this).tablesorter({theme: 'blue'});
             });
 
-            $('#tabs').tabs({ active: 1 });
+            $('#tabs').tabs({active: 1});
             xga('send', 'pageview', undefined, trackingid);
 
         });
@@ -371,14 +364,13 @@ $(document).ready(function () {
                 window.open(data, '_blank');
             });
             xga('send', 'pageview', undefined, trackingid);
-        };
-
+        }
         $('#waitingImage').css({
             display: "none"
         });
     });
 // we need to make sure this gets done in the event the page is created anew (e.g. via a pasted URL)
-$('#tabs').tabs({ active: 0 });
+    $('#tabs').tabs({active: 0});
 // nb: this is a newish browser feature -- HTML5. what it does is to clear the GET parms from the URL in the addr bar.
     if ($('#search'.length != 0)) {
         // on the first load (or a reload) of the page, clear the form...
