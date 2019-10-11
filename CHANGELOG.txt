@@ -3,11 +3,13 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc16
-Fri Oct 11 07:31:48 PDT 2019
+This is version 5.2.0-rc17
+Fri Oct 11 11:13:09 PDT 2019
 
-35d59df (HEAD -> master) CSW-157: improve portal search ux on 'reset': leave defaults in place
-9a92ab2 (origin/master, origin/HEAD) CSW-157: code reformat only
+b1d187e (HEAD -> master) CSW-99: more bulletproofing for webapps deploy script
+15d4afd (tag: 5.2.0-rc16, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc16
+35d59df CSW-157: improve portal search ux on 'reset': leave defaults in place
+9a92ab2 CSW-157: code reformat only
 75fb869 CSW-157: repair toolbox, broken by an earlier fix to Portals
 4b54dde (tag: 5.2.0-rc15) revise change log and VERSION file for version 5.2.0-rc15
 2142254 CSW-156: make 'emailable URLs work again in portals
