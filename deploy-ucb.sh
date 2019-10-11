@@ -22,9 +22,6 @@ do
       echo "to deploy a particular version (i.e. tag) for pahma and cinefiles"
       echo "./deploy_ucb.sh pahma -v 5.1.0-rc3 cinefiles"
       echo
-      echo "to deploy the clean master branch for all ucb tenants (e.g. for development perhaps, where you may have uncommitted changes)"
-      echo "./deploy_ucb.sh -a"
-      echo
       echo "nb: assumes you have the two needed repos set up in the standard RTL way. See the README.md for details."
       echo
       exit 0
@@ -45,17 +42,22 @@ do
   esac
 done
 
+# make sure the repo is clean and tidy
 cd ~/cspace-webapps-ucb/
+git clean -fd
+git reset --hard
 git pull -v
 cd ~/cspace-webapps-common/
+git clean -fd
+git reset --hard
 git pull -v
 
 for t in $MUSEUMS
 do
-  # make sure the repo is clean and tidy
+  # make sure the repo is clean and tidy for each tenant
   git clean -fd
   git reset --hard
   # now set things up
-  ./setup.sh configure prod $1
-  ./setup.sh deploy ${t} $1
+  ./setup.sh configure prod $VERSION
+  ./setup.sh deploy ${t} $VERSION
 done
