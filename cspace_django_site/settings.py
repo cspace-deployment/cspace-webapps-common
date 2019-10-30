@@ -159,3 +159,5 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'authn.authn.CSpaceAuthN',
 )
+
+CSRF_COOKIE_DOMAIN = '.cspace.berkeley.edu'
