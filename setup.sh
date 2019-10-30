@@ -55,15 +55,11 @@ function deploy()
     buildjs $1
     # if this is running on a dev or prod system (evidenced by the presence of web-accessible
     # deployment directories, i.e. /var/www/*), then copy the needed files there
-    # nb: the config directory and cspace_django_site/main.cfg are not overwritten!
+    # nb: the config directory is not overwritten!
     if [[ -e /var/www/$1 ]]; then
         # copy the built files to the runtime directory, but leave the config files as they are
         rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . /var/www/$1
-        if [[ ! -d /var/www/$1/config ]]; then
-            # if there isn't already a config directory in the destination, copy this one there
-	        cp -r config /var/www/$1
-        fi
-	    cd /var/www/$1
+	cd /var/www/$1
     fi
 
     $PYTHON manage.py migrate --noinput
@@ -71,13 +67,6 @@ function deploy()
     # get rid of the existing static_root to force django to rebuild it from scratch
     rm -rf static_root/
     $PYTHON manage.py collectstatic --noinput
-
-    # put things back the way they were...
-    if [[ $VERSION != "" ]]; then
-	cd ${CURRDIR}
-        git checkout master
-        git branch -d deploy
-    fi
 }
 
 function check_version()
@@ -86,8 +75,8 @@ function check_version()
     if [[ $VERSION != "" ]]; then
         if [[ $(git status -s) ]]; then
             echo
-            echo 'fyi, uncommitted changes or untracked files were found.'
-            echo 'initial deployments of a particular must be from a "clean" branch.'
+            echo 'fyi, uncommitted changes or untracked files were found and version $VERSION was specified.'
+            echo 'initial deployments of a particular version must be from a "clean" branch.'
             echo 'cowardly refusal to proceed; please clean up and try again...'
             echo
             echo 'e.g. something like the following'
@@ -99,9 +88,8 @@ function check_version()
             exit 1
             # read -p "continue as is? (y/N): " confirm && [[ $confirm == [yY] || $confirm == [yY][eE][sS] ]] || exit 1
         fi
+        git checkout ${VERSION}
 
-        echo "installing and configuring version: $VERSION ..."
-        git checkout -b deploy ${VERSION}
     else
         echo "no version specified; deploying code as is, but with specified customizations."
     fi
@@ -150,7 +138,7 @@ elif [[ "${COMMAND}" = "configure" ]]; then
         exit
     fi
 
-    # checkout correct version, if indicated...
+    # checkout indicated version, if any...
     check_version
 
     cp cspace_django_site/extra_${DEPLOYMENT}.py cspace_django_site/extra_settings.py
@@ -170,7 +158,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
         exit
     fi
 
-    # checkout correct version, if indicated...
+    # checkout indicated version, if any...
     check_version
 
     if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
@@ -191,7 +179,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
     cp ${CONFIGDIR}/${TENANT}/config/* config
     cp ${CONFIGDIR}/${TENANT}/fixtures/* fixtures
     # note that in some cases, this cp will overwrite customized files in the underlying contributed apps
-    # in cspace_django_project. that is the intended behavior!
+    # in cspace-webapps-common. that is the intended behavior!
     cp -r ${CONFIGDIR}/${TENANT}/apps/* .
     cp ${CONFIGDIR}/${TENANT}/project_urls.py cspace_django_site/urls.py
     cp ${CONFIGDIR}/${TENANT}/project_apps.py cspace_django_site/installed_apps.py
@@ -214,15 +202,6 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
     echo "configuration files in config/ (these are .cfg and .csv files)"
     echo
     echo "please restart apache to pick up changes"
-    echo "*************************************************************************************************"
-    echo
-elif [[ "${COMMAND}" = "updatejs" ]]; then
-    deploy ${TENANT}
-    echo
-    echo "*************************************************************************************************"
-    echo "base javascript code updated; no changes to configuration or deployment though"
-    echo
-    echo "please restart apache to pick up changes!"
     echo "*************************************************************************************************"
     echo
 else

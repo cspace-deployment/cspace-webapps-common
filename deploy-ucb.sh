@@ -42,21 +42,21 @@ do
   esac
 done
 
-# make sure the repo is clean and tidy
+# make sure the ucb custom repo is clean and tidy
 cd ~/cspace-webapps-ucb/
 git clean -fd
 git reset --hard
+git checkout master
 git pull -v
 cd ~/cspace-webapps-common/
-git clean -fd
-git reset --hard
-git pull -v
 
 for t in $MUSEUMS
 do
   # make sure the repo is clean and tidy for each tenant
   git clean -fd
   git reset --hard
+  git checkout master
+  git pull -v
   # now set things up
   ./setup.sh configure prod $VERSION
   ./setup.sh deploy ${t} $VERSION
