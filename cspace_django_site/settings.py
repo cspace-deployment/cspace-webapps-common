@@ -160,4 +160,8 @@ AUTHENTICATION_BACKENDS = (
     'authn.authn.CSpaceAuthN',
 )
 
+# we need this to ensure that forms with lots of fields in them work.
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 100000
+
+# we need this to ensure that our webapp proxying works.
 CSRF_COOKIE_DOMAIN = '.cspace.berkeley.edu'
