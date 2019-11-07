@@ -949,17 +949,20 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             # msg += 'place and date'
             pass
 
+        newItems = {}
         for item in updateItems.keys():
+            newItems[item] = updateItems[item]
             if updateItems[item] == 'None' or updateItems[item] is None:
                 if item in 'collection inventoryCount objectCount'.split(' '):
-                    del updateItems[item]
+                    del newItems[item]
                     #updateMsg += 'deleted %s <br/>' % item
                 else:
-                    updateItems[item] = ''
+                    newItems[item] = ''
                     #updateMsg += 'eliminated %s <br/>' % item
             else:
                 #updateMsg += 'kept %s, value: %s <br/>' % (item, updateItems[item])
                 pass
+        updateItems = newItems
 
         try:
             #pass
