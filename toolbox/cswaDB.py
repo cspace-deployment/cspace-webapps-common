@@ -967,7 +967,7 @@ def getrefname(table, term, config):
         query = "SELECT pahmaaltnumtype FROM pahmaaltnumgroup WHERE pahmaaltnum ILIKE '%s' LIMIT 1" % (
             term.replace("'", "''"))
     else:
-        query = "select %s from %s where %s ILIKE '%%''%s''%%' LIMIT 1" % (
+        query = "select %s from %s x join misc ON misc.id = x.id AND misc.lifecyclestate <> 'deleted' where %s ILIKE '%%''%s''%%' LIMIT 1" % (
             column, table, column, term.replace("'", "''"))
 
     try:
