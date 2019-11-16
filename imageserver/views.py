@@ -131,7 +131,6 @@ def get_image(request, image):
         except:
             filename = ''
     except:
-        raise
         msg = 'image error'
         data = open(path.join(settings.STATIC_ROOT, 'cspace_django_site/images', imageunavailable), 'r').read()
         content_type = 'image/%s' % unavailable_mime_type
