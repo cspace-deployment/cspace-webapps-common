@@ -7,6 +7,7 @@ import json
 
 from cspace_django_site import settings
 from common import cspace  # we use the config file reading function
+from common.utils import loginfo
 from json import loads
 
 def get_special(label, labels, row):
@@ -24,7 +25,7 @@ def get_special(label, labels, row):
             values = loads(parsed_valued)
             row[labels['Role']] = [label, values]
         except:
-            print('could not parse JSON for %s: %s' % (value,parsed_valued))
+            loginfo('search startup', 'could not parse JSON for %s: %s' % (value,parsed_valued), {}, {})
 
 
 def getParms(parmFile, prmz):
@@ -150,7 +151,7 @@ def loadConfiguration(configFileName):
         prmz.SIZEGRID = config.get('search', 'SIZEGRID')
         prmz.SIZECOMPACT = config.get('search', 'SIZECOMPACT')
     except:
-        print('could not get image layout (size and derviative to use) from config file, using defaults')
+        loginfo('search startup', 'could not get image layout (size and derviative to use) from config file, using defaults', {}, {})
         prmz.DERIVATIVEGRID     = "Thumbnail"
         prmz.DERIVATIVECOMPACT  = "Thumbnail"
         prmz.SIZEGRID           = "100px"
@@ -187,8 +188,8 @@ def loadConfiguration(configFileName):
         prmz.VERSION = getversion()
 
     except:
-        print('ERROR in configuration file %s' % path.join(settings.BASE_DIR, 'config/' + configFileName + '.cfg'))
-        print('this webapp will probably not work.')
+        loginfo('search startup', 'ERROR in configuration file %s' % path.join(settings.BASE_DIR, 'config/' + configFileName + '.cfg'), {}, {})
+        loginfo('search startup', 'this webapp will probably not work.', {}, {})
         raise
 
     try:
@@ -200,7 +201,7 @@ def loadConfiguration(configFileName):
 
 def loadFields(fieldFile, prmz):
     # get "frontend" configuration from the ... frontend configuration file
-    print('Reading field definitions from %s' % path.join(settings.BASE_DIR, 'config/' + fieldFile))
+    loginfo('search startup', 'Reading field definitions from %s' % path.join(settings.BASE_DIR, 'config/' + fieldFile), {}, {})
 
     prmz.LOCATION = ''
     prmz.DROPDOWNS = []
@@ -215,7 +216,7 @@ def loadFields(fieldFile, prmz):
             prmz.LOCATION = prmz.PARMS[p][3]
 
     if prmz.LOCATION == '':
-        print("LOCATION not set, please specify a variable as 'location'")
+        loginfo('search startup', "LOCATION not set, please specify a variable as 'location'", {}, {})
 
     facetfields = [f['solrfield'] for f in prmz.FIELDS['Search'] if 'dropdown' in f['fieldtype']]
 
@@ -228,14 +229,14 @@ def loadFields(fieldFile, prmz):
 
     # create a connection to a solr server
 
-    print('Starting facet search at %s/%s' % (prmz.SOLRSERVER, prmz.SOLRCORE))
+    loginfo('search startup', 'Starting facet search at %s/%s' % (prmz.SOLRSERVER, prmz.SOLRCORE), {}, {})
     s = solr.SolrConnection(url='%s/%s' % (prmz.SOLRSERVER, prmz.SOLRCORE))
 
     try:
         response = s.query('*:*', facet='true', facet_field=facetfields, fq={},
                            rows=0, facet_limit=1000, facet_mincount=1, start=0)
 
-        print('Solr search succeeded, %s results' % (response.numFound))
+        loginfo('search startup', 'Solr search succeeded, %s results' % (response.numFound), {}, {})
 
         # facets = getfacets(response)
 
@@ -251,7 +252,7 @@ def loadFields(fieldFile, prmz):
         facets = _facets
 
         for facet, values in facets.items():
-            print('facet', facet, len(values))
+            loginfo('search startup', 'facet %s: %s' % (facet, len(values)), {}, {})
             prmz.FACETS[facet] = sorted(values, key=lambda tup: tup[0])
             # build dropdowns for searching
             for f in prmz.FIELDS['Search']:
@@ -266,7 +267,7 @@ def loadFields(fieldFile, prmz):
         #raise
         errormsg = 'Solr query for facets failed: %s' % str(inst)
         solrIsUp = False
-        print('Solr facet search failed. Concluding that Solr is down or unreachable... Will not be trying again! Please fix and restart!')
+        loginfo('search startup', 'Solr facet search failed. Concluding that Solr is down or unreachable... Will not be trying again! Please fix and restart!', {}, {})
 
     # figure out which solr fields are the required ones...
     prmz.REQUIRED = []

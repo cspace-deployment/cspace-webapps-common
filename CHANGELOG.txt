@@ -3,11 +3,19 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.2.0-rc18
-Fri Oct 25 14:14:49 PDT 2019
+This is version 5.3.0-rc1
+Thu Nov 21 06:31:07 PST 2019
 
-33f8fb9 (HEAD -> master) NOJIRA: ireports form does not need an 'action' attribute
-24b7722 (tag: 5.2.0-rc17, origin/master, origin/HEAD) revise change log and VERSION file for version 5.2.0-rc17
+19be0e7 (HEAD -> master) CSW-180: restore cacheing code to imageserver
+bf17181 (origin/master, origin/HEAD) CSW-151: don't allow deleted authority terms to be saved in xIR webapps
+53f8f0f CSW-179: one fieldset in xIR tools had data dependencies
+83726dc CSW-179: new Django needs DATA_UPLOAD_MAX_NUMBER_FIELDS for large updates
+dfcca67 CSW-166: keep CSRF_COOKIE_DOMAIN parameter in django settings, for now, perhaps forever
+9e369f2 CSW-99: improve reliability and clarity of django webapps deployment scripts
+7bd50b4 NOJIRA: update Pillow fro security
+340e79b (tag: 5.2.0-rc18, tag: 5.2.0) revise change log and VERSION file for version 5.2.0-rc18
+33f8fb9 NOJIRA: ireports form does not need an 'action' attribute
+24b7722 (tag: 5.2.0-rc17) revise change log and VERSION file for version 5.2.0-rc17
 b1d187e CSW-99: more bulletproofing for webapps deploy script
 15d4afd (tag: 5.2.0-rc16) revise change log and VERSION file for version 5.2.0-rc16
 35d59df CSW-157: improve portal search ux on 'reset': leave defaults in place

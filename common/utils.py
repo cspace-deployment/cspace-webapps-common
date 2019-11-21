@@ -17,7 +17,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 SolrIsUp = True  # an initial guess! this is verified below...
 
-# Get an instance of a logger, log some startup info
+# Get an instance of a logger
 logger = logging.getLogger(__name__)
 
 
@@ -111,7 +111,7 @@ def checkValue(cell):
 
 
 def writeCsv(filehandle, fieldset, items, writeheader=False, csvFormat='csv'):
-    # print("Fieldset: %s" % fieldset)
+    # loginfo('search', "Fieldset: %s" % fieldset, {}, {})
     writer = csv.writer(filehandle, delimiter='\t')
     # write the header
     if writeheader:
@@ -493,7 +493,7 @@ def setConstants(context, prmz, request):
         context['maxfacets'] = int(requestObject['maxfacets']) if 'maxfacets' in requestObject else prmz.MAXFACETS
         context['sortkey'] = requestObject['sortkey'] if 'sortkey' in requestObject else prmz.DEFAULTSORTKEY
     except:
-        print("no searchValues set")
+        loginfo('search', "no searchValues set", context, request)
         context['displayType'] = setDisplayType({}, prmz)
         context['url'] = ''
         context['querystring'] = ''
@@ -520,7 +520,7 @@ def setConstants(context, prmz, request):
 
 
 def generate_query_term(t, p, prmz, requestObject, context):
-    # print('qualifier:',requestObject[p+'_qualifier'])
+    # loginfo('search', 'qualifier:',requestObject[p+'_qualifier'], context, request)
     index = prmz.PARMS[p][3]
     # if this is a "switcharoo field", use the specified shadow
     if prmz.PARMS[p][6] != '':
@@ -681,7 +681,6 @@ def doSearch(context, prmz, request):
                 ORs.append(querypattern % (index, t))
             searchTerm = ' OR '.join(ORs)
             if ' ' in searchTerm and not ' TO ' in searchTerm: searchTerm = ' (' + searchTerm + ') '
-            # print(searchTerm)
             queryterms.append(searchTerm)
             urlterms.append('%s=%s' % (p, cgi.escape(requestObject[p])))
             if p + '_qualifier' in requestObject:
@@ -713,14 +712,13 @@ def doSearch(context, prmz, request):
     else:
         locsonly = None
 
-    # print('Solr query: %s' % querystring)
     try:
         startpage = context['maxresults'] * (context['start'] - 1)
     except:
         startpage = 0
         context['start'] = 1
 
-    print('query: %s' % querystring)
+    loginfo('search', 'query: %s' % querystring, context, request)
     try:
         solrtime = time.time()
         # TODO: this hack allows keyword searching while continuing to use the _s versions in displays
@@ -728,11 +726,11 @@ def doSearch(context, prmz, request):
         response = s.query(querystring, facet='true', facet_field=facetfields, fq={}, fields=solrfl2,
                            rows=context['maxresults'], facet_limit=prmz.MAXFACETS, sort=context['sortkey'],
                            facet_mincount=1, start=startpage)
-        print('Solr search succeeded, %s results, %s rows requested starting at %s; %8.2f seconds.' % (response.numFound, context['maxresults'], startpage, time.time() - solrtime))
+        loginfo('search', 'Solr search succeeded, %s results, %s rows requested starting at %s; %8.2f seconds.' % (response.numFound, context['maxresults'], startpage, time.time() - solrtime), context, request)
     # except:
     except Exception as inst:
         # raise
-        print('Solr search failed: %s' % str(inst))
+        loginfo('search', 'Solr search failed: %s' % str(inst), context, request)
         context['errormsg'] = 'Solr4 query failed'
         return context
 
@@ -755,7 +753,7 @@ def doSearch(context, prmz, request):
             for sumi, sumcol in enumerate(summfields):
                 if not sumcol in summaryrows[summarizeon][1][sumi]:
                     summaryrows[summarizeon][1][sumi] += [sumcol, ]
-                    # print(summarizeon, sumi, sumcol, summaryrows[summarizeon][1][sumi])
+                    # loginfo('search', summarizeon, sumi, sumcol, summaryrows[summarizeon][1][sumi], context, request)
             summaryrows[summarizeon][0] += 1
 
         # pull out the fields that have special functions in the UI
