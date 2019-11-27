@@ -840,7 +840,7 @@ def getHeader(updateType, institution):
     <tr>
       <th data-sort="float">Accession</th>
       <th data-sort="string">Family</th>
-      <th data-sort="string">Taxonomic Name</th>
+      <th data-sort="string">Previously Applied Names</th>
       <th data-sort="string">Rare?</th>
       <th data-sort="string">Accession<br/>Dead?</th>
     </tr></thead><tbody>"""
@@ -850,14 +850,14 @@ def getHeader(updateType, institution):
     <tr>
       <th data-sort="float">Accession Number</th>
       <th data-sort="string">Family</th>
-      <th data-sort="string">Taxonomic Name</th>
+      <th data-sort="string">Previously Applied Names</th>
     </tr></thead><tbody>"""
     elif updateType == 'bedlistnone':
         return """
     <table class="tablesorter-blue" id="sortTable"><thead><tr>
       <th data-sort="float">Accession</th>
       <th data-sort="string">Family</th>
-      <th data-sort="string">Taxonomic Name</th>
+      <th data-sort="string">Previously Applied Names</th>
       <th data-sort="string">Rare?</th>
       <th data-sort="string">Accession<br/>Dead?</th>
       <th>Garden Location</th>
@@ -866,7 +866,7 @@ def getHeader(updateType, institution):
         return """
     <table class="tablesorter-blue" id="sortTable"><thead><tr>
       <th data-sort="float">Accession</th>
-      <th data-sort="string">Taxonomic Name</th>
+      <th data-sort="string">Previously Applied Names</th>
       <th data-sort="string">Family</th>
       <th data-sort="string">Garden Location</th>
       <th data-sort="string">Locality</th>

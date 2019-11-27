@@ -43,13 +43,13 @@ def formatRow(result, form, config):
         else:
             location = ''
         return '''<tr><td class="objno"><a target="cspace" href="%s">%s</a</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td>%s</tr>''' % (
-            link, rr[4], rr[6], rr[5], rare, dead, location)
+            link, rr[4], rr[6], rr[14], rare, dead, location)
     elif result['rowtype'] in ['locreport', 'holdings', 'advsearch']:
         rare = 'Yes' if rr[7] == 'true' else 'No'
         dead = 'Yes' if rr[8] == 'true' else 'No'
         link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % rr[6]
         return '''<tr><td class="zcell"><a target="cspace" href="%s">%s</a></td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td></tr>''' % (
-            link, rr[0], rr[1], rr[2], rr[3], rr[5], rare, dead)
+            link, rr[0], rr[1], rr[2], rr[3], rr[14], rare, dead)
     elif result['rowtype'] == 'inventory':
         if institution == 'bampfa':
             return """<tr><td class="objno"><a target="cspace" href="%s">%s</a></td><td class="objname">%s</td><td>%s</td><td class="rdo" ><input type="radio" id="sel-move" name="r.%s" value="found|%s|%s|%s|%s|%s" checked></td><td class="rdo" ><input type="radio" id="sel-nomove" name="r.%s" value="not found|%s|%s|%s|%s|%s"/></td><td class="zcell"><input class="xspan" type="text" size="65" name="n.%s"></td></tr>""" % (

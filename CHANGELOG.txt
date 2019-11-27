@@ -3,11 +3,13 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc1
-Thu Nov 21 06:31:07 PST 2019
+This is version 5.3.0-rc2
+Wed Nov 27 15:05:46 PST 2019
 
-19be0e7 (HEAD -> master) CSW-180: restore cacheing code to imageserver
-bf17181 (origin/master, origin/HEAD) CSW-151: don't allow deleted authority terms to be saved in xIR webapps
+df1e04a (HEAD -> master, origin/master, origin/HEAD) CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
+549fe0c (tag: 5.3.0-rc1) revise change log and VERSION file for version 5.3.0-rc1
+19be0e7 CSW-180: restore cacheing code to imageserver
+bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
 53f8f0f CSW-179: one fieldset in xIR tools had data dependencies
 83726dc CSW-179: new Django needs DATA_UPLOAD_MAX_NUMBER_FIELDS for large updates
 dfcca67 CSW-166: keep CSRF_COOKIE_DOMAIN parameter in django settings, for now, perhaps forever
