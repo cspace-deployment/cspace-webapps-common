@@ -116,7 +116,7 @@ def getobjinfo(museumNumber, config):
     co.distinguishingfeatures,
     co.recordstatus,
     n.objectname,
-    ca.nagprainventoryname,
+    regexp_replace(ca.nagprainventoryname, '^.*\\)''(.*)''$', '\\1'),
     bd.item,
     CASE WHEN (efc.item IS NOT NULL AND efc.item <> '') THEN SUBSTRING(efc.item, POSITION(')''' IN efc.item)+2, LENGTH(efc.item)-POSITION(')''' IN efc.item)-2) END AS filecode,
     cp.iscomponent,
