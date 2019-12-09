@@ -3,7 +3,7 @@ certifi==2019.6.16
 chardet==3.0.4
 colour==0.1.5
 dirq==1.7.1
-Django==2.2.4
+Django>=2.2.8
 django-extensions==2.1.9
 django-filter==2.1.0
 Django-Mobileesp==1.0.1
