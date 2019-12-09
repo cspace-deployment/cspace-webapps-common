@@ -3,10 +3,14 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc2
-Wed Nov 27 15:05:46 PST 2019
+This is version 5.3.0-rc3
+Mon Dec  9 13:18:47 PST 2019
 
-df1e04a (HEAD -> master, origin/master, origin/HEAD) CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
+4818721 (HEAD -> master) CSW-204: update Django to 2.2.8
+6e9b2fd (origin/master, origin/HEAD) Merge pull request #1 from cesarvh/master
+124eab3 CC-940: Fixed to extract display name from nagprainventoryname
+f4ebbf2 (tag: 5.3.0-rc2) revise change log and VERSION file for version 5.3.0-rc2
+df1e04a CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
 549fe0c (tag: 5.3.0-rc1) revise change log and VERSION file for version 5.3.0-rc1
 19be0e7 CSW-180: restore cacheing code to imageserver
 bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
