@@ -1,6 +1,6 @@
 # "generic" list of dependencies (i.e. not OS-specific)
 # Python>=3.6
-Django
+Django==2.2.8
 Pillow
 PyGreSQL
 Pygments
