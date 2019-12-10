@@ -31,6 +31,6 @@ do
 	else
 		COUNT=$((COUNT+1))
 	fi
-done < <(find . -type f ! -name "*.csv" -a ! -name "*.log" -mmin +${CS_TEMP_MMIN})
+done < <(find . -maxdepth 1 -type f ! -name "*.csv" -a ! -name "*.log" -mmin +${CS_TEMP_MMIN})
 
 echo "Removed $COUNT files from `pwd`"
