@@ -3,11 +3,14 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc3
-Mon Dec  9 13:18:47 PST 2019
+This is version 5.3.0-rc4
+Tue Dec 10 09:02:04 PST 2019
 
-4818721 (HEAD -> master) CSW-204: update Django to 2.2.8
-6e9b2fd (origin/master, origin/HEAD) Merge pull request #1 from cesarvh/master
+134e792 (HEAD -> master) CC-913: quiet the bmu cleanup cron job
+55935cb CSW-204: freeze django at v2.2.8
+e966f6a (tag: 5.3.0-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc3
+4818721 CSW-204: update Django to 2.2.8
+6e9b2fd Merge pull request #1 from cesarvh/master
 124eab3 CC-940: Fixed to extract display name from nagprainventoryname
 f4ebbf2 (tag: 5.3.0-rc2) revise change log and VERSION file for version 5.3.0-rc2
 df1e04a CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
