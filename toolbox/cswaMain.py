@@ -5,7 +5,7 @@ import cgitb; cgitb.enable()  # for troubleshooting
 from toolbox.cswaConstants import selectWebapp
 from toolbox.cswaUtils import *
 from toolbox.cswaObjDetails import *
-from toolbox.cswaUpdateCSpace import writeInfo2log
+from common.utils import loginfo
 
 #reload(sys)
 #sys.setdefaultencoding('utf-8')
@@ -43,8 +43,8 @@ def main(request, updateType, form, webappconfig):
 
     elapsedtime = time.time()
 
-    writeInfo2log('start', updateType, form, webappconfig, 0.0)
-    toolconfig = webappconfig._sections[updateType]
+    loginfo('toolbox', f'start {updateType}', {}, request)
+    # toolconfig = webappconfig._sections[updateType]
     html += starthtml(form, updateType, webappconfig)
 
     try:
@@ -137,7 +137,7 @@ def main(request, updateType, form, webappconfig):
 
     elapsedtime = time.time() - elapsedtime
 
-    writeInfo2log('end', updateType, form, webappconfig, elapsedtime)
+    loginfo('toolbox', f'end   {updateType}', {'elapsed_time': '%8.2f' % elapsedtime}, request)
     html += endhtml(form,webappconfig,elapsedtime)
 
     return html, ('%8.2f' % elapsedtime) + ' seconds'
