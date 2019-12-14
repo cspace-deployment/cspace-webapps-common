@@ -3,12 +3,14 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc6
-Fri Dec 13 17:32:06 PST 2019
+This is version 5.3.0-rc7
+Sat Dec 14 10:29:28 PST 2019
 
-a85ecf3 (HEAD -> master) CSW-177: two more places to use loginfo for uploadmedia's messages
+89b2517 (HEAD -> master) CSW-177: one more place to use loginfo for uploadmedia's messages
+2af90de (tag: 5.3.0-rc6, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc6
+a85ecf3 CSW-177: two more places to use loginfo for uploadmedia's messages
 c323ff9 CC-332: use proper directories for django webapps cacheing
-d992732 (tag: 5.3.0-rc5, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc5
+d992732 (tag: 5.3.0-rc5) revise change log and VERSION file for version 5.3.0-rc5
 02d627c CSW-177: eliminate logging cruft from toolbox
 4640d2e CSW-177: eliminate logging cruft from toolbox
 32e0c96 CSW-177: use loginfo for logging in toolbox cswaMain
