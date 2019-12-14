@@ -153,7 +153,7 @@ def find_group_relations(request, groupcsid):
         # Make authenticated connection to ucjeps.cspace...
         (groupurl, searchresult, dummy, elapsedtime) = getfromCSpace(relationsquery, request)
         if searchresult is None:
-            return(None, None, 'Error: We could not find the groupcsid \'%s.\' Please try another.' % groupcsid)
+            return(None, None, 'ERROR: We could not find the groupcsid \'%s.\' Please try another.' % groupcsid)
         relationlist = fromstring(searchresult)
 
         relations = relationlist.findall('.//relation-list-item')

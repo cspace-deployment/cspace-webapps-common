@@ -145,7 +145,7 @@ def prepareFiles(request, BMUoptions, context):
         if 'createmedia' in request.POST:
             jobinfo['status'] = 'createmedia'
             if not validateonly:
-                loginfo('start', getJobfile(jobnumber), context, request)
+                loginfo('bmu', getJobfile(jobnumber), context, request)
                 try:
                     file_is_OK = True
                     if INSTITUTION == 'cinefiles':
@@ -161,17 +161,17 @@ def prepareFiles(request, BMUoptions, context):
                             images = []
                             deletejob(request, jobnumber + '.step1.csv')
                             jobinfo['status'] = 'jobfailed'
-                            loginfo('process', jobnumber + " QC check failed.", context, request)
+                            loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
                     if file_is_OK:
                         retcode = subprocess.call([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
                         if retcode < 0:
-                            loginfo('process', jobnumber + " Child was terminated by signal %s" % -retcode, context, request)
+                            loginfo('bmu ERROR: process', jobnumber + " Child was terminated by signal %s" % -retcode, context, request)
                         else:
-                            loginfo('process', jobnumber + ": Child returned %s" % retcode, context, request)
+                            loginfo('bmu ERROR: process', jobnumber + ": Child returned %s" % retcode, context, request)
                 except OSError as e:
                     jobinfo['status'] = 'jobfailed'
-                    loginfo('error', "Execution failed: %s" % e, context, request)
-                loginfo('finish', getJobfile(jobnumber), context, request)
+                    loginfo('error', "ERROR: Execution failed: %s" % e, context, request)
+                loginfo('bmu finish', getJobfile(jobnumber), context, request)
 
         elif 'uploadmedia' in request.POST:
             jobinfo['status'] = 'uploadmedia'
@@ -325,7 +325,7 @@ def deletejob(request, filename):
         remove(getJobfile(filename))
         loginfo('bmu', '%s :: %s' % ('uploadmedia job deleted', filename), {}, {})
     except:
-        loginfo('bmu', '%s :: %s' % ('uploadmedia tried and failed to delete job', filename), {}, {})
+        loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to delete job', filename), {}, {})
     return showqueue(request)
 
 

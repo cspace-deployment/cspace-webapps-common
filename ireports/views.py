@@ -63,7 +63,7 @@ def getReportparameters(filename):
     except:
         #raise
         # indicate that .jrxml file was not found...
-        loginfo('ireports','jrxml file not found, no parms extracted.', {}, {})
+        loginfo('ireports','ERROR: jrxml file not found, no parms extracted.', {}, {})
     return parms,csidParms,fileFound
 
 

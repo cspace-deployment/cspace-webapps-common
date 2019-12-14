@@ -141,7 +141,7 @@ def get_image(request, image):
             data = add_watermark(data, watermark_image)
         except:
             raise
-            loginfo('imageserver', '%s :: %s :: %s' % ('watermark failed', '-', url), {}, {})
+            loginfo('imageserver', '%s :: %s :: %s' % ('ERROR: watermark failed', '-', url), {}, {})
     elapsedtime = time.time() - elapsedtime
     loginfo('imageserver', '%s :: %s :: %s' % (msg, '-', '%s :: %8.3f seconds' % (image, elapsedtime)), {}, {})
     response = HttpResponse(data, content_type=content_type)
