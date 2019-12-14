@@ -32,7 +32,7 @@ CACHES = {
     }
 }
 
-# 8 rotating logs, 8MB each, named '<museum>.webapps.log.txt', only warnings or higher
+# 8 rotating logs, 16MB each, named '<museum>.webapps.log.txt', only INFO or higher
 # emailing of ERROR level messages deferred for now: we'd need to configure all that
 LOGGING = {
     'version': 1,
@@ -51,10 +51,10 @@ LOGGING = {
         #     'filters': ['require_debug_false']
         # },
         'logfile': {
-            'level': 'WARNING',
+            'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', f'{PROJECT_NAME}.webapps.log.txt'),
-            'maxBytes': 8 * 1024 * 1024,
+            'filename': os.path.join('/', 'var', 'log', 'django', PROJECT_NAME, f'{PROJECT_NAME}.webapps.log'),
+            'maxBytes': 16 * 1024 * 1024,
             'backupCount': 8,
             # 'formatter': 'standard',
         },
@@ -65,9 +65,9 @@ LOGGING = {
         #     'level': 'ERROR',
         #     'propagate': False,
         # },
-        'django': {
+        '': {
             'handlers': ['logfile'],
-            'level': 'WARNING',
+            'level': 'INFO',
             'propagate': True,
         }
     }

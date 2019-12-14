@@ -20,20 +20,24 @@ TEMPLATE_DEBUG = DEBUG
 # See https://docs.djangoproject.com/en/2.2/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 
+# 8 rotating logs, 16MB each, named '<museum>.webapps.log.txt', only INFO or higher
+# emailing of ERROR level messages deferred for now: we'd need to configure all that
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
+        'logfile': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join('/', 'var', 'log', 'django', PROJECT_NAME, f'{PROJECT_NAME}.webapps.log'),
+            'maxBytes': 16 * 1024 * 1024,
+            'backupCount': 8,
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
-            'level': 'WARNING',
+            'handlers': ['logfile'],
+            'level': 'INFO',
             'propagate': True,
         },
     },
