@@ -18,6 +18,7 @@ from uploadmedia.utils import getBMUoptions, handle_uploaded_file, assignValue, 
 from uploadmedia.utils import getJobfile, getJoblist, loginfo, reformat, rendermedia
 from uploadmedia.specialhandling import specialhandling
 from uploadmedia.checkBlobs import doChecks
+from common.utils import loginfo
 
 from grouper.grouputils import getfromCSpace
 
@@ -32,10 +33,7 @@ from .models import AdditionalInfo
 
 additionalInfo = AdditionalInfo.objects.filter(live=True)
 
-# Get an instance of a logger, log some startup info
-logger = logging.getLogger(__name__)
-logger.info('%s :: %s :: %s' % ('uploadmedia startup', '-', '-'))
-
+loginfo('bmu startup', '-', {}, {})
 
 TITLE = 'Bulk Media Uploader'
 
