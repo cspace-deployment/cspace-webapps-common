@@ -415,6 +415,7 @@ def postxml(requestType, uri, payload, form):
 def writeLog(updateItems, uri, httpAction, form, config):
     auditFile = config.get('files', 'auditfile')
     # TODO: unsnarl this someday. there should be only one way to specify which tool is in use.
+    # TODO: and only one place all the logging should go (I think: not sure about audit trail...)
     try:
         updateType = form['tool']
     except:
@@ -435,17 +436,3 @@ def writeLog(updateItems, uri, httpAction, form, config):
         # html += 'writing to log %s failed!' % auditFile
         pass
 
-
-def writeInfo2log(action, updateType , form, config, elapsedtime):
-    "'start', updateType, form, webappconfig, 0.0"
-    #action = str(form.get("action"))
-    serverlabel = config.get('info', 'serverlabel')
-    institution = config.get('info', 'institution')
-    apptitle = config.get(updateType, 'apptitle')
-    checkServer = form.get('check')
-    # override updateType if we are just checking the server
-    if checkServer == 'check server':
-        updateType = checkServer
-    updateItems = {'app': apptitle, 'server': serverlabel, 'institution': institution,
-                   'elapsedtime': '%8.2f' % elapsedtime, 'action': action, 'updateType': updateType}
-    writeLog(updateItems, '', '', form, config)
