@@ -232,7 +232,7 @@ def uploadmedia(request):
         images = []
 
     elapsedtime = time.time() - elapsedtime
-    logger.info('%s :: %s :: %s' % ('uploadmedia job ', context['jobnumber'], '-'))
+    loginfo('bmu', '%s :: %s' % ('uploadmedia job ', context['jobnumber']), {}, request)
     context = setContext(context, elapsedtime)
 
     context['jobinfo'] = jobinfo
