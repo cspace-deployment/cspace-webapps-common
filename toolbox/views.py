@@ -53,9 +53,6 @@ def toolbox(request, action):
             if type(response) == type(' '):
                 context['html'] += response
             else:
-                # elapsedtime = time.time() - elapsedtime
-                #writeInfo2log('end', form, config, elapsedtime)
-                # html += endhtml(form, config, elapsedtime)
                 return response
 
     context['extra_nav'] = {'href': './', 'id': 'switchtool', 'name': 'Switch Tool'}
