@@ -323,10 +323,9 @@ def showresults(request):
 def deletejob(request, filename):
     try:
         remove(getJobfile(filename))
-        logger.info('%s :: %s' % ('uploadmedia job deleted', filename))
-
+        loginfo('bmu', '%s :: %s' % ('uploadmedia job deleted', filename), {}, {})
     except:
-        logger.info('%s :: %s' % ('uploadmedia tried and failed to delete job', filename))
+        loginfo('bmu', '%s :: %s' % ('uploadmedia tried and failed to delete job', filename), {}, {})
     return showqueue(request)
 
 
