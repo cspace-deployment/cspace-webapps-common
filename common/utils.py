@@ -616,7 +616,7 @@ def doSearch(context, prmz, request):
             # skip form values that are not strictly input values
             if p in ['csrfmiddlewaretoken', 'displayType', 'displaytype', 'resultsOnly', 'maxresults', 'url', 'querystring', 'pane',
                      'pixonly', 'locsonly', 'acceptterms', 'submit', 'start', 'sortkey', 'count', 'summarizeon',
-                     'summarize', 'summaryfields', 'lastpage']: continue
+                     'summarize', 'summaryfields', 'lastpage', 'score', 'right', 'wrong']: continue
             if p == '_': continue
             if '_qualifier' in p: continue
             if 'select-' in p: continue  # skip select control for map markers

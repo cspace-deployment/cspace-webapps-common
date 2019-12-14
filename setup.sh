@@ -119,17 +119,19 @@ fi
 
 if [[ "${COMMAND}" = "disable" ]]; then
     perl -i -pe "s/('${WEBAPP}')/# \1/" cspace_django_site/installed_apps.py
-    perl -i -pe "s/(url)/# \1/ if /${WEBAPP}/" cspace_django_site/urls.py
+    perl -i -pe "s/(path)/# \1/ if /${WEBAPP}/" cspace_django_site/urls.py
     echo "disabled ${WEBAPP}"
 elif [[ "${COMMAND}" = "enable" ]]; then
     perl -i -pe "s/# *('${WEBAPP}')/\1/" cspace_django_site/installed_apps.py
-    perl -i -pe "s/# *(url)/\1/ if /${WEBAPP}/" cspace_django_site/urls.py
+    perl -i -pe "s/# *(path)/\1/ if /${WEBAPP}/" cspace_django_site/urls.py
+    python manage.py migrate
+    python manage.py collectstatic
     echo "enabled ${WEBAPP}"
 elif [[ "${COMMAND}" = "show" ]]; then
     echo
     echo "Installed apps:"
     echo
-    echo -e "from cspace_django_site.installed_apps import INSTALLED_APPS\nfor i in INSTALLED_APPS: print i" | $PYTHON
+    echo -e "from cspace_django_site.installed_apps import INSTALLED_APPS\nfor i in INSTALLED_APPS: print(i)" | $PYTHON
     echo
 elif [[ "${COMMAND}" = "configure" ]]; then
     if [[ ! -f "cspace_django_site/extra_${DEPLOYMENT}.py" ]]; then
