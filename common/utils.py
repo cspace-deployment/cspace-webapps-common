@@ -38,8 +38,10 @@ def loginfo(webapp, infotype, context, request):
     if 'querystring' in context:
         logdata = context['querystring']
     if 'url' in context:
-        logdata += ' :: %s' % context['url']
-    logger.info('%s :: %s :: %s :: %s' % (infotype, count, username, logdata))
+        logdata += ' url: %s' % context['url']
+    if 'elapsed_time' in context:
+        logdata += ' elapsed_time: %s' % context['elapsed_time']
+    logger.info('%s :: %s :: %s :: %s :: %s' % (webapp, infotype, count, username, logdata))
 
 
 def getfromXML(element, xpath):
