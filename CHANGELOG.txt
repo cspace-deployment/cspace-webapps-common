@@ -3,12 +3,15 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc8
-Sat Dec 14 13:34:42 PST 2019
+This is version 5.3.0-rc9
+Wed Jan 22 10:34:18 PST 2020
 
-00a94c5 (HEAD -> master) CSW-177: indicate which log messages are errors
+11d719a (HEAD -> master) CSW-224: fix Solr-based term suggestions in Django portals
+ce3f0ca (origin/master, origin/HEAD) NOJIRA: fix enable/disable feature in setup.sh script for django webapps
+3f1708d (tag: 5.3.0-rc8) revise change log and VERSION file for version 5.3.0-rc8
+00a94c5 CSW-177: indicate which log messages are errors
 902c290 CSW-123: setup.sh needed a fix to disable/enable functionality
-610ad46 (tag: 5.3.0-rc7, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc7
+610ad46 (tag: 5.3.0-rc7) revise change log and VERSION file for version 5.3.0-rc7
 89b2517 CSW-177: one more place to use loginfo for uploadmedia's messages
 2af90de (tag: 5.3.0-rc6) revise change log and VERSION file for version 5.3.0-rc6
 a85ecf3 CSW-177: two more places to use loginfo for uploadmedia's messages
