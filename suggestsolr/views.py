@@ -61,10 +61,13 @@ def solrtransaction(q, elementID):
             searchfield = solrField.replace('_ss','_txt')
             searchfield = searchfield.replace('_s','_txt')
         # yes, case is a terrible thing to have to deal with!
-        q2 = q.lower().split(' ')
+        q2 = [x for x in re.sub('[,\*+\.]',  ' ', q).lower().split(' ') if x!= '']
         # make every token a left prefix...
         q3 = [x + '*' for x in q2]
-        querystring = searchfield + ':' + (' AND %s:' % searchfield).join(q3)
+        querystring = ''
+        for i,x in enumerate(q3):
+            querystring += f' AND ({searchfield}:{q3[i]} OR {searchfield}:{q2[i]})'
+        querystring = querystring[4:]
         response = s.query(querystring, facet='true', facet_field=[ suggestfield ], fq={},
                            rows=0, facet_limit=30,
                            facet_mincount=1)
@@ -91,7 +94,6 @@ def solrtransaction(q, elementID):
         return json.dumps(result)
 
     except:
-        raise
         sys.stderr.write("suggest solr query error!\n")
         return None
 
