@@ -150,20 +150,18 @@
                         <th>filename</th>
                         <th>object number</th>
                         <th>image number</th>
-                        <th> </th>
-                        <th>Found in CSpace?</th>
+                        <th>found in CSpace?</th>
                     </tr>
                     {% for o in objectnumbers %}
                         <tr>
                             <td>{{ o.0 }}</td>
                             <td>{{ o.1 }}</td>
                             <td>{{ o.2 }}</td>
-                            <td>{{ o.3 }}</td>
                             <td>
                                 {% if o.4 == 0 %}
-                                    <span class="error">Not Found</span>
+                                    <span class="error">{{  o.5 }}</span>
                                 {% else %}
-                                    <span style="color: green">Found</span>
+                                    <span style="color: green">{{  o.5 }}</span>
                                 {% endif %}
                             </td>
                         </tr>

@@ -16,9 +16,7 @@ from cswaExtras import postxml, relationsPayload, getCSID
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
 FIELDS2WRITE = 'name size objectnumber date creator contributor rightsholder imagenumber handling approvedforweb'.split(' ')
 
-
-def mediaPayload(mh, institution):
-    payload = """<?xml version="1.0" encoding="UTF-8"?>
+media_payload = """<?xml version="1.0" encoding="UTF-8"?>
 <document name="media">
 <ns2:media_common xmlns:ns2="http://collectionspace.org/services/media" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <blobCsid>{blobCSID}</blobCsid>
@@ -50,6 +48,17 @@ def mediaPayload(mh, institution):
 </ns2:media_INSTITUTION>
 </document>
 """
+
+object_payload = """<?xml version="1.0" encoding="UTF-8"?>
+<document name="collectionobjects">
+  <ns2:collectionobjects_common xmlns:ns2="http://collectionspace.org/services/collectionobject" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <objectNumber>{objectnumber}</objectNumber>
+  </ns2:collectionobjects_common>
+</document>
+"""
+
+def makePayload(payload, mh, institution):
+
 
     # xml-escape everything...
     for m in mh:
@@ -98,7 +107,6 @@ def mediaPayload(mh, institution):
     payload = payload.replace('#LOCALITY#', '')
     payload = payload.replace('INSTITUTION', institution)
 
-    # print("mediaPayload...")
     # print(payload)
     return payload
 
@@ -140,7 +148,7 @@ def uploadmedia(mediaElements, config, http_parms):
 
         messages = []
         #messages.append("posting to media REST API...")
-        payload = mediaPayload(mediaElements, http_parms.institution)
+        payload = makePayload(media_payload, mediaElements, http_parms.institution)
         (url, data, mediaCSID, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
         messages.append('mediacsid %s elapsedtime %s ' % (mediaCSID, elapsedtime))
         mediaElements['mediaCSID'] = mediaCSID
@@ -161,6 +169,13 @@ def uploadmedia(mediaElements, config, http_parms):
                 # postxml('POST', 'batch/563d0999-d29e-4888-b58d', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, primary_payload)
             except:
                 print("batch job to set primary image failed.")
+        # for UCJEPS, create a 'skeletal' accession (object) record if requested
+        elif mediaElements['handling'] == 'media+create+accession':
+            payload = makePayload(object_payload, mediaElements, http_parms.institution)
+            try:
+                (url, data, xobjectCSID, elapsedtime) = postxml('POST', 'collectionobjects', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
+            except:
+                print("Failed to create skeletal object record for.")
 
         else:
             pass

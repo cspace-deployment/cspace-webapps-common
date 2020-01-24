@@ -253,14 +253,12 @@ def checkimagefilenames(request):
         context['filename'] = filename
         file_handle = open(getJobfile(filename), 'r')
         lines = file_handle.read().splitlines()
-        recordtypes = [f.split("|") for f in lines]
-        filenames = [ r[0] for r in recordtypes[1:]]
-        objectnumbers = []
+        recordtypes = [tuple(list(f.split("|")[i] for i in [0, 2, 7, 8])) for f in lines]
         seen = {}
-        for o in filenames:
-            objitems = getNumber(o, INSTITUTION)
+        checked_objects = []
+        for objitems in recordtypes[1:]:
             if objitems[1] in seen:
-                objectnumbers.append(objitems + (seen[objitems[1]],))
+                checked_objects.append(objitems + upload_type_check(seen[objitems], objitems))
             else:
                 asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', urllib.parse.quote_plus(objitems[1]), 10)
                 (objecturl, objectx, dummy, itemtime) = getfromCSpace(asquery, request)
@@ -270,18 +268,30 @@ def checkimagefilenames(request):
                     objectx = fromstring(objectx)
                     totalItems = objectx.find('.//totalItems')
                     totalItems = int(totalItems.text)
-                #objectcsids = [e.text for e in objectx.findall('.//csid')]
-                objectnumbers.append(objitems + (totalItems,))
+                checked_objects.append(objitems + upload_type_check(totalItems, objitems))
                 seen[objitems[1]] = totalItems
         file_handle.close()
     except:
         raise
-        objectnumbers = []
+        checked_objects = []
     elapsedtime = time.time() - elapsedtime
     context = setContext(context, elapsedtime)
-    context['objectnumbers'] = objectnumbers
+    context['objectnumbers'] = checked_objects
 
     return render(request, 'uploadmedia.html', context)
+
+def upload_type_check(num_items, objitem):
+    handling = objitem[3]
+    if handling == 'media+create+accession':
+        if num_items == 0:
+            return (1, 'A new object record will be created.')
+        else:
+            return (0, 'Object record exists! A new DUPLICATE skeletal object record will be created.')
+    else:
+        if num_items == 0:
+            return (num_items, 'Not found')
+        else:
+            return (num_items, 'Found')
 
 @login_required()
 def downloadresults(request, filename):
