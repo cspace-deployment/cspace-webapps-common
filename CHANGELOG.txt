@@ -3,10 +3,12 @@ CHANGELOG for the cspace_django_webapps
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc10
-Wed Jan 22 10:37:10 PST 2020
+This is version 5.3.0-rc11
+Fri Jan 24 12:18:42 PST 2020
 
-5f67348 (HEAD -> master, tag: 5.3.0-rc9, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc9
+ba16a17 (HEAD -> master) CSW-231: BMU enhancements to support revised UCJEP workflow
+1c0f73c (tag: 5.3.0-rc10, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc10
+5f67348 (tag: 5.3.0-rc9) revise change log and VERSION file for version 5.3.0-rc9
 11d719a CSW-224: fix Solr-based term suggestions in Django portals
 ce3f0ca NOJIRA: fix enable/disable feature in setup.sh script for django webapps
 3f1708d (tag: 5.3.0-rc8) revise change log and VERSION file for version 5.3.0-rc8
