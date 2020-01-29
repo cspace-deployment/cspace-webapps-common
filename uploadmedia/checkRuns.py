@@ -160,7 +160,7 @@ for filename in os.listdir(DIR):
         if i == 0: continue  # skip header rows
         try:
             if step == 'processed':
-                # sorry there are 7 different formats of processed files at this point...
+                # sorry there are 8 different formats of processed files at this point...
                 try:
                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber, handling,
                      approvedforweb, mediaCSID, objectCSID, blobCSID) = line.split('\t')
@@ -193,10 +193,15 @@ for filename in os.listdir(DIR):
                                         try:
                                             (name, size, objectnumber, date, creator, contributor, rightsholder,
                                              imagenumber, handling, approvedforweb, copyright, imagetype, source,
-                                             locality, mediaCSID, objectCSID) = line.split('\t')
-                                            blobCSID = 'not provided'
+                                             locality, group_title, mediaCSID, objectCSID, blobCSID) = line.split('\t')
                                         except:
-                                            raise
+                                            try:
+                                                (name, size, objectnumber, date, creator, contributor, rightsholder,
+                                                 imagenumber, handling, approvedforweb, copyright, imagetype, source,
+                                                 locality, mediaCSID, objectCSID) = line.split('\t')
+                                                blobCSID = 'not provided'
+                                            except:
+                                                raise
             elif step == 'original' or step == 'step1':
                 try:
                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber, handling,

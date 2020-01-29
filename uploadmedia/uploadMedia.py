@@ -10,8 +10,8 @@ from xml.sax.saxutils import escape
 import traceback
 import configparser
 
-from cswaExtras import postxml, relationsPayload, getCSID
-
+from uploadmedia.cswaExtras import postxml, relationsPayload, getCSID
+from uploadmedia.utils4groups import add2group, create_group
 
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
 FIELDS2WRITE = 'name size objectnumber date creator contributor rightsholder imagenumber handling approvedforweb'.split(' ')
@@ -145,6 +145,7 @@ def uploadmedia(mediaElements, config, http_parms):
     if 'blobCSID' in mediaElements:
 
         uri = 'media'
+        xobjectCSID = ''
 
         messages = []
         #messages.append("posting to media REST API...")
@@ -169,7 +170,7 @@ def uploadmedia(mediaElements, config, http_parms):
                 # postxml('POST', 'batch/563d0999-d29e-4888-b58d', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, primary_payload)
             except:
                 print("batch job to set primary image failed.")
-        # for UCJEPS, create a 'skeletal' accession (object) record if requested
+        # create a 'skeletal' accession (object) record if requested
         elif mediaElements['handling'] == 'media+create+accession':
             payload = makePayload(object_payload, mediaElements, http_parms.institution)
             try:
@@ -185,13 +186,16 @@ def uploadmedia(mediaElements, config, http_parms):
             mediaElements['objectCSID'] = 'N/A: %s' % mediaElements['handling']
         else:
             # try to relate media record to collection object if needed
-            objectCSID = getCSID('objectnumber', mediaElements['objectnumber'], config)
+            if mediaElements['handling'] == 'media+create+accession':
+                objectCSID = xobjectCSID
+            else:
+                objectCSID = getCSID('objectnumber', mediaElements['objectnumber'], config)
+                objectCSID = objectCSID[0]
             if objectCSID == [] or objectCSID is None:
                 print("could not get (i.e. find) objectnumber's csid: %s." % mediaElements['objectnumber'])
                 mediaElements['objectCSID'] = 'not found'
                 # raise Exception("<span style='color:red'>Object Number not found: %s!</span>" % mediaElements['objectnumber'])
             else:
-                objectCSID = objectCSID[0]
                 mediaElements['objectCSID'] = objectCSID
 
                 uri = 'relations'
@@ -284,6 +288,7 @@ if __name__ == "__main__":
         http_parms.alwayscreatemedia = True if http_parms.alwayscreatemedia.lower() == 'true' else False
 
         http_parms.server = http_parms.protocol + "://" + http_parms.hostname
+
         try:
             int(http_parms.port)
             http_parms.server = http_parms.server  + ':' + http_parms.port
@@ -297,7 +302,6 @@ if __name__ == "__main__":
         # print("can't continue, exiting...")
         sys.exit(1)
 
-    # print('config',config)
     records, columns = getRecords(sys.argv[1])
     if columns == -1:
         print('MEDIA: Error! %s' % records)
@@ -313,6 +317,8 @@ if __name__ == "__main__":
     del records[0]
     outputfh.writerow(columns + ['mediaCSID', 'objectCSID', 'blobCSID'])
 
+    objectCSIDs = []
+    group_title = ''
     for i, r in enumerate(records):
 
         elapsedtimetotal = time.time()
@@ -323,6 +329,9 @@ if __name__ == "__main__":
         # now insert the actual values for those that appear in the input
         for v1, v2 in enumerate(columns):
             mediaElements[v2] = r[v1]
+            # snag group_title, if provided
+            if v2 == 'group_title':
+                group_title = r[v1]
         mediaElements['approvedforweb'] = 'true' if mediaElements['approvedforweb'] == 'on' else 'false'
         print('MEDIA: uploading media for filename %s, objectnumber: %s' % (mediaElements['name'], mediaElements['objectnumber']))
         try:
@@ -333,6 +342,7 @@ if __name__ == "__main__":
                 (time.time() - elapsedtimetotal)))
             r.append(mediaElements['mediaCSID'])
             r.append(mediaElements['objectCSID'])
+            objectCSIDs.append(mediaElements['objectCSID'])
             r.append(mediaElements['blobCSID'])
             outputfh.writerow(r)
         except:
@@ -345,4 +355,14 @@ if __name__ == "__main__":
                                                           http_parms.password, '')
                 print("MEDIA: deleted blob %s" % mediaElements['blobCSID'])
             except:
-                print("MEDIA: failed to delete blob %s" % mediaElements['blobCSID'])
+                try:
+                    print("MEDIA: failed to delete blob %s" % mediaElements['blobCSID'])
+                except:
+                    pass
+
+    # make a group, if asked
+    if group_title != '':
+
+        groupCSID = create_group(group_title, http_parms)
+        add2group(groupCSID, objectCSIDs, http_parms)
+

@@ -80,7 +80,7 @@ def postxml(requestType, uri, realm, server, username, password, payload):
         csid = re.search(uri + '/(.*)', info['Location'])
         csid = csid.group(1)
     else:
-        csid = ''
+        csid = None
     return (url, data, csid, elapsedtime)
 
 
