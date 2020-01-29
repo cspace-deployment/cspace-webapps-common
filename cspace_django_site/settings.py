@@ -100,19 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.2/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 # URL prefix for static files.
@@ -151,6 +138,9 @@ FILE_UPLOAD_TEMP_DIR = '/var/cspace/bmutmp'
 # LOGGING is set up in the extra_*.py modules
 
 SITE_ID = 2
+
+# Internationalization
+# https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
