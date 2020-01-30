@@ -146,4 +146,5 @@ def get_image(request, image):
     loginfo('imageserver', '%s :: %s :: %s' % (msg, '-', '%s :: %8.3f seconds' % (image, elapsedtime)), {}, {})
     response = HttpResponse(data, content_type=content_type)
     response['Content-Disposition'] = 'filename="%s"' % filename
+    response['X-Frame-Options'] = 'ALLOWALL'
     return response
