@@ -1,5 +1,5 @@
-from toolbox.cswaHelpers import relationsPayload
-from uploadmedia.cswaExtras import postxml
+from cswaExtras import postxml, relationsPayload
+
 
 def add2group(groupcsid, list_of_objects, http_parms):
 

@@ -10,8 +10,8 @@ from xml.sax.saxutils import escape
 import traceback
 import configparser
 
-from uploadmedia.cswaExtras import postxml, relationsPayload, getCSID
-from uploadmedia.utils4groups import add2group, create_group
+from cswaExtras import postxml, relationsPayload, getCSID
+from utils4groups import add2group, create_group
 
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
 FIELDS2WRITE = 'name size objectnumber date creator contributor rightsholder imagenumber handling approvedforweb'.split(' ')
