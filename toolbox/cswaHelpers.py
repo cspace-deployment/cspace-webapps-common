@@ -3,6 +3,7 @@ import toolbox.cswaConstants as cswaConstants
 from django.conf import settings
 
 from common import appconfig
+from common.cspace import getConfig
 from common.utils import devicetype
 
 def basicSetup(form, webappconfig):
@@ -26,6 +27,12 @@ def configure_common_tools(context, request, action, webappconfig):
     context['device'] = devicetype(request)
     context['timestamp'] = time.strftime("%b %d %Y %H:%M:%S", time.localtime())
     context['labels'] = 'name file'.split(' ')
+    try:
+        alert_config = getConfig(os.path.join(settings.BASE_DIR, 'config'), 'alert')
+        context['ALERT'] = alert_config.get('alert', 'ALERT')
+        context['MESSAGE'] = alert_config.get('alert', 'MESSAGE')
+    except:
+        context['ALERT'] = ''
     return context
 
 

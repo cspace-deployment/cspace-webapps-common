@@ -4,11 +4,13 @@ import time, datetime
 import csv
 import solr
 import cgi
+import os
 import logging
 
 from os import path, popen
 from copy import deepcopy
 from cspace_django_site import settings
+from common.cspace import getConfig
 
 from io import BytesIO
 # disable reportlab code for now
@@ -517,6 +519,14 @@ def setConstants(context, prmz, request):
             searchfield['fieldtype'] = searchfield['fieldtype'][0]
 
     context['device'] = devicetype(request)
+
+    try:
+        alert_config = getConfig(os.path.join(settings.BASE_DIR, 'config'), 'alert')
+        context['ALERT'] = alert_config.get('alert', 'ALERT')
+        context['MESSAGE'] = alert_config.get('alert', 'MESSAGE')
+    except:
+        x = settings.BASE_DIR
+        context['ALERT'] = ''
 
     return context
 

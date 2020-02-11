@@ -1,14 +1,8 @@
 __author__ = 'jblowe'
 
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponse
-from django import forms
-import json
-from django.conf import settings
-import time
+from django.shortcuts import render
 
 from cspace_django_site.main import cspace_django_site
-from cspace_django_site import settings
 from toolbox.cswaMain import main
 from toolbox.cswaUtils import downloadCsv
 from toolbox.cswaHelpers import *
