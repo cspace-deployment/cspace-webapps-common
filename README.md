@@ -123,8 +123,8 @@ sudo pip install -r pycharm_requirements.txt
 NB: Yes, you can, and indeed may have to, run your apps in a virtual environment if you are unable or unwilling to use the system defaults. This is covered below.  Also note that PyCharm can help you resolve module dependencies -- `venv` comes pretty much builtin
 with PyCharm and supports multiple Python interpreters.
 
-(At the moment, there are few version constraints for this project: Python 2.6.8+ and Django 1.5+; requirements.txt
-specifies Django 1.5 or higher, but minor code changes seem to be required to run with Django > 1.8. This project has not been tried with Python 3.)
+(At the moment, there are few version constraints for this project: Python 3.6+ and Django 2.2.9+; requirements.txt
+specifies Django 2.2.9 or higher.)
 
 You are now ready to configure your environment and deploy your tenant-specific parameters.
 
@@ -134,9 +134,9 @@ There is no `make` or `mvn` build/deploy process for Django webapps, and the dep
 
 Instead there is a shell script called `setup.sh` which does the steps required to make your webapps go.
 
-```bash
+```
 $ ./setup.sh
-Usage: ./setup.sh <enable|disable|deploy|redeploy|configure|show> <TENANT|CONFIGURATION|WEBAPP> [VERSION]
+Usage: ./setup.sh <enable|disable|deploy|configure|show> <TENANT|CONFIGURATION|WEBAPP> [VERSION]
 
 where: TENANT = 'default' or the name of a deployable tenant
        CONFIGURATION = <pycharm|dev|prod>
@@ -150,7 +150,7 @@ e.g. ./setup.sh disable ireports
      ./setup.sh show
 ```
 
-```bash
+```
 # OPTION 1: sample deployment to see if you can get the project to run.
 # configure your dev deployment
 ./setup.sh configure pycharm
@@ -166,14 +166,14 @@ example configurations for all UCB tenants in a separate GitHub repo. If you clo
 `setup.sh` will do the work of copying all the config files to the right place and initializing the Django project
 to run them.
 
-```bash
+```
 # OPTION 2: deploy one of the UCB configurations
 # to deploy a specific tetant, you'll want to clone the repo with all the
 # example config files out side of this repo, i.e. in ~/cspace-webapps-ucb
 cd ; git clone https://github.com/cspace-deployment/cspace-webapps-ucb.git
 cd ~/PycharmProjects/my_test_project
 ./setup.sh deploy ucjeps
-# this will blow away whatever tenant was deployed previously and setup the UCJEPS tenant.
+# this will blow away whatever tenant might have been deployed previously in this repo and setup the UCJEPS tenant.
 ```
 
 *NB: `setup.sh` expects this repo (`cspace-webapps-ucb`), with this exact name, to be in your home directory!*
@@ -186,7 +186,7 @@ you will not be interested in any of the webapps named image\*. It is a simple m
 (re-)enable any time if you like. The process is illustrated below. If you don't, they will appear in the landing page
 and you will need to configure them even if they won't really do anything.
 
-```bash
+```
 # optional: disable any apps you don't want. the following apps only work if you have a solr datastore configured.
 ./setup.sh disable imageserver
 ./setup.sh disable imagebrowser
@@ -195,13 +195,13 @@ and you will need to configure them even if they won't really do anything.
 
 To enable a disabled webapp do the following and restart the webserver you are using:
 
-```bash
+```
 ./setup.sh enable uploadmedia
 ```
 
 To see which apps are enabled:
 
-```bash
+```
 ./setup.sh show
 ```
 
@@ -225,7 +225,7 @@ A few important details, but do please read this whole section before you attemp
 
 ###### Initial setup for deployments on RTL servers
 
-If you haven't already done so, clone the two needed reports
+If you haven't already done so, clone the two needed repo
 
 ```
 ssh blacklight-prod.ets.berkeley.edu
@@ -233,8 +233,11 @@ ssh blacklight-prod.ets.berkeley.edu
 sudo su - app_webapps
 
 # only do this if it hasn't been done already...
-git clone https://github.com/cspace-deployment/
-cp radiance/*.sh .
+# 1. easiest if to deploy repos in your home directory
+cd
+# 2. clone the two needed repos
+git clone https://github.com/cspace-deployment/cspace-webapps-common
+git clone https://github.com/cspace-deployment/cspace-webapps-ucb.git
 ```
 
 There is a helper script for use in making Dev and Prod
@@ -245,19 +248,14 @@ deployments on RTL servers.
 For initial setup, you'll need to:
 
 * A Python virtual environment installed
-* Requirements installed via pip.
-* Have Apache configured appropriately (e.g. wsgi, etc.)
+* Requirements installed via pip (see above.)
+* Apache configured appropriately (e.g. wsgi, passenger, etc.)
 
 E.g.
 
 ```
-$ ssh blacklight-dev.ets.berkeley.edu
-
-[...]
-
-Last login: Tue Mar  5 10:54:19 2019 from 128.32.202.5
-jblowe@blacklight-dev:~$ sudo su - blacklight
-
+(venv) app_webapps@blacklight-dev:~$ tail -1 .profile 
+source /var/www/venv/bin/activate
 ```
 
 Then you can deploy and start up the application.
@@ -268,20 +266,23 @@ On the RTL servers, you may assume that the two repos and scripts have
 been set up in in the home directory of user `app_webapps` and are ready to use. In theory, only these two scripts are needed
 to do a complete deployment.
 
+
 First, stop Apache2 (see below).
 
 To deploy and build the code from GitHub for pahma and cinefiles:
 ```
-./deploy-ucb.sh -v 5.2.0-rc1 pahma cinefiles
+cd
+cspace-webapps-common//deploy-ucb.sh -v 5.2.0-rc1 pahma cinefiles
 ```
 
-or, to deploy them all:
+or, to deploy them all, and keep a log of the deploy process:
 
 ```
-./deploy-ucb.sh -v 5.2.0-rc1 -a
+cd
+nohup time cspace-webapps-common/deploy-ucb.sh -a -v 5.3.0-rc14 > da-2020-02-07.txt &
 ```
 
-... then start Apache2 (see below).
+... then start/restart Apache2 (see below).
 
 NB:
 
@@ -291,7 +292,7 @@ Here's a recipe for actually deploying a new version on an RTL server:
 
 1. Sign in to blacklight server (dev or prod)
 1. Stop Apache
-1. sudo to the app_webapps user
+1. `sudo` to the app_webapps user
 1. Deploy the new version
 1. Exit the  shell
 1. Start Apache
@@ -317,12 +318,25 @@ sudo apache2ctl start
 
 exit
 ```
+
+If you want to update just one deployment, you do NOT have to restart Apache.
+Since we are running WSGI in "daemon mode", you can just touch the wsgi.py
+file and WSGI will reload that one deployment:
+```
+cd
+cspace-webapps-common//deploy-ucb.sh -v 5.2.0-rc1 pahma 
+touch pahma/cspace_django_site/wsgi.py
+```
+
+_NB: authenticated webapp users for this deployment will need to 
+log back in again after this!_
+
 ###### Rolling back on RTL servers
 
 Right now, there is no way to rollback a release.
 
 ```
-# to roll back
+# to roll back...
 ```
 
 ##### Configuration files
@@ -364,13 +378,13 @@ Now you start a server...
 
 From the command line, while in the project directory, type:
 
-```bash
+```
 $ python manage.py runserver
 ```
 
 and you should see:
 
-```bash
+```
 Performing system checks...
 System check identified 1 issue (0 silenced).
 February 28, 2016 - 20:47:14
