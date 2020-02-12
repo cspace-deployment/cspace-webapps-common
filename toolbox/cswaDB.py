@@ -632,6 +632,88 @@ def getgrouplist(group, num2ret, config):
         ORDER BY storageLocation,objectnumber,hx2.name asc
         limit """ + str(num2ret)
 
+    elif institution == 'ucjeps':
+        getobjects =  """
+                select coc.id,
+                       coc.objectnumber                as accessionnumber,
+                       getdispl(tig.taxon)             as scientificname,
+                       tig.taxon                       as taxonrefname,
+                       regexp_replace(lg.fieldloccountry, '^.*\\)''(.*)''$', '\\1') as country,
+                       lg.fieldloccountry              as countryrefname,
+                       regexp_replace(lg.fieldlocstate, '^.*\\)''(.*)''$', '\\1') as state,
+                       lg.fieldlocstate                as staterefname,
+                       regexp_replace(lg.fieldloccounty, '^.*\\)''(.*)''$', '\\1') as county,
+                       lg.fieldloccounty               as countyrefname,
+                       cocbd.item                      as briefdescription,
+                       getdispl(coc.phase)             as phase,
+                       coc.sex                         as sex,
+                       rg.reference                    as reference,
+                       coc.numberofobjects             as numberofobjects,
+                       conh.objectcountnumber          as sheet,
+                       concat_collectors(coc.id)       as collectors,
+                       coc.fieldcollectionnumber       as fieldcollectionnumber,
+                       get_fieldcolldate_range(coc.id) as fieldcollectiondate,
+                       sdg.datedisplaydate             as fieldcollectiondateverbatim,
+                       getdispl(conh.labelheader)      as labelheader,
+                       getdispl(conh.labelfooter)      as labelfooter,
+                       lng.localname                   as localname,
+                       lg.fieldlocverbatim             as localityverbatim,
+                       concat_localitynote(coc.id)     as locality,
+                       coc.fieldcollectionnote         as habitat,
+                       -- getdispl(nps.numbervalue)       as nps_numbervalue,
+                       -- getdispl(onps.numbervalue)      as onps_numbervalue,
+                       ttg.termformatteddisplayname    as scinamefmtted,
+                       concat_assoctaxa(coc.id)        as associatedtaxa
+
+                from groups_common gc
+                         join hierarchy hgc ON (gc.id = hgc.id)
+                         join relations_common rc ON (hgc.name = rc.subjectcsid)
+                         join hierarchy hrc ON (rc.objectcsid = hrc.name)
+                         left outer join collectionobjects_common coc ON (hrc.id = coc.id)
+                         left outer join collectionobjects_naturalhistory conh on (coc.id = conh.id)
+                         left outer join hierarchy htig on (coc.id = htig.parentid
+                    and htig.primarytype = 'taxonomicIdentGroup' and htig.pos = 0)
+                         left outer join taxonomicIdentGroup tig on (htig.id = tig.id)
+                         left outer join taxon_common tc on (tig.taxon = tc.refname)
+                         left outer join hierarchy httg on (
+                        tc.id = httg.parentid
+                        and httg.name = 'taxon_common:taxonTermGroupList' and httg.pos = 0)
+                         left outer join taxontermgroup ttg on (ttg.id = httg.id)
+                         left outer join hierarchy hrg on (coc.id = hrg.parentid
+                    and hrg.primarytype = 'referenceGroup' and hrg.pos = 0)
+                         left outer join referenceGroup rg on (hrg.id = rg.id)
+                         left outer join hierarchy hlng on (coc.id = hlng.parentid
+                    and hlng.primarytype = 'localNameGroup'
+                    and hlng.pos = 0)
+                         left outer join localNameGroup lng on (hlng.id = lng.id)
+                         left outer join hierarchy hlg on (coc.id = hlg.parentid
+                    and hlg.primarytype = 'localityGroup'
+                    and hlg.pos = 0)
+                         left outer join localityGroup lg on (hlg.id = lg.id)
+                         left outer join hierarchy hsdg on (coc.id = hsdg.parentid
+                    and hsdg.name = 'collectionobjects_common:fieldCollectionDateGroup')
+                         left outer join structuredDateGroup sdg on (hsdg.id = sdg.id)
+                         left outer join collectionobjects_common_briefdescriptions cocbd on (coc.id = cocbd.id
+                    and cocbd.pos = 0)
+                --         left outer join (
+                --      select h.parentid, getdispl(o.numbertype) numbertype, o.numbervalue
+                --      from othernumber o,
+                --           hierarchy h
+                --      where h.id = o.id
+                --        and h.primarytype = 'otherNumber'
+                --        and getdispl(o.numbertype) = 'National Park Service Accession Number') nps on (coc.id = nps.parentid)
+                --           left outer join (
+                --      select h.parentid, getdispl(o.numbertype) numbertype, o.numbervalue
+                --      from othernumber o,
+                --           hierarchy h
+                --      where h.id = o.id
+                --        and h.primarytype = 'otherNumber'
+                --        and getdispl(o.numbertype) = 'Old NPS catalog number') onps on (coc.id = onps.parentid)
+                -- where hgc.name = 'ec7e6fd6-34f8-4e9a-9933'
+            WHERE
+               gc.title='""" + group + """'
+            limit """ + str(num2ret)
+
     else:
         getobjects = """SELECT DISTINCT ON (sortableobjectnumber)
 (case when ca.computedcrate is Null then regexp_replace(cc.computedcurrentlocation, '^.*\\)''(.*)''$', '\\1')
@@ -686,7 +768,8 @@ REGEXP_REPLACE(tig.taxon, '^.*\\)''(.*)''$', '\\1') taxon,
 ddep.datedisplaydate contentDateGroup,
 REGEXP_REPLACE(conp.item, '^.*\\)''(.*)''$', '\\1') contentPlace,
 REGEXP_REPLACE(ope.objectProductionPerson, '^.*\\)''(.*)''$', '\\1') productionperson,
-pobs.item objectstatus
+pobs.item objectstatus,
+cp.pahmatmslegacydepartment
 
 FROM groups_common gc
 

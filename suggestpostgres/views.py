@@ -31,6 +31,12 @@ form = cgi.FieldStorage()
 
 timeoutcommand = 'set statement_timeout to 500'
 
+def makeVocabTemplate(refname,term,expression):
+    return """select displayname
+            FROM vocabularyitems_common vc
+            WHERE refname ilike '%%%%%s%%%%' and displayname %s ORDER BY %s LIMIT 30;""" % (refname,expression,term)
+
+
 def makeTemplate(table,term,expression):
     return """select distinct(%s)
             FROM %s tg
@@ -77,6 +83,12 @@ def dbtransaction(q, elementID, connect_string):
         srchindex = 'person'
     elif srchindex in ['or']:
         srchindex = 'organization'
+    elif srchindex in ['cn']:
+        srchindex = 'country'
+    elif srchindex in ['st']:
+        srchindex = 'state'
+    elif srchindex in ['co']:
+        srchindex = 'county'
     else:
         srchindex = 'concept'
 
@@ -136,6 +148,12 @@ def dbtransaction(q, elementID, connect_string):
             template = makeTemplate('orgtermgroup', 'termdisplayname', "like '%s%%'")
         elif srchindex == 'taxon':
             template = makeTemplate('taxontermgroup', 'termdisplayname', "like '%s%%'")
+        elif srchindex == 'country':
+            template = makeVocabTemplate('fieldloccountry', 'displayname', "like '%s%%'")
+        elif srchindex == 'state':
+            template = makeVocabTemplate('fieldlocstate', 'displayname', "like '%s%%'")
+        elif srchindex == 'county':
+            template = makeVocabTemplate('fieldloccounty', 'displayname', "like '%s%%'")
         else:
             pass
             # error!
@@ -150,8 +168,6 @@ def dbtransaction(q, elementID, connect_string):
         result = []
         for r in cursor.fetchall():
             result.append({'value': r[0]})
-
-        result.append({'s': srchindex})
 
         return json.dumps(result)    # or "json.dump(result, sys.stdout)"
 

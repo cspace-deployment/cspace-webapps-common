@@ -1,13 +1,21 @@
-CHANGELOG for the cspace_django_webapps
+CHANGELOG for cspace-webapps-common
 
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc14
-Fri Feb  7 15:32:50 PST 2020
+This is version 5.3.0-rc15
+Wed Feb 12 10:14:28 PST 2020
 
-49b5d78 (HEAD -> master) CSW-231: few more details about UCJEPS BMU enhancements
-e72548d (tag: 5.3.0-rc13, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc13
+96a8aca (HEAD -> master) NOJIRA: improve README.md, tweak release making script
+c040b1b CSW-176: revisions to webapps 'alert' mechanism
+55895fd CSW-176: initial attempt at 'alert' mechanism for webapp user notification
+dc010a6 CSW-231: additional customizations for UCJEPS BMU for revised workflow
+b4232c4 NOJIRA: tidy up grouper layout a bit only
+8bf2f71 CSW-207: remove extraneous tracking ids from Django webapps
+22e24a8 CSW-207: repair google analytics in Django webapps
+3a5dae2 (tag: 5.3.0-rc14, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc14
+49b5d78 CSW-231: few more details about UCJEPS BMU enhancements
+e72548d (tag: 5.3.0-rc13) revise change log and VERSION file for version 5.3.0-rc13
 6d5370d CSW-225: imageserver needs to set 'X-Frame-Options' so CineFiles PDF viewer will work
 d5dad05 (tag: 5.3.0-rc12) revise change log and VERSION file for version 5.3.0-rc12
 4056d1a CSW-231: revisions to support 'skeletal object records' for UCJEPS BMU

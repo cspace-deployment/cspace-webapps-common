@@ -165,6 +165,7 @@ def formatInfoReviewRow(form, link, rr, link2):
     elif fieldSet == 'objtypecm':
         objtypes, selected = cswaConstants.getObjType(form, rr[8], rr[26])
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
+        legacydepartments, selected = cswaConstants.getLegacyDepts(form, rr[8], rr[38])
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
 <td class="objname"><input class="objname" type="text" name="onm.%s" value="%s"></td>
@@ -172,11 +173,13 @@ def formatInfoReviewRow(form, link, rr, link2):
 <td><input type="hidden" name="oox.%s" value="%s"><input type="hidden" name="csid.%s" value="%s">%s</td>
 <td>%s</td>
 <td><input class="xspan" type="text" size="26" name="cp.%s" value="%s"></td>
+<td><input class="xspan" type="text" size="26" name="ld.%s" value="%s"></td>
 </tr>""" % (link, cgi.escape(rr[3], True), rr[8], cgi.escape(rr[4], True),
             rr[8], rr[5],
             rr[8], cgi.escape(rr[3], True),
             rr[8], rr[8], objtypes, collmans,
-            rr[8], cgi.escape(rr[6], True))
+            rr[8], cgi.escape(rr[6], True),
+            rr[8], cgi.escape(rr[38], True))
     elif fieldSet == 'collection':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -239,6 +242,22 @@ def formatInfoReviewRow(form, link, rr, link2):
             rr[8], cgi.escape(rr[30], True),
             rr[8], cgi.escape(rr[33], True),
             rr[8], cgi.escape(rr[15], True))
+    # ucjeps fieldset
+    elif fieldSet == 'student':
+        return """<tr>
+    <td class="objno"><a target="cspace" href="%s">%s</a></td>
+    <input type="hidden" name="csid.%s" value="%s">
+    <td><input class="xspan" type="text" size="40" name="ta.%s" value="%s"></td>
+    <td><input class="xspan" type="text" size="40" name="cn.%s" value="%s"></td>
+    <td><input class="xspan" type="text" size="40" name="st.%s" value="%s"></td>
+    <td><input class="xspan" type="text" size="40" name="co.%s" value="%s"></td>
+    <!-- td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td -->
+    </tr>""" % (link, cgi.escape(rr[1], True), rr[0], rr[0],
+                rr[0], cgi.escape(rr[2], True),
+                rr[0], cgi.escape(rr[4], True),
+                rr[0], cgi.escape(rr[6], True),
+                rr[0], cgi.escape(rr[8], True),
+                rr[0], cgi.escape(rr[9], True))
     elif fieldSet == 'fullmonty':
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
         objstatuses, selected = cswaConstants.getObjectStatuses(form, rr[8], rr[37])

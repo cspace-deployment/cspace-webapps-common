@@ -130,6 +130,7 @@ def infoHeaders(fieldSet):
       <th>Object Type</th>
       <th>Collection Manager</th>
       <th>Field Collection Place</th>
+      <th>Legacy Department</th>
       <th></th>
     </tr>"""
     elif fieldSet == 'collection':
@@ -174,6 +175,16 @@ def infoHeaders(fieldSet):
       <th>Materials</th>
       <th>Taxon</th>
       <th style="text-align:center">Brief Description</th>
+    </tr>"""
+    elif fieldSet == 'student':
+        return """
+    <table><tr>
+      <th>Accession #</th>
+      <th>Scientific name</th>
+      <th>Country</th>
+      <th>State</th>
+      <th>County</th>
+      <!-- th style="text-align:center">Brief Description</th -->
     </tr>"""
     elif fieldSet == 'fullmonty':
         return """
@@ -334,6 +345,30 @@ def getReasons(form, institution):
     return reasons, reason
 
 
+
+def getLegacyDepts(form, csid, ld):
+    selected = form.get('legacydept')
+
+    legacydeptlist = [ \
+        ("1", "1"),
+        ("2", "2")
+    ]
+
+    legacydepts = \
+          '''<select class="cell" name="ld.''' + csid + '''">
+              <option value="None">Select a legacy department</option>'''
+
+    for legacydept in legacydeptlist:
+        if legacydept[1] == ld:
+            legacydeptOption = """<option value="%s" selected>%s</option>""" % (legacydept[1], legacydept[0])
+        else:
+            legacydeptOption = """<option value="%s">%s</option>""" % (legacydept[1], legacydept[0])
+        legacydepts = legacydepts + legacydeptOption
+
+    legacydepts += '\n      </select>'
+    return legacydepts, selected
+
+
 def selectWebapp(form, webappconfig):
 
     if form.get('webapp') == 'switchapp':
@@ -416,6 +451,10 @@ def getFieldset(form, institution):
         fields = [
             ("Collection", "collection"),
         ]
+    elif institution == 'ucjeps':
+        fields = [
+            ("Student Entry", "student"),
+        ]
     else:
         fields = [
             ("Key Info", "keyinfo"),
@@ -427,7 +466,6 @@ def getFieldset(form, institution):
             ("Places", "places"),
             ("Dates", "dates"),
             ("Material and Taxon", "mattax"),
-            ("Full Monty", "fullmonty"),
         ]
 
     fieldset = '''
@@ -638,6 +676,7 @@ def getObjType(form, csid, ot):
     objtypes += '\n      </select>'
     return objtypes, selected
 
+
 def getCollMan(form, csid, cm):
     selected = form.get('collMan')
 
@@ -663,6 +702,8 @@ def getCollMan(form, csid, cm):
 
     collmans += '\n      </select>'
     return collmans, selected
+
+
 def getAgencies(form):
     selected = form.get('agency')
 
@@ -966,7 +1007,7 @@ if __name__ == '__main__':
     result += handleResult(getPrinters(form),'getPrinters')
     result += handleResult(getFieldset(form,'pahma'),'getFieldset')
     result += handleResult(getFieldset(form,'bampfa'),'getFieldset')
-    result += handleResult(getHierarchies(form),'getHierarchies')
+    result += handleResult(getHierarchies(form, ['']),'getHierarchies')
     result += handleResult(getAgencies(form),'getAgencies')
     result += '</table>'
 
@@ -981,7 +1022,7 @@ if __name__ == '__main__':
     #    result += '<li>%s</li>' % p
 
     result += '<h2>Headers</h2>'
-    for h in 'inventory movecrate packinglist packinglistbyculture moveobject bedlist bedlistnone keyinfoResult objinfoResult inventoryResult barcodeprint(barcodeprintlocations upload'.split(' '):
+    for h in 'inventory movecrate packinglist packinglistbyculture moveobject bedlist bedlistnone keyinfoResult objinfoResult inventoryResult barcodeprint barcodeprintlocations upload'.split(' '):
         result += '<h3>Header for %s</h3>' % h
         header = getHeader(h,'')
         result += header.replace('<table', '<table border="1" ')
