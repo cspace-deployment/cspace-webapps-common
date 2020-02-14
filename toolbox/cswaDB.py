@@ -351,7 +351,8 @@ REGEXP_REPLACE(tig.taxon, '^.*\\)''(.*)''$', '\\1') taxon,
 ddep.datedisplaydate contentDateGroup,
 REGEXP_REPLACE(conp.item, '^.*\\)''(.*)''$', '\\1') contentPlace,
 REGEXP_REPLACE(ope.objectProductionPerson, '^.*\\)''(.*)''$', '\\1') productionperson,
-pobs.item objectstatus
+pobs.item objectstatus,
+cp.pahmatmslegacydepartment
 
 FROM loctermgroup l
 
@@ -634,7 +635,7 @@ def getgrouplist(group, num2ret, config):
 
     elif institution == 'ucjeps':
         getobjects =  """
-                select coc.id,
+                select hrc.name,
                        coc.objectnumber                as accessionnumber,
                        getdispl(tig.taxon)             as scientificname,
                        tig.taxon                       as taxonrefname,
@@ -968,7 +969,8 @@ REGEXP_REPLACE(tig.taxon, '^.*\\)''(.*)''$', '\\1') taxon,
 ddep.datedisplaydate contentDateGroup,
 REGEXP_REPLACE(conp.item, '^.*\\)''(.*)''$', '\\1') contentPlace,
 REGEXP_REPLACE(ope.objectProductionPerson, '^.*\\)''(.*)''$', '\\1') productionperson,
-pobs.item objectstatus
+pobs.item objectstatus,
+cp.pahmatmslegacydepartment
 
 FROM collectionobjects_pahma cp
 left outer join collectionobjects_common cc on (cp.id=cc.id)
@@ -1094,6 +1096,24 @@ def findrefnames(table, termlist, config):
             return "findrefnames error"
 
     return result
+
+
+def findvocabnames(vocab, termlist, config):
+
+    result = []
+    for t in termlist:
+        query = "select refname from vocabularyitems_common vc where refname ilike '%%%%%s%%%%' and displayname  ILIKE '%%''%s''%%'" % (vocab, t.replace("'", "''"))
+
+        try:
+            objects = setupcursor(config, query)
+            refname = objects.fetchone()
+            result.append([t, refname])
+        except:
+            raise
+            return "findrefnames error"
+
+    return result
+
 
 def finddoctypes(table, doctype, config):
 

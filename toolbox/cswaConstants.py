@@ -349,9 +349,45 @@ def getReasons(form, institution):
 def getLegacyDepts(form, csid, ld):
     selected = form.get('legacydept')
 
-    legacydeptlist = [ \
-        ("1", "1"),
-        ("2", "2")
+    legacydeptlist = [
+        ('Audio recordings', 'Audio recordings'),
+        ('Casts and molds', 'Casts and molds'),
+        ('Cat.  1: California (archaeology and ethnology)', 'Cat.  1: California (archaeology and ethnology)'),
+        ('Cat.  2 - North America (except Mexico and Central America)', 'Cat.  2 - North America (except Mexico and Central America)'),
+        ('Cat.  3 - Mexico, Central America, and Caribbean Area', 'Cat.  3 - Mexico, Central America, and Caribbean Area'),
+        ('Cat.  4 - South America (Uhle Collection)', 'Cat.  4 - South America (Uhle Collection)'),
+        ('Cat.  5 - Africa (except the Hearst Reisner Egyptian Collection)', 'Cat.  5 - Africa (except the Hearst Reisner Egyptian Collection)'),
+        ('Cat.  6 - Ancient Egypt (the Hearst Reisner Egyptian Collection)', 'Cat.  6 - Ancient Egypt (the Hearst Reisner Egyptian Collection)'),
+        ('Cat.  7 - Europe (incl. Russia west of Urals, north of Caucasus)', 'Cat.  7 - Europe (incl. Russia west of Urals, north of Caucasus)'),
+        ('Cat.  8 - Classical Mediterranean regions', 'Cat.  8 - Classical Mediterranean regions'),
+        ('Cat.  9 - Asia (incl. Russia east of Urals)', 'Cat.  9 - Asia (incl. Russia east of Urals)'),
+        ('Cat. 10 - Philippine Islands', 'Cat. 10 - Philippine Islands'),
+        ('Cat. 11 - Oceania (incl. Australia)', 'Cat. 11 - Oceania (incl. Australia)'),
+        ('Cat. 13 - Photographic prints (without negatives)', 'Cat. 13 - Photographic prints (without negatives)'),
+        ('Cat. 15 - Photographic negatives', 'Cat. 15 - Photographic negatives'),
+        ('Cat. 16 - South America (except Uhle Collection)', 'Cat. 16 - South America (except Uhle Collection)'),
+        ('Cat. 17 - Drawings and Paintings', 'Cat. 17 - Drawings and Paintings'),
+        ('Cat. 18 - Malaysia (incl. Indonesia, excl. Philippine Islands)', 'Cat. 18 - Malaysia (incl. Indonesia, excl. Philippine Islands)'),
+        ('Cat. 22 - Rubbings of Greek & Latin Inscriptions', 'Cat. 22 - Rubbings of Greek & Latin Inscriptions'),
+        ('Cat. 23 - No provenience (most of catalog deleted)', 'Cat. 23 - No provenience (most of catalog deleted)'),
+        ('Cat. 25 - Kodachrome color transparencies', 'Cat. 25 - Kodachrome color transparencies'),
+        ('Cat. 26 - Motion picture film', 'Cat. 26 - Motion picture film'),
+        ('Cat. 28 - unknown (retired catalog)', 'Cat. 28 - unknown (retired catalog)'),
+        ('Cat. B - Barr collection', 'Cat. B - Barr collection'),
+        ('Cat. Bascom', 'Cat. Bascom'),
+        ('Cat. E', 'Cat. E'),
+        ('Cat. K - Kelly collection', 'Cat. K - Kelly collection'),
+        ('Cat. L - Lillard Collection', 'Cat. L - Lillard Collection'),
+        ('Cat. NO', 'Cat. NO'),
+        ('Cat. TB', 'Cat. TB'),
+        ('Faunal Remains', 'Faunal Remains'),
+        ('Human Remains', 'Human Remains'),
+        ('Loans In', 'Loans In'),
+        ('Maps', 'Maps'),
+        ('Mixed faunal and human remains', 'Mixed faunal and human remains'),
+        ('Mounts', 'Mounts'),
+        ('NAGPRA-associated Funerary Objects', 'NAGPRA-associated Funerary Objects'),
+        ('Registration', 'Registration')
     ]
 
     legacydepts = \

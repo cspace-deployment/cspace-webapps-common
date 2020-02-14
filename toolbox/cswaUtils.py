@@ -839,6 +839,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['collection'] = form.get('ot.' + index)
             updateItems['responsibleDepartment'] = form.get('cm.' + index)
             updateItems['pahmaFieldCollectionPlace'] = refNames2find[form.get('cp.' + index)]
+            updateItems['pahmaTmsLegacyDepartment'] = form.get('ld.' + index)
         elif fieldset == 'placeanddate':
             updateItems['pahmaFieldLocVerbatim'] = form.get('vfcp.' + index)
             updateItems['pahmaFieldCollectionDate'] = form.get('dcol.' + index)

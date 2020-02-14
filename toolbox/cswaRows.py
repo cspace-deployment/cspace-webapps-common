@@ -23,6 +23,13 @@ def formatRow(result, form, config):
     except:
         link2 = ''
 
+    try:
+        csid = rr[0]
+    except:
+        csid = 'user'
+    link3 = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % csid
+
+
     if result['rowtype'] == 'subheader':
         return """<tr><td colspan="7" class="subheader">%s</td></tr>""" % result['data'][0]
     elif result['rowtype'] == 'location':
@@ -71,7 +78,7 @@ def formatRow(result, form, config):
         return """<tr><td class="rdo" ><input type="checkbox" name="r.%s" value="moved|%s|%s|%s|%s|%s" checked></td><td class="objno"><a target="cspace" href="%s">%s</a></td><td class="objname">%s</td><td class="zcell">%s</td><td class="zcell">%s</td></tr>""" % (
             rr[3], rr[8], rr[1], '', rr[3], rr[13], link, rr[3], rr[4], rr[5], rr[0])
     elif result['rowtype'] == 'keyinfo' or result['rowtype'] == 'objinfo':
-        return formatInfoReviewRow(form, link, rr, link2)
+        return formatInfoReviewRow(form, link, rr, link2, link3)
     elif result['rowtype'] == 'packinglist':
         if institution == 'bampfa':
             return """
@@ -103,7 +110,7 @@ def formatRow(result, form, config):
 </tr>""" % (link, rr[3], rr[8], rr[4], rr[8], rr[5], rr[7], rr[8], rr[6])
 
 
-def formatInfoReviewRow(form, link, rr, link2):
+def formatInfoReviewRow(form, link, rr, link2, link3):
     fieldSet = form.get("fieldset")
     if fieldSet == 'namedesc':
         return """<tr>
@@ -173,13 +180,13 @@ def formatInfoReviewRow(form, link, rr, link2):
 <td><input type="hidden" name="oox.%s" value="%s"><input type="hidden" name="csid.%s" value="%s">%s</td>
 <td>%s</td>
 <td><input class="xspan" type="text" size="26" name="cp.%s" value="%s"></td>
-<td><input class="xspan" type="text" size="26" name="ld.%s" value="%s"></td>
+<td>%s</td>
 </tr>""" % (link, cgi.escape(rr[3], True), rr[8], cgi.escape(rr[4], True),
             rr[8], rr[5],
             rr[8], cgi.escape(rr[3], True),
             rr[8], rr[8], objtypes, collmans,
             rr[8], cgi.escape(rr[6], True),
-            rr[8], cgi.escape(rr[38], True))
+            legacydepartments)
     elif fieldSet == 'collection':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -252,7 +259,7 @@ def formatInfoReviewRow(form, link, rr, link2):
     <td><input class="xspan" type="text" size="40" name="st.%s" value="%s"></td>
     <td><input class="xspan" type="text" size="40" name="co.%s" value="%s"></td>
     <!-- td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td -->
-    </tr>""" % (link, cgi.escape(rr[1], True), rr[0], rr[0],
+    </tr>""" % (link3, cgi.escape(rr[1], True), rr[0], rr[0],
                 rr[0], cgi.escape(rr[2], True),
                 rr[0], cgi.escape(rr[4], True),
                 rr[0], cgi.escape(rr[6], True),
@@ -412,6 +419,13 @@ def setRefnames(refNames2find, fieldset, form, config, index):
             refNames2find[form.get('cm.' + index)] = cswaDB.getrefname('persons_common', form.get('cm.' + index), config)
         if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
+    if fieldset in ['student', 'fullmonty']:
+        if not form.get('cn.' + index) in refNames2find:
+            refNames2find[form.get('cn.' + index)] = cswaDB.findvocabnames('fieldloccountry', form.get('cn.' + index), config)
+        if not form.get('st.' + index) in refNames2find:
+            refNames2find[form.get('st.' + index)] = cswaDB.findvocabnames('fieldlocstate', form.get('st.' + index), config)
+        if not form.get('co.' + index) in refNames2find:
+            refNames2find[form.get('co.' + index)] = cswaDB.findvocabnames('fieldloccounty', form.get('co.' + index), config)
     if fieldset in ['fullmonty', 'mattax']:
         if not form.get('pe.' + index) in refNames2find:
             refNames2find[form.get('pe.' + index)] = cswaDB.getrefname('persons_common', form.get('pe.' + index), config)

@@ -135,7 +135,7 @@ def updateXML(fieldset, updateItems, xml):
     elif fieldset == 'hsrinfo':
         fieldList = ('objectName', 'pahmaFieldCollectionPlace', 'briefDescription')
     elif fieldset == 'objtypecm':
-        fieldList = ('objectName', 'collection', 'responsibleDepartment', 'pahmaFieldCollectionPlace')
+        fieldList = ('objectName', 'collection', 'responsibleDepartment', 'pahmaFieldCollectionPlace', 'pahmaTmsLegacyDepartment')
     elif fieldset == 'collection':
         fieldList = ('objectName', 'collection')
     elif fieldset == 'placeanddate':
@@ -146,6 +146,8 @@ def updateXML(fieldset, updateItems, xml):
         fieldList = ('objectProductionDate', 'pahmaFieldCollectionDate', 'contentDate', 'briefDescription')
     elif fieldset == 'mattax':
         fieldList = ('material', 'taxon', 'briefDescription')
+    elif fieldset == 'student':
+        fieldList = ('taxon', 'fieldLocCountry', 'fieldLocState', 'fieldLocCounty')
     elif fieldset == 'fullmonty':
         fieldList = ('assocPeople', 'briefDescription', 'collection', 'contentDate', 'contentPlace', 'fieldCollector', 'material',
         'objectName', 'objectName', 'objectProductionDate', 'objectProductionPlace', 'objectProductionPerson', 'pahmaAltNum', 'pahmaEthnographicFileCode',
@@ -161,11 +163,11 @@ def updateXML(fieldset, updateItems, xml):
             continue
         listSuffix = 'List'
         extra = ''
-        if relationType in ['assocPeople', 'pahmaAltNum', 'pahmaFieldCollectionDate', 'objectProductionDate', 'objectProductionPlace', 'objectProductionPerson', 'contentDate', 'material', 'taxon']:
+        if relationType in ['assocPeople', 'pahmaAltNum', 'pahmaFieldCollectionDate', 'objectProductionDate', 'objectProductionPlace', 'objectProductionPerson', 'contentDate', 'material', 'taxon', 'fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
             extra = 'Group'
         elif relationType in ['briefDescription', 'fieldCollector', 'responsibleDepartment', 'contentPlace']:
             listSuffix = 's'
-        if relationType in ['collection', 'pahmaFieldLocVerbatim', 'contentDate']:
+        if relationType in ['collection', 'pahmaFieldLocVerbatim', 'contentDate', 'pahmaTmsLegacyDepartment']:
             listSuffix = ''
         else:
             pass
@@ -173,6 +175,8 @@ def updateXML(fieldset, updateItems, xml):
         # sys.stderr.write('tag2: %s\n' % (relationType + extra + listSuffix))
         if relationType == 'taxon':
             tmprelationType = 'taxonomicIdent'
+        elif relationType in ['fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
+            tmprelationType = 'localityGroup'
         else:
             tmprelationType = relationType
         metadata = root.findall('.//' + tmprelationType + extra + listSuffix)
@@ -185,7 +189,7 @@ def updateXML(fieldset, updateItems, xml):
             # message += 'No "' + relationType + extra + listSuffix + '" element found to update.'
             continue
         # html += ">>> ",relationType,':',updateItems[relationType]
-        if relationType in ['assocPeople', 'objectName', 'pahmaAltNum', 'material', 'taxon', 'objectProductionPerson', 'objectProductionPlace']:
+        if relationType in ['assocPeople', 'objectName', 'pahmaAltNum', 'material', 'taxon', 'objectProductionPerson', 'objectProductionPlace''fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
             # group = metadata.findall('.//'+relationType+'Group')
             # sys.stderr.write('  updateItem: ' + relationType + ':: ' + updateItems[relationType] + '\n' )
             Entries = metadata.findall('.//' + relationType)
@@ -305,14 +309,14 @@ def updateXML(fieldset, updateItems, xml):
                 './/{http://collectionspace.org/services/collectionobject/local/pahma}collectionobjects_pahma')
             collectionobjects_pahma.insert(0, inventoryCount)
         inventoryCount.text = updateItems['inventoryCount']
-    if 'pahmaFieldLocVerbatim' in updateItems and updateItems['pahmaFieldLocVerbatim'] != '':
-        pahmaFieldLocVerbatim = root.find('.//pahmaFieldLocVerbatim')
-        if pahmaFieldLocVerbatim is None:
-            pahmaFieldLocVerbatim = etree.Element('pahmaFieldLocVerbatim')
-            pahmaFieldLocVerbatimobjects_common = root.find('.//{http://collectionspace.org/services/collectionobject/local/pahma}collectionobjects_pahma')
-            pahmaFieldLocVerbatimobjects_common.insert(0, pahmaFieldLocVerbatim)
-            # message += "%s added as &lt;%s&gt;.<br/>" % (updateItems['pahmaFieldLocVerbatim'], 'pahmaFieldLocVerbatim')
-        pahmaFieldLocVerbatim.text = updateItems['pahmaFieldLocVerbatim']
+    for fld in 'pahmaTmsLegacyDepartment pahmaFieldLocVerbatim'.split(' '):
+        if fld in updateItems and updateItems[fld] != '':
+            fldtoupdate = root.find('.//' + fld)
+            if fldtoupdate is None:
+                fldtoupdate = etree.Element(fld)
+                collectionobjects_pahma = root.find('.//{http://collectionspace.org/services/collectionobject/local/pahma}collectionobjects_pahma')
+                collectionobjects_pahma.insert(0, fldtoupdate)
+            fldtoupdate.text = updateItems[fld]
 
     collection = root.find('.//collection')
     if 'collection' in updateItems:
