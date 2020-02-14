@@ -82,7 +82,7 @@ for t in $MUSEUMS
 do
   if [[ $ACTION == 'clear' ]]
   then
-      rm ${BASE_DIR}/${t}/config/alert.cfg
+      rm -f ${BASE_DIR}/${t}/config/alert.cfg
       echo "Cleared alert for ${t}."
   elif [[ $ACTION == 'show' ]]
   then
