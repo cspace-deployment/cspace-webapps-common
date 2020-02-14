@@ -1,6 +1,6 @@
 {% if ALERT != '' %}
     <div style="padding-top: 10px;">
-        <span style="color: red; font-weight: bold; font-size: larger">{{ ALERT }}</span>
-        {{ MESSAGE }}
+        <span style="color: red; font-weight: bold; font-size: larger">{{ ALERT|safe }}</span>
+        {{ MESSAGE|safe }}
     </div>
 {% endif %}

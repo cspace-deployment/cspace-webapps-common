@@ -35,6 +35,10 @@ do
       echo "./alert_ucb.sh -a -c"
       echo "./alert_ucb.sh -c ucjeps bampfa"
       echo
+      echo "to see what alerts are set"
+      echo "./alert_ucb.sh -a -s"
+      echo "./alert_ucb.sh -s ucjeps bampfa"
+      echo
       exit 0
     ;;
     '-a' )
@@ -44,7 +48,10 @@ do
       ALERT=$1 ; shift;
     ;;
     '-c' )
-      CLEAR='clear' ;
+      ACTION='clear' ;
+    ;;
+    '-s' )
+      ACTION='show' ;
     ;;
     '-m' )
       MESSAGE=$1 ; shift;
@@ -59,12 +66,12 @@ do
 done
 
 SITE_DIR=cspace_django_site
-BASE_DIR='..'
+BASE_DIR='/var/www'
 
 echo "****************************************************************************"
 echo "Alert webapp users:"
 echo "****************************************************************************"
-if [[ $CLEAR != 'clear' ]]
+if [[ $ACTION != 'clear' && $ACTION != 'show' ]]
 then
     echo "label:   ${ALERT}"
     echo "message: ${MESSAGE}"
@@ -73,14 +80,25 @@ fi
 
 for t in $MUSEUMS
 do
-  if [[ $CLEAR == 'clear' ]]
+  if [[ $ACTION == 'clear' ]]
   then
       rm ${BASE_DIR}/${t}/config/alert.cfg
       echo "Cleared alert for ${t}."
+  elif [[ $ACTION == 'show' ]]
+  then
+      echo
+      echo "Alert for ${t}:"
+      if [[ -f ${BASE_DIR}/${t}/config/alert.cfg ]]
+      then
+          cat ${BASE_DIR}/${t}/config/alert.cfg
+      else
+          echo "No alert set"
+      fi
   else
       perl -pe "s/#ALERT#/${ALERT}/; s/#MESSAGE#/${MESSAGE}/;" ${BASE_DIR}/${t}/${SITE_DIR}/alert_template.cfg > ${BASE_DIR}/${t}/config/alert.cfg
       echo "Set alert for ${t}."
   fi
 done
+echo "****************************************************************************"
 echo "Done."
 echo "****************************************************************************"
