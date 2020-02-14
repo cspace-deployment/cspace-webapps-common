@@ -3,17 +3,22 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc15
-Wed Feb 12 10:14:28 PST 2020
+This is version 5.3.0-rc16
+Thu Feb 13 17:17:52 PST 2020
 
-96a8aca (HEAD -> master) NOJIRA: improve README.md, tweak release making script
+85d2e7b (HEAD -> master) CSW-231: toolbox enhancements for UCJEPS and PAHMA
+44671a4 CSW-176: further revisions to webapps 'alert' mechanism
+e118a26 (origin/master, origin/HEAD) Merge pull request #2 from cspace-deployment/dependabot/pip/django-2.2.10
+5cf539b Bump django from 2.2.9 to 2.2.10
+2fad69d (tag: 5.3.0-rc15) revise change log and VERSION file for version 5.3.0-rc15
+96a8aca NOJIRA: improve README.md, tweak release making script
 c040b1b CSW-176: revisions to webapps 'alert' mechanism
 55895fd CSW-176: initial attempt at 'alert' mechanism for webapp user notification
 dc010a6 CSW-231: additional customizations for UCJEPS BMU for revised workflow
 b4232c4 NOJIRA: tidy up grouper layout a bit only
 8bf2f71 CSW-207: remove extraneous tracking ids from Django webapps
 22e24a8 CSW-207: repair google analytics in Django webapps
-3a5dae2 (tag: 5.3.0-rc14, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc14
+3a5dae2 (tag: 5.3.0-rc14) revise change log and VERSION file for version 5.3.0-rc14
 49b5d78 CSW-231: few more details about UCJEPS BMU enhancements
 e72548d (tag: 5.3.0-rc13) revise change log and VERSION file for version 5.3.0-rc13
 6d5370d CSW-225: imageserver needs to set 'X-Frame-Options' so CineFiles PDF viewer will work
