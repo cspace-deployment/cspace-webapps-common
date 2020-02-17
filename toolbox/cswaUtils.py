@@ -857,6 +857,12 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['material'] = refNames2find[form.get('ma.' + index)]
             updateItems['taxon'] = refNames2find[form.get('ta.' + index)]
             updateItems['briefDescription'] = form.get('bdx.' + index)
+        elif fieldset == 'student':
+            updateItems['taxon'] = refNames2find[form.get('ta.' + index)]
+            updateItems['fieldLocCountry'] = refNames2find[form.get('cn.' + index)]
+            updateItems['fieldLocState'] = refNames2find[form.get('st.' + index)]
+            updateItems['fieldLocCounty'] = refNames2find[form.get('co.' + index)]
+            updateItems['briefDescription'] = form.get('bdx.' + index)
         elif fieldset == 'fullmonty':
             if form.get('ocn.' + index) != '':
                 updateItems['objectCount'] = form.get('ocn.' + index)

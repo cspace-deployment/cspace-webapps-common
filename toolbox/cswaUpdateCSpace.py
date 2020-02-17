@@ -176,7 +176,7 @@ def updateXML(fieldset, updateItems, xml):
         if relationType == 'taxon':
             tmprelationType = 'taxonomicIdent'
         elif relationType in ['fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
-            tmprelationType = 'localityGroup'
+            tmprelationType = 'locality'
         else:
             tmprelationType = relationType
         metadata = root.findall('.//' + tmprelationType + extra + listSuffix)
@@ -189,12 +189,15 @@ def updateXML(fieldset, updateItems, xml):
             # message += 'No "' + relationType + extra + listSuffix + '" element found to update.'
             continue
         # html += ">>> ",relationType,':',updateItems[relationType]
-        if relationType in ['assocPeople', 'objectName', 'pahmaAltNum', 'material', 'taxon', 'objectProductionPerson', 'objectProductionPlace''fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
+        if relationType in ['assocPeople', 'objectName', 'pahmaAltNum', 'material', 'taxon', 'objectProductionPerson', 'objectProductionPlace', 'fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
             # group = metadata.findall('.//'+relationType+'Group')
             # sys.stderr.write('  updateItem: ' + relationType + ':: ' + updateItems[relationType] + '\n' )
             Entries = metadata.findall('.//' + relationType)
             if not alreadyExists(updateItems[relationType], Entries):
-                newElement = etree.Element(tmprelationType + 'Group')
+                try:
+                    newElement = metadata.findall('.//' + tmprelationType + 'Group')[0]
+                except:
+                    newElement = etree.Element(tmprelationType + 'Group')
                 leafElement = etree.Element(relationType)
                 leafElement.text = updateItems[relationType]
                 newElement.append(leafElement)
@@ -204,7 +207,7 @@ def updateXML(fieldset, updateItems, xml):
                     apgType.text = updateItems[relationType + 'Type'] if relationType == 'pahmaAltNum' else "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(assocpeople):item:name(assocpeopletype06)'made by'"
                     # sys.stderr.write(relationType + 'Type:' + updateItems[relationType + 'Type'])
                     newElement.append(apgType)
-                if len(Entries) == 1 and Entries[0].text is None:
+                if (len(Entries) == 1 and Entries[0].text is None) or tmprelationType == 'locality':
                     # sys.stderr.write('reusing empty element: %s\n' % Entries[0].tag)
                     # sys.stderr.write('ents : %s\n' % Entries[0].text)
                     for child in metadata:
@@ -216,7 +219,7 @@ def updateXML(fieldset, updateItems, xml):
                 else:
                     metadata.insert(0, newElement)
             else:
-                if IsAlreadyPreferred(updateItems[relationType], metadata.findall('.//' + relationType)):
+                if IsAlreadyPreferred(updateItems[relationType], Entries):
                     continue
                 else:
                     # exists, but not preferred. make it the preferred: remove it from where it is, insert it as 1st

@@ -420,6 +420,8 @@ def setRefnames(refNames2find, fieldset, form, config, index):
         if not form.get('cp.' + index) in refNames2find:
             refNames2find[form.get('cp.' + index)] = cswaDB.getrefname('places_common', form.get('cp.' + index), config)
     if fieldset in ['student', 'fullmonty']:
+        if not form.get('ta.' + index) in refNames2find:
+            refNames2find[form.get('ta.' + index)] = cswaDB.getrefname('taxon_common', form.get('ta.' + index), config)
         if not form.get('cn.' + index) in refNames2find:
             refNames2find[form.get('cn.' + index)] = cswaDB.findvocabnames('fieldloccountry', form.get('cn.' + index), config)
         if not form.get('st.' + index) in refNames2find:

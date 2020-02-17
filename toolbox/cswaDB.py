@@ -668,6 +668,7 @@ def getgrouplist(group, num2ret, config):
 
                 from groups_common gc
                          join hierarchy hgc ON (gc.id = hgc.id)
+                         join misc mc1 on (gc.id = mc1.id AND mc1.lifecyclestate <> 'deleted')
                          join relations_common rc ON (hgc.name = rc.subjectcsid)
                          join hierarchy hrc ON (rc.objectcsid = hrc.name)
                          left outer join collectionobjects_common coc ON (hrc.id = coc.id)
@@ -1098,21 +1099,21 @@ def findrefnames(table, termlist, config):
     return result
 
 
-def findvocabnames(vocab, termlist, config):
+def findvocabnames(vocab, term, config):
 
     result = []
-    for t in termlist:
-        query = "select refname from vocabularyitems_common vc where refname ilike '%%%%%s%%%%' and displayname  ILIKE '%%''%s''%%'" % (vocab, t.replace("'", "''"))
+    query = "select refname from vocabularyitems_common vc where refname ilike '%%%s%%' and displayname  = '%s'" % (vocab, term.replace("'", "''"))
 
-        try:
-            objects = setupcursor(config, query)
-            refname = objects.fetchone()
-            result.append([t, refname])
-        except:
-            raise
-            return "findrefnames error"
-
-    return result
+    try:
+        objects = setupcursor(config, query)
+        refname = objects.fetchone()
+        if refname is None:
+            return refname
+        else:
+            return refname[0]
+    except:
+        raise
+        return "findrefnames error"
 
 
 def finddoctypes(table, doctype, config):
