@@ -39,7 +39,7 @@ my ($rc, $highest_rc, $release_to_check, $version_number);
 
 foreach my $tag (sort (@tags)) {
     chomp $tag;
-    print "checking $tag for $RELEASE\n";
+    # print "checking $tag for $RELEASE\n";
     if ($tag eq $RELEASE) {
         $release_to_check = $tag;
         $rc = '';

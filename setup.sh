@@ -56,12 +56,16 @@ function deploy()
     # if this is running on a dev or prod system (evidenced by the presence of web-accessible
     # deployment directories, i.e. /var/www/*), then copy the needed files there
     # nb: the config directory is not overwritten!
-    if [[ -e /var/www/$1 ]]; then
+    YYYYMMDD=`date +%Y%m%d`
+    RUNDIR=~/${YYYYMMDD}/$1
+    mkdir -p ${RUNDIR}
+    if [[ -e ${RUNDIR} ]]; then
         # copy the built files to the runtime directory, but leave the config files as they are
-        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . /var/www/$1
-	cd /var/www/$1
+        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . ${RUNDIR}
+	cd ${RUNDIR}
     fi
 
+    cp -r ~/backup/$1/config ${RUNDIR}
     $PYTHON manage.py migrate --noinput
     $PYTHON manage.py loaddata fixtures/*.json
     # get rid of the existing static_root to force django to rebuild it from scratch

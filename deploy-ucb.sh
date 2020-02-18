@@ -50,6 +50,9 @@ git checkout master
 git pull -v
 cd ~/cspace-webapps-common/
 
+# backup the existing config files
+./backup-config.sh
+
 for t in $MUSEUMS
 do
   # make sure the repo is clean and tidy for each tenant

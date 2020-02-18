@@ -4,7 +4,7 @@ cd
 
 for t in bampfa botgarden ucjeps pahma cinefiles
 do 
-  cd ~/$t
+  cd /var/www/$t
   if [[ ! -d "~/backup/$t/config" ]]; then
     mkdir -p ~/backup/$t/config
   fi

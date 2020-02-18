@@ -3,12 +3,15 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc16
-Thu Feb 13 17:17:52 PST 2020
+This is version 5.3.0-rc17
+Tue Feb 18 10:15:40 PST 2020
 
-85d2e7b (HEAD -> master) CSW-231: toolbox enhancements for UCJEPS and PAHMA
+030dce7 (HEAD -> master) CSW-231: handle UCJEP geocoded fields correctly in toolbox
+f504e1f CSW-176: 'clear' function for webapp alerts needed tlc
+e414f1c (tag: 5.3.0-rc16, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc16
+85d2e7b CSW-231: toolbox enhancements for UCJEPS and PAHMA
 44671a4 CSW-176: further revisions to webapps 'alert' mechanism
-e118a26 (origin/master, origin/HEAD) Merge pull request #2 from cspace-deployment/dependabot/pip/django-2.2.10
+e118a26 Merge pull request #2 from cspace-deployment/dependabot/pip/django-2.2.10
 5cf539b Bump django from 2.2.9 to 2.2.10
 2fad69d (tag: 5.3.0-rc15) revise change log and VERSION file for version 5.3.0-rc15
 96a8aca NOJIRA: improve README.md, tweak release making script
