@@ -58,12 +58,13 @@ function deploy()
     # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
         YYYYMMDD=`date +%Y%m%d`
-        RUNDIR=~/$1/${YYYYMMDD}
+        RUNDIR=~/${YYYYMMDD}/$1
         if [[ -e ${RUNDIR} ]]; then
             echo "Cowardly refusal to overwrite existing runtime directory ${RUNDIR}"
-            echo "Remove/rename ${RUNDIR}, then try again."
+            echo "Remove or rename ${RUNDIR}, then try again."
             exit 1
         fi
+        echo "Making and populating runtime directory ${RUNDIR}"
         mkdir -p ${RUNDIR}
         # copy the built files to the runtime directory, but leave the config files as they are
         rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . ${RUNDIR}

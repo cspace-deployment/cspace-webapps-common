@@ -55,6 +55,7 @@ cd ~/cspace-webapps-common/
 
 for t in $MUSEUMS
 do
+  echo "Cleaning up to deploy ${t}..."
   # make sure the repo is clean and tidy for each tenant
   git clean -fd
   git reset --hard
