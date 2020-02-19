@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc18
-Tue Feb 18 18:09:48 PST 2020
+This is version 5.3.0-rc19
+Tue Feb 18 19:07:20 PST 2020
 
-9b55c3b (HEAD -> master) CSW-258: a more resilient django webapp deployment script
-0856f30 (tag: 5.3.0-rc17, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc17
+4b6a78e (HEAD -> master) CSW-258: museum name needs to be leaf node in runtime dirs
+47f9a96 (tag: 5.3.0-rc18, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc18
+9b55c3b CSW-258: a more resilient django webapp deployment script
+0856f30 (tag: 5.3.0-rc17) revise change log and VERSION file for version 5.3.0-rc17
 030dce7 CSW-231: handle UCJEP geocoded fields correctly in toolbox
 f504e1f CSW-176: 'clear' function for webapp alerts needed tlc
 e414f1c (tag: 5.3.0-rc16) revise change log and VERSION file for version 5.3.0-rc16
