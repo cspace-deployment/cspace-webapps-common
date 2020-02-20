@@ -502,6 +502,7 @@ def getFieldset(form, institution):
             ("Places", "places"),
             ("Dates", "dates"),
             ("Material and Taxon", "mattax"),
+            ("Full Monty", "fullmonty"),
         ]
 
     fieldset = '''
