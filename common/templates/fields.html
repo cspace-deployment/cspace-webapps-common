@@ -19,7 +19,9 @@
                                 <td colspan="2">
                                     <select id="{{ field.name }}" name="{{ field.name }}">
                                         <option value="">Please select</option>
-                                        <option value="Null">Null (no values)</option>
+                                        {% if field.name != 'hasimage' and field.name != 'hascoords' %}
+                                            <option value="Null">Null (no values)</option>
+                                        {% endif %}
                                         {% for value in field.dropdowns %}
                                             <option value="{{ value.0 }}"{% if value.0 == field.value %} selected{% endif %}>{{ value.0|slice:":40" }} ({{ value.1 }})
                                             </option>
