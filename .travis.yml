@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.6"
+
+# command to install dependencies
+install:
+  - pip install -r ubuntu_requirements.txt
+  - git clone https://github.com/cspace-deployment/cspace-webapps-ucb
+
+# command to run tests
+script:
+  make test
+  coverage run manage.py test
+
+after_script:
+  coveralls
