@@ -2,6 +2,7 @@
 certifi==2019.6.16
 chardet==3.0.4
 colour==0.1.5
+coverage
 dirq==1.7.1
 Django==2.2.10
 django-extensions==2.1.9

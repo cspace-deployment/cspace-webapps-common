@@ -8,6 +8,7 @@ Wand
 certifi
 chardet
 colour
+coverage
 dirq
 django-extensions
 django-filter
