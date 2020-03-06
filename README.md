@@ -1,5 +1,7 @@
 ## cspace-webapps-common
 
+[![build status](https://travis-ci.com/cspace-deployment/cspace-webapps-common.svg?branch=master)](https://travis-ci.com/cspace-deployment/cspace-webapps-common)
+
 This Django project supports easy access to various CollectionSpace services. To preview
 several deployments of this project at UC Berkeley, visit: https://webapps.cspace.berkeley.edu.
 

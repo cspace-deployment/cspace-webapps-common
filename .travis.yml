@@ -5,12 +5,13 @@ python:
 # command to install dependencies
 install:
   - pip install -r ubuntu_requirements.txt
-  - git clone https://github.com/cspace-deployment/cspace-webapps-ucb
+  - pip install coveralls
+  - git clone https://github.com/cspace-deployment/cspace-webapps-ucb ~/cspace-webapps-ucb
 
 # command to run tests
 script:
-  make test
-  coverage run manage.py test
+  - make test
+  - coverage run manage.py test
 
 after_script:
   coveralls
