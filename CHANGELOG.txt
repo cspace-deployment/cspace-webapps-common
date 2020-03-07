@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc21
-Fri Mar  6 08:33:25 PST 2020
+This is version 5.3.0-rc22
+Fri Mar  6 17:32:25 PST 2020
 
-a2a0997 (HEAD -> master) NOJIRA: modest improvements to the modest travis ci implementation
-5650009 (origin/master, origin/HEAD) CSW-258: unneeded pip requirement
+40a828b (HEAD -> master) CSW-266: format string needed more % sign for revised db query
+1b8d8c4 (tag: 5.3.0-rc21, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc21
+a2a0997 NOJIRA: modest improvements to the modest travis ci implementation
+5650009 CSW-258: unneeded pip requirement
 b51d342 CSW-258: add 'coverage' to python requirements
 70375c9 CSW-258: add travis ci to django webapps
 ad89bbf NOJIRA: constrain 'find null' option to dropdowns in portals
