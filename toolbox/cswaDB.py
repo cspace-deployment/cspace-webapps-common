@@ -182,7 +182,7 @@ regexp_replace(mc.reasonformove, '^.*\\)''(.*)''$', '\\1') actionreason,
 case when (mb.previouslocation is not null and mb.previouslocation <> '') then regexp_replace(mb.previouslocation, '^.*\\)''(.*)''$', '\\1') end as previouslocation,
 array_to_string(array
       (SELECT
-      CASE WHEN (tig3.taxon IS NOT NULL AND tig3.taxon <>'' and tig3.taxon not like '%no name%') THEN getdispl(tig3.taxon) ELSE '' END
+      CASE WHEN (tig3.taxon IS NOT NULL AND tig3.taxon <>'' and tig3.taxon not like '%%no name%%') THEN getdispl(tig3.taxon) ELSE '' END
        from collectionobjects_common co2
         inner join hierarchy h2int on co2.id = h2int.id
         left outer join hierarchy htig3 on (co2.id = htig3.parentid
@@ -449,7 +449,7 @@ date(mc.locationdate + interval '8 hours') actiondate,
 case when (mb.previouslocation is not null and mb.previouslocation <> '') then regexp_replace(mb.previouslocation, '^.*\\)''(.*)''$', '\\1') end as previouslocation,
 array_to_string(array
       (SELECT
-      CASE WHEN (tig3.taxon IS NOT NULL AND tig3.taxon <>'' and tig3.taxon not like '%no name%') THEN getdispl(tig3.taxon) ELSE '' END
+      CASE WHEN (tig3.taxon IS NOT NULL AND tig3.taxon <>'' and tig3.taxon not like '%%no name%%') THEN getdispl(tig3.taxon) ELSE '' END
        from collectionobjects_common co2
         inner join hierarchy h2int on co2.id = h2int.id
         left outer join hierarchy htig3 on (co2.id = htig3.parentid
