@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0-rc22
-Fri Mar  6 17:32:25 PST 2020
+This is version 5.3.0
+Wed Mar 11 10:19:01 PDT 2020
 
-40a828b (HEAD -> master) CSW-266: format string needed more % sign for revised db query
-1b8d8c4 (tag: 5.3.0-rc21, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc21
+1012996 (HEAD -> master, tag: 5.3.0-rc22, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc22
+40a828b CSW-266: format string needed more % sign for revised db query
+1b8d8c4 (tag: 5.3.0-rc21) revise change log and VERSION file for version 5.3.0-rc21
 a2a0997 NOJIRA: modest improvements to the modest travis ci implementation
 5650009 CSW-258: unneeded pip requirement
 b51d342 CSW-258: add 'coverage' to python requirements
