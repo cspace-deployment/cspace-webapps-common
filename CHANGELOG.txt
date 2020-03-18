@@ -3,33 +3,35 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 with some human annotation after the fact.
 
-This is version 5.3.0
-Wed Mar 11 10:19:01 PDT 2020
+This is version 6.0.0-rc1
+Wed Mar 18 10:14:57 PDT 2020
 
-1012996 (HEAD -> master, tag: 5.3.0-rc22, origin/master, origin/HEAD) revise change log and VERSION file for version 5.3.0-rc22
+40285dd (HEAD -> master, origin/master, origin/HEAD) CSW-279: now include 'group_title' as possible column in BMU job files
+ea65dd3 (tag: 5.3.0) revise change log and VERSION file for version 5.3.0
+1012996 revise change log and VERSION file for version 5.3.0-rc22
 40a828b CSW-266: format string needed more % sign for revised db query
-1b8d8c4 (tag: 5.3.0-rc21) revise change log and VERSION file for version 5.3.0-rc21
+1b8d8c4 revise change log and VERSION file for version 5.3.0-rc21
 a2a0997 NOJIRA: modest improvements to the modest travis ci implementation
 5650009 CSW-258: unneeded pip requirement
 b51d342 CSW-258: add 'coverage' to python requirements
 70375c9 CSW-258: add travis ci to django webapps
 ad89bbf NOJIRA: constrain 'find null' option to dropdowns in portals
-1ce4ef3 (tag: 5.3.0-rc20) revise change log and VERSION file for version 5.3.0-rc20
+1ce4ef3 revise change log and VERSION file for version 5.3.0-rc20
 bc2d8a5 NOJIRA: add 'find null' option to dropdowns in portals
 1b03d93 CSW-231: restore full monty to field sets, accidentally deleted
-0841b2a (tag: 5.3.0-rc19) revise change log and VERSION file for version 5.3.0-rc19
+0841b2a revise change log and VERSION file for version 5.3.0-rc19
 4b6a78e CSW-258: museum name needs to be leaf node in runtime dirs
-47f9a96 (tag: 5.3.0-rc18) revise change log and VERSION file for version 5.3.0-rc18
+47f9a96 revise change log and VERSION file for version 5.3.0-rc18
 9b55c3b CSW-258: a more resilient django webapp deployment script
-0856f30 (tag: 5.3.0-rc17) revise change log and VERSION file for version 5.3.0-rc17
+0856f30 revise change log and VERSION file for version 5.3.0-rc17
 030dce7 CSW-231: handle UCJEP geocoded fields correctly in toolbox
 f504e1f CSW-176: 'clear' function for webapp alerts needed tlc
-e414f1c (tag: 5.3.0-rc16) revise change log and VERSION file for version 5.3.0-rc16
+e414f1c revise change log and VERSION file for version 5.3.0-rc16
 85d2e7b CSW-231: toolbox enhancements for UCJEPS and PAHMA
 44671a4 CSW-176: further revisions to webapps 'alert' mechanism
 e118a26 Merge pull request #2 from cspace-deployment/dependabot/pip/django-2.2.10
 5cf539b Bump django from 2.2.9 to 2.2.10
-2fad69d (tag: 5.3.0-rc15) revise change log and VERSION file for version 5.3.0-rc15
+2fad69d revise change log and VERSION file for version 5.3.0-rc15
 96a8aca NOJIRA: improve README.md, tweak release making script
 c040b1b CSW-176: revisions to webapps 'alert' mechanism
 55895fd CSW-176: initial attempt at 'alert' mechanism for webapp user notification
@@ -37,45 +39,45 @@ dc010a6 CSW-231: additional customizations for UCJEPS BMU for revised workflow
 b4232c4 NOJIRA: tidy up grouper layout a bit only
 8bf2f71 CSW-207: remove extraneous tracking ids from Django webapps
 22e24a8 CSW-207: repair google analytics in Django webapps
-3a5dae2 (tag: 5.3.0-rc14) revise change log and VERSION file for version 5.3.0-rc14
+3a5dae2 revise change log and VERSION file for version 5.3.0-rc14
 49b5d78 CSW-231: few more details about UCJEPS BMU enhancements
-e72548d (tag: 5.3.0-rc13) revise change log and VERSION file for version 5.3.0-rc13
+e72548d revise change log and VERSION file for version 5.3.0-rc13
 6d5370d CSW-225: imageserver needs to set 'X-Frame-Options' so CineFiles PDF viewer will work
-d5dad05 (tag: 5.3.0-rc12) revise change log and VERSION file for version 5.3.0-rc12
+d5dad05 revise change log and VERSION file for version 5.3.0-rc12
 4056d1a CSW-231: revisions to support 'skeletal object records' for UCJEPS BMU
 3155394 NOJIRA: correct munged source code in toy 'service' Django webapp
 8eb0de2 NOJIRA: remove duplicate I18N settings in settings.py
-ccdcec7 (tag: 5.3.0-rc11) revise change log and VERSION file for version 5.3.0-rc11
+ccdcec7 revise change log and VERSION file for version 5.3.0-rc11
 ba16a17 CSW-231: BMU enhancements to support revised UCJEP workflow
-1c0f73c (tag: 5.3.0-rc10) revise change log and VERSION file for version 5.3.0-rc10
-5f67348 (tag: 5.3.0-rc9) revise change log and VERSION file for version 5.3.0-rc9
+1c0f73c revise change log and VERSION file for version 5.3.0-rc10
+5f67348 revise change log and VERSION file for version 5.3.0-rc9
 11d719a CSW-224: fix Solr-based term suggestions in Django portals
 ce3f0ca NOJIRA: fix enable/disable feature in setup.sh script for django webapps
-3f1708d (tag: 5.3.0-rc8) revise change log and VERSION file for version 5.3.0-rc8
+3f1708d revise change log and VERSION file for version 5.3.0-rc8
 00a94c5 CSW-177: indicate which log messages are errors
 902c290 CSW-123: setup.sh needed a fix to disable/enable functionality
-610ad46 (tag: 5.3.0-rc7) revise change log and VERSION file for version 5.3.0-rc7
+610ad46 revise change log and VERSION file for version 5.3.0-rc7
 89b2517 CSW-177: one more place to use loginfo for uploadmedia's messages
-2af90de (tag: 5.3.0-rc6) revise change log and VERSION file for version 5.3.0-rc6
+2af90de revise change log and VERSION file for version 5.3.0-rc6
 a85ecf3 CSW-177: two more places to use loginfo for uploadmedia's messages
 c323ff9 CC-332: use proper directories for django webapps cacheing
-d992732 (tag: 5.3.0-rc5) revise change log and VERSION file for version 5.3.0-rc5
+d992732 revise change log and VERSION file for version 5.3.0-rc5
 02d627c CSW-177: eliminate logging cruft from toolbox
 4640d2e CSW-177: eliminate logging cruft from toolbox
 32e0c96 CSW-177: use loginfo for logging in toolbox cswaMain
 8b453c7 CSW-185: add previous determination headers to ucbg toolbox/bedlist
 751fa82 CSW-177: correct logging done by loginfo
 6bd1c65 CSW-177: using loginfo for uploadmedia's messages
-8b248f5 (tag: 5.3.0-rc4) revise change log and VERSION file for version 5.3.0-rc4
+8b248f5 revise change log and VERSION file for version 5.3.0-rc4
 134e792 CC-913: quiet the bmu cleanup cron job
 55935cb CSW-204: freeze django at v2.2.8
-e966f6a (tag: 5.3.0-rc3) revise change log and VERSION file for version 5.3.0-rc3
+e966f6a revise change log and VERSION file for version 5.3.0-rc3
 4818721 CSW-204: update Django to 2.2.8
 6e9b2fd Merge pull request #1 from cesarvh/master
 124eab3 CC-940: Fixed to extract display name from nagprainventoryname
-f4ebbf2 (tag: 5.3.0-rc2) revise change log and VERSION file for version 5.3.0-rc2
+f4ebbf2 revise change log and VERSION file for version 5.3.0-rc2
 df1e04a CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
-549fe0c (tag: 5.3.0-rc1) revise change log and VERSION file for version 5.3.0-rc1
+549fe0c revise change log and VERSION file for version 5.3.0-rc1
 19be0e7 CSW-180: restore cacheing code to imageserver
 bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
 53f8f0f CSW-179: one fieldset in xIR tools had data dependencies
@@ -83,47 +85,47 @@ bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
 dfcca67 CSW-166: keep CSRF_COOKIE_DOMAIN parameter in django settings, for now, perhaps forever
 9e369f2 CSW-99: improve reliability and clarity of django webapps deployment scripts
 7bd50b4 NOJIRA: update Pillow fro security
-340e79b (tag: 5.2.0-rc18, tag: 5.2.0) revise change log and VERSION file for version 5.2.0-rc18
+340e79b (tag: 5.2.0) revise change log and VERSION file for version 5.2.0-rc18
 33f8fb9 NOJIRA: ireports form does not need an 'action' attribute
-24b7722 (tag: 5.2.0-rc17) revise change log and VERSION file for version 5.2.0-rc17
+24b7722 revise change log and VERSION file for version 5.2.0-rc17
 b1d187e CSW-99: more bulletproofing for webapps deploy script
-15d4afd (tag: 5.2.0-rc16) revise change log and VERSION file for version 5.2.0-rc16
+15d4afd revise change log and VERSION file for version 5.2.0-rc16
 35d59df CSW-157: improve portal search ux on 'reset': leave defaults in place
 9a92ab2 CSW-157: code reformat only
 75fb869 CSW-157: repair toolbox, broken by an earlier fix to Portals
-4b54dde (tag: 5.2.0-rc15) revise change log and VERSION file for version 5.2.0-rc15
+4b54dde revise change log and VERSION file for version 5.2.0-rc15
 2142254 CSW-156: make 'emailable URLs work again in portals
-3371f04 (tag: 5.2.0-rc14) revise change log and VERSION file for version 5.2.0-rc14
+3371f04 revise change log and VERSION file for version 5.2.0-rc14
 0fb59d9 CWS-150: recover ability to return reports with different mime types
-2fa32e9 (tag: 5.2.0-rc13) revise change log and VERSION file for version 5.2.0-rc13
+2fa32e9 revise change log and VERSION file for version 5.2.0-rc13
 511a45f CWS-150: bulletproof iReports webapp a bit
-7b17ad4 (tag: 5.2.0-rc12) revise change log and VERSION file for version 5.2.0-rc12
+7b17ad4 revise change log and VERSION file for version 5.2.0-rc12
 0fdd767 CSW-140: need to transfer barcode print file as binary
-24f9304 (tag: 5.2.0-rc11) revise change log and VERSION file for version 5.2.0-rc11
+24f9304 revise change log and VERSION file for version 5.2.0-rc11
 2f6d80d CSW-55: incremental improvements to ireports webapp
 164abb3 CSW-135: fix Bulk Object Edit: XML and python3 dict handling
-a63f64e (tag: 5.2.0-rc10) revise change log and VERSION file for version 5.2.0-rc10
+a63f64e revise change log and VERSION file for version 5.2.0-rc10
 de75655 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
 d2f166d CSW-55: ireports webapp now return the correct MIMEtype with response
 c873541 CSW-101: set logging to WARNING everywhere
-7a1d976 (tag: 5.2.0-rc9) revise change log and VERSION file for version 5.2.0-rc9
+7a1d976 revise change log and VERSION file for version 5.2.0-rc9
 5ed0713 CSW-101: refactor logging: now 8 rotating logs 8 MB each
 ec6514f CSW-101: use our spiffy new image cache for prod deployments
 a3bf6fa CSW-101: correct reference URL only
-5f84ac2 (tag: 5.2.0-rc8) revise change log and VERSION file for version 5.2.0-rc8
+5f84ac2 revise change log and VERSION file for version 5.2.0-rc8
 e6a5315 CSW-101: now use the right values for LOGIN_URL and LOGIN_REDIRECT_URL
-a34ff92 (tag: 5.2.0-rc7) revise change log and VERSION file for version 5.2.0-rc7
+a34ff92 revise change log and VERSION file for version 5.2.0-rc7
 66e0194 CSW-101: zip returns an iterator in python3
 9abea72 CSW-101: LOGIN_URL and LOGIN_REDIRECT_URL seem to have changed
 12da851 CSW-101: the bmu 'check runs' script needs to open files properly
-62e63df (tag: 5.2.0-rc6) revise change log and VERSION file for version 5.2.0-rc6
+62e63df revise change log and VERSION file for version 5.2.0-rc6
 17f55d1 CSW-101: 'suggestpostres' should write error log if connection can't be made
 2aee3da CSW-101: small amount of refactoring and bulletproofing for move webapps
-6d02579 (tag: 5.2.0-rc5) revise change log and VERSION file for version 5.2.0-rc5
+6d02579 revise change log and VERSION file for version 5.2.0-rc5
 82e0c27 CSW-101: additional refactoring of bmu uploadMedia.py script for python3
 f5c1b43 CSW-101: 'request-toolbelt' module now needed by uploadMedia.py
 9a27b98 CSW-101: refactor solr autosuggest to not use 'filter'
-4fbea97 (tag: 5.2.0-rc4) revise change log and VERSION file for version 5.2.0-rc4
+4fbea97 revise change log and VERSION file for version 5.2.0-rc4
 f9f5bb2 CSW-99: set default log level to 'WARNING'; add dir to template directories
 7ae38ee CSW-69: quote_plus encode objectnumber to ensure proper search
 ead0ce0 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
@@ -131,15 +133,15 @@ eedc7cc CSW-99: deploy-ucb.sh should verify latest code
 07f7e0c CSW-101: use the 'modern' version of loginfo' for bmu
 429f32c CSW-101: need a lambda to make a sort go in toolbox; and a bit of refactoring
 6cd41eb python3 returns a tuple for an exceptions
-1ace66c (tag: 5.2.0-rc3) revise change log and VERSION file for version 5.2.0-rc3
+1ace66c revise change log and VERSION file for version 5.2.0-rc3
 fac3b62 CSW-101: a few more places to encode payload
 2c59ca6 CSW-101: toolbox needs to encode payload, too
 91385f5 CSW-101: dict keys sort differently in python3
 3a6f116 CSW-101: 'requests' returns a different 'info' object in python3
 c53aea0 CSW-99: use the setup script that is in the repo
-86ef2df (tag: 5.2.0-rc2) revise change log and VERSION file for version 5.2.0-rc2
+86ef2df revise change log and VERSION file for version 5.2.0-rc2
 d437632 CSW-99: add the initial version of the CHANGELOG to this repo
-cc1345e (tag: 5.2.0-rc1) CSW-99: update readme for new deployment options and repo names
+cc1345e CSW-99: update readme for new deployment options and repo names
 f5df950 CSW-101: landing page needs to point to correct webapp url
 ab2cc6f CSW-99: revise webapps deploy script
 3b5850c CSW-99: update version of django to 2.2.4
