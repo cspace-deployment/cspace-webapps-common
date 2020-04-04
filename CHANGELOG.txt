@@ -1,12 +1,15 @@
 CHANGELOG for cspace-webapps-common
 
 OK, it is not a *real* change log, but a list of changes resulting from git log
-with some human annotation after the fact.
+sometimes with some human annotation after the fact.
 
-This is version 6.0.0-rc1
-Wed Mar 18 10:14:57 PDT 2020
+This is version 6.0.0-rc2
+Sat Apr  4 13:40:42 PDT 2020
 
-40285dd (HEAD -> master, origin/master, origin/HEAD) CSW-279: now include 'group_title' as possible column in BMU job files
+e165832 (HEAD -> master) CSW-285: make-release.pl script should not use -a in commits
+f95f47f (origin/master, origin/HEAD) CSW-270: moved this cinefiles pdf making script to cspace-webapp-ucb
+53c92cc (tag: 6.0.0-rc1) revise change log and VERSION file for version 6.0.0-rc1
+40285dd CSW-279: now include 'group_title' as possible column in BMU job files
 ea65dd3 (tag: 5.3.0) revise change log and VERSION file for version 5.3.0
 1012996 revise change log and VERSION file for version 5.3.0-rc22
 40a828b CSW-266: format string needed more % sign for revised db query
