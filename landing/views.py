@@ -47,6 +47,14 @@ def index(request):
     context['hostname'] = hostname
     context['device'] = devicetype(request)
     context['timestamp'] = time.strftime("%b %d %Y %H:%M:%S", time.localtime())
+
+    try:
+        alert_config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'alert')
+        context['ALERT'] = alert_config.get('alert', 'ALERT')
+        context['MESSAGE'] = alert_config.get('alert', 'MESSAGE')
+    except:
+        context['ALERT'] = ''
+
     return render(request, 'listApps.html', context)
 
 
