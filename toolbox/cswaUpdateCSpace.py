@@ -193,20 +193,45 @@ def updateXML(fieldset, updateItems, xml):
             # group = metadata.findall('.//'+relationType+'Group')
             # sys.stderr.write('  updateItem: ' + relationType + ':: ' + updateItems[relationType] + '\n' )
             Entries = metadata.findall('.//' + relationType)
+            # if this value does not already exist, we shall add it as a new first element
             if not alreadyExists(updateItems[relationType], Entries):
-                try:
-                    newElement = metadata.findall('.//' + tmprelationType + 'Group')[0]
-                except:
-                    newElement = etree.Element(tmprelationType + 'Group')
+                newElement = etree.Element(tmprelationType + 'Group')
+                # these 3 fields can only appear once per group, so reuse (replace) them if they appear
+                if relationType in ['fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
+                    try:
+                        newElement = metadata.findall('.//' + tmprelationType + 'Group')[0]
+                    except:
+                        pass
                 leafElement = etree.Element(relationType)
                 leafElement.text = updateItems[relationType]
                 newElement.append(leafElement)
+                if relationType == 'objectName':
+                    for m in 'objectNameType objectNameSystem objectNameCurrency objectNameNote objectNameNote objectNameLevel objectNameLanguage'.split(' '):
+                        leafElement = etree.Element(m)
+                        newElement.append(leafElement)
+                if relationType == 'material':
+                    for m in 'materialName materialComponent materialComponentNote materialSource'.split(' '):
+                        leafElement = etree.Element(m)
+                        newElement.append(leafElement)
+                if relationType == 'taxon':
+                    for m in 'refPage notes taxonomicIdentHybridParentGroupList affinityTaxon reference institution identBy identDateGroup identKind taxonomicIdentHybridName qualifier hybridFlag'.split(' '):
+                        leafElement = etree.Element(m)
+                        if m == 'identDateGroup':
+                            date_element = etree.Element('dateDisplayDate')
+                            leafElement.append(date_element)
+                        newElement.append(leafElement)
+                for r in 'objectProductionPerson objectProductionPlace'.split(' '):
+                    if r == relationType:
+                        leafElement = etree.Element(r + 'Role')
+                        newElement.append(leafElement)
                 if relationType in ['assocPeople', 'pahmaAltNum']:
                     apgType = etree.Element(relationType + 'Type')
                     # this needs to be a refname for PAHMA's assocpeopletype...
                     apgType.text = updateItems[relationType + 'Type'] if relationType == 'pahmaAltNum' else "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(assocpeople):item:name(assocpeopletype06)'made by'"
                     # sys.stderr.write(relationType + 'Type:' + updateItems[relationType + 'Type'])
                     newElement.append(apgType)
+                    leafElement = etree.Element(relationType + 'Note')
+                    newElement.append(leafElement)
                 if (len(Entries) == 1 and Entries[0].text is None) or tmprelationType == 'locality':
                     # sys.stderr.write('reusing empty element: %s\n' % Entries[0].tag)
                     # sys.stderr.write('ents : %s\n' % Entries[0].text)
@@ -231,11 +256,6 @@ def updateXML(fieldset, updateItems, xml):
                                 metadata.remove(child)
                     metadata.insert(0, savechild)
                 pass
-            # for AltNums, we need to update the AltNumType even if the AltNum hasn't changed
-            if relationType == 'pahmaAltNum':
-                apgType = metadata.find('.//' + relationType + 'Type')
-                apgType.text = updateItems[relationType + 'Type']
-                # sys.stderr.write('  updated: pahmaAltNumType to' + updateItems[relationType + 'Type'] + '\n' )
         elif relationType in ['briefDescription', 'fieldCollector', 'responsibleDepartment', 'contentPlace']:
             Entries = metadata.findall('.//' + relationType)
             # for e in Entries:
