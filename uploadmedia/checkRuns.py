@@ -68,7 +68,7 @@ def checkJobs(jobs, joberrors, report_type):
     print('\n'.join(output_lines))
 
     print("\ntotal number of jobs found: %s " % len(jobs.keys()))
-    print("\ngrand totals:\n\n",)
+    print("\ngrand totals:\n\n")
     for step in columnheaders:
         if totals[step] != 0:
             print('%s %s ' % (step, totals[step]))
