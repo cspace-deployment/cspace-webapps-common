@@ -25,10 +25,17 @@ ALLOWED_HOSTS = ['*']
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'logfile': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'timestamp',
             'filename': os.path.join('/', 'var', 'log', 'django', PROJECT_NAME, f'{PROJECT_NAME}.webapps.log'),
             'maxBytes': 16 * 1024 * 1024,
             'backupCount': 8,

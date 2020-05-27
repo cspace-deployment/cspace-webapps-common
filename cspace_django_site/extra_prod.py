@@ -37,13 +37,12 @@ CACHES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    # 'formatters': {
-    # },
-    # 'filters': {
-    #     'require_debug_false': {
-    #         '()': 'django.utils.log.RequireDebugFalse'
-    #     }
-    # },
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         # 'mail_admins': {
         #     'level': 'ERROR',
@@ -53,6 +52,7 @@ LOGGING = {
         'logfile': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
+            'formatter': 'timestamp',
             'filename': os.path.join('/', 'var', 'log', 'django', PROJECT_NAME, f'{PROJECT_NAME}.webapps.log'),
             'maxBytes': 16 * 1024 * 1024,
             'backupCount': 8,

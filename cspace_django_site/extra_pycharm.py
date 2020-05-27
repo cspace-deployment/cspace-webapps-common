@@ -17,10 +17,17 @@ ALLOWED_HOSTS = ['*']
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} {levelname} {name} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
+            'formatter': 'timestamp',
             'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
         },
     },
