@@ -97,8 +97,8 @@ my $tag_message = "Release tag $version_number.";
 $tag_message .= ' ' . $MSG if $MSG;
 
 print "verifying code is current and using master branch...\n";
-system "git pull -v";
 system "git checkout master";
+system "git pull -v";
 print "updating CHANGELOG.txt...\n";
 system "echo 'CHANGELOG for $DIRECTORY' > CHANGELOG.txt";
 system "echo  >> CHANGELOG.txt";
