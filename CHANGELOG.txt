@@ -3,11 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.3.1
-Tue May  5 08:45:43 PDT 2020
+This is version 5.4.0-rc1
+Wed Jul  8 12:46:55 PDT 2020
 
-35eb264 (HEAD -> master) CSW-311: xIR django webapps no longer double adds to repeatable fields
-5fa7da6 (origin/master, origin/HEAD) CSW-176: webapps landing pages should show alerts, too
+47f87e7 (HEAD -> master) NOJIRA: for making versions: checkout master, then make release tag
+a8fc58d (origin/master, origin/HEAD) HMP-152: update django for webapps per security advisory
+1024daa NOJIRA: minor formatting infelicity in bmu email report
+0b6a724 CSW-321: django logs again include timestamps
+81357ca (tag: 5.3.1) revise change log and VERSION file for version 5.3.1
+35eb264 CSW-311: xIR django webapps no longer double adds to repeatable fields
+5fa7da6 CSW-176: webapps landing pages should show alerts, too
 82cc09c (tag: 6.0.0-rc2) revise change log and VERSION file for version 6.0.0-rc2
 e165832 CSW-285: make-release.pl script should not use -a in commits
 f95f47f CSW-270: moved this cinefiles pdf making script to cspace-webapp-ucb
