@@ -56,6 +56,7 @@ LOGGING = {
             'filename': os.path.join('/', 'var', 'log', 'django', PROJECT_NAME, f'{PROJECT_NAME}.webapps.log'),
             'maxBytes': 16 * 1024 * 1024,
             'backupCount': 8,
+            'encoding': 'utf8',
             # 'formatter': 'standard',
         },
     },

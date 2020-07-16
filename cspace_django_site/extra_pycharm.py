@@ -29,6 +29,7 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'formatter': 'timestamp',
             'filename': os.path.join(BASE_DIR, 'logs', 'logging.txt'),
+            'encoding': 'utf8',
         },
     },
     'loggers': {
