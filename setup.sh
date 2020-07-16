@@ -73,6 +73,7 @@ function deploy()
         # nb: presumes that these are the right ones! any changes to configuration needed
         # for this release will need to be applied (by hand, presumably) in advance
         # of relinking.
+        # TODO: need to ineluctably save the current config so that the following will work.
         cp -r ~/backup/$1/config ${RUNDIR}
 
         cd ${RUNDIR}
@@ -80,7 +81,7 @@ function deploy()
 
     echo "*************************************************************************************************"
     echo "The configured CSpace system is:"
-    grep 'hostname' config/main.cfg
+    grep 'hostname' ${RUNDIR}/config/main.cfg
     echo "*************************************************************************************************"
 
     # now we can go ahead and complete the configuration
@@ -194,15 +195,15 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
         exit
     fi
 
-    # for now, until versions in both django_example_config and cspace_django_project are sync'd
-    # we don't check the version for the 'example' repo...
+    # for now, until versions in both cspace-webapps-ucb and cspace-webapps-common are sync'd
+    # we don't check the version for the 'custom webapps' repo (cspace-webapps-ucb) ...
     # cd ${CONFIGDIR}
     # check_version
 
     rm -f config/*
     rm -f fixtures/*
 
-    # use 'default' configuration for this tenant from github, initially.
+    # use 'default' configuration for this tenant from github, only initially for configuration
     cp ${CONFIGDIR}/${TENANT}/config/* config
     cp ${CONFIGDIR}/${TENANT}/fixtures/* fixtures
     # note that in some cases, this cp will overwrite customized files in the underlying contributed apps
