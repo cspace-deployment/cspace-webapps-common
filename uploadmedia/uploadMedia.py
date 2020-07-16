@@ -157,7 +157,7 @@ def uploadmedia(mediaElements, config, http_parms):
         # i.e. the last image in a set of images for the same object becomes the primary
         if http_parms.institution == 'pahma':
             primary_payload = """<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-            <ns2:invocationContext xmlns:ns2="http://collectionspace.org/services/common/invocable"
+            <ns2:invocationContext xmlns:ns2="http://collectionspace.org/services/common/invocable">
             <mode>single</mode>
             <docType>""" + mediaCSID + """</docType>
             <singleCSID></singleCSID>
