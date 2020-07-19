@@ -135,7 +135,7 @@ def uploadblob(mediaElements, config, http_parms):
 
     blobURL = response.headers['location']
     blobCSID = blobURL.split('/')[-1:][0]
-    print('blobcsid %s elapsedtime %s ' % (blobCSID, time.time() - elapsedtime))
+    print('blobcsid %s elapsedtime %8.2f s.' % (blobCSID, time.time() - elapsedtime))
     mediaElements['blobCSID'] = blobCSID
     return mediaElements
 
@@ -151,33 +151,16 @@ def uploadmedia(mediaElements, config, http_parms):
         #messages.append("posting to media REST API...")
         payload = makePayload(media_payload, mediaElements, http_parms.institution)
         (url, data, mediaCSID, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
-        messages.append('mediacsid %s elapsedtime %s ' % (mediaCSID, elapsedtime))
+        messages.append('mediacsid %s elapsedtime %8.2f s.' % (mediaCSID, elapsedtime))
         mediaElements['mediaCSID'] = mediaCSID
-        # for PAHMA, each uploaded image becomes the primary, in turn
-        # i.e. the last image in a set of images for the same object becomes the primary
-        if http_parms.institution == 'pahma':
-            primary_payload = """<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-            <ns2:invocationContext xmlns:ns2="http://collectionspace.org/services/common/invocable">
-            <mode>single</mode>
-            <docType>""" + mediaCSID + """</docType>
-            <singleCSID></singleCSID>
-            </ns2:invocationContext>
-            """
 
-            try:
-                # don't try to do this step for now, until we get it straightened out...
-                pass
-                # postxml('POST', 'batch/563d0999-d29e-4888-b58d', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, primary_payload)
-            except:
-                print("batch job to set primary image failed.")
         # create a 'skeletal' accession (object) record if requested
-        elif mediaElements['handling'] == 'media+create+accession':
+        if mediaElements['handling'] == 'media+create+accession':
             payload = makePayload(object_payload, mediaElements, http_parms.institution)
             try:
                 (url, data, xobjectCSID, elapsedtime) = postxml('POST', 'collectionobjects', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
             except:
-                print("Failed to create skeletal object record for.")
-
+                messages.append("Failed to create skeletal object record for %s." % mediaElements['objectnumber'])
         else:
             pass
 
@@ -190,14 +173,12 @@ def uploadmedia(mediaElements, config, http_parms):
                 objectCSID = xobjectCSID
             else:
                 objectCSID = getCSID('objectnumber', mediaElements['objectnumber'], config)
-                objectCSID = objectCSID[0]
             if objectCSID == [] or objectCSID is None:
-                print("could not get (i.e. find) objectnumber's csid: %s." % mediaElements['objectnumber'])
+                messages.append("could not get (i.e. find) objectnumber's csid: %s." % mediaElements['objectnumber'])
                 mediaElements['objectCSID'] = 'not found'
                 # raise Exception("<span style='color:red'>Object Number not found: %s!</span>" % mediaElements['objectnumber'])
             else:
                 mediaElements['objectCSID'] = objectCSID
-
                 uri = 'relations'
 
                 #messages.append("posting media2obj to relations REST API...")
@@ -209,9 +190,9 @@ def uploadmedia(mediaElements, config, http_parms):
                 mediaElements['subjectDocumentType'] = 'Media'
 
                 payload = relationsPayload(mediaElements)
-                (url, data, csid, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
+                (url, data, csid, elapsedtime1) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
                 # elapsedtimetotal += elapsedtime
-                messages.append('relation media2obj csid %s elapsedtime %s ' % (csid, elapsedtime))
+                #messages.append('relation media2obj csid %s elapsedtime %s ' % (csid, elapsedtime))
                 mediaElements['media2objCSID'] = csid
                 #messages.append("relations REST API post succeeded...")
 
@@ -223,10 +204,10 @@ def uploadmedia(mediaElements, config, http_parms):
                 mediaElements['objectDocumentType'] = 'Media'
                 mediaElements['subjectDocumentType'] = 'CollectionObject'
                 payload = relationsPayload(mediaElements)
-                (url, data, csid, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
-                messages.append('relation obj2media csid %s elapsedtime %s ' % (csid, elapsedtime))
+                (url, data, csid, elapsedtime2) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
+                #messages.append('relation obj2media csid %s elapsedtime %s ' % (csid, elapsedtime))
                 mediaElements['obj2mediaCSID'] = csid
-                #messages.append("relations REST API post succeeded...")
+                messages.append("REST API post for two relations succeeded, elapsedtime %8.2f s." % (elapsedtime1 + elapsedtime2))
                 for m in messages:
                     print("   %s" % m)
     return mediaElements
@@ -299,7 +280,7 @@ if __name__ == "__main__":
 
     except:
         print("could not get at least one of alwayscreatemedia, realm, hostname, port, protocol, username, password or institution from config file.")
-        # print("can't continue, exiting...")
+        print("can't continue, exiting...")
         sys.exit(1)
 
     records, columns = getRecords(sys.argv[1])
@@ -317,6 +298,7 @@ if __name__ == "__main__":
     del records[0]
     outputfh.writerow(columns + ['mediaCSID', 'objectCSID', 'blobCSID'])
 
+    # this list contains ONLY the csids of objects that had media related, if any
     objectCSIDs = []
     group_title = ''
     for i, r in enumerate(records):
@@ -331,7 +313,12 @@ if __name__ == "__main__":
             mediaElements[v2] = r[v1]
             # snag group_title, if provided
             if v2 == 'group_title':
-                group_title = r[v1]
+                if r[v1] == '=job':
+                    group_title = sys.argv[1].split('.')[0]
+                    group_title = group_title.split('/')[-1]
+                    group_title = f'bmu-{group_title}'
+                else:
+                    group_title = r[v1]
         mediaElements['approvedforweb'] = 'true' if mediaElements['approvedforweb'] == 'on' else 'false'
         print('MEDIA: uploading media for filename %s, objectnumber: %s' % (mediaElements['name'], mediaElements['objectnumber']))
         try:
@@ -342,12 +329,32 @@ if __name__ == "__main__":
                 (time.time() - elapsedtimetotal)))
             r.append(mediaElements['mediaCSID'])
             r.append(mediaElements['objectCSID'])
-            objectCSIDs.append(mediaElements['objectCSID'])
+
+            if not ('N/A' in mediaElements['objectCSID'] or 'not found' in mediaElements['objectCSID']):
+                objectCSIDs.append(mediaElements['objectCSID'])
             r.append(mediaElements['blobCSID'])
+
+            # for PAHMA, each uploaded image becomes the primary, in turn
+            # i.e. the last image in a set of images for the same object becomes the primary
+            if http_parms.institution == 'pahma':
+                primary_payload = """<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+                <ns2:invocationContext xmlns:ns2="http://collectionspace.org/services/common/invocable">
+                <mode>single</mode>
+                <docType>""" + mediaElements['mediaCSID'] + """</docType>
+                <singleCSID></singleCSID>
+                </ns2:invocationContext>
+                """
+                try:
+                    # don't try to do this step for now, until we get it straightened out...
+                    pass
+                    # postxml('POST', 'batch/563d0999-d29e-4888-b58d', http_parms.realm, http_parms.server, http_parms.username, http_parms.password, primary_payload)
+                except:
+                    print("batch job to set primary image failed.")
+
             outputfh.writerow(r)
         except:
             print("%s" % traceback.format_exc())
-            print("MEDIA: create failed for blob or media. objectnumber %s, %8.2f" % (
+            print("MEDIA: create failed for blob or media. objectnumber %s, %8.2f s." % (
                 mediaElements['objectnumber'], (time.time() - elapsedtimetotal)))
             # delete the blob if we did not manage to make a media record for it...
             try:
@@ -363,6 +370,10 @@ if __name__ == "__main__":
     # make a group, if asked
     if group_title != '':
 
-        groupCSID = create_group(group_title, http_parms)
-        add2group(groupCSID, objectCSIDs, http_parms)
+        if len(objectCSIDs) > 0:
+            groupCSID = create_group(group_title, http_parms)
+            add2group(groupCSID, objectCSIDs, http_parms)
+            print(f'GROUP: created group {group_title} (csid: {groupCSID}) with {len(objectCSIDs)} objects')
+        else:
+            print(f'GROUP: no group created {group_title}, there were no objects to group.')
 

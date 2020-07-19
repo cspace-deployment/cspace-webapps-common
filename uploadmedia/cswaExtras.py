@@ -30,7 +30,11 @@ JOIN misc on (pc.id = misc.id and misc.lifecyclestate <> 'deleted')
 WHERE pc.refname ILIKE '%""" + arg + "%%'"
 
     objects.execute(query)
-    return objects.fetchone()
+    CSID = objects.fetchone()
+    if CSID is not None:
+        return CSID[0]
+    else:
+        return None
 
 
 MAXLOCATIONS = 1000
