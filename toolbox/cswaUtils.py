@@ -1691,13 +1691,15 @@ def formatInfoReviewForm(form):
     elif fieldSet == 'objtypecm':
         objtypes, selected = cswaConstants.getObjType(form, 'user', '')
         collmans, selected = cswaConstants.getCollMan(form, 'user', '')
+        legacydepartments, selected = cswaConstants.getLegacyDepts(form, 'user', '')
 
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text" size="60" name="onm.user"></td>
 </tr><tr><th>Count</th><td class="veryshortinput"><input class="veryshortinput" type="text" name="ocn.user"></td>
 </tr><tr><th>Object Type</th><td class="zcell">%s</td>
 </tr><tr><th>Collection Manager</th><td class="zcell">%s</td>
 </tr><tr><th>Field Collection Place</th><td><input class="xspan" type="text" size="60" name="cp.user"></td>
-</tr>""" % (objtypes, collmans)
+</tr><tr><th>Legacy Department</th><td class="zcell">%s</td>
+</tr>""" % (objtypes, collmans, legacydepartments)
     elif fieldSet == 'collection':
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text" size="60" name="onm.user"></td>
 </tr><tr><th>Collection</th><td><input class="xspan" type="text" size="60" name="cn.user"></td>
