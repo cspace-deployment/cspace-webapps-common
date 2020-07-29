@@ -53,7 +53,7 @@ function buildjs()
 function deploy()
 {
     buildjs $1
-    # if this is running on an RTL server, the runtime directory is ~/M/YYYYMMDD
+    # if this is running on an RTL server, the runtime directory will be ~/YYYYMMDD/M
     # (where M is the museum and YYYYMMDD is today's date)
     # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -66,15 +66,14 @@ function deploy()
         fi
         echo "Making and populating runtime directory ${RUNDIR}"
         mkdir -p ${RUNDIR}
-        # copy the built files to the runtime directory, but leave the config files as they are
+        # copy the "built" files to the runtime directory, but leave the config files as they are
         rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . ${RUNDIR}
 
-        # copy the most recent backup of the config files into this new runtime directory
-        # nb: presumes that these are the right ones! any changes to configuration needed
-        # for this release will need to be applied (by hand, presumably) in advance
-        # of relinking.
-        # TODO: need to ineluctably save the current config so that the following will work.
-        cp -r ~/backup/$1/config ${RUNDIR}
+        # copy the most existing (old) config files into this new runtime directory
+        # nb: any changes to configuration needed
+        # for this release will need to be applied (by hand, presumably) after the fact of
+        # of relinking this directory with the runtime directory in /var/www/
+        cp -r /var/www/$1/config ${RUNDIR}
 
         cd ${RUNDIR}
     fi
