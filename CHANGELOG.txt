@@ -3,12 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.4.0-rc3
-Wed Jul 22 09:09:59 PDT 2020
+This is version 5.4.0
+Wed Jul 29 10:57:05 PDT 2020
 
-5b6f309 (HEAD -> master) CSW-347: add 'legacy dept' to fieldset in Toolbox tool 'bult object edit'
+ce8d56d (HEAD -> master, tag: 5.4.0-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 5.4.0-rc3
+5b6f309 CSW-347: add 'legacy dept' to fieldset in Toolbox tool 'bult object edit'
 cdda70a CSW-344: refactor 'group making' feature of bmu
-7a5fd16 (tag: 5.4.0-rc2, origin/master, origin/HEAD) revise change log and VERSION file for version 5.4.0-rc2
+7a5fd16 (tag: 5.4.0-rc2) revise change log and VERSION file for version 5.4.0-rc2
 edf7b9d NOJIRA: improve inline comments and messages for django webapps setup script
 c9006a2 NOJIRA: correct undetected bug in xml for unused pahma batch job in uploadmedia.py
 196b967 CSW-340: django logs should handle unicode characters
