@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.4.0
-Wed Jul 29 10:57:05 PDT 2020
+This is version 5.4.0-rc4
+Wed Jul 29 17:36:12 PDT 2020
 
-ce8d56d (HEAD -> master, tag: 5.4.0-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 5.4.0-rc3
+6cfbf0e (HEAD -> master) CSW-348: correct items #3 and #4 in this issue concerning 'PAHMA alt num' field
+a297b5d CSW-349: handle webapp configuration files more gracefully; correct inline doc
+e6a2e29 (origin/master, origin/HEAD) revise change log and VERSION file for version 5.4.0
+ce8d56d (tag: 5.4.0-rc3) revise change log and VERSION file for version 5.4.0-rc3
 5b6f309 CSW-347: add 'legacy dept' to fieldset in Toolbox tool 'bult object edit'
 cdda70a CSW-344: refactor 'group making' feature of bmu
 7a5fd16 (tag: 5.4.0-rc2) revise change log and VERSION file for version 5.4.0-rc2
