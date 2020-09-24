@@ -1024,6 +1024,7 @@ if __name__ == '__main__':
     result += handleResult(getFieldset(form,'bampfa'),'getFieldset')
     result += handleResult(getHierarchies(form, ['']),'getHierarchies')
     result += handleResult(getAgencies(form),'getAgencies')
+    result += handleResult(getObjectStatuses(form, 'csid', 'stolen'), 'getObjectStatuses')
     result += '</table>'
 
     # these two return python objects
