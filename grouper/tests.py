@@ -22,7 +22,7 @@ class SimpleTest(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
-            username='jblowe@berkeley.edu', email='xxx', password='pumpkins99')
+            username='xxx@berkeley.edu', email='xxx', password='xxxxx')
 
     def test_grouper(self):
         # Create an instance of a GET request.

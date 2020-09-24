@@ -620,6 +620,7 @@ def getObjectStatuses(form, csid, ant):
         ("irregular Museum number", "irregular Museum number"),
         ("missing", "missing"),
         ("missing in inventory", "missing in inventory"),
+        ("not accessioned", "not accessioned"),
         ("not cataloged", "not cataloged"),
         ("not located", "not located"),
         ("not received", "not received"),
@@ -636,7 +637,8 @@ def getObjectStatuses(form, csid, ant):
         ("returned loan object", "returned loan object"),
         ("sold", "sold"),
         ("stolen", "stolen"),
-        ("transferred", "transferred")
+        ("transferred", "transferred"),
+        ("on deposit", "on deposit")
     ]
 
     objectstatuses = '''<select class="cell" name="obs.''' + csid + '''">
