@@ -3,12 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.5.0-rc1
-Thu Sep 24 14:55:10 PDT 2020
+This is version 5.5.0-rc2
+Fri Oct  2 13:54:08 PDT 2020
 
-abc8549 (HEAD -> master) CSW-363: add a test for then pahma object status dropdown
+676a37f (HEAD -> master, origin/master, origin/HEAD) CSW-363: put 'on deposit' in the correct spot in toolbox dropdown
+bb1d1fc (tag: 5.5.0-rc1) revise change log and VERSION file for version 5.5.0-rc1
+abc8549 CSW-363: add a test for then pahma object status dropdown
 30318f0 CSW-363: add 'on deposit' and 'not accessioned' to object status in XIR webapps
-fa0646a (tag: 5.4.0, origin/master, origin/HEAD) revise change log and VERSION file for version 5.4.0
+fa0646a (tag: 5.4.0) revise change log and VERSION file for version 5.4.0
 8b3b07f (tag: 5.4.0-rc4) revise change log and VERSION file for version 5.4.0-rc4
 6cfbf0e CSW-348: correct items #3 and #4 in this issue concerning 'PAHMA alt num' field
 a297b5d CSW-349: handle webapp configuration files more gracefully; correct inline doc
