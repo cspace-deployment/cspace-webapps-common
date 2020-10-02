@@ -626,6 +626,7 @@ def getObjectStatuses(form, csid, ant):
         ("not received", "not received"),
         ("number not used", "number not used"),
         ("object mount", "object mount"),
+        ("on deposit", "on deposit"),
         ("on loan (=borrowed)", "on loan (=borrowed)"),
         ("partially deaccessioned", "partially deaccessioned"),
         ("partially exchanged", "partially exchanged"),
@@ -637,8 +638,7 @@ def getObjectStatuses(form, csid, ant):
         ("returned loan object", "returned loan object"),
         ("sold", "sold"),
         ("stolen", "stolen"),
-        ("transferred", "transferred"),
-        ("on deposit", "on deposit")
+        ("transferred", "transferred")
     ]
 
     objectstatuses = '''<select class="cell" name="obs.''' + csid + '''">
