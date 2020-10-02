@@ -184,7 +184,7 @@ def infoHeaders(fieldSet):
       <th>Country</th>
       <th>State</th>
       <th>County</th>
-      <!-- th>Other Number</th -->
+      <th>Project Code</th>
       <!-- th style="text-align:center">Brief Description</th -->
     </tr>"""
     elif fieldSet == 'fullmonty':
@@ -620,13 +620,11 @@ def getObjectStatuses(form, csid, ant):
         ("irregular Museum number", "irregular Museum number"),
         ("missing", "missing"),
         ("missing in inventory", "missing in inventory"),
-        ("not accessioned", "not accessioned"),
         ("not cataloged", "not cataloged"),
         ("not located", "not located"),
         ("not received", "not received"),
         ("number not used", "number not used"),
         ("object mount", "object mount"),
-        ("on deposit", "on deposit"),
         ("on loan (=borrowed)", "on loan (=borrowed)"),
         ("partially deaccessioned", "partially deaccessioned"),
         ("partially exchanged", "partially exchanged"),
@@ -1024,7 +1022,6 @@ if __name__ == '__main__':
     result += handleResult(getFieldset(form,'bampfa'),'getFieldset')
     result += handleResult(getHierarchies(form, ['']),'getHierarchies')
     result += handleResult(getAgencies(form),'getAgencies')
-    result += handleResult(getObjectStatuses(form, 'csid', 'stolen'), 'getObjectStatuses')
     result += '</table>'
 
     # these two return python objects

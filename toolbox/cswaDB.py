@@ -664,7 +664,8 @@ def getgrouplist(group, num2ret, config):
                        -- getdispl(nps.numbervalue)       as nps_numbervalue,
                        -- getdispl(onps.numbervalue)      as onps_numbervalue,
                        ttg.termformatteddisplayname    as scinamefmtted,
-                       concat_assoctaxa(coc.id)        as associatedtaxa
+                       concat_assoctaxa(coc.id)        as associatedtaxa,
+                       pc.numbervalue                  as projectcode
 
                 from groups_common gc
                          join hierarchy hgc ON (gc.id = hgc.id)
@@ -673,30 +674,26 @@ def getgrouplist(group, num2ret, config):
                          join hierarchy hrc ON (rc.objectcsid = hrc.name)
                          left outer join collectionobjects_common coc ON (hrc.id = coc.id)
                          left outer join collectionobjects_naturalhistory conh on (coc.id = conh.id)
-                         left outer join hierarchy htig on (coc.id = htig.parentid
-                    and htig.primarytype = 'taxonomicIdentGroup' and htig.pos = 0)
+                         left outer join hierarchy htig on (coc.id = htig.parentid and htig.primarytype = 'taxonomicIdentGroup' and htig.pos = 0)
                          left outer join taxonomicIdentGroup tig on (htig.id = tig.id)
                          left outer join taxon_common tc on (tig.taxon = tc.refname)
-                         left outer join hierarchy httg on (
-                        tc.id = httg.parentid
-                        and httg.name = 'taxon_common:taxonTermGroupList' and httg.pos = 0)
+                         left outer join hierarchy httg on (tc.id = httg.parentid and httg.name = 'taxon_common:taxonTermGroupList' and httg.pos = 0)
                          left outer join taxontermgroup ttg on (ttg.id = httg.id)
-                         left outer join hierarchy hrg on (coc.id = hrg.parentid
-                    and hrg.primarytype = 'referenceGroup' and hrg.pos = 0)
+                         left outer join hierarchy hrg on (coc.id = hrg.parentid and hrg.primarytype = 'referenceGroup' and hrg.pos = 0)
                          left outer join referenceGroup rg on (hrg.id = rg.id)
-                         left outer join hierarchy hlng on (coc.id = hlng.parentid
-                    and hlng.primarytype = 'localNameGroup'
-                    and hlng.pos = 0)
+                         left outer join hierarchy hlng on (coc.id = hlng.parentid and hlng.primarytype = 'localNameGroup' and hlng.pos = 0)
                          left outer join localNameGroup lng on (hlng.id = lng.id)
-                         left outer join hierarchy hlg on (coc.id = hlg.parentid
-                    and hlg.primarytype = 'localityGroup'
-                    and hlg.pos = 0)
+                         left outer join hierarchy hlg on (coc.id = hlg.parentid and hlg.primarytype = 'localityGroup' and hlg.pos = 0)
                          left outer join localityGroup lg on (hlg.id = lg.id)
-                         left outer join hierarchy hsdg on (coc.id = hsdg.parentid
-                    and hsdg.name = 'collectionobjects_common:fieldCollectionDateGroup')
+                         left outer join hierarchy hsdg on (coc.id = hsdg.parentid and hsdg.name = 'collectionobjects_common:fieldCollectionDateGroup')
                          left outer join structuredDateGroup sdg on (hsdg.id = sdg.id)
-                         left outer join collectionobjects_common_briefdescriptions cocbd on (coc.id = cocbd.id
-                    and cocbd.pos = 0)
+                         left outer join collectionobjects_common_briefdescriptions cocbd on (coc.id = cocbd.id and cocbd.pos = 0)
+                         left outer join (
+                           select distinct on (h.parentid)
+                             h.parentid, o.numbervalue
+                             from othernumber o, hierarchy h
+                             where h.id = o.id and h.primarytype = 'otherNumber'
+                               and getdispl(o.numbertype) = 'Project Code') pc on (coc.id = pc.parentid)
                 --         left outer join (
                 --      select h.parentid, getdispl(o.numbertype) numbertype, o.numbervalue
                 --      from othernumber o,

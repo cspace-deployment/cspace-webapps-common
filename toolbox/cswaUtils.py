@@ -862,11 +862,11 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['fieldLocCountry'] = refNames2find[form.get('cn.' + index)]
             updateItems['fieldLocState'] = refNames2find[form.get('st.' + index)]
             updateItems['fieldLocCounty'] = refNames2find[form.get('co.' + index)]
-            updateItems['briefDescription'] = form.get('bdx.' + index)
+            updateItems['numberValue'] = form.get('pc.' + index)
+            # updateItems['briefDescription'] = form.get('bdx.' + index)
         elif fieldset == 'fullmonty':
             if form.get('ocn.' + index) != '':
                 updateItems['objectCount'] = form.get('ocn.' + index)
-            updateItems['pahmaFieldLocVerbatim'] = form.get('vfcp.' + index)
             updateItems['briefDescription'] = form.get('bdx.' + index)
 
             updateItems['assocPeople'] = refNames2find[form.get('cg.' + index)]
@@ -882,10 +882,11 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['pahmaAltNum'] = form.get('anm.' + index)
             updateItems['pahmaAltNumType'] = form.get('ant.' + index)
             updateItems['pahmaEthnographicFileCode'] = refNames2find[form.get('fc.' + index)]
+            updateItems['pahmaFieldLocVerbatim'] = form.get('vfcp.' + index)
             updateItems['pahmaFieldCollectionDate'] = form.get('dcol.' + index)
             updateItems['pahmaFieldCollectionPlace'] = refNames2find[form.get('cp.' + index)]
+            updateItems['pahmaTmsLegacyDepartment'] = form.get('ld.' + index)
             updateItems['objectProductionPerson'] = refNames2find[form.get('pe.' + index)]
-            updateItems['pahmaFieldLocVerbatim'] = form.get('vfcp.' + index)
             updateItems['responsibleDepartment'] = form.get('cm.' + index)
             updateItems['taxon'] = refNames2find[form.get('ta.' + index)]
 

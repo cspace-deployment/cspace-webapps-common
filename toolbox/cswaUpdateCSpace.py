@@ -147,7 +147,7 @@ def updateXML(fieldset, updateItems, xml):
     elif fieldset == 'mattax':
         fieldList = ('material', 'taxon', 'briefDescription')
     elif fieldset == 'student':
-        fieldList = ('taxon', 'fieldLocCountry', 'fieldLocState', 'fieldLocCounty')
+        fieldList = ('taxon', 'fieldLocCountry', 'fieldLocState', 'fieldLocCounty', 'numberValue')
     elif fieldset == 'fullmonty':
         fieldList = ('assocPeople', 'briefDescription', 'collection', 'contentDate', 'contentPlace', 'fieldCollector', 'material',
         'objectName', 'objectName', 'objectProductionDate', 'objectProductionPlace', 'objectProductionPerson', 'pahmaAltNum', 'pahmaEthnographicFileCode',
@@ -177,6 +177,8 @@ def updateXML(fieldset, updateItems, xml):
             tmprelationType = 'taxonomicIdent'
         elif relationType in ['fieldLocCountry', 'fieldLocState', 'fieldLocCounty']:
             tmprelationType = 'locality'
+        elif relationType == 'numberValue':
+            tmprelationType = 'otherNumber'
         else:
             tmprelationType = relationType
         metadata = root.findall('.//' + tmprelationType + extra + listSuffix)
@@ -312,8 +314,18 @@ def updateXML(fieldset, updateItems, xml):
                     message += "'%s' already exists as an NPT in %s: This value has been inserted as the PT and in doing so is now duplicated.<br/>" % (
                         deURN(updateItems[relationType]), relationType)
                     pass
-            newElement = etree.Element(relationType)
-            newElement.text = updateItems[relationType]
+            # otherNumberList is a bit unique: it does not contain an otherNumberGroupList, etc.
+            if relationType == 'numberValue':
+                newElement = etree.Element('otherNumber')
+                pcType = etree.Element('numberType')
+                pcType.text = "urn:cspace:ucjeps.cspace.berkeley.edu:vocabularies:name(numbertype):item:name(CSpaceProjectCode1536082165062)'Project Code'"
+                newElement.append(pcType)
+                pcValue = etree.Element('numberValue')
+                pcValue.text = updateItems[relationType]
+                newElement.append(pcValue)
+            else:
+                newElement = etree.Element(relationType)
+                newElement.text = updateItems[relationType]
             metadata.insert(0, newElement)
     objectCount = root.find('.//numberOfObjects')
     if 'objectCount' in updateItems:
