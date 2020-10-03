@@ -311,9 +311,12 @@ def updateXML(fieldset, updateItems, xml):
                 if IsAlreadyPreferred(updateItems[relationType], metadata.findall('.//' + relationType)):
                     continue
                 else:
-                    message += "'%s' already exists as an NPT in %s: This value has been inserted as the PT and in doing so is now duplicated.<br/>" % (
-                        deURN(updateItems[relationType]), relationType)
-                    pass
+                    if relationType == 'numberValue':
+                        message += "'%s' already exists and was not added again.<br/>" % (updateItems[relationType])
+                        continue
+                    else:
+                        message += "'%s' already exists as an NPT in %s: This value has been inserted as the PT and in doing so is now duplicated.<br/>" % (
+                            deURN(updateItems[relationType]), relationType)
             # otherNumberList is a bit unique: it does not contain an otherNumberGroupList, etc.
             if relationType == 'numberValue':
                 newElement = etree.Element('otherNumber')

@@ -137,9 +137,9 @@ def doObjectSearch(form, config, displaytype):
         toLocation = verifyLocation(form.get("lo.location1"), form, config)
 
         if str(form.get("lo.crate")) != '' and crate == '':
-            html += '<span style="color:red;">Crate is not valid! Sorry!</span><br/>'
+            html += '<span class="error">Crate is not valid! Sorry!</span><br/>'
         if toLocation == '':
-            html += '<span style="color:red;">Destination is not valid! Sorry!</span><br/>'
+            html += '<span class="error">Destination is not valid! Sorry!</span><br/>'
         if (str(form.get("lo.crate")) != '' and crate == '') or toLocation == '':
             return html
 
@@ -423,11 +423,11 @@ def doCheckMove(form, config):
     #html += '</table>'
 
     if crate == '':
-        html += '<span style="color:red;">Crate is not valid! Sorry!</span><br/>'
+        html += '<span class="error">Crate is not valid! Sorry!</span><br/>'
     if fromLocation == '':
-        html += '<span style="color:red;">From location is not valid! Sorry!</span><br/>'
+        html += '<span class="error">From location is not valid! Sorry!</span><br/>'
     if toLocation == '':
-        html += '<span style="color:red;">To location is not valid! Sorry!</span><br/>'
+        html += '<span class="error">To location is not valid! Sorry!</span><br/>'
     if crate == '' or fromLocation == '' or toLocation == '':
         return html
 
@@ -462,7 +462,7 @@ def doCheckMove(form, config):
     locs = sorted(locations.keys())
 
     if len(locs) == 0:
-        return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
+        return '<span class="error">Did not find this crate at this location! Sorry!</span>'
 
     html += cswaConstants.getHeader(updateType,institution)
     for header in locs:
@@ -541,17 +541,17 @@ def doCheckPowerMove(form, config):
     crate2 = verifyLocation(form.get("lo.crate2"), form, config)
 
     if crate1 == '':
-        html += '<span style="color:red;">From Crate is not valid! Sorry!</span><br/>'
+        html += '<span class="error">From Crate is not valid! Sorry!</span><br/>'
     if crate2 == '':
-        html += '<span style="color:red;">To Crate is not valid! Sorry!</span><br/>'
+        html += '<span class="error">To Crate is not valid! Sorry!</span><br/>'
 
     fromLocation = verifyLocation(form.get("lo.location1"), form, config)
     toLocation = verifyLocation(form.get("lo.location2"), form, config)
 
     if fromLocation == '':
-        html += '<span style="color:red;">From location is not valid! Sorry!</span><br/>'
+        html += '<span class="error">From location is not valid! Sorry!</span><br/>'
     if toLocation == '':
-        html += '<span style="color:red;">To location is not valid! Sorry!</span><br/>'
+        html += '<span class="error">To location is not valid! Sorry!</span><br/>'
     if fromLocation == '' or toLocation == '':
         return html
 
@@ -599,7 +599,7 @@ def doCheckPowerMove(form, config):
     locs = sorted(locations.keys())
 
     if len(locs) == 0:
-        return '<span style="color:red;">Did not find this crate at this location! Sorry!</span>'
+        return '<span class="error">Did not find this crate at this location! Sorry!</span>'
 
     html += cswaConstants.getHeader(updateType,institution)
     for header in locs:
@@ -904,55 +904,55 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
                 if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
                     pass
                 else:
-                    msg += '<span style="color:red;"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
+                    msg += '<span class="error"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
             if updateItems['assocPeople'] == '' and form.get('cg.' + index):
                 if form.get('cg.' + index) == cswaDB.getCSIDDetail(config, index, 'assocpeoplegroup'):
                     pass
                 else:
-                    msg += '<span style="color:red;"> Cultural Group: term "%s" not found, field not updated.</span>' % form.get('cg.' + index)
+                    msg += '<span class="error"> Cultural Group: term "%s" not found, field not updated.</span>' % form.get('cg.' + index)
             if updateItems['pahmaEthnographicFileCode'] == '' and form.get('fc.' + index):
-                msg += '<span style="color:red;"> Ethnographic File Code: term "%s" not found, field not updated.</span>' % form.get('fc.' + index)
+                msg += '<span class="error"> Ethnographic File Code: term "%s" not found, field not updated.</span>' % form.get('fc.' + index)
             if 'objectCount' in updateItems:
                 try:
                     int(updateItems['objectCount'])
                     int(updateItems['objectCount'][0])
                 except ValueError:
-                    msg += '<span style="color:red;"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
+                    msg += '<span class="error"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
                     del updateItems['objectCount']
         if fieldset in ['registration', 'fullmonty']:
             if updateItems['fieldCollector'] == '' and form.get('cl.' + index):
-                msg += '<span style="color:red;"> Field Collector: term "%s" not found, field not updated.</span>' % form.get('cl.' + index)
+                msg += '<span class="error"> Field Collector: term "%s" not found, field not updated.</span>' % form.get('cl.' + index)
         if fieldset in ['hsrinfo', 'fullmonty']:
             if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
                 if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
                     pass
                 else:
-                    msg += '<span style="color:red;"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
+                    msg += '<span class="error"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
             if 'objectCount' in updateItems:
                 try:
                     int(updateItems['objectCount'])
                     int(updateItems['objectCount'][0])
                 except ValueError:
-                    msg += '<span style="color:red;"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
+                    msg += '<span class="error"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
                     del updateItems['objectCount']
         if fieldset in ['objtypecm', 'fullmonty']:
             if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
                 if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
                     pass
                 else:
-                    msg += '<span style="color:red;"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
+                    msg += '<span class="error"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
             if 'objectCount' in updateItems:
                 try:
                     int(updateItems['objectCount'])
                     int(updateItems['objectCount'][0])
                 except ValueError:
-                    msg += '<span style="color:red;"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
+                    msg += '<span class="error"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
                     del updateItems['objectCount']
         if fieldset in ['mattax', 'fullmonty']:
             if updateItems['material'] == '' and form.get('ma.' + index):
-                msg += '<span style="color:red;"> Materials: term "%s" not found, field not updated.</span>' % form.get('ma.' + index)
+                msg += '<span class="error"> Materials: term "%s" not found, field not updated.</span>' % form.get('ma.' + index)
             if updateItems['taxon'] == '' and form.get('ta.' + index):
-                msg += '<span style="color:red;"> Taxon: term "%s" not found, field not updated.</span>' % form.get('ta.' + index)
+                msg += '<span class="error"> Taxon: term "%s" not found, field not updated.</span>' % form.get('ta.' + index)
         if fieldset in ['placeanddate', 'fullmonty']:
             # msg += 'place and date'
             pass
@@ -976,7 +976,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             #pass
             when2post, updateMsg  = updateCspace(fieldset, updateItems, form, config)
             if updateMsg != '':
-                msg = '<span style="color:red;">%s</span>' % updateMsg
+                msg = '<span class="warning">%s</span>' % updateMsg
             if not 'ERROR' in updateMsg:
                 numUpdated += 1
         except:
@@ -1057,7 +1057,7 @@ def doUpdateLocations(form, config):
                 updateLocations(updateItems, config, form)
                 numUpdated += 1
         except:
-            msg = '<span style="color:red;">location update failed!</span>'
+            msg = '<span class="error">location update failed!</span>'
         html += ('<tr>' + (4 * '<td class="ncell">%s</td>') + '</tr>\n') % (
             makeObjectLink(config, objectCsid, updateItems['objectNumber']), updateItems['objectStatus'], updateItems['inventoryNote'], msg)
 
@@ -1654,7 +1654,7 @@ def doUploadUpdateLocs(data, line, id2ref, form, config):
             html += ('<tr>' + (3 * '<td class="ncell">%s</td>') + '</tr>\n') % (makeObjectLink(config, updateItems['objectCsid'], updateItems['objectNumber']), updateItems['inventoryNote'], msg)
     except:
         raise
-        #raise Exception('<span style="color:red;">Problem updating line %s </span>' % line)
+        #raise Exception('<span class="error">Problem updating line %s </span>' % line)
         #msg = 'Problem updating line %s' % line
         #html += ('<tr>' + (3 * '<td class="ncell">%s</td>') + '</tr>\n') % (
         #    updateItems['objectNumber'], updateItems['inventoryNote'], msg)
@@ -1693,7 +1693,6 @@ def formatInfoReviewForm(form):
         objtypes, selected = cswaConstants.getObjType(form, 'user', '')
         collmans, selected = cswaConstants.getCollMan(form, 'user', '')
         legacydepartments, selected = cswaConstants.getLegacyDepts(form, 'user', '')
-
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text" size="60" name="onm.user"></td>
 </tr><tr><th>Count</th><td class="veryshortinput"><input class="veryshortinput" type="text" name="ocn.user"></td>
 </tr><tr><th>Object Type</th><td class="zcell">%s</td>
@@ -1739,32 +1738,44 @@ def formatInfoReviewForm(form):
         objstatuses, selected = cswaConstants.getObjectStatuses(form, 'user', '')
         objecttypes, selected = cswaConstants.getObjType(form, 'user', '')
         altnumtypes, selected = cswaConstants.getAltNumTypes(form, 'user', '')
+        legacydepartments, selected = cswaConstants.getLegacyDepts(form, 'user', '')
         return """
 <table>
 
 <tr class="monty">
 
-<td>Count<br/>
-<input class="xspan" type="text" size="10" name="ocn.user"></td>
+<td>Object Name<br/>
+<input type="hidden" name="oox.user">
+<input type="hidden" name="csid.user">
+<input class="xspan" type="text" name="onm.user"></td>
+</td>
+</tr>
+
+<tr class="monty">
+
+<td>Count and Count Note<br/>
+<input class="xspan" type="text" size="10" name="ocn.user">
+<input class="xspan" type="text" size="20" name="ctn.user"></td>
+</td>
 
 <td>Cultural Group<br/>
-<input class="xspan" type="text" size="40" name="cg.user"></td>
+<input class="xspan" type="text" size="45" name="cg.user"></td>
 
 <td>Ethnographic File Code<br/>
-<input class="xspan" type="text" size="40" name="fc.user"></td></td>
+<input class="xspan" type="text" size="45" name="fc.user"></td></td>
 
 </tr>
 
 <tr class="monty">
 
 <td>Alt Num<br/>
-<input class="xspan" type="text" size="40" name="anm.user"></td>
+<input class="xspan" type="text" size="45" name="anm.user"></td>
 
 <td>Alt Num Type<br/>
 """ + altnumtypes + """</td>
 
 <td>Field Collector<br/>
-<input class="xspan" type="text" size="40" name="cl.user"></td>
+<input class="xspan" type="text" size="45" name="cl.user"></td>
 
 </tr>
 
@@ -1774,52 +1785,61 @@ def formatInfoReviewForm(form):
 """ + objecttypes + """</td>
 
 <td>Production person<br/>
-<input class="xspan" type="text" size="40" name="pe.user"></td>
+<input class="xspan" type="text" size="45" name="pe.user"></td>
 
 <td>Object Status<br/>
 """ + objstatuses + """</td>
-</td>
 
 </tr>
 
 <tr class="monty">
 
 <td>Date collected<br/>
-<input class="xspan" type="text" size="40" name="dcol.user"></td>
+<input class="xspan" type="text" size="45" name="dcol.user"></td>
 
 <td>Production date<br/>
-<input class="xspan" type="text" size="40" name="dprd.user"></td>
+<input class="xspan" type="text" size="45" name="dprd.user"></td>
 
 <td>Date depicted<br/>
-<input class="xspan" type="text" size="40" name="ddep.user"></td>
+<input class="xspan" type="text" size="45" name="ddep.user"></td>
 
 </tr>
 
 <tr class="monty">
 
 <td>Materials<br/>
-<input class="xspan" type="text" size="40" name="ma.user"></td>
+<input class="xspan" type="text" size="45" name="ma.user"></td>
 
 <td>Taxon<br/>
-<input class="xspan" type="text" size="40" name="ta.user"></td>
+<input class="xspan" type="text" size="45" name="ta.user"></td>
 
 <td>Verbatim field collection place<br/>
-<input class="xspan" type="text" size="40" name="vfcp.user"></td>
+<input class="xspan" type="text" size="45" name="vfcp.user"></td>
 
 </tr>
 
 <tr class="monty">
 
 <td>Field collection place<br/>
-<input class="xspan" type="text" size="40" name="cp.user"></td>
+<input class="xspan" type="text" size="45" name="cp.user"></td>
 
 <td>Production Place<br/>
-<input class="xspan" type="text" size="40" name="pp.user"></td>
+<input class="xspan" type="text" size="45" name="pp.user"></td>
 
 <td>Place depicted<br/>
-<input class="xspan" type="text" size="40" name="pd.user"></td>
+<input class="xspan" type="text" size="45" name="pd.user"></td>
 
 </tr>
+
+<tr>
+
+<td>Collection Manager<br/>
+""" + collmans + """</td>
+
+<td colspan="2">Legacy Department<br/>
+""" + legacydepartments + """</td>
+</tr>
+
 
 <tr>
 <td colspan="10">Brief Description<br/>

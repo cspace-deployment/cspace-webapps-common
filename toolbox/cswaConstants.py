@@ -29,13 +29,15 @@ button { font-size: 150%; width:85px; text-align: center; text-transform: upperc
 img#logo { float:left; height:50px; padding:10px 10px 10px 10px;}
 .authority { color: #000000; background-color: #FFFFFF; font-weight: bold; font-size: 18px; }
 .ncell { line-height: 1.0; cell-padding: 2px; font-size: 16px;}
-.zcell { min-width:250px; cell-padding: 2px; font-size: 16px;}
+.zcell { min-width:80px; cell-padding: 2px; font-size: 16px;}
 .shortcell { width:180px; cell-padding: 2px; font-size: 16px;}
 .objname { font-weight: bold; font-size: 16px; font-style: italic; min-width:200px; }
 .objno { font-weight: bold; font-size: 16px; font-style: italic; }
 .ui-tabs .ui-tabs-panel { padding: 0px; min-height:120px; }
 .rdo { text-align: center; width:60px; }
 .error {color:red;}
+.warning {color:chocolate;}
+.ok {color:green;}
 .save { background-color: BurlyWood; font-size:20px; color: #000000; font-weight:bold; vertical-align: middle; text-align: center; }
 .shortinput { font-weight: bold; width:150px; }
 .subheader { background-color: ''' + schemacolor1 + '''; color: #FFFFFF; font-size: 24px; font-weight: bold; }
@@ -620,11 +622,13 @@ def getObjectStatuses(form, csid, ant):
         ("irregular Museum number", "irregular Museum number"),
         ("missing", "missing"),
         ("missing in inventory", "missing in inventory"),
+        ("not accessioned", "not accessioned"),
         ("not cataloged", "not cataloged"),
         ("not located", "not located"),
         ("not received", "not received"),
         ("number not used", "number not used"),
         ("object mount", "object mount"),
+        ("on deposit", "on deposit"),
         ("on loan (=borrowed)", "on loan (=borrowed)"),
         ("partially deaccessioned", "partially deaccessioned"),
         ("partially exchanged", "partially exchanged"),

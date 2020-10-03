@@ -16,7 +16,7 @@ def main(request, updateType, form, webappconfig):
     if request.user.is_authenticated:
         form['userdata'] = request.user
     else:
-        return "<span style='color:red'>You must be authenticated to use these Tools! Please sign in (upper right of this page).</span>", None
+        return "<span style='color:chocolate'>You must be authenticated to use these Tools! Please sign in (upper right of this page).</span>", None
 
 
     update_action_label = form.get('action')

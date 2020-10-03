@@ -711,6 +711,7 @@ def getgrouplist(group, num2ret, config):
                 -- where hgc.name = 'ec7e6fd6-34f8-4e9a-9933'
             WHERE
                gc.title='""" + group + """'
+            ORDER BY accessionnumber
             limit """ + str(num2ret)
 
     else:
