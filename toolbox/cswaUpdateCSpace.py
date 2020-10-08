@@ -131,11 +131,11 @@ def updateXML(fieldset, updateItems, xml):
         fieldList = ('briefDescription', 'objectName')
     elif fieldset == 'registration':
         # nb:  'pahmaAltNumType' is handled with  'pahmaAltNum'
-        fieldList = ('objectName', 'pahmaAltNum', 'fieldCollector')
+        fieldList = ('objectName', 'pahmaAltNum', 'fieldCollector', 'pahmaObjectStatus')
     elif fieldset == 'hsrinfo':
         fieldList = ('objectName', 'pahmaFieldCollectionPlace', 'briefDescription')
     elif fieldset == 'objtypecm':
-        fieldList = ('objectName', 'collection', 'responsibleDepartment', 'pahmaFieldCollectionPlace', 'pahmaTmsLegacyDepartment')
+        fieldList = ('objectName', 'collection', 'responsibleDepartment', 'pahmaFieldCollectionPlace', 'pahmaTmsLegacyDepartment', 'pahmaObjectStatus')
     elif fieldset == 'collection':
         fieldList = ('objectName', 'collection')
     elif fieldset == 'placeanddate':

@@ -821,6 +821,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['pahmaAltNum'] = form.get('anm.' + index)
             updateItems['pahmaAltNumType'] = form.get('ant.' + index)
             updateItems['fieldCollector'] = refNames2find[form.get('cl.' + index)]
+            updateItems['pahmaObjectStatus'] = form.get('obs.' + index)
         elif fieldset == 'keyinfo':
             if form.get('ocn.' + index) != '':
                 updateItems['objectCount'] = form.get('ocn.' + index)
@@ -840,6 +841,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             updateItems['responsibleDepartment'] = form.get('cm.' + index)
             updateItems['pahmaFieldCollectionPlace'] = refNames2find[form.get('cp.' + index)]
             updateItems['pahmaTmsLegacyDepartment'] = form.get('ld.' + index)
+            updateItems['pahmaObjectStatus'] = form.get('obs.' + index)
         elif fieldset == 'placeanddate':
             updateItems['pahmaFieldLocVerbatim'] = form.get('vfcp.' + index)
             updateItems['pahmaFieldCollectionDate'] = form.get('dcol.' + index)
@@ -1670,11 +1672,13 @@ def formatInfoReviewForm(form):
 </tr>"""
     elif fieldSet == 'registration':
         altnumtypes, selected = cswaConstants.getAltNumTypes(form, 'user','')
+        objstatuses, selected = cswaConstants.getObjectStatuses(form, 'user', '')
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text"  size="60" name="onm.user"></td>
 </tr><tr><th>Alternate Number</th><td class="zcell"><input class="xspan" type="text" size="60" name="anm.user"></td>
 </tr><tr><th>Alternate Number Types</th><td class="zcell">%s</td>
 </tr><tr><th>Field Collector (person)</th><td class="zcell"><input class="xspan" type="text" size="60" name="cl.user"></td>
-</tr>""" % altnumtypes
+</tr><tr><th>Object Status</th><td class="zcell">%s</td>
+</tr>""" % (altnumtypes, objstatuses)
     elif fieldSet == 'keyinfo':
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text"  size="60" name="onm.user"></td>
 </tr><tr><th>Count</th><td class="veryshortinput"><input class="veryshortinput" type="text" name="ocn.user"></td>
@@ -1693,13 +1697,15 @@ def formatInfoReviewForm(form):
         objtypes, selected = cswaConstants.getObjType(form, 'user', '')
         collmans, selected = cswaConstants.getCollMan(form, 'user', '')
         legacydepartments, selected = cswaConstants.getLegacyDepts(form, 'user', '')
+        objstatuses, selected = cswaConstants.getObjectStatuses(form, 'user', '')
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text" size="60" name="onm.user"></td>
 </tr><tr><th>Count</th><td class="veryshortinput"><input class="veryshortinput" type="text" name="ocn.user"></td>
 </tr><tr><th>Object Type</th><td class="zcell">%s</td>
 </tr><tr><th>Collection Manager</th><td class="zcell">%s</td>
 </tr><tr><th>Field Collection Place</th><td><input class="xspan" type="text" size="60" name="cp.user"></td>
 </tr><tr><th>Legacy Department</th><td class="zcell">%s</td>
-</tr>""" % (objtypes, collmans, legacydepartments)
+</tr><tr><th>Object Status</th><td class="zcell">%s</td>
+</tr>""" % (objtypes, collmans, legacydepartments, objstatuses)
     elif fieldSet == 'collection':
         return """<tr><th>Object name</th><td class="objname"><input class="objname" type="text" size="60" name="onm.user"></td>
 </tr><tr><th>Collection</th><td><input class="xspan" type="text" size="60" name="cn.user"></td>

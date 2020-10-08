@@ -110,6 +110,7 @@ def infoHeaders(fieldSet):
       <th>Alt Num</th>
       <th>Alt Num Type</th>
       <th>Field Collector</th>
+      <th>Object Status</th>
       <th>Donor</th>
       <th>Accession</th>
     </tr>"""
@@ -133,6 +134,7 @@ def infoHeaders(fieldSet):
       <th>Collection Manager</th>
       <th>Field Collection Place</th>
       <th>Legacy Department</th>
+      <th>Object Status</th>
       <th></th>
     </tr>"""
     elif fieldSet == 'collection':
@@ -661,18 +663,12 @@ def getObjType(form, csid, ot):
     selected = form.get('objectType')
 
     objtypelist = [ \
-        ("(not specified)",
-         "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype00)'(not specified)'"),
         ("none (Registration)",
          "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype01)'none (Registration)'"),
         ("archaeology",
          "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype02)'archaeology'"),
         ("ethnography",
          "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype03)'ethnography'"),
-        ("documentation",
-         "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype04)'documentation'"),
-        ("sample",
-         "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype05)'sample'"),
         ("indeterminate",
          "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(objecttype):item:name(objtype06)'indeterminate'"),
         ("unknown",

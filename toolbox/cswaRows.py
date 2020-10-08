@@ -128,6 +128,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
             rr[8], cgi.escape(rr[15], True))
     elif fieldSet == 'registration':
         altnumtypes, selected = cswaConstants.getAltNumTypes(form, rr[8], rr[19])
+        objstatuses, selected = cswaConstants.getObjectStatuses(form, rr[8], rr[37])
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
 <td class="objname"><input class="objname" type="text" name="onm.%s" value="%s"></td>
@@ -137,6 +138,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <input class="xspan" type="text" size="13" name="anm.%s" value="%s"></td>
 <td class="zcell">%s</td>
 <td class="zcell"><input class="xspan" type="text" size="40" name="cl.%s" value="%s"></td>
+<td class="zcell">%s</td>
 <td class="zcell"><span style="font-size:8">%s</span></td>
 <td class="zcell"><a target="cspace" href="%s">%s</a></td>
 </tr>""" % (link, cgi.escape(rr[3], True),
@@ -146,6 +148,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
             rr[8], cgi.escape(rr[18], True),
             altnumtypes,
             rr[8], cgi.escape(rr[16], True),
+            objstatuses,
             cgi.escape(rr[17], True),
             link2, cgi.escape(rr[21], True))
     elif fieldSet == 'keyinfo':
@@ -183,6 +186,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
         objtypes, selected = cswaConstants.getObjType(form, rr[8], rr[26])
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
         legacydepartments, selected = cswaConstants.getLegacyDepts(form, rr[8], rr[38])
+        objstatuses, selected = cswaConstants.getObjectStatuses(form, rr[8], rr[37])
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
 <td class="objname"><input class="objname" type="text" name="onm.%s" value="%s"></td>
@@ -193,13 +197,15 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td>%s</td>
 <td><input class="xspan" type="text" size="40" name="cp.%s" value="%s"></td>
 <td>%s</td>
+<td>%s</td>
 </tr>""" % (link, cgi.escape(rr[3], True),
             rr[8], cgi.escape(rr[4], True),
             rr[8], rr[5],
             rr[8], cgi.escape(rr[3], True), rr[8], rr[8],
             objtypes, collmans,
             rr[8], cgi.escape(rr[6], True),
-            legacydepartments)
+            legacydepartments,
+            objstatuses)
     elif fieldSet == 'collection':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
