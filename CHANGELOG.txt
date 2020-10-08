@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.5.0-rc4
-Sat Oct  3 15:47:43 PDT 2020
+This is version 5.5.0-rc5
+Thu Oct  8 12:58:28 PDT 2020
 
-3be0a42 (HEAD -> master) CSW-358: refactor xir toolbox code: apply DRY, small bug fixes, etc.
-5d16993 (tag: 5.5.0-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 5.5.0-rc3
+7ad96c9 (HEAD -> master) CSW-363: add 'object status' to registation and object type/cm fieldsets in xir webapps
+56d1282 (tag: 5.5.0-rc4, origin/master, origin/HEAD) revise change log and VERSION file for version 5.5.0-rc4
+3be0a42 CSW-358: refactor xir toolbox code: apply DRY, small bug fixes, etc.
+5d16993 (tag: 5.5.0-rc3) revise change log and VERSION file for version 5.5.0-rc3
 8ab604a CSW-358: refactoring toolbox xir apps a bit
 0c158cd (tag: 5.5.0-rc2) revise change log and VERSION file for version 5.5.0-rc2
 676a37f CSW-363: put 'on deposit' in the correct spot in toolbox dropdown
