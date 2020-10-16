@@ -74,8 +74,9 @@ function deploy()
         # for this release will need to be applied (by hand, presumably) after the fact of
         # of relinking this directory with the runtime directory in /var/www/
         cp -r /var/www/$1/config ${RUNDIR}
-
         cd ${RUNDIR}
+    else
+        RUNDIR=.
     fi
 
     echo "*************************************************************************************************"
