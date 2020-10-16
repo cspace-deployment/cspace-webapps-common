@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.5.0-rc5
-Thu Oct  8 12:58:28 PDT 2020
+This is version 5.5.0-rc6
+Fri Oct 16 14:11:31 PDT 2020
 
-7ad96c9 (HEAD -> master) CSW-363: add 'object status' to registation and object type/cm fieldsets in xir webapps
-56d1282 (tag: 5.5.0-rc4, origin/master, origin/HEAD) revise change log and VERSION file for version 5.5.0-rc4
+b91c506 (HEAD -> master, origin/master, origin/HEAD) NOJIRA: django setup.sh script needs to set runtime directory for local setup
+328e804 (tag: 5.5.0-rc5) revise change log and VERSION file for version 5.5.0-rc5
+7ad96c9 CSW-363: add 'object status' to registation and object type/cm fieldsets in xir webapps
+56d1282 (tag: 5.5.0-rc4) revise change log and VERSION file for version 5.5.0-rc4
 3be0a42 CSW-358: refactor xir toolbox code: apply DRY, small bug fixes, etc.
 5d16993 (tag: 5.5.0-rc3) revise change log and VERSION file for version 5.5.0-rc3
 8ab604a CSW-358: refactoring toolbox xir apps a bit
