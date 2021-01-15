@@ -1,4 +1,4 @@
-import cgi
+import cgi, html
 import toolbox.cswaConstants as cswaConstants
 import toolbox.cswaDB as cswaDB
 
@@ -121,11 +121,11 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td width="0"></td>
 <td class="zcell">
 <textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td>
-</tr>""" % (link, cgi.escape(rr[3], True),
-            rr[8], cgi.escape(rr[3], True),
+</tr>""" % (link, html.escape(rr[3], True),
+            rr[8], html.escape(rr[3], True),
             rr[8], rr[8],
-            rr[8], cgi.escape(rr[4], True),
-            rr[8], cgi.escape(rr[15], True))
+            rr[8], html.escape(rr[4], True),
+            rr[8], html.escape(rr[15], True))
     elif fieldSet == 'registration':
         altnumtypes, selected = cswaConstants.getAltNumTypes(form, rr[8], rr[19])
         objstatuses, selected = cswaConstants.getObjectStatuses(form, rr[8], rr[37])
@@ -141,16 +141,16 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td class="zcell">%s</td>
 <td class="zcell"><span style="font-size:8">%s</span></td>
 <td class="zcell"><a target="cspace" href="%s">%s</a></td>
-</tr>""" % (link, cgi.escape(rr[3], True),
-            rr[8], cgi.escape(rr[4], True),
-            rr[8], cgi.escape(rr[3], True),
+</tr>""" % (link, html.escape(rr[3], True),
+            rr[8], html.escape(rr[4], True),
+            rr[8], html.escape(rr[3], True),
             rr[8], rr[8],
-            rr[8], cgi.escape(rr[18], True),
+            rr[8], html.escape(rr[18], True),
             altnumtypes,
-            rr[8], cgi.escape(rr[16], True),
+            rr[8], html.escape(rr[16], True),
             objstatuses,
-            cgi.escape(rr[17], True),
-            link2, cgi.escape(rr[21], True))
+            html.escape(rr[17], True),
+            link2, html.escape(rr[21], True))
     elif fieldSet == 'keyinfo':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -162,9 +162,9 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <input class="xspan" type="text" size="40" name="cp.%s" value="%s"></td>
 <td class="zcell"><input class="xspan" type="text" size="40" name="cg.%s" value="%s"></td>
 <td class="zcell"><input class="xspan" type="text" size="40" name="fc.%s" value="%s"></td>
-</tr>""" % (link, cgi.escape(rr[3], True), rr[8], cgi.escape(rr[4], True), rr[8], rr[5], rr[8], cgi.escape(rr[3], True),
-            rr[8], rr[8], rr[8], cgi.escape(rr[6], True), rr[8], cgi.escape(rr[7], True), rr[8],
-            cgi.escape(rr[9], True))
+</tr>""" % (link, html.escape(rr[3], True), rr[8], html.escape(rr[4], True), rr[8], rr[5], rr[8], html.escape(rr[3], True),
+            rr[8], rr[8], rr[8], html.escape(rr[6], True), rr[8], html.escape(rr[7], True), rr[8],
+            html.escape(rr[9], True))
     elif fieldSet == 'hsrinfo':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -176,12 +176,12 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <input class="xspan" type="text" size="20" name="ctn.%s" value="%s"></td>
 <td class="zcell"><input class="xspan" type="text" size="40" name="cp.%s" value="%s"></td>
 <td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td>
-</tr>""" % (link, cgi.escape(rr[3], True), rr[8], cgi.escape(rr[4], True),
+</tr>""" % (link, html.escape(rr[3], True), rr[8], html.escape(rr[4], True),
             rr[8], rr[5],
-            rr[8], cgi.escape(rr[3], True),
-            rr[8], rr[8], rr[8], cgi.escape(rr[25], True),
-            rr[8], cgi.escape(rr[6], True), rr[8],
-            cgi.escape(rr[15], True))
+            rr[8], html.escape(rr[3], True),
+            rr[8], rr[8], rr[8], html.escape(rr[25], True),
+            rr[8], html.escape(rr[6], True), rr[8],
+            html.escape(rr[15], True))
     elif fieldSet == 'objtypecm':
         objtypes, selected = cswaConstants.getObjType(form, rr[8], rr[26])
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
@@ -198,12 +198,12 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td><input class="xspan" type="text" size="40" name="cp.%s" value="%s"></td>
 <td>%s</td>
 <td>%s</td>
-</tr>""" % (link, cgi.escape(rr[3], True),
-            rr[8], cgi.escape(rr[4], True),
+</tr>""" % (link, html.escape(rr[3], True),
+            rr[8], html.escape(rr[4], True),
             rr[8], rr[5],
-            rr[8], cgi.escape(rr[3], True), rr[8], rr[8],
+            rr[8], html.escape(rr[3], True), rr[8], rr[8],
             objtypes, collmans,
-            rr[8], cgi.escape(rr[6], True),
+            rr[8], html.escape(rr[6], True),
             legacydepartments,
             objstatuses)
     elif fieldSet == 'collection':
@@ -214,12 +214,12 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <input type="hidden" name="clnx.%s" value="%s">
 <input type="hidden" name="csid.%s" value="%s">
 <td><input class="xspan" type="text" size="45" name="cln.%s" value="%s"></td>
-</tr>""" % (link, cgi.escape(rr[1], True),
-            rr[2], cgi.escape(rr[1], True),
-            rr[2], cgi.escape(rr[3], True),
+</tr>""" % (link, html.escape(rr[1], True),
+            rr[2], html.escape(rr[1], True),
+            rr[2], html.escape(rr[3], True),
             rr[2], rr[22],
             rr[2], rr[2],
-            rr[2], cgi.escape(rr[8], True))
+            rr[2], html.escape(rr[8], True))
     elif fieldSet == 'placeanddate':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -229,12 +229,12 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td><input class="xspan" type="text" size="45" name="vfcp.%s" value="%s"></td>
 <td><input class="xspan" type="text" size="45" name="dcol.%s" value="%s"></td>
 </tr>""" % (
-        link, cgi.escape(rr[3], True),
-        rr[8], cgi.escape(rr[3], True),
+        link, html.escape(rr[3], True),
+        rr[8], html.escape(rr[3], True),
         rr[8], rr[8],
-        rr[8], cgi.escape(rr[4], True),
-        rr[8], cgi.escape(rr[28], True),
-        rr[8], cgi.escape(rr[29], True))
+        rr[8], html.escape(rr[4], True),
+        rr[8], html.escape(rr[28], True),
+        rr[8], html.escape(rr[29], True))
     elif fieldSet == 'dates':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -245,11 +245,11 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td><input class="xspan" type="text" size="20" name="ddep.%s" value="%s"></td>
 <td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td>
 </tr>""" % (
-        link, cgi.escape(rr[3], True), rr[8], rr[8], rr[8], cgi.escape(rr[4], True),
-        rr[8], cgi.escape(rr[32], True),
-        rr[8], cgi.escape(rr[29], True),
-        rr[8], cgi.escape(rr[34], True),
-        rr[8], cgi.escape(rr[15], True))
+        link, html.escape(rr[3], True), rr[8], rr[8], rr[8], html.escape(rr[4], True),
+        rr[8], html.escape(rr[32], True),
+        rr[8], html.escape(rr[29], True),
+        rr[8], html.escape(rr[34], True),
+        rr[8], html.escape(rr[15], True))
     elif fieldSet == 'places':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -261,14 +261,14 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td><input class="xspan" type="text" size="45" name="pp.%s" value="%s"></td>
 <td><input class="xspan" type="text" size="45" name="pd.%s" value="%s"></td>
 </tr>""" % (
-        link, cgi.escape(rr[3], True),
-        rr[8], cgi.escape(rr[3], True),
+        link, html.escape(rr[3], True),
+        rr[8], html.escape(rr[3], True),
         rr[8], rr[8],
-        rr[8], cgi.escape(rr[4], True),
-        rr[8], cgi.escape(rr[28], True),
-        rr[8], cgi.escape(rr[6], True),
-        rr[8], cgi.escape(rr[31], True),
-        rr[8], cgi.escape(rr[35], True))
+        rr[8], html.escape(rr[4], True),
+        rr[8], html.escape(rr[28], True),
+        rr[8], html.escape(rr[6], True),
+        rr[8], html.escape(rr[31], True),
+        rr[8], html.escape(rr[35], True))
     elif fieldSet == 'mattax':
         return """<tr>
 <td class="objno"><a target="cspace" href="%s">%s</a></td>
@@ -278,13 +278,13 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 <td><input class="xspan" type="text" size="45" name="ma.%s" value="%s"></td>
 <td><input class="xspan" type="text" size="45" name="ta.%s" value="%s"></td>
 <td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td>
-</tr>""" % (link, cgi.escape(rr[3], True),
-            rr[8], cgi.escape(rr[3], True),
+</tr>""" % (link, html.escape(rr[3], True),
+            rr[8], html.escape(rr[3], True),
             rr[8], rr[8],
-            rr[8], cgi.escape(rr[4], True),
-            rr[8], cgi.escape(rr[30], True),
-            rr[8], cgi.escape(rr[33], True),
-            rr[8], cgi.escape(rr[15], True))
+            rr[8], html.escape(rr[4], True),
+            rr[8], html.escape(rr[30], True),
+            rr[8], html.escape(rr[33], True),
+            rr[8], html.escape(rr[15], True))
     # ucjeps fieldset
     elif fieldSet == 'student':
         return """<tr>
@@ -297,15 +297,15 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
     <td><input class="xspan" type="text" size="36" name="co.%s" value="%s"></td>
     <td><input class="xspan" type="text" size="10" name="pc.%s" value="%s"></td>
     <!-- td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td -->
-    </tr>""" % (link3, cgi.escape(rr[1], True),
-                rr[0], cgi.escape(rr[1], True),
+    </tr>""" % (link3, html.escape(rr[1], True),
+                rr[0], html.escape(rr[1], True),
                 rr[0], rr[0],
-                rr[0], cgi.escape(rr[2], True),
-                rr[0], cgi.escape(rr[4], True),
-                rr[0], cgi.escape(rr[6], True),
-                rr[0], cgi.escape(rr[8], True),
-                rr[0], cgi.escape(rr[28], True),
-                rr[0], cgi.escape(rr[10], True))
+                rr[0], html.escape(rr[2], True),
+                rr[0], html.escape(rr[4], True),
+                rr[0], html.escape(rr[6], True),
+                rr[0], html.escape(rr[8], True),
+                rr[0], html.escape(rr[28], True),
+                rr[0], html.escape(rr[10], True))
     elif fieldSet == 'fullmonty':
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
         objstatuses, selected = cswaConstants.getObjectStatuses(form, rr[8], rr[37])
@@ -423,32 +423,32 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
 
 </td>
 </tr>""" % (
-        link, cgi.escape(rr[3], True),
-        rr[8], cgi.escape(rr[3], True),
+        link, html.escape(rr[3], True),
+        rr[8], html.escape(rr[3], True),
         rr[8], rr[8],
-        rr[8], cgi.escape(rr[4], True),
+        rr[8], html.escape(rr[4], True),
         rr[8], rr[5],
-        rr[8], cgi.escape(rr[25], True),
-        rr[8], cgi.escape(rr[7], True),
-        rr[8], cgi.escape(rr[9], True),
-        rr[8], cgi.escape(rr[18], True),
+        rr[8], html.escape(rr[25], True),
+        rr[8], html.escape(rr[7], True),
+        rr[8], html.escape(rr[9], True),
+        rr[8], html.escape(rr[18], True),
         altnumtypes,
-        rr[8], cgi.escape(rr[16], True),
+        rr[8], html.escape(rr[16], True),
         objecttypes,
-        rr[8], cgi.escape(rr[36], True),
+        rr[8], html.escape(rr[36], True),
         objstatuses,
-        rr[8], cgi.escape(rr[29], True),
-        rr[8], cgi.escape(rr[32], True),
-        rr[8], cgi.escape(rr[34], True),
-        rr[8], cgi.escape(rr[30], True),
-        rr[8], cgi.escape(rr[33], True),
-        rr[8], cgi.escape(rr[28], True),
-        rr[8], cgi.escape(rr[6], True),
-        rr[8], cgi.escape(rr[31], True),
-        rr[8], cgi.escape(rr[35], True),
+        rr[8], html.escape(rr[29], True),
+        rr[8], html.escape(rr[32], True),
+        rr[8], html.escape(rr[34], True),
+        rr[8], html.escape(rr[30], True),
+        rr[8], html.escape(rr[33], True),
+        rr[8], html.escape(rr[28], True),
+        rr[8], html.escape(rr[6], True),
+        rr[8], html.escape(rr[31], True),
+        rr[8], html.escape(rr[35], True),
         collmans,
         legacydepartments,
-        rr[8], cgi.escape(rr[15], True)
+        rr[8], html.escape(rr[15], True)
         )
 
 
