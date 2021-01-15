@@ -3,35 +3,37 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.5.0
-Fri Oct 16 14:54:22 PDT 2020
+This is version 5.6.0-rc1
+Fri Jan 15 11:43:35 PST 2021
 
-deb5da9 (HEAD -> master, tag: 5.5.0-rc6, origin/master, origin/HEAD) revise change log and VERSION file for version 5.5.0-rc6
+34efcc2 (HEAD -> master, origin/master, origin/HEAD) CSW-397: update django webapps to use python 3.8
+6cdcf38 (tag: 5.5.0) revise change log and VERSION file for version 5.5.0
+deb5da9 revise change log and VERSION file for version 5.5.0-rc6
 b91c506 NOJIRA: django setup.sh script needs to set runtime directory for local setup
-328e804 (tag: 5.5.0-rc5) revise change log and VERSION file for version 5.5.0-rc5
+328e804 revise change log and VERSION file for version 5.5.0-rc5
 7ad96c9 CSW-363: add 'object status' to registation and object type/cm fieldsets in xir webapps
-56d1282 (tag: 5.5.0-rc4) revise change log and VERSION file for version 5.5.0-rc4
+56d1282 revise change log and VERSION file for version 5.5.0-rc4
 3be0a42 CSW-358: refactor xir toolbox code: apply DRY, small bug fixes, etc.
-5d16993 (tag: 5.5.0-rc3) revise change log and VERSION file for version 5.5.0-rc3
+5d16993 revise change log and VERSION file for version 5.5.0-rc3
 8ab604a CSW-358: refactoring toolbox xir apps a bit
-0c158cd (tag: 5.5.0-rc2) revise change log and VERSION file for version 5.5.0-rc2
+0c158cd revise change log and VERSION file for version 5.5.0-rc2
 676a37f CSW-363: put 'on deposit' in the correct spot in toolbox dropdown
-bb1d1fc (tag: 5.5.0-rc1) revise change log and VERSION file for version 5.5.0-rc1
+bb1d1fc revise change log and VERSION file for version 5.5.0-rc1
 abc8549 CSW-363: add a test for then pahma object status dropdown
 30318f0 CSW-363: add 'on deposit' and 'not accessioned' to object status in XIR webapps
 fa0646a (tag: 5.4.0) revise change log and VERSION file for version 5.4.0
-8b3b07f (tag: 5.4.0-rc4) revise change log and VERSION file for version 5.4.0-rc4
+8b3b07f revise change log and VERSION file for version 5.4.0-rc4
 6cfbf0e CSW-348: correct items #3 and #4 in this issue concerning 'PAHMA alt num' field
 a297b5d CSW-349: handle webapp configuration files more gracefully; correct inline doc
 e6a2e29 revise change log and VERSION file for version 5.4.0
-ce8d56d (tag: 5.4.0-rc3) revise change log and VERSION file for version 5.4.0-rc3
+ce8d56d revise change log and VERSION file for version 5.4.0-rc3
 5b6f309 CSW-347: add 'legacy dept' to fieldset in Toolbox tool 'bult object edit'
 cdda70a CSW-344: refactor 'group making' feature of bmu
-7a5fd16 (tag: 5.4.0-rc2) revise change log and VERSION file for version 5.4.0-rc2
+7a5fd16 revise change log and VERSION file for version 5.4.0-rc2
 edf7b9d NOJIRA: improve inline comments and messages for django webapps setup script
 c9006a2 NOJIRA: correct undetected bug in xml for unused pahma batch job in uploadmedia.py
 196b967 CSW-340: django logs should handle unicode characters
-38d42cf (tag: 5.4.0-rc1) revise change log and VERSION file for version 5.4.0-rc1
+38d42cf revise change log and VERSION file for version 5.4.0-rc1
 47f87e7 NOJIRA: for making versions: checkout master, then make release tag
 a8fc58d HMP-152: update django for webapps per security advisory
 1024daa NOJIRA: minor formatting infelicity in bmu email report
