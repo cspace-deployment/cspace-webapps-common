@@ -78,7 +78,7 @@ def formatRow(result, form, config):
         return """<tr><td class="rdo" ><input type="checkbox" name="r.%s" value="moved|%s|%s|%s|%s|%s" checked></td><td class="objno"><a target="cspace" href="%s">%s</a></td><td class="objname">%s</td><td class="zcell">%s</td><td class="zcell">%s</td></tr>""" % (
             rr[3], rr[8], rr[1], '', rr[3], rr[13], link, rr[3], rr[4], rr[5], rr[0])
     elif result['rowtype'] == 'keyinfo' or result['rowtype'] == 'objinfo':
-        return formatInfoReviewRow(form, link, rr, link2, link3)
+        return formatInfoReviewRow(form, link, rr, link2, link3, config)
     elif result['rowtype'] == 'packinglist':
         if institution == 'bampfa':
             return """
@@ -110,7 +110,9 @@ def formatRow(result, form, config):
 </tr>""" % (link, rr[3], rr[8], rr[4], rr[8], rr[5], rr[7], rr[8], rr[6])
 
 
-def formatInfoReviewRow(form, link, rr, link2, link3):
+def formatInfoReviewRow(form, link, rr, link2, link3, config):
+    hostname = config.get('connect', 'hostname')
+    institution = config.get('info', 'institution')
     fieldSet = form.get("fieldset")
     if fieldSet == 'namedesc':
         return """<tr>
@@ -296,6 +298,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
     <td><input class="xspan" type="text" size="36" name="st.%s" value="%s"></td>
     <td><input class="xspan" type="text" size="36" name="co.%s" value="%s"></td>
     <td><input class="xspan" type="text" size="10" name="pc.%s" value="%s"></td>
+    <td><a href="/%s/media/%s" target="fullimage">View Media</a></td>
     <!-- td class="zcell"><textarea cols="78" rows="5" name="bdx.%s">%s</textarea></td -->
     </tr>""" % (link3, html.escape(rr[1], True),
                 rr[0], html.escape(rr[1], True),
@@ -305,6 +308,7 @@ def formatInfoReviewRow(form, link, rr, link2, link3):
                 rr[0], html.escape(rr[6], True),
                 rr[0], html.escape(rr[8], True),
                 rr[0], html.escape(rr[28], True),
+                institution, html.escape(rr[1], True),
                 rr[0], html.escape(rr[10], True))
     elif fieldSet == 'fullmonty':
         collmans, selected = cswaConstants.getCollMan(form, rr[8], rr[27])
