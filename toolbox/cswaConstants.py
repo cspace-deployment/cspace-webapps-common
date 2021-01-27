@@ -189,6 +189,7 @@ def infoHeaders(fieldSet):
       <th>State</th>
       <th>County</th>
       <th>Project Code</th>
+      <th>Media</th>
       <!-- th style="text-align:center">Brief Description</th -->
     </tr>"""
     elif fieldSet == 'fullmonty':
