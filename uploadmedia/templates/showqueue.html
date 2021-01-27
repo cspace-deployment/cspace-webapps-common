@@ -15,6 +15,7 @@
         <th/>
         <th>View Job Files</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -69,10 +70,18 @@
             <td>
                 {% for j in jobinfo %}
                     {% if j.1 == 'ingested' %}
-                        <!-- a href="showresults/?filename={{ j.0 }}&status=showinportal">In Portal</a -->
-                        <a href="bmu_showresults?filename={{ j.0 }}&status=showmedia">View Media</a>
+                        <a href="bmu_checkimagefilenames?filename={{ j.0 }}">Check File</a>
                     {% elif j.1 == 'pending' %}
                         <a href="bmu_checkimagefilenames?filename={{ j.0 }}">Check File</a>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td>
+                {% for j in jobinfo %}
+                    {% if j.1 == 'ingested' %}
+                        <a href="bmu_showresults?filename={{ j.0 }}&status=showmedia">View Media</a>
+                    {% elif j.1 == 'pending' %}
+                        <a href="bmu_startjob/{{ j.0 }}">Start Job</a>
                     {% endif %}
                 {% endfor %}
             </td>

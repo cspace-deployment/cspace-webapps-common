@@ -16,7 +16,7 @@
                     <h2><span style="color:red">System is down, please standby!</span></h2>
                 {% else %}
                     <input type="file" name="imagefiles" multiple>
-                    <input type="checkbox" name="validateonly"> Validate files and filenames only, do not process.
+                    <!-- input type="checkbox" name="validateonly"> Validate files and filenames only, do not process. -->
                     <hr/>
                     {% if dropdowns.usebmuoptions %}
                         <h2>
@@ -95,15 +95,14 @@
                         </table>
                     {% endif %}
                     <h2>
-                        <li>Select action to perform</li>
+                        <li>Upload media to queue</li>
                     </h2>
-                    <input class="prettyBtn" type="submit" name="createmedia"
+                    <!-- input class="prettyBtn" type="submit" name="createmedia"
                            value="Upload to CSpace and Create Media Records NOW (100 media files max)">
-                    <span class="error">&nbsp;Only click once, please, then be patient!</span>
-                    <br/><br/>
+                    <br/><br/ -->
                     <input class="prettyBtn" type="submit" name="uploadmedia"
-                           value="Upload to CSpace and Queue for LATER CSpace Ingestion"></td>
-
+                           value="Upload to CSpace and Queue for CSpace Ingestion"></td>
+                    <span class="error">&nbsp;Only click once, please, then be patient!</span>
                     {% if images %}
                         {% include "images.html" %}
                     {% endif %}
@@ -111,26 +110,26 @@
                     {% if jobinfo %}
                         <hr/>
                         {% if jobinfo.status == 'uploadmedia' %}
-                            <h2>Job {{ jobinfo.jobnumber }} enqueued; {{ count }} image{{ count|pluralize }}.</h2>
+                            <h3>Job {{ jobinfo.jobnumber }} enqueued; {{ count }} image{{ count|pluralize }}.</h3>
                             <!-- h2>Job {{ jobinfo.jobnumber }} enqueued. Estimated time to
                             run: {{ jobinfo.estimatedtime }} minutes.</h2 -->
                         {% endif %}
                         {% if jobinfo.status == 'createmedia' %}
-                            <h2>Job {{ jobinfo.jobnumber }} completed. Time required: {{ elapsedtime }} seconds.</h2>
+                            <h3>Job {{ jobinfo.jobnumber }} completed. Time required: {{ elapsedtime }} seconds.</h3>
                         {% endif %}
                         {% if jobinfo.status == 'jobfailed' %}
-                            <h2 class="error">Job {{ jobinfo.jobnumber }} failed.<br/>
-                                Please click <a href="bmu_showresults/?filename={{ jobinfo.jobnumber }}.check.csv&status=check}">here</a> or consult the 'check' file in job queue for details. Sorry!</h2>
+                            <h3 class="error">Job {{ jobinfo.jobnumber }} failed.<br/>
+                                Please click <a href="bmu_showresults/?filename={{ jobinfo.jobnumber }}.check.csv&status=check}">here</a> or consult the 'check' file in job queue for details. Sorry!</h3>
                         {% endif %}
                     {% endif %}
                 {% endif %}
+            <h2>
+                <li>Manage jobs and uploads: check results, start jobs, delete pending jobs</li>
+            </h2>
         </ol>
             </form>
-        <hr/>
-        <ul style="margin-left: 20px;">
-            <h2>
-                <li>Check on jobs and uploads</li>
-            </h2>
+            <ul style="margin-left: 20px;">
+            <hr/>
             <form action="{% url 'bmu_showqueue' %}" method="post">
                 {% csrf_token %}
                 <input class="prettyBtn" type="submit" name="checkjobs" value="View the Job Queue">
@@ -174,6 +173,8 @@
                             <td>{{ o.2 }}</td>
                             <td>
                                 {% if o.4 == 0 %}
+                                    <span class="error">{{  o.5 }}</span>
+                                {% elif o.4 > 1 %}
                                     <span class="error">{{  o.5 }}</span>
                                 {% else %}
                                     <span style="color: green">{{  o.5 }}</span>

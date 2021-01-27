@@ -10,12 +10,11 @@ import urllib.parse
 from django.shortcuts import render, HttpResponse, redirect
 
 from os import path, remove
-import logging
-import time, datetime
+import time
 from uploadmedia.getNumber import getNumber
 from uploadmedia.utils import SERVERLABEL, SERVERLABELCOLOR, POSTBLOBPATH, INSTITUTION, BATCHPARAMETERS, FIELDS2WRITE, JOBDIR
 from uploadmedia.utils import getBMUoptions, handle_uploaded_file, assignValue, get_exif, writeCsv
-from uploadmedia.utils import getJobfile, getJoblist, loginfo, reformat, rendermedia
+from uploadmedia.utils import getJobfile, getJoblist, reformat, rendermedia
 from uploadmedia.specialhandling import specialhandling
 from uploadmedia.checkBlobs import doChecks
 from common.utils import loginfo
@@ -70,8 +69,6 @@ def setContext(context, elapsedtime):
 
 def prepareFiles(request, BMUoptions, context):
 
-    validateonly = 'validateonly' in request.POST
-
     jobnumber = context['jobnumber']
     jobinfo = {}
     images = []
@@ -93,8 +90,7 @@ def prepareFiles(request, BMUoptions, context):
                 # add the Displayname just in case...
                 imageinfo['%sDisplayname' % override[2]] = dname
 
-            if not validateonly:
-                handle_uploaded_file(afile)
+            handle_uploaded_file(afile)
 
             for option in ['handling', 'approvedforweb']:
                 if option in request.POST:
@@ -125,12 +121,11 @@ def prepareFiles(request, BMUoptions, context):
 
         except:
             raise
-            if not validateonly:
-                # we still upload the file, anyway...
-                try:
-                    handle_uploaded_file(afile)
-                except:
-                    sys.stderr.write("error! file=%s %s" % (afile.name, traceback.format_exc()))
+            # we still upload the file, anyway...
+            try:
+                handle_uploaded_file(afile)
+            except:
+                sys.stderr.write("error! file=%s %s" % (afile.name, traceback.format_exc()))
 
             images.append({'name': afile.name, 'size': afile.size,
                            'error': 'problem uploading file or extracting image metadata, not processed'})
@@ -138,40 +133,12 @@ def prepareFiles(request, BMUoptions, context):
     if len(images) > 0:
         jobinfo['jobnumber'] = jobnumber
 
-        if not validateonly:
-            writeCsv(getJobfile(jobnumber) + '.step1.csv', images, FIELDS2WRITE)
+        writeCsv(getJobfile(jobnumber) + '.step1.csv', images, FIELDS2WRITE)
         jobinfo['estimatedtime'] = '%8.1f' % (len(images) * 10 / 60.0)
 
         if 'createmedia' in request.POST:
             jobinfo['status'] = 'createmedia'
-            if not validateonly:
-                loginfo('bmu', getJobfile(jobnumber), context, request)
-                try:
-                    file_is_OK = True
-                    if INSTITUTION == 'cinefiles':
-                        # test file content
-                        input_file = getJobfile(jobnumber) + '.step1.csv'
-                        report_file = getJobfile(jobnumber) + '.check.csv'
-                        file_is_OK = doChecks(('', 'file', JOBDIR % '', input_file, report_file))
-                        # if ok continue
-                        # otherwise ... bail
-                        if file_is_OK:
-                            pass
-                        else:
-                            images = []
-                            deletejob(request, jobnumber + '.step1.csv')
-                            jobinfo['status'] = 'jobfailed'
-                            loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
-                    if file_is_OK:
-                        retcode = subprocess.call([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
-                        if retcode < 0:
-                            loginfo('bmu ERROR: process', jobnumber + " Child was terminated by signal %s" % -retcode, context, request)
-                        else:
-                            loginfo('bmu ERROR: process', jobnumber + ": Child returned %s" % retcode, context, request)
-                except OSError as e:
-                    jobinfo['status'] = 'jobfailed'
-                    loginfo('error', "ERROR: Execution failed: %s" % e, context, request)
-                loginfo('bmu finish', getJobfile(jobnumber), context, request)
+            jobinfo['status'] = runjob(jobnumber, context, request)
 
         elif 'uploadmedia' in request.POST:
             jobinfo['status'] = 'uploadmedia'
@@ -185,8 +152,6 @@ def setConstants(request, im):
 
     context = {}
 
-    context['validateonly'] = 'validateonly' in request.POST
-
     for override in im.BMUoptions['overrides']:
         if override[2] in request.POST:
             context[override[2]] = [request.POST[override[2]],request.POST['override%s' % override[2]]]
@@ -194,6 +159,39 @@ def setConstants(request, im):
             context[override[2]] = ['', 'never']
 
     return context
+
+
+def runjob(jobnumber, context, request):
+    loginfo('bmu online job submission started', getJobfile(jobnumber), context, request)
+    status = 'jobstarted'
+    try:
+        file_is_OK = True
+        if INSTITUTION == 'cinefiles':
+            # test file content
+            input_file = getJobfile(jobnumber) + '.step1.csv'
+            report_file = getJobfile(jobnumber) + '.check.csv'
+            file_is_OK = doChecks(('', 'file', JOBDIR % '', input_file, report_file))
+            # if ok continue
+            # otherwise ... bail
+            if file_is_OK:
+                pass
+            else:
+                deletejob(request, jobnumber + '.step1.csv')
+                loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
+                status = 'jobfailed'
+        if file_is_OK:
+            p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
+            pid = ''
+            if p_object._child_created:
+                pid = p_object.pid
+                loginfo('bmu online job submitted:', jobnumber + f': Child returned {p_object.returncode}, pid {pid}', context, request)
+            else:
+                loginfo('bmu ERROR:', jobnumber + f': Child returned {p_object.returncode}, pid {pid}', context, request)
+    except OSError as e:
+        loginfo('error', "ERROR: Execution failed: %s" % e, context, request)
+        status = 'jobfailed'
+    loginfo('bmu online submission finished', getJobfile(jobnumber), context, request)
+    return status
 
 
 @csrf_exempt
@@ -253,7 +251,12 @@ def checkimagefilenames(request):
         context['filename'] = filename
         file_handle = open(getJobfile(filename), 'r')
         lines = file_handle.read().splitlines()
-        recordtypes = [tuple(list(f.split("|")[i] for i in [0, 2, 7, 8])) for f in lines]
+        # TODO the delimiters used should be rationalized someday
+        if '|' in lines[0]:
+            delim = '|'
+        else:
+            delim = '\t'
+        recordtypes = [tuple(list(f.split(delim)[i] for i in [0, 2, 7, 8])) for f in lines]
         seen = {}
         checked_objects = []
         for objitems in recordtypes[1:]:
@@ -282,16 +285,12 @@ def checkimagefilenames(request):
 
 def upload_type_check(num_items, objitem):
     handling = objitem[3]
-    if handling == 'media+create+accession':
-        if num_items == 0:
-            return (1, 'A new object record will be created.')
-        else:
-            return (0, 'Object record exists! A new DUPLICATE skeletal object record will be created.')
+    if num_items == 0:
+        return (num_items, 'Not found')
+    if num_items > 1:
+        return (num_items, f'Duplicated {num_items} times!')
     else:
-        if num_items == 0:
-            return (num_items, 'Not found')
-        else:
-            return (num_items, 'Found')
+        return (num_items, 'Found')
 
 @login_required()
 def downloadresults(request, filename):
@@ -330,6 +329,23 @@ def showresults(request):
 
 
 @login_required()
+def startjob(request, filename):
+    try:
+        elapsedtime = time.time()
+        context = setConstants(request, im)
+        (jobnumber, step, csv ) = filename.split('.')
+        context['jobnumber'] = jobnumber
+        context['filename'] = filename
+        runjob(jobnumber, context, request)
+        # give the job a chance to start to ensure the queue listing is updated properly.
+        time.sleep(2)
+        loginfo('bmu', '%s :: %s' % ('uploadmedia online job submission requested', filename), {}, {})
+    except:
+        loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to start job', filename), {}, {})
+    return showqueue(request)
+
+
+@login_required()
 def deletejob(request, filename):
     try:
         remove(getJobfile(filename))
@@ -344,12 +360,10 @@ def showqueue(request):
     elapsedtime = time.time()
     context = setConstants(request, im)
     jobs, errors, jobcount, errorcount = getJoblist(request)
-    if 'checkjobs' in request.POST:
-        display_type = 'checkjobs'
-    elif 'showerrors' in request.POST:
+    if 'showerrors' in request.POST:
         display_type = 'showerrors'
     else:
-        display_type = None
+        display_type = 'checkjobs'
     context['display'] = display_type
     context['jobs'] = jobs
     context['errors'] = errors

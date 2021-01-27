@@ -11,6 +11,7 @@ urlpatterns = [
     path('bmu_showqueue', views.showqueue, name='bmu_showqueue'),
     path('bmu_downloadresults/<filename>', views.downloadresults, name='bmu_downloadresults'),
     path('bmu_showresults', views.showresults, name='bmu_showresults'),
+    path('bmu_startjob/<filename>', views.startjob, name='bmu_startjob'),
     path('bmu_deletejob/<filename>', views.deletejob, name='bmu_deletejob'),
     # path('createmedia', views.createmedia, name='createmedia'),
 ]
