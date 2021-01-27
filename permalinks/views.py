@@ -32,6 +32,10 @@ def get_item(request, itemid):
     if form.is_valid():
         context = {'searchValues': requestObject}
         context = doSearch(context, prmz, request)
+        if '/media/' in request.path_info:
+            context['permalink_display'] = 'media'
+        else:
+            context['permalink_display'] = 'object'
 
         loginfo('permalinks', 'results.%s' % context['displayType'], context, request)
         return render(request, 'search.html', context)

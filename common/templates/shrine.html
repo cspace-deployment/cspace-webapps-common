@@ -1,6 +1,40 @@
 {% load staticfiles %}
 
-<a class="cbbtn" href="../search">Click here to start a new search</a>
+{% if permalink_display == 'media' %}
+    {% for item in items %}
+        <div style="overflow: auto;">
+            <div style="width: 98%; text-align: right;">
+                <hr/>
+                <span style="padding:2px; font-size:xx-large; font-weight: bold">{{ item.mainentry|safe }}</span>
+                <div class="result-title">
+                    <h2>{{ item.accession }}</h2>
+                </div>
+                <hr/>
+            </div>
+            <div style="float: left; min-width: 350px; padding-right: 10px;">
+                {% if item.blobs %}
+                    <div style="text-align: left; padding-bottom: 10px; ">
+                        <a target="image"
+                           href="{{ imageserver }}/blobs/{{ item.blobs.0 }}/derivatives/OriginalJpeg/content"><img
+                                style="max-width: 98%;"
+                                src="{{ imageserver }}/blobs/{{ item.blobs.0 }}/derivatives/OriginalJpeg/content"/></a>
+                    </div>
+                    <div style="text-align: left; max-width: 500px;">
+                        {% for t in item.blobs %}
+                            {% if forloop.counter != 1 %}
+                                <a target="image"
+                                   href="{{ imageserver }}/blobs/{{ t }}/derivatives/OriginalJpeg/content"><img
+                                        style="max-width: 600px; height: {{ sizecompact }}"
+                                        src="{{ imageserver }}/blobs/{{ t }}/derivatives/{{ derivativecompact }}/content"/></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <a class="cbbtn" href="../search">Click here to start a new search</a>
 {% for item in items %}
     <div style="overflow: auto;">
         <div style="width: 1000px; text-align: right;">
@@ -103,5 +137,5 @@
         <a title="permalink" target=_new href="/{{ institution }}/object/{{ item.accession }}">
             {{ request.environ.HTTP_HOST }}/{{ institution }}/object/{{ item.accession }}
         </a>
-
 {% endfor %}
+{% endif %}
