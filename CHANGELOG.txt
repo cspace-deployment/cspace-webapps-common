@@ -3,11 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.6.0-rc2
-Fri Jan 15 12:53:44 PST 2021
+This is version 5.6.0-rc3
+Thu Jan 28 09:31:37 PST 2021
 
-717a8ba (HEAD -> master) CSW-397: update travis to use python 3.8 for django webapps
-88794fc (tag: 5.6.0-rc1, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc1
+58b250d (HEAD -> master) CSW-403: refactor bmu a bit to improve ux
+8b4fbb4 CSW-403: toolbox webapps (gir) should show link to media to faciliate ucjeps editing
+85a5486 CSW-403: toolbox webapps (gir) should show link to media to faciliate ucjeps editing
+8c1e712 CSW-403: revise 'permalink' webapp to support ucjeps media functionality
+f7e18c1 NOJIRA: add a 500 error page to django webapps
+4bbd327 (tag: 5.6.0-rc2, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc2
+717a8ba CSW-397: update travis to use python 3.8 for django webapps
+88794fc (tag: 5.6.0-rc1) revise change log and VERSION file for version 5.6.0-rc1
 34efcc2 CSW-397: update django webapps to use python 3.8
 6cdcf38 (tag: 5.5.0) revise change log and VERSION file for version 5.5.0
 deb5da9 revise change log and VERSION file for version 5.5.0-rc6
