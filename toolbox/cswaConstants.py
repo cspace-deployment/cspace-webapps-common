@@ -393,6 +393,7 @@ def getLegacyDepts(form, csid, ld):
         ('Mixed faunal and human remains', 'Mixed faunal and human remains'),
         ('Mounts', 'Mounts'),
         ('NAGPRA-associated Funerary Objects', 'NAGPRA-associated Funerary Objects'),
+        ('NAGPRA unassociated funerary objects', 'NAGPRA unassociated funerary objects'),
         ('Registration', 'Registration')
     ]
 
@@ -620,6 +621,7 @@ def getObjectStatuses(form, csid, ant):
         ("destructive analysis", "destructive analysis"),
         ("discarded", "discarded"),
         ("exchanged", "exchanged"),
+        ("held in trust", "held in trust"),
         ("intended for repatriation", "intended for repatriation"),
         ("intended for transfer", "intended for transfer"),
         ("irregular Museum number", "irregular Museum number"),
