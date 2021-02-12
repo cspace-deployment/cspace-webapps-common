@@ -66,14 +66,18 @@ function deploy()
         fi
         echo "Making and populating runtime directory ${RUNDIR}"
         mkdir -p ${RUNDIR}
-        # copy the "built" files to the runtime directory, but leave the config files as they are
-        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore --exclude config . ${RUNDIR}
+        # rsync the "prepped and configged" files to the runtime directory
+        rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
 
-        # copy the most existing (old) config files into this new runtime directory
+        # if running on an RTL server where this code is already deployed and running...
+        # copy the most recent existing (i.e. old) config files into this new runtime directory
         # nb: any changes to configuration needed
         # for this release will need to be applied (by hand, presumably) after the fact of
         # of relinking this directory with the runtime directory in /var/www/
-        cp -r /var/www/$1/config ${RUNDIR}
+        # otherwise, we use the default config provided by the prepping code further below
+        if [[ -d /var/www/$1/config ]]; then
+            rsync -r /var/www/$1/config/ ${RUNDIR}/config/
+        fi
         cd ${RUNDIR}
     else
         RUNDIR=.
