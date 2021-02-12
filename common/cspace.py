@@ -33,7 +33,7 @@ def getConfig(base_path, filename_nosuffix):
     config = configparser.RawConfigParser()
     config.read(relative_path)
     theSections = config.sections()
-    if len(theSections) is 0:
+    if len(theSections) == 0:
         errMsg = "Could not find the required config file %s" % relative_path
         # print(errMsg)
         raise Exception(errMsg)
