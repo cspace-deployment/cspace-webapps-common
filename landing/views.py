@@ -1,6 +1,6 @@
 __author__ = 'jblowe'
 
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import json
 from django.conf import settings

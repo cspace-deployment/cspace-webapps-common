@@ -6,7 +6,7 @@ import time
 import urllib
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, render_to_response
+from django.shortcuts import render
 
 from common.utils import setConstants, loginfo
 from common.appconfig import loadConfiguration, loadFields, getParms
