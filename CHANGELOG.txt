@@ -3,13 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.6.0-rc5
-Thu Feb 11 21:54:56 PST 2021
+This is version 5.6.0-rc6
+Thu Feb 18 12:36:22 PST 2021
 
-64cdf4e (HEAD -> master) CSW-349: get rid of obsolete ubuntu_requirements.txt
+c2006d0 (HEAD -> master) CSW-349: update js packages in package.json
+1c2307e CSW-349: python 3.8 seems to make these bytes rather than string
+766fa35 (tag: 5.6.0-rc5, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc5
+64cdf4e CSW-349: get rid of obsolete ubuntu_requirements.txt
 f7569d3 CSW-349: render_to_response is deprecated in django 2.x will be gone in 3.x
 da33f1d CSW-349: python 3.8 complains when you use ' is ' with literals
-2b9c39f (origin/master, origin/HEAD) CSW-349: .travis.yml specified wrong requirements.txt
+2b9c39f CSW-349: .travis.yml specified wrong requirements.txt
 2393f6a CSW-349: django setup.sh should ensure config dir has plausible files in it
 2cc4c70 (tag: 5.6.0-rc4) revise change log and VERSION file for version 5.6.0-rc4
 ce2fc05 CSW-420: add 'held in trust' and 'NAGPRA unassociated...' values where they belong in Toolbox
