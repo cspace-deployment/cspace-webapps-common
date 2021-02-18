@@ -79,7 +79,7 @@ def make_get_request(realm, uri, hostname, protocol, port, username, password):
     authhandler = urllib.request.HTTPBasicAuthHandler(passMgr)
     opener = urllib.request.build_opener(authhandler)
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip().decode('utf-8')
     opener.addheaders = [('Authorization', auth_value)]
     urllib.request.install_opener(opener)
     url = "%s/%s" % (server, uri)
@@ -119,7 +119,7 @@ def postxml(realm, uri, hostname, protocol, port, username, password, payload, r
     authhandler = urllib.request.HTTPBasicAuthHandler(passMgr)
     opener = urllib.request.build_opener(authhandler)
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip().decode('utf-8')
     opener.addheaders = [('Authorization', auth_value)]
     urllib.request.install_opener(opener)
     url = "%s/%s" % (server, uri)

@@ -50,7 +50,7 @@ def postxml(requestType, uri, realm, server, username, password, payload):
     opener = urllib.request.build_opener(authhandler)
 
     unencoded_credentials = "%s:%s" % (username, password)
-    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip()
+    auth_value = 'Basic %s' % base64.b64encode(str.encode(unencoded_credentials)).strip().decode('utf-8')
     opener.addheaders = [('Authorization', auth_value)]
     urllib.request.install_opener(opener)
     url = "%s/cspace-services/%s" % (server, uri)
