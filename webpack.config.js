@@ -13,7 +13,7 @@ const config = {
       toolbox: './client_modules/js/toolbox-index.js'
     },
     output: {
-        path: './webpack_dist',
+        path: __dirname+ '/webpack_dist/',
         filename: '[name].bundle.js',
         library: library,
         libraryTarget: 'umd'
@@ -23,7 +23,7 @@ const config = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                loader: 'babel',
+                loader: 'babel-loader',
             },
         ],
     },
@@ -36,7 +36,7 @@ const config = {
         }),
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx'],
+        extensions: ['.js', '.jsx'],
     },
 };
 

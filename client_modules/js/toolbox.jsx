@@ -7,7 +7,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Autosuggest = require('react-autosuggest');
-var $ = require("expose?$!jquery");
+var $ = require("expose-loader?$!jquery");
 
 // custom propType
 function tuple(props, propName, componentName) {
