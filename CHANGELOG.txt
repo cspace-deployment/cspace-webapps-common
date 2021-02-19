@@ -3,12 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.6.0-rc6
-Thu Feb 18 12:36:22 PST 2021
+This is version 5.6.0-rc7
+Fri Feb 19 15:58:05 PST 2021
 
-c2006d0 (HEAD -> master) CSW-349: update js packages in package.json
+86b93bc (HEAD -> master) CSW-349: seems that the new webpack requires config changes
+ee57255 (tag: 5.6.0-rc6, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc6
+c2006d0 CSW-349: update js packages in package.json
 1c2307e CSW-349: python 3.8 seems to make these bytes rather than string
-766fa35 (tag: 5.6.0-rc5, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc5
+766fa35 (tag: 5.6.0-rc5) revise change log and VERSION file for version 5.6.0-rc5
 64cdf4e CSW-349: get rid of obsolete ubuntu_requirements.txt
 f7569d3 CSW-349: render_to_response is deprecated in django 2.x will be gone in 3.x
 da33f1d CSW-349: python 3.8 complains when you use ' is ' with literals
