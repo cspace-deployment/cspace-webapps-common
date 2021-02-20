@@ -173,7 +173,7 @@ $(document).ready(function () {
                     }
                 });
             },
-            minLength: 2
+            minLength: 1
         });
     });
 
