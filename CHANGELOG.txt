@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 5.6.0-rc9
-Sat Feb 20 12:53:25 PST 2021
+This is version 5.6.0
+Sat Feb 20 18:54:07 PST 2021
 
-9dcd573 (HEAD -> master) NOJIRA: min length for autosuggest is now 1
-c8d2934 (tag: 5.6.0-rc8, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc8
+fd0ca5f (HEAD -> master, tag: 5.6.0-rc9, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0-rc9
+9dcd573 NOJIRA: min length for autosuggest is now 1
+c8d2934 (tag: 5.6.0-rc8) revise change log and VERSION file for version 5.6.0-rc8
 85357ad CSW-428: add the UCB and CSpace logos as static content for server splash pages
 5e5b110 (tag: 5.6.0-rc7) revise change log and VERSION file for version 5.6.0-rc7
 86b93bc CSW-349: seems that the new webpack requires config changes
