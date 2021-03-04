@@ -240,18 +240,10 @@ def getHandlers(form, institution):
 
         handlerlist = [
             ("Michael T. Black", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7827)'Michael T. Black'"),
-            ("Camille Cronkhite", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(CamilleCronkhite1487791877801)'Camille Cronkhite'"),
             ("Madeleine Fang", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7248)'Madeleine W. Fang'"),
             ("Leslie Freund", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7475)'Leslie Freund'"),
-            ("Corrina Fuller", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(CorrinaFuller1516841545527)'Corrina Fuller'"),
-            ("Jasmine Hernandez", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(JasmineHernandez1516841792786)'Jasmine Hernandez'"),
-            ("Audrey Hungridge", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(AudreyHungridge1516841827825)'Audrey Hungridge'"),
             ("Natasha Johnson", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'"),
-            ("Mei Shan Liang", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(MeiShanLiang1516841862452)'Mei Shan Liang'"),
-            ("Oscar Murguia-Zepeda", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(OscarMurguiaZepeda1516841756311)'Oscar Murguia-Zepeda'"),
-            ("Martina Smith", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(9034)'Martina Smith'"),
             ("Linda Waterfield", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'Linda Waterfield'"),
-            ("Leah Weaver", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LeahWeaver1441412347620)'Leah Weaver'"),
         ]
 
     handlers = '''
