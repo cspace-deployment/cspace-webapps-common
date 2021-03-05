@@ -3,10 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.2-rc2
-Thu Mar  4 16:53:39 PST 2021
+This is version 6.1.2-rc3
+Fri Mar  5 14:56:03 PST 2021
 
-2fdac9d (HEAD -> master, origin/master, origin/HEAD) CSW-436: add 'location info' subreport to ucbg bed list webapp
+c552bd4 (HEAD -> master) CSW-349: pahma object status now refnames in toolbox webapps
+feef0e5 (tag: 6.1.2-rc2, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.2-rc2
+2fdac9d CSW-436: add 'location info' subreport to ucbg bed list webapp
 8ce003e CSW-418: remove 8 handlers from PAHMA Toolbox handler list
 1657e18 (tag: 6.1.2-rc1) revise change log and VERSION file for version 6.1.2-rc1
 7684abf (tag: 5.6.0) revise change log and VERSION file for version 5.6.0
