@@ -3,36 +3,39 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.2-rc1
-Sat Feb 20 18:54:31 PST 2021
+This is version 6.1.2-rc2
+Thu Mar  4 16:53:39 PST 2021
 
-7684abf (HEAD -> master, tag: 5.6.0, origin/master, origin/HEAD) revise change log and VERSION file for version 5.6.0
-fd0ca5f (tag: 5.6.0-rc9) revise change log and VERSION file for version 5.6.0-rc9
+2fdac9d (HEAD -> master, origin/master, origin/HEAD) CSW-436: add 'location info' subreport to ucbg bed list webapp
+8ce003e CSW-418: remove 8 handlers from PAHMA Toolbox handler list
+1657e18 (tag: 6.1.2-rc1) revise change log and VERSION file for version 6.1.2-rc1
+7684abf (tag: 5.6.0) revise change log and VERSION file for version 5.6.0
+fd0ca5f revise change log and VERSION file for version 5.6.0-rc9
 9dcd573 NOJIRA: min length for autosuggest is now 1
-c8d2934 (tag: 5.6.0-rc8) revise change log and VERSION file for version 5.6.0-rc8
+c8d2934 revise change log and VERSION file for version 5.6.0-rc8
 85357ad CSW-428: add the UCB and CSpace logos as static content for server splash pages
-5e5b110 (tag: 5.6.0-rc7) revise change log and VERSION file for version 5.6.0-rc7
+5e5b110 revise change log and VERSION file for version 5.6.0-rc7
 86b93bc CSW-349: seems that the new webpack requires config changes
-ee57255 (tag: 5.6.0-rc6) revise change log and VERSION file for version 5.6.0-rc6
+ee57255 revise change log and VERSION file for version 5.6.0-rc6
 c2006d0 CSW-349: update js packages in package.json
 1c2307e CSW-349: python 3.8 seems to make these bytes rather than string
-766fa35 (tag: 5.6.0-rc5) revise change log and VERSION file for version 5.6.0-rc5
+766fa35 revise change log and VERSION file for version 5.6.0-rc5
 64cdf4e CSW-349: get rid of obsolete ubuntu_requirements.txt
 f7569d3 CSW-349: render_to_response is deprecated in django 2.x will be gone in 3.x
 da33f1d CSW-349: python 3.8 complains when you use ' is ' with literals
 2b9c39f CSW-349: .travis.yml specified wrong requirements.txt
 2393f6a CSW-349: django setup.sh should ensure config dir has plausible files in it
-2cc4c70 (tag: 5.6.0-rc4) revise change log and VERSION file for version 5.6.0-rc4
+2cc4c70 revise change log and VERSION file for version 5.6.0-rc4
 ce2fc05 CSW-420: add 'held in trust' and 'NAGPRA unassociated...' values where they belong in Toolbox
-068ac32 (tag: 5.6.0-rc3) revise change log and VERSION file for version 5.6.0-rc3
+068ac32 revise change log and VERSION file for version 5.6.0-rc3
 58b250d CSW-403: refactor bmu a bit to improve ux
 8b4fbb4 CSW-403: toolbox webapps (gir) should show link to media to faciliate ucjeps editing
 85a5486 CSW-403: toolbox webapps (gir) should show link to media to faciliate ucjeps editing
 8c1e712 CSW-403: revise 'permalink' webapp to support ucjeps media functionality
 f7e18c1 NOJIRA: add a 500 error page to django webapps
-4bbd327 (tag: 5.6.0-rc2) revise change log and VERSION file for version 5.6.0-rc2
+4bbd327 revise change log and VERSION file for version 5.6.0-rc2
 717a8ba CSW-397: update travis to use python 3.8 for django webapps
-88794fc (tag: 5.6.0-rc1) revise change log and VERSION file for version 5.6.0-rc1
+88794fc revise change log and VERSION file for version 5.6.0-rc1
 34efcc2 CSW-397: update django webapps to use python 3.8
 6cdcf38 (tag: 5.5.0) revise change log and VERSION file for version 5.5.0
 deb5da9 revise change log and VERSION file for version 5.5.0-rc6
