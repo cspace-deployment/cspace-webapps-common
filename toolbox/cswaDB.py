@@ -188,7 +188,11 @@ array_to_string(array
         left outer join hierarchy htig3 on (co2.id = htig3.parentid
         and htig3.name = 'collectionobjects_naturalhistory:taxonomicIdentGroupList')
         left outer join taxonomicIdentGroup tig3 on (tig3.id = htig3.id)
-       where h2int.name=h1.name order by htig3.pos), '|', '') alldeterminations_ss
+       where h2int.name=h1.name order by htig3.pos), '|', '') alldeterminations_ss,
+mc.movementnote as movementnote,
+case when (lg.fieldlocplace is not null and lg.fieldlocplace <> '') then regexp_replace(lg.fieldlocplace, '^.*\)''(.*)''$', '\\1')
+     when (lg.fieldlocplace is null and lg.taxonomicrange is not null) then 'Geographic range: '||lg.taxonomicrange
+end as locality_s
 from collectionobjects_common co1 
 join hierarchy h1 on co1.id=h1.id
 left outer 
@@ -203,14 +207,17 @@ join relations_common r1 on (h1.name=r1.subjectcsid and objectdocumenttype='Move
 join hierarchy h2 on (r1.objectcsid=h2.name and h2.isversion is %s true) 
 join movements_common mc on (mc.id=h2.id) 
 join movements_botgarden mb on (mc.id=mb.id)
-left outer
-join loctermgroup lct on (regexp_replace(mc.currentlocation, '^.*\\)''(.*)''$', '\\1')=lct.termdisplayname)
+left outer join loctermgroup lct on (regexp_replace(mc.currentlocation, '^.*\\)''(.*)''$', '\\1')=lct.termdisplayname)
 %s
 join collectionspace_core core on mc.id=core.id 
 join collectionobjects_botgarden cob on (co1.id=cob.id) 
 join collectionobjects_naturalhistory con on (co1.id = con.id)
-
-left outer join locations_common lc on (mc.currentlocation=lc.refname) 
+left outer join hierarchy hlg
+        on (co1.id = hlg.parentid
+        and hlg.pos = 0
+        and hlg.name = 'collectionobjects_naturalhistory:localityGroupList')
+left outer join localitygroup lg on (lg.id = hlg.id)
+join locations_common lc on (mc.currentlocation=lc.refname)
 where %s  %s = '%s'
 ORDER BY to_number(objectnumber,'9999.9999')
 LIMIT 6000"""

@@ -883,8 +883,9 @@ def getHeader(updateType, institution):
       <th>Count</th>
       <th>Location</th>
     </tr>"""
-    elif updateType == 'bedlist':
-        return """
+    elif 'bedlist' in updateType:
+        if 'standard' in updateType:
+            header = """
     <table class="tablesorter-blue" id="sortTable%s"><thead>
     <tr>
       <th data-sort="float">Accession</th>
@@ -892,25 +893,23 @@ def getHeader(updateType, institution):
       <th data-sort="string">Taxonomic Name</th>
       <th data-sort="string">Rare?</th>
       <th data-sort="string">Accession<br/>Dead?</th>
+      %s
     </tr></thead><tbody>"""
-    elif updateType == 'bedlistxxx' or updateType == 'advsearchxxx':
-        return """
+        else:
+            header = """
     <table class="tablesorter-blue" id="sortTable%s"><thead>
     <tr>
       <th data-sort="float">Accession Number</th>
       <th data-sort="string">Family</th>
-      <th data-sort="string">Taxonomic Name</th>
+      <th data-sort="string">Scientific Name</th>
+      <th data-sort="string">Collection Location Information</th>
+      <th data-sort="string">Notes</th>
+      %s
     </tr></thead><tbody>"""
-    elif updateType == 'bedlistnone':
-        return """
-    <table class="tablesorter-blue" id="sortTable"><thead><tr>
-      <th data-sort="float">Accession</th>
-      <th data-sort="string">Family</th>
-      <th data-sort="string">Taxonomic Name</th>
-      <th data-sort="string">Rare?</th>
-      <th data-sort="string">Accession<br/>Dead?</th>
-      <th>Garden Location</th>
-    </tr></thead><tbody>"""
+        if 'none' in updateType:
+            return header % ('%s', '<th>Garden Location</th>')
+        else:
+            return header % ('%s', '')
     elif updateType in ['locreport', 'holdings', 'advsearch']:
         return """
     <table class="tablesorter-blue" id="sortTable"><thead><tr>

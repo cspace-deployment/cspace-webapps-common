@@ -330,16 +330,6 @@ def starthtml(form, updateType, config):
     <a target="help" href="%s">Help</a>
     ''' % ('https://webapps.cspace.berkeley.edu/webappmanual/%s-webappmanual.html' % institution)
 
-    # groupbyelement = '''
-    #      <th><span class="cell">group by:</span></th>
-    #      <th>
-    #      <span class="cell">none </span><input type="radio" name="groupby" value="none">
-    #      <span class="cell">name </span><input type="radio" name="groupby" value="determination">
-    #      <span class="cell">family </span><input type="radio" name="groupby" value="family">
-    #      <span class="cell">location </span><input type="radio" name="groupby" value="gardenlocation">
-    #      </th>'''
-    # groupby   = str(form.get("groupby")) if form.get("groupby") else 'gardenlocation'
-
     # temporary, until the other groupings and sortings work...
     groupbyelement = '''
           <th><span class="cell">group by: </span></th>
@@ -349,6 +339,18 @@ def starthtml(form, updateType, config):
 
     groupby = str(form.get("groupby")) if form.get("groupby") else 'location'
     groupbyelement = groupbyelement.replace(('value="%s"' % groupby), ('checked value="%s"' % groupby))
+
+    reporttypeelement = '''
+          <th><span class="cell">report type:</span></th>
+          <th>
+          <select class="cell" name="reporttype">
+          <option value="standard">standard</option>
+          <option value="details">location details</option>
+          </select>
+          </th>
+          '''
+    reporttype = str(form.get("reporttype")) if form.get("reporttype") else 'standard'
+    reporttypeelement = reporttypeelement.replace(('value="%s"' % reporttype), ('selected value="%s"' % reporttype))
 
     deadoralive = '''
       <th><span class="cell">filters: </span></th>
@@ -566,9 +568,15 @@ def starthtml(form, updateType, config):
         otherfields = '''
 	  <tr>
           <th><span rowspan="2" class="cell">bed:</span></th>
-	  <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-          <th><table><tr>''' + groupbyelement + '''</tr><tr>''' + deadoralive + '''</tr></table></th>
-          </tr>'''
+	      <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+          <th>
+          <table><tr>''' + groupbyelement + '''</tr>
+                 <tr>''' + deadoralive + '''</tr>
+                 <tr>''' + reporttypeelement + '''</tr>
+          </table>
+          </th>
+      </tr>
+      </tr>'''
 
     elif updateType == 'locreport':
         taxName = str(form.get('ut.taxon')) if form.get('ut.taxon') else ''

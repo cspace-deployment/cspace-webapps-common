@@ -1417,6 +1417,7 @@ def doBedList(form, config):
     if not valid: return html + error
 
     groupby = form.get('groupby')
+    reporttype = form.get('reporttype')
 
     dead,rare,qualifier = setFilters(form)
 
@@ -1429,7 +1430,7 @@ def doBedList(form, config):
     rowcount = len(rows)
     totalobjects = 0
     if groupby == 'none':
-        html += cswaConstants.getHeader(updateType + groupby, institution)
+        html += cswaConstants.getHeader(f'{updateType}.{groupby}.{reporttype}', institution)
     else:
         html += '<table>'
     rows = sorted(rows)
@@ -1449,7 +1450,7 @@ def doBedList(form, config):
             else:
                 html += formatRow({'rowtype': 'subheader', 'data': [l, ]}, form, config)
                 html += '<tr><td colspan="6">'
-                html += cswaConstants.getHeader(updateType + groupby if groupby == 'none' else updateType, institution) % headerid
+                html += cswaConstants.getHeader(f'{updateType}.{groupby}.{reporttype}', institution) % headerid
 
         for r in objects:
             #html += "<tr><td>%s<td>%s</tr>" % (len(places),r[6])

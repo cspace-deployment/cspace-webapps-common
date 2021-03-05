@@ -42,15 +42,20 @@ def formatRow(result, form, config):
             (boxType,) + (rr[0],) * 4)
     elif result['rowtype'] == 'bedlist':
         groupby = str(form.get("groupby"))
+        reporttype = str(form.get("reporttype"))
         rare = 'Yes' if rr[8] == 'true' else 'No'
         dead = 'Yes' if rr[9] == 'true' else 'No'
         link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % rr[7]
         if groupby == 'none':
-            location = '<td class="zcell">%s</td>' % rr[0]
+            location = '<td class="zcell">%s</td>' % rr[13]
         else:
             location = ''
-        return '''<tr><td class="objno"><a target="cspace" href="%s">%s</a</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td>%s</tr>''' % (
-            link, rr[4], rr[6], rr[14], rare, dead, location)
+        if reporttype == 'details':
+            return '''<tr><td class="objno"><a target="cspace" href="%s">%s</a</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td>%s</tr>''' % (
+                link, rr[4], rr[6], rr[14], rr[16], rr[15], location)
+        else:
+            return '''<tr><td class="objno"><a target="cspace" href="%s">%s</a</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td>%s</tr>''' % (
+                link, rr[4], rr[6], rr[14], rare, dead, location)
     elif result['rowtype'] in ['locreport', 'holdings', 'advsearch']:
         rare = 'Yes' if rr[7] == 'true' else 'No'
         dead = 'Yes' if rr[8] == 'true' else 'No'
