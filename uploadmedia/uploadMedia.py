@@ -208,8 +208,8 @@ def uploadmedia(mediaElements, config, http_parms):
                 #messages.append('relation obj2media csid %s elapsedtime %s ' % (csid, elapsedtime))
                 mediaElements['obj2mediaCSID'] = csid
                 messages.append("REST API post for two relations succeeded, elapsedtime %8.2f s." % (elapsedtime1 + elapsedtime2))
-                for m in messages:
-                    print("   %s" % m)
+        for m in messages:
+            print("   %s" % m)
     return mediaElements
 
 
