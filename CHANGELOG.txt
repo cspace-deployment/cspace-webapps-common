@@ -3,11 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.2-rc3
-Fri Mar  5 14:56:03 PST 2021
+This is version 6.1.2-rc4
+Thu Mar 18 14:36:34 PDT 2021
 
-c552bd4 (HEAD -> master) CSW-349: pahma object status now refnames in toolbox webapps
-feef0e5 (tag: 6.1.2-rc2, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.2-rc2
+a19d42b (HEAD -> master) CC-1544: demo shell script for the pahma ledgers project helpers
+19c63e5 CC-1544: two test files for the ledger linking effort
+805ca61 CC-1544: two scripts to help create media records and linking to objects
+f006eb0 CSW-372: print all the bmu log messages, not just some
+9e751f7 (tag: 6.1.2-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.2-rc3
+c552bd4 CSW-349: pahma object status now refnames in toolbox webapps
+feef0e5 (tag: 6.1.2-rc2) revise change log and VERSION file for version 6.1.2-rc2
 2fdac9d CSW-436: add 'location info' subreport to ucbg bed list webapp
 8ce003e CSW-418: remove 8 handlers from PAHMA Toolbox handler list
 1657e18 (tag: 6.1.2-rc1) revise change log and VERSION file for version 6.1.2-rc1
