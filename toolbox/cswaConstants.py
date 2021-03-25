@@ -461,7 +461,7 @@ def getPrinters(form):
     selected = form.get('printer')
 
     printerlist = [
-        ("Kroeber Hall", "cluster1"),
+        ("MA1", "cluster1"),
         ("Regatta", "cluster2")
     ]
 
