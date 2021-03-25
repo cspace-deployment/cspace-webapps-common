@@ -5,7 +5,7 @@
     <div style="overflow: auto;">
         <div style="float: left; ; width: 50%;">
             <div class="result-title">
-                <input type="checkbox" name="item-{{ item.counter }}" value="{{ item.csid }}" checked/>
+                <input type="checkbox" class="sel-item" name="item-{{ item.counter }}" value="{{ item.csid }}" data-grouper="{{ item.accession }}" checked>
                 &nbsp;
                 <b><a href="?maxresults=1&displayType=full&{{ item.accessionfield }}={{ item.accession }}">{{ item.accession }}</a></b>
                 <a title="permalink" target=_new href="/{{ institution }}/object/{{ item.accession }}"><img src="{% static "common/images/permalink.svg" %}" class="cspaceLink"></a>

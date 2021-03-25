@@ -3,7 +3,7 @@
     {% for item in items %}
     <div class="grid">
         <div class="tiny" style="padding-bottom: 4px;">
-            <input type="checkbox" name="item-{{ item.counter }}" value="{{ item.csid }}" checked>
+            <input type="checkbox" class="sel-item" name="item-{{ item.counter }}" value="{{ item.csid }}" data-grouper="{{ item.accession }}" checked>
             <a href="?maxresults=1&displayType=full&{{ item.accessionfield }}={{ item.accession }}">{{ item.accession }}</a>
         </div>
         {% if item.blobs %}
