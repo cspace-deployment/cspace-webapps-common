@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.3-rc1
-Fri Apr  9 15:39:48 PDT 2021
+This is version 6.1.3-rc2
+Thu Apr 29 13:40:32 PDT 2021
 
-6b4aac1 (HEAD -> master, origin/master, origin/HEAD) CSW-349: get rid of obsolete requirements files
+fb0eb5f (HEAD -> master, tag: 6.1.3-rc1, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc1
+6b4aac1 CSW-349: get rid of obsolete requirements files
 9a4b4ab CSW-412: rename barcode printer location to MA1
 f926afd CSW-431: search was not passing id numbers to grouper
 7782098 (tag: 6.1.2) revise change log and VERSION file for version 6.1.2
