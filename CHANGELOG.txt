@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.3-rc2
-Thu Apr 29 13:40:32 PDT 2021
+This is version 6.1.3-rc3
+Wed May 12 05:46:26 PDT 2021
 
-fb0eb5f (HEAD -> master, tag: 6.1.3-rc1, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc1
+3b62fec (HEAD -> master) CSW-460: use 'modern' cspace urls for toolbox and portal outlinks
+07af333 CSW-460: remove cruft from 'create empty object' update
+3de42fd (tag: 6.1.3-rc2, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc2
+fb0eb5f (tag: 6.1.3-rc1) revise change log and VERSION file for version 6.1.3-rc1
 6b4aac1 CSW-349: get rid of obsolete requirements files
 9a4b4ab CSW-412: rename barcode printer location to MA1
 f926afd CSW-431: search was not passing id numbers to grouper
