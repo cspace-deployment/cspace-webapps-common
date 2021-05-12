@@ -15,11 +15,11 @@ def formatRow(result, form, config):
         csid = rr[8]
     except:
         csid = 'user'
-    link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % csid
+    link = protocol + '://' + hostname + port + /cspace/' + institution + '/record/all/%s' % csid
 
     # the link to acquisitions is for PAHMA...
     try:
-        link2 = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/acquisition.html?csid=%s' % rr[24]
+        link2 = protocol + '://' + hostname + port + /cspace/' + institution + '/record/all/%s' % rr[24]
     except:
         link2 = ''
 
@@ -27,7 +27,7 @@ def formatRow(result, form, config):
         csid = rr[0]
     except:
         csid = 'user'
-    link3 = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % csid
+    link3 = protocol + '://' + hostname + port + /cspace/' + institution + '/record/all/%s' % csid
 
 
     if result['rowtype'] == 'subheader':
@@ -45,7 +45,7 @@ def formatRow(result, form, config):
         reporttype = str(form.get("reporttype"))
         rare = 'Yes' if rr[8] == 'true' else 'No'
         dead = 'Yes' if rr[9] == 'true' else 'No'
-        link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % rr[7]
+        link = protocol + '://' + hostname + port + /cspace/' + institution + '/record/all/%s' % rr[7]
         if groupby == 'none':
             location = '<td class="zcell">%s</td>' % rr[13]
         else:
@@ -59,7 +59,7 @@ def formatRow(result, form, config):
     elif result['rowtype'] in ['locreport', 'holdings', 'advsearch']:
         rare = 'Yes' if rr[7] == 'true' else 'No'
         dead = 'Yes' if rr[8] == 'true' else 'No'
-        link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/cataloging.html?csid=%s' % rr[6]
+        link = protocol + '://' + hostname + port + /cspace/' + institution + '/record/all/%s' % rr[6]
         return '''<tr><td class="zcell"><a target="cspace" href="%s">%s</a></td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td><td class="zcell">%s</td></tr>''' % (
             link, rr[0], rr[1], rr[2], rr[3], rr[14], rare, dead)
     elif result['rowtype'] == 'inventory':

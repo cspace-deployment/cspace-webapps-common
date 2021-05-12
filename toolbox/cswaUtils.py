@@ -1509,11 +1509,11 @@ def doHierarchyView(form, config):
     port = ''
     protocol = 'https'
     if query == 'taxonomy':
-        link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/taxon.html?csid=%s'
+        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s'
     elif query == 'places':
-        link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/place.html?csid=%s'
+        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s'
     else:
-        link = protocol + '://' + hostname + port + '/collectionspace/ui/' + institution + '/html/concept.html?csid=%s&vocab=' + query
+        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s&vocab=' + query
     for row in res:
         prettyName = row[0].replace('"', "'")
         if len(prettyName) > 0 and prettyName[0] == '@':
@@ -1564,7 +1564,7 @@ def doListGovHoldings(form, config):
     institution = config.get('info', 'institution')
     protocol = 'https'
     port = ''
-    link = protocol + '://' + hostname + port + '/collectionspace/ui/'+institution+'/html/place.html?csid='
+    link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/'
     sites = cswaDB.getSitesByOwner(config, form.get('agency'))
     html += '<table width="100%">'
     html += '<tr><td class="subheader" colspan="4">%s</td></tr>' % query
