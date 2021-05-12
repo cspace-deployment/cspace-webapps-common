@@ -5,7 +5,6 @@ import copy
 import csv
 import time
 import datetime
-import cgi
 import re
 
 from django.http import HttpResponse

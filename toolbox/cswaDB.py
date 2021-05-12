@@ -2,7 +2,6 @@
 
 import time
 import sys
-import cgi
 import psycopg2
 
 # reload(sys)

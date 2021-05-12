@@ -21,13 +21,7 @@ connect_string = config.get('connect', 'connect_string')
 institution = config.get('connect', 'institution')
 
 import sys, json, re
-import cgi
-import cgitb;
-
-cgitb.enable()  # for troubleshooting
 import psycopg2
-
-form = cgi.FieldStorage()
 
 timeoutcommand = 'set statement_timeout to 500'
 

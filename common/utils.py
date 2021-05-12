@@ -3,7 +3,7 @@ import re
 import time, datetime
 import csv
 import solr
-import cgi, html
+import html
 import os
 import logging
 

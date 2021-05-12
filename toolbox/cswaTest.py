@@ -1,6 +1,6 @@
 from toolbox.cswaUtils import *
 
-# to test this module on the command line you have to pass in two cgi values:
+# to test this module on the command line you have to pass in two values:
 # $ python cswaUtils.py "lo.location1=Hearst Gym, 30, L 12,  2&lo.location2=Hearst Gym, 30, L 12,  7"
 # $ python cswaUtils.py "lo.location1=X&lo.location2=Y"
 

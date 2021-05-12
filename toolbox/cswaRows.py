@@ -1,4 +1,4 @@
-import cgi, html
+import html
 import toolbox.cswaConstants as cswaConstants
 import toolbox.cswaDB as cswaDB
 

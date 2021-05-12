@@ -36,10 +36,6 @@ prmz = getParms(path.join(settings.BASE_DIR, 'config/' + FIELDEFINITIONS), prmz)
 s = solr.SolrConnection(url='%s/%s' % (prmz.SOLRSERVER, prmz.SOLRCORE))
 
 import sys, json, re
-import cgi
-import cgitb
-
-cgitb.enable()  # for troubleshooting
 
 
 def solrtransaction(q, elementID):

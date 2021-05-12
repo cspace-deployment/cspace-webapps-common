@@ -1,13 +1,9 @@
 #!/usr/bin/env /var/www/venv/bin/python
 
 import traceback
-import cgitb; cgitb.enable()  # for troubleshooting
 from toolbox.cswaConstants import selectWebapp
 from toolbox.cswaUtils import *
 from common.utils import loginfo
-
-#reload(sys)
-#sys.setdefaultencoding('utf-8')
 
 
 def main(request, updateType, form, webappconfig):
