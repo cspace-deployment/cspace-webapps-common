@@ -4,7 +4,6 @@ import traceback
 import cgitb; cgitb.enable()  # for troubleshooting
 from toolbox.cswaConstants import selectWebapp
 from toolbox.cswaUtils import *
-from toolbox.cswaObjDetails import *
 from common.utils import loginfo
 
 #reload(sys)
@@ -44,7 +43,6 @@ def main(request, updateType, form, webappconfig):
     elapsedtime = time.time()
 
     loginfo('toolbox', f'start {updateType}', {}, request)
-    # toolconfig = webappconfig._sections[updateType]
     html += starthtml(form, updateType, webappconfig)
 
     try:
@@ -77,14 +75,6 @@ def main(request, updateType, form, webappconfig):
                 elif updateType == 'makegroup':    makeGroup(form,webappconfig)
                 elif update_action_label == "Recent Activity":
                     viewLog(form,webappconfig)
-        ##    # special case: if only one location in range, jump to enumerate
-        ##    elif form.getvalue("lo.location1") != '' and str(form.getvalue("lo.location1")) == str(form.getvalue("lo.location2")) :
-        ##        if updateType in ['keyinfo', 'inventory']:
-        ##            doEnumerateObjects(form,config)
-        ##        elif updateType == 'movecrate':
-        ##            doCheckMove(form,config)
-        ##        else:
-        ##            doLocationSearch(form,config,'nolist')
             elif update_action_label == "Search":
                 if   updateType == 'packinglist':  html += doLocationSearch(form,webappconfig,'nolist')
                 elif updateType == 'movecrate':    html += doCheckMove(form,webappconfig)
@@ -108,8 +98,7 @@ def main(request, updateType, form, webappconfig):
                 elif updateType == 'grpinfo':      html += doGroupSearch(form,webappconfig,'list')
                 elif updateType == 'createobjects': html += doCreateObjects(form,webappconfig)
                 elif updateType == 'moveobject':   html += doObjectSearch(form,webappconfig,'list')
-                elif updateType == 'objdetails':   html += doObjectDetails(form,webappconfig)
-                #elif updateType == 'editrel':      html += doRelationsSearch(form,config)
+                 #elif updateType == 'editrel':      html += doRelationsSearch(form,config)
                 elif updateType == 'makegroup':    html += doComplexSearch(form,webappconfig,'select')
 
             elif update_action_label == "View Hierarchy":

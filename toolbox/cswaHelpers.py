@@ -445,12 +445,6 @@ def starthtml(form, updateType, config):
         <i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;group identifier supersedes both, if entered.</i></th>
         </tr>'''
 
-    elif updateType == 'objdetails':
-        objectnumber = str(form.get('ob.objectnumber')) if form.get('ob.objectnumber') else ''
-        otherfields = '''
-	  <tr><td><span class="cell">Museum Number:</span></td>
-	  <td><input id="ob.objectnumber" class="cell" type="text" size="40" name="ob.objectnumber" value="''' + objectnumber + '''" class="xspan"></td></tr>'''
-
     elif updateType == 'moveobject':
         objno1 = str(form.get("ob.objno1")) if form.get("ob.objno1") else ''
         objno2 = str(form.get("ob.objno2")) if form.get("ob.objno2") else ''
@@ -738,11 +732,7 @@ def endhtml(form, config, elapsedtime):
     $('[name="action"]').prop('disabled', false);
 });"""
 
-    # for object details, clear out the input field on focus, for everything else, just focus
-    if 'action' in form and form['action'] == 'objdetails':
-        focusSnippet = '''$('input:text:first').focus().val("");'''
-    else:
-        focusSnippet = '''$('input:text:first').focus();'''
+    focusSnippet = '''$('input:text:first').focus();'''
 
     return '''
 </tbody></table>
