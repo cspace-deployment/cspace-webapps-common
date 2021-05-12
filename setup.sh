@@ -57,8 +57,8 @@ function deploy()
     # (where M is the museum and YYYYMMDD is today's date)
     # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
     if [[ "$OSTYPE" == "linux-gnu" ]]; then
-        YYYYMMDDHHMM=`date +%Y%m%d%H%M`
-        RUNDIR=~/${YYYYMMDDHHMM}/$1
+        YYYYMMDD=`date +%Y%m%d`
+        RUNDIR=~/${YYYYMMDD}/$1
         if [[ -e ${RUNDIR} ]]; then
             echo "Cowardly refusal to overwrite existing runtime directory ${RUNDIR}"
             echo "Remove or rename ${RUNDIR}, then try again."
