@@ -3,14 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.3-rc4
-Wed May 12 06:57:29 PDT 2021
+This is version 6.1.3-rc5
+Wed May 12 07:03:32 PDT 2021
 
-9347c13 (HEAD -> master) NOJIRA: get rid of last vestiges of legacy cgi uses
+5224c5b (HEAD -> master) NOJIRA: use latest django <3.0
+c930cc8 (tag: 6.1.3-rc4, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc4
+9347c13 NOJIRA: get rid of last vestiges of legacy cgi uses
 1540c9b NOJIRA: get rid of last vestiges of legacy 'object details' webapp
 dfe1cc5 CSW-468: use YYYYMMDDHHMM as deploy directory for django webapps
 25cb16f CSW-460: fix typo in constructed urls
-9ca1a13 (tag: 6.1.3-rc3, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc3
+9ca1a13 (tag: 6.1.3-rc3) revise change log and VERSION file for version 6.1.3-rc3
 3b62fec CSW-460: use 'modern' cspace urls for toolbox and portal outlinks
 07af333 CSW-460: remove cruft from 'create empty object' update
 3de42fd (tag: 6.1.3-rc2) revise change log and VERSION file for version 6.1.3-rc2
