@@ -392,12 +392,6 @@ def createObjectXML(objectinfo):
 </ns2:collectionobjects_common>
 </document>'''
 
-    x = '''
-<ns2:collectionobjects_omca xmlns:ns2="http://collectionspace.org/services/collectionobject/local/omca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<sortableObjectNumber/>
-</ns2:collectionobjects_omca>
-'''
-
     root = etree.fromstring(content)
     for elementname in objectinfo:
         if elementname in objectinfo:
