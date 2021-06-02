@@ -327,109 +327,71 @@ def formatInfoReviewRow(form, link, rr, link2, link3, config):
 <input type="hidden" name="csid.%s" value="%s">
 <td class="objname"><input class="xspan" type="text" name="onm.%s" value="%s"></td>
 <td>
-
 <table>
-
 <tr class="monty">
-
 <td>Count and Count Note<br/>
 <input class="xspan" type="text" size="10" name="ocn.%s" value="%s">
 <input class="xspan" type="text" size="20" name="ctn.%s" value="%s"></td>
 </td>
-
 <td>Cultural Group<br/>
 <input class="xspan" type="text" size="45" name="cg.%s" value="%s"></td>
-
 <td>Ethnographic File Code<br/>
 <input class="xspan" type="text" size="45" name="fc.%s" value="%s"></td></td>
-
 </tr>
-
 <tr class="monty">
-
 <td>Alt Num<br/>
 <input class="xspan" type="text" size="45" name="anm.%s" value="%s"></td>
-
 <td>Alt Num Type<br/>
 %s</td>
-
 <td>Field Collector<br/>
 <input class="xspan" type="text" size="45" name="cl.%s" value="%s"></td>
-
 </tr>
-
 <tr class="monty">
-
 <td>Object type<br/>
 %s</td>
-
 <td>Production person<br/>
 <input class="xspan" type="text" size="45" name="pe.%s" value="%s"></td>
-
 <td>Object Status<br/>
 %s
 </td>
-
 </tr>
-
 <tr class="monty">
-
 <td>Date collected<br/>
 <input class="xspan" type="text" size="45" name="dcol.%s" value="%s"></td>
-
 <td>Production date<br/>
 <input class="xspan" type="text" size="45" name="dprd.%s" value="%s"></td>
-
 <td>Date depicted<br/>
 <input class="xspan" type="text" size="45" name="ddep.%s" value="%s"></td>
-
 </tr>
-
 <tr class="monty">
-
 <td>Materials<br/>
 <input class="xspan" type="text" size="45" name="ma.%s" value="%s"></td>
-
 <td>Taxon<br/>
 <input class="xspan" type="text" size="45" name="ta.%s" value="%s"></td>
-
 <td>Verbatim field collection place<br/>
 <input class="xspan" type="text" size="45" name="vfcp.%s" value="%s"></td>
-
 </tr>
-
 <tr class="monty">
-
 <td>Field collection place<br/>
 <input class="xspan" type="text" size="45" name="cp.%s" value="%s"></td>
-
 <td>Production Place<br/>
 <input class="xspan" type="text" size="45" name="pp.%s" value="%s"></td>
-
 <td>Place depicted<br/>
 <input class="xspan" type="text" size="45" name="pd.%s" value="%s"></td>
-
 </tr>
-
 <tr>
-
 <td>Collection Manager<br/>
 %s
 </td>
-
 <td colspan="2">Legacy Department<br/>
 %s
 </td></tr>
-
-
 <tr>
 <td colspan="10">Brief Description<br/>
 <textarea cols="130" rows="5" name="bdx.%s">%s</textarea>
 </td>
 </tr>
-
 </table>
-
 </td>
 </tr>""" % (
         link, html.escape(rr[3], True),
@@ -508,32 +470,3 @@ def setRefnames(refNames2find, fieldset, form, config, index):
             refNames2find[form.get('ta.' + index)] = cswaDB.getrefname('taxon_common', form.get('ta.' + index), config)
 
     return refNames2find
-
-if __name__ == '__main__':
-
-    data = ['Regatta, A124, Mapcase Drawer 01', 'Regatta,0A124,0Mapcase0Drawer001:0',
-            'xxx', '1-10080', 'Basket', '1',
-            'Six Mile, Calaveras county, California', 'Eastern Miwok', 'ebb26dd3-52c9-42a3-9f90-5309933e4b2f', '',
-            "urn:cspace:pahma.cspace.berkeley.edu:placeauthorities:name(place):item:name(pl1547482)'Six Mile, Calaveras county, California'",
-            "urn:cspace:pahma.cspace.berkeley.edu:conceptauthorities:name(concept):item:name(ec1550590)'Eastern Miwok'",
-            '', '', '', 'Small.', 'Samuel A. Barrett', 'Mrs. Phoebe Apperson Hearst', '189', 'original number',
-            "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(447)'Samuel A. Barrett'",
-            'Acc.216',
-            "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(444)'Mrs. Phoebe Apperson Hearst'",
-            '8cac5be5-4072-4257-a8ec-0bbb5ec761de', '3f8a27ec-f2b3-4902-920a-6f55e499e7ee', '', 'ethnography',
-            'Natasha Johnson', 'California; Calaveras; Six Mile', '1906']
-    html = formatRow({'rowtype': 'keyinfo', 'data': data}, {'fieldset': 'keyinfo'}, {})
-    goodresult = """<tr>
-<td class="objno"><a target="cspace" href="https://hostname/collectionspace/ui/institution/html/cataloging.html?csid=ebb26dd3-52c9-42a3-9f90-5309933e4b2f">1-10080</a></td>
-<td class="objname">
-<input class="objname" type="text" name="onm.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="Basket">
-</td>
-<td class="veryshortinput"><input class="veryshortinput" type="text" name="ocn.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="1"></td>
-<td class="zcell">
-<input type="hidden" name="oox.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="1-10080">
-<input type="hidden" name="csid.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="ebb26dd3-52c9-42a3-9f90-5309933e4b2f">
-<input class="xspan" type="text" size="40" name="cp.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="Six Mile, Calaveras county, California"></td>
-<td class="zcell"><input class="xspan" type="text" size="40" name="cg.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value="Eastern Miwok"></td>
-<td class="zcell"><input class="xspan" type="text" size="40" name="fc.ebb26dd3-52c9-42a3-9f90-5309933e4b2f" value=""></td>
-</tr>"""
-    if goodresult.replace('\n', '') == html.replace('\n', ''): print("keyinfo fieldset keyinfo ok")
