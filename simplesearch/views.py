@@ -34,7 +34,7 @@ def simplesearch(request):
             objectNumber = objectNumber.text
             hostname = connection.protocol + ':' + connection.hostname
             if connection.port != '': hostname = hostname + ':' + connection.port
-            link = '%s/collectionspace/ui/%s/html/cataloging.html?csid=%s' % (hostname, connection.tenant, csid)
+            link = '%s/cspace/%s/record/all/%s' % (hostname, connection.tenant, csid)
             outputrow.append(link)
             outputrow.append(objectNumber)
             additionalfields = []

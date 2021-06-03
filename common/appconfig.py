@@ -64,7 +64,7 @@ def parseRows(rows, prmz):
 
     prmz.SEARCHCOLUMNS = 0
     prmz.SEARCHROWS = 0
-    prmz.CSRECORDTYPE = 'cataloging' # default
+    prmz.CSRECORDTYPE = 'all' # default
 
     functions = 'Search,Facet,bMapper,listDisplay,fullDisplay,gridDisplay,mapDisplay,inCSV'.split(',')
     for function in functions:
@@ -195,7 +195,7 @@ def loadConfiguration(configFileName):
     try:
         prmz.CSRECORDTYPE = config.get('search', 'CSRECORDTYPE')
     except:
-        prmz.CSRECORDTYPE = 'cataloging'  # default
+        pass
 
     return prmz
 
