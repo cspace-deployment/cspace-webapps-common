@@ -3,11 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.3-rc6
-Wed May 12 07:18:31 PDT 2021
+This is version 6.1.3-rc7
+Wed Jun  2 17:36:10 PDT 2021
 
-df4d93f (HEAD -> master) CSW-468: revert to using YYYYMMDD as deployment dir
-07b1657 (tag: 6.1.3-rc5, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc5
+a66ed79 (HEAD -> master) CSW-460: further revisions to 'legacy' urls in webapps
+300c671 CSW-460: tidy up a dangling legacy url in toolbox webapp
+3424b81 (tag: 6.1.3-rc6, origin/master, origin/HEAD) revise change log and VERSION file for version 6.1.3-rc6
+df4d93f CSW-468: revert to using YYYYMMDD as deployment dir
+07b1657 (tag: 6.1.3-rc5) revise change log and VERSION file for version 6.1.3-rc5
 5224c5b NOJIRA: use latest django <3.0
 c930cc8 (tag: 6.1.3-rc4) revise change log and VERSION file for version 6.1.3-rc4
 9347c13 NOJIRA: get rid of last vestiges of legacy cgi uses
