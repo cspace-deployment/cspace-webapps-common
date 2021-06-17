@@ -44,7 +44,6 @@ function buildjs()
     fi
 
     npm install
-    npm build
     ./node_modules/.bin/webpack
     # disable eslint for now, until we address the errors it detects
     #./node_modules/.bin/eslint client_modules/js/app.js

@@ -73,54 +73,6 @@ def retrieveResults(request):
             return render(request, 'searchResults.html', context)
 
 
-@csrf_exempt
-def facetJSON(request):
-    if request.method == 'GET' and request.GET != {}:
-        requestObject = request.GET
-        form = forms.Form(requestObject)
-
-        if form.is_valid():
-            context = {'searchValues': requestObject}
-            context = doSearch(context, prmz, request)
-
-            loginfo('search', 'results.%s' % context['displayType'], context, request)
-            #del context['FIELDS']
-            #del context['facets']
-            if not 'items' in context:
-                return accesscontrolalloworigin(json.dumps('error'))
-            else:
-                return accesscontrolalloworigin(json.dumps({'facets': context['facets'],'fields': context['fields']}))
-    else:
-        return accesscontrolalloworigin(json.dumps('no data seen'))
-
-
-@csrf_exempt
-def retrieveJSON(request):
-    if request.method == 'GET' and request.GET != {}:
-        requestObject = request.GET
-        form = forms.Form(requestObject)
-
-        if form.is_valid():
-            context = {'searchValues': requestObject}
-            context = doSearch(context, prmz, request)
-
-            loginfo('search', 'results.%s' % context['displayType'], context, request)
-            #del context['FIELDS']
-            #del context['facets']
-            if not 'items' in context:
-                return accesscontrolalloworigin(json.dumps('error'))
-            else:
-                return accesscontrolalloworigin(json.dumps({'items': context['items'],'labels': context['labels']}))
-    else:
-        return accesscontrolalloworigin(json.dumps('no data seen'))
-
-
-def JSONentry(request): 
-    context = setConstants({}, prmz, request)
-    
-    return render(request, 'json_searchentry.html', context)
-
-
 def bmapper(request):
     if request.method == 'POST' and request.POST != {}:
         requestObject = request.POST

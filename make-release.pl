@@ -110,9 +110,8 @@ system "echo '$version_number' > VERSION";
 system "date >> CHANGELOG.txt ; echo >> CHANGELOG.txt";
 system "git log --oneline --decorate >> CHANGELOG.txt";
 system "git add CHANGELOG.txt";
-system "git commit -m 'revise change log and VERSION file for version $version_number'";
+system "git commit -m 'revise CHANGELOG.txt and bump version to $version_number'";
 system "git push -v" ;
 print  "git tag -a $version_number -m '$tag_message'\n";
 system "git tag -a $version_number -m '$tag_message'";
 system "git push --tags";
-
