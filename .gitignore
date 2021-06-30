@@ -22,8 +22,6 @@ cspace_django_site/main.cfg
 # npm / webpack stuff
 webpack_dist
 node_modules
-package-lock.json
-
 
 # IDE and OS specfic files
 .DS_Store
