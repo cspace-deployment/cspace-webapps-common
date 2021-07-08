@@ -32,7 +32,7 @@
 {% block footer %}
     <table width="100%">
         <tbody>
-        <tr>
+        <tr style="background-color: #f7f7f7">
             <td style="vertical-align: middle">
                 {% if timestamp %}Current time: {{ timestamp }}. {% endif %}
                 {% if elapsedtime %} Elapsed time: {{ elapsedtime }}. {% endif %}
@@ -41,8 +41,13 @@
                         the <span style="color: {{ serverlabelcolor }}">{{ serverlabel }}</span> deployment of
                     {% endif %}
                     version {{ version }}{% endif %}</td>
-            <td style="vertical-align: middle;width: 70px;">powered by</td>
-            <td style="text-align: right; width: 160px;"><img src="{% static "cspace_django_site/images/header-logo-cspace.png" %}" height="30px"></td>
+            <td style="vertical-align: middle">
+                committed to
+                <a href="https://dac.berkeley.edu/web-accessibility">Accessibility</a>,
+                <a href="https://ophd.berkeley.edu/policies-and-procedures/nondiscrimination-policy-statement">Nondiscrimination</a> &amp;
+                <a href="https://security.berkeley.edu/policy/privacy-statement-uc-berkeley-website">Privacy</a>
+            </td>
+            <td style="vertical-align: middle"><img style="vertical-align: middle" src="{% static "cspace_django_site/images/header-logo-cspace.png" %}" height="30px"></td>
         </tr>
         </tbody>
     </table>
