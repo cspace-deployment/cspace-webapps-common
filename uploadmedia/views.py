@@ -261,7 +261,7 @@ def checkimagefilenames(request):
         checked_objects = []
         for objitems in recordtypes[1:]:
             if objitems[1] in seen:
-                checked_objects.append(objitems + upload_type_check(seen[objitems], objitems))
+                checked_objects.append(objitems + upload_type_check(seen[objitems[1]], objitems))
             else:
                 asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', urllib.parse.quote_plus(objitems[1]), 10)
                 (objecturl, objectx, dummy, itemtime) = getfromCSpace(asquery, request)
