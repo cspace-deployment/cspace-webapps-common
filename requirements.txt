@@ -16,6 +16,7 @@ django-positions
 djangorestframework
 idna
 itsdangerous
+lxml
 numpy
 psycopg2
 pyasn1
