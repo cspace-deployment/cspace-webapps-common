@@ -90,7 +90,7 @@ if __name__ == "__main__":
     for i, r in enumerate(records1):
         f  = r[0]
         fn = f.split('/')[-1]
-        if '.JPG' in f or '.CR2' in f:
+        if '.JPG' in f:
             fn = fn.replace('.JPG','').replace('.CR2','')
             fn = fn.split('_')[0]
             filenames[fn] = f
