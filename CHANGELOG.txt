@@ -3,10 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.4-rc1
-Fri Jul 16 13:50:52 PDT 2021
+This is version 6.1.4-rc2
+Fri Aug  6 10:37:10 PDT 2021
 
-c951d60 (HEAD -> master, origin/master, origin/HEAD) CSW-486: fix typo in privacy url
+2f24dfd (HEAD -> master, origin/master, origin/HEAD) CSW-464: add lxml to django requirements
+e980b14 NOJIRA: improve 'check UCJEPS images' script
+fa7f724 NOJIRA: improve 'check UCJEPS images' script
+1d96015 NOJIRA: small script to check presence of UCJEPS images in CSpace
+104c7c0 CSW-488: fix BMU 'check file' function
+3a77d86 (tag: 6.1.4-rc1) revise CHANGELOG.txt and bump version to 6.1.4-rc1
+c951d60 CSW-486: fix typo in privacy url
 03e0537 CSW-486: add 3 required links to webapps landing page
 d34f539 CSW-486: revise footer for django webapps to address 3 link needs
 bf25b24 CSW-482: add package-lock.json to source control
