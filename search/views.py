@@ -68,6 +68,7 @@ def retrieveResults(request):
         if form.is_valid():
             context = {'searchValues': requestObject}
             context = doSearch(context, prmz, request)
+            context['url_institution'] = context['institution'].replace('botgarden', 'ucbg')
 
             loginfo('search', 'results.%s' % context['displayType'], context, request)
             return render(request, 'searchResults.html', context)
