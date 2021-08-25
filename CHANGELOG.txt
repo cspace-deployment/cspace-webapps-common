@@ -3,10 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.4-rc2
-Fri Aug  6 10:37:10 PDT 2021
+This is version 6.1.4-rc3
+Wed Aug 25 14:06:06 PDT 2021
 
-2f24dfd (HEAD -> master, origin/master, origin/HEAD) CSW-464: add lxml to django requirements
+ce25866 (HEAD -> master) CSW-507: generate correct (new-style) url in botgarden portals
+405fd33 (tag: 6.1.4-rc2, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.4-rc2
+2f24dfd CSW-464: add lxml to django requirements
 e980b14 NOJIRA: improve 'check UCJEPS images' script
 fa7f724 NOJIRA: improve 'check UCJEPS images' script
 1d96015 NOJIRA: small script to check presence of UCJEPS images in CSpace
