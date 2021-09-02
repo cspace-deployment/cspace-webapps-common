@@ -656,7 +656,7 @@ def doBulkEdit(form, config):
     CSIDs = []
     fieldset = form.get('fieldset')
     for row in objs:
-        CSIDs.append(row[8])
+        CSIDs.append((row[8], row[3]))
 
     refNames2find = {}
     setRefnames(refNames2find, fieldset, form, config, 'user')
@@ -808,6 +808,8 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
 
         if updateType == 'bulkedit':
             index = 'user'
+            objectnumber = csid[1]
+            csid = csid[0]
         else:
             index = csid
         updateItems = {}
@@ -895,17 +897,16 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
             pass
             #error!
 
+        # save the object number if this is a bulk edit...
+        if updateType == 'bulkedit':
+            updateItems['objectNumber'] = objectnumber
+
         for i in ('handlerRefName',):
             updateItems[i] = form.get(i)
 
         #html += updateItems
         msg = ''
         if fieldset in ['keyinfo', 'fullmonty']:
-            if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
-                if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
-                    pass
-                else:
-                    msg += '<span class="error"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
             if updateItems['assocPeople'] == '' and form.get('cg.' + index):
                 if form.get('cg.' + index) == cswaDB.getCSIDDetail(config, index, 'assocpeoplegroup'):
                     pass
@@ -923,20 +924,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
         if fieldset in ['registration', 'fullmonty']:
             if updateItems['fieldCollector'] == '' and form.get('cl.' + index):
                 msg += '<span class="error"> Field Collector: term "%s" not found, field not updated.</span>' % form.get('cl.' + index)
-        if fieldset in ['hsrinfo', 'fullmonty']:
-            if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
-                if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
-                    pass
-                else:
-                    msg += '<span class="error"> Field Collection Place: term "%s" not found, field not updated.</span>' % form.get('cp.' + index)
-            if 'objectCount' in updateItems:
-                try:
-                    int(updateItems['objectCount'])
-                    int(updateItems['objectCount'][0])
-                except ValueError:
-                    msg += '<span class="error"> Object count: "%s" is not a valid number!</span>' % form.get('ocn.' + index)
-                    del updateItems['objectCount']
-        if fieldset in ['objtypecm', 'fullmonty']:
+        if fieldset in ['hsrinfo', 'places', 'keyinfo', 'placeanddate', 'objtypecm', 'fullmonty']:
             if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
                 if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
                     pass
