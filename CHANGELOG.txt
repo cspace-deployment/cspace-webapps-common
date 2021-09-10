@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.4-rc4
-Thu Sep  2 10:53:23 PDT 2021
+This is version 6.1.4
+Fri Sep 10 11:09:02 PDT 2021
 
-479b299 (HEAD -> master) CSW-508: bulk object edit webapp was failing to notify of failures
-403b90d (tag: 6.1.4-rc3, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.4-rc3
+c7953fd (HEAD -> master, tag: 6.1.4-rc4, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.4-rc4
+479b299 CSW-508: bulk object edit webapp was failing to notify of failures
+403b90d (tag: 6.1.4-rc3) revise CHANGELOG.txt and bump version to 6.1.4-rc3
 ce25866 CSW-507: generate correct (new-style) url in botgarden portals
 405fd33 (tag: 6.1.4-rc2) revise CHANGELOG.txt and bump version to 6.1.4-rc2
 2f24dfd CSW-464: add lxml to django requirements
