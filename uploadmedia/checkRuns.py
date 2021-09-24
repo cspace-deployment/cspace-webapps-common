@@ -1,4 +1,5 @@
-import sys, os
+import os
+import sys
 
 
 def pluralize(n, w):
@@ -205,7 +206,14 @@ for filename in os.listdir(DIR):
                                                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber, handling,
                                                      approvedforweb, description, group_title, mediaCSID, objectCSID, blobCSID) = line.split('\t')
                                                 except:
-                                                    raise
+                                                    try:
+                                                        (name, size, objectnumber, date, creator,
+                                                         contributor, rightsholder, imagenumber, handling,
+                                                         approvedforweb, imagetype, copyright, type, source,
+                                                         description, group_title, mediaCSID, objectCSID,
+                                                         blobCSID) = line.split('\t')
+                                                    except:
+                                                        raise
             elif step == 'original' or step == 'step1':
                 try:
                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber, handling,
@@ -227,11 +235,17 @@ for filename in os.listdir(DIR):
                                     (name, size, objectnumber, date, creator, contributor, rightsholder, imagenumber,
                                      handling, approvedforweb, description, group_title) = line.split('|')
                                 except:
-                                    print('skipped', filename, line)
-                                    continue
+                                    try:
+                                        (name, size, objectnumber, date, creator,
+                                         contributor, rightsholder, imagenumber, handling,
+                                         approvedforweb, imagetype, copyright, type, source,
+                                         description, group_title) = line.split('|')
+                                    except:
+                                        print('skipped', filename, line)
+                                        continue
         except:
             print('problem with file %s' % filename)
-            continue
+            break
         if objectCSID == 'not found': continue
         if not run in jobs: jobs[run] = {}
         if not step in jobs[run]: jobs[run][step] = 0
