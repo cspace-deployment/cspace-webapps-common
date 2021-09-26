@@ -331,14 +331,13 @@ def showresults(request):
 @login_required()
 def startjob(request, filename):
     try:
-        elapsedtime = time.time()
         context = setConstants(request, im)
         (jobnumber, step, csv ) = filename.split('.')
         context['jobnumber'] = jobnumber
         context['filename'] = filename
         runjob(jobnumber, context, request)
         # give the job a chance to start to ensure the queue listing is updated properly.
-        time.sleep(2)
+        time.sleep(1)
         loginfo('bmu', '%s :: %s' % ('uploadmedia online job submission requested', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to start job', filename), {}, {})
@@ -352,7 +351,7 @@ def deletejob(request, filename):
         loginfo('bmu', '%s :: %s' % ('uploadmedia job deleted', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to delete job', filename), {}, {})
-    return showqueue(request)
+    return redirect('../bmu_showqueue')
 
 
 @login_required()
