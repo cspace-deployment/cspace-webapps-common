@@ -17,7 +17,7 @@ if 'paste' in sys.argv:
     #background.show()
     
     background.save(filename='watermark.jpg')
-    print 'save paste %s' % 'watermark.jpg'
+    print('save paste %s' % 'watermark.jpg')
   
     sys.exit(0)
 
@@ -28,5 +28,7 @@ with Image(filename=image1) as background:
     with Image(filename=image2) as watermark:
         background.watermark(image=watermark, transparency=0.60)
     background.save(filename='watermark.jpg')
-    print 'save wand %s' % 'watermark.jpg'
+    print(f'main image {image1}')
+    print(f'watermark image {image2}')
+    print(f'saved watermarked image as "watermarked.jpg"')
 
