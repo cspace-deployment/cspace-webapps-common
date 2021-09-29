@@ -74,10 +74,8 @@ function deploy()
         # for the release will need to be applied (by hand, presumably) after the fact of
         # of relinking this directory with the runtime directory in /var/www/
         # otherwise, we use the default config provided by the prepping code further below
-        if [[ -d ${RUNDIR}/config/ ]]; then
-            rm -rf ${RUNDIR}/config/
-            ln -s /home/app_webapps/config/$TENANT ${RUNDIR}/config/
-        fi
+        rm -rf ${RUNDIR}/config/
+        ln -s /home/app_webapps/config/$TENANT ${RUNDIR}/config/
         cd ${RUNDIR}
     else
         RUNDIR=.
