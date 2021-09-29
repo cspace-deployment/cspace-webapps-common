@@ -75,7 +75,7 @@ function deploy()
         # of relinking this directory with the runtime directory in /var/www/
         # otherwise, we use the default config provided by the prepping code further below
         rm -rf ${RUNDIR}/config/
-        ln -s /home/app_webapps/config/$TENANT ${RUNDIR}/config/
+        ln -s /home/app_webapps/config/$TENANT ${RUNDIR}/config
         cd ${RUNDIR}
     else
         RUNDIR=.
