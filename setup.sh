@@ -69,13 +69,14 @@ function deploy()
         rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
 
         # if running on an RTL server where this code is already deployed and running...
-        # copy the most recent existing (i.e. old) config files into this new runtime directory
+        # symlink the config files into this new runtime directory
         # nb: any changes to configuration needed
-        # for this release will need to be applied (by hand, presumably) after the fact of
+        # for the release will need to be applied (by hand, presumably) after the fact of
         # of relinking this directory with the runtime directory in /var/www/
         # otherwise, we use the default config provided by the prepping code further below
-        if [[ -d /var/www/$1/config ]]; then
-            rsync -r /var/www/$1/config/ ${RUNDIR}/config/
+        if [[ -d ${RUNDIR}/config/ ]]; then
+            rm -rf ${RUNDIR}/config/
+            ln -s /home/app_webapps/config/$TENANT ${RUNDIR}/config/
         fi
         cd ${RUNDIR}
     else
@@ -197,11 +198,6 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
         echo 1
         exit
     fi
-
-    # for now, until versions in both cspace-webapps-ucb and cspace-webapps-common are sync'd
-    # we don't check the version for the 'custom webapps' repo (cspace-webapps-ucb) ...
-    # cd ${CONFIGDIR}
-    # check_version
 
     rm -f config/*
     rm -f fixtures/*
