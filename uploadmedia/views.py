@@ -341,7 +341,7 @@ def startjob(request, filename):
         loginfo('bmu', '%s :: %s' % ('uploadmedia online job submission requested', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to start job', filename), {}, {})
-    return showqueue(request)
+    return redirect('../bmu_showqueue')
 
 
 @login_required()
