@@ -39,12 +39,12 @@
                 url: "../uploadmedia/bmu_uploadfiles",
                 data: {
                   csrfmiddlewaretoken: "{{ csrf_token }}"
-                },
-                success: function () {
-                  flap(false);
                 }
               })
               xga('send', 'pageview', undefined, trackingid);
+            });
+            $( "#upload" ).promise().done(function() {
+              flap(false);
             });
           });
         </script>
