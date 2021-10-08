@@ -3,20 +3,32 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.4
-Fri Sep 10 11:09:02 PDT 2021
+This is version 6.1.5-rc1
+Fri Oct  8 10:54:40 PDT 2021
 
-c7953fd (HEAD -> master, tag: 6.1.4-rc4, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.4-rc4
+43c337c (HEAD -> master, origin/master, origin/HEAD) CSW-530: update javascript packages used by Django webapps
+87cada5 CSW-516: disable ui controls while bmu webapp is at work using a promise
+7e52318 CSW-516: better disabling of ui controls while bmu webapp is at work
+69992ca CSW-471: typo in symlinking
+e98c2a7 CSW-471: symlinking of config directories needs to work properly
+ac5b9ed CSW-471: move django config files to a more durable location
+91e6808 CSW-516: disable ui controls while bmu webapp is at work
+0655bfa NOJIRA: imageserver should fail gracefully if watermarking fails
+8041425 NOJIRA: tidy up imageserver's watermarking demo
+ef37f67 CSW-529: check for new columns in bmu job files in checkRuns.py
+1e8b07c CSW-377: django logs now go in /var/cspace/django
+d1d208e (tag: 6.1.4) revise CHANGELOG.txt and bump version to 6.1.4
+c7953fd revise CHANGELOG.txt and bump version to 6.1.4-rc4
 479b299 CSW-508: bulk object edit webapp was failing to notify of failures
-403b90d (tag: 6.1.4-rc3) revise CHANGELOG.txt and bump version to 6.1.4-rc3
+403b90d revise CHANGELOG.txt and bump version to 6.1.4-rc3
 ce25866 CSW-507: generate correct (new-style) url in botgarden portals
-405fd33 (tag: 6.1.4-rc2) revise CHANGELOG.txt and bump version to 6.1.4-rc2
+405fd33 revise CHANGELOG.txt and bump version to 6.1.4-rc2
 2f24dfd CSW-464: add lxml to django requirements
 e980b14 NOJIRA: improve 'check UCJEPS images' script
 fa7f724 NOJIRA: improve 'check UCJEPS images' script
 1d96015 NOJIRA: small script to check presence of UCJEPS images in CSpace
 104c7c0 CSW-488: fix BMU 'check file' function
-3a77d86 (tag: 6.1.4-rc1) revise CHANGELOG.txt and bump version to 6.1.4-rc1
+3a77d86 revise CHANGELOG.txt and bump version to 6.1.4-rc1
 c951d60 CSW-486: fix typo in privacy url
 03e0537 CSW-486: add 3 required links to webapps landing page
 d34f539 CSW-486: revise footer for django webapps to address 3 link needs
@@ -24,38 +36,38 @@ bf25b24 CSW-482: add package-lock.json to source control
 c0c869f CSW-482: get rid of remaining js that handled json interactions
 03d6a41 CSW-482: initial refactoring of js/webpack framework used by django webapps
 1cce78f (tag: 6.1.3) revise change log and VERSION file for version 6.1.3
-a17c8c1 (tag: 6.1.3-rc7) revise change log and VERSION file for version 6.1.3-rc7
+a17c8c1 revise change log and VERSION file for version 6.1.3-rc7
 a66ed79 CSW-460: further revisions to 'legacy' urls in webapps
 300c671 CSW-460: tidy up a dangling legacy url in toolbox webapp
-3424b81 (tag: 6.1.3-rc6) revise change log and VERSION file for version 6.1.3-rc6
+3424b81 revise change log and VERSION file for version 6.1.3-rc6
 df4d93f CSW-468: revert to using YYYYMMDD as deployment dir
-07b1657 (tag: 6.1.3-rc5) revise change log and VERSION file for version 6.1.3-rc5
+07b1657 revise change log and VERSION file for version 6.1.3-rc5
 5224c5b NOJIRA: use latest django <3.0
-c930cc8 (tag: 6.1.3-rc4) revise change log and VERSION file for version 6.1.3-rc4
+c930cc8 revise change log and VERSION file for version 6.1.3-rc4
 9347c13 NOJIRA: get rid of last vestiges of legacy cgi uses
 1540c9b NOJIRA: get rid of last vestiges of legacy 'object details' webapp
 dfe1cc5 CSW-468: use YYYYMMDDHHMM as deploy directory for django webapps
 25cb16f CSW-460: fix typo in constructed urls
-9ca1a13 (tag: 6.1.3-rc3) revise change log and VERSION file for version 6.1.3-rc3
+9ca1a13 revise change log and VERSION file for version 6.1.3-rc3
 3b62fec CSW-460: use 'modern' cspace urls for toolbox and portal outlinks
 07af333 CSW-460: remove cruft from 'create empty object' update
-3de42fd (tag: 6.1.3-rc2) revise change log and VERSION file for version 6.1.3-rc2
-fb0eb5f (tag: 6.1.3-rc1) revise change log and VERSION file for version 6.1.3-rc1
+3de42fd revise change log and VERSION file for version 6.1.3-rc2
+fb0eb5f revise change log and VERSION file for version 6.1.3-rc1
 6b4aac1 CSW-349: get rid of obsolete requirements files
 9a4b4ab CSW-412: rename barcode printer location to MA1
 f926afd CSW-431: search was not passing id numbers to grouper
 7782098 (tag: 6.1.2) revise change log and VERSION file for version 6.1.2
-a9c1a9c (tag: 6.1.2-rc4) revise change log and VERSION file for version 6.1.2-rc4
+a9c1a9c revise change log and VERSION file for version 6.1.2-rc4
 a19d42b CC-1544: demo shell script for the pahma ledgers project helpers
 19c63e5 CC-1544: two test files for the ledger linking effort
 805ca61 CC-1544: two scripts to help create media records and linking to objects
 f006eb0 CSW-372: print all the bmu log messages, not just some
-9e751f7 (tag: 6.1.2-rc3) revise change log and VERSION file for version 6.1.2-rc3
+9e751f7 revise change log and VERSION file for version 6.1.2-rc3
 c552bd4 CSW-349: pahma object status now refnames in toolbox webapps
-feef0e5 (tag: 6.1.2-rc2) revise change log and VERSION file for version 6.1.2-rc2
+feef0e5 revise change log and VERSION file for version 6.1.2-rc2
 2fdac9d CSW-436: add 'location info' subreport to ucbg bed list webapp
 8ce003e CSW-418: remove 8 handlers from PAHMA Toolbox handler list
-1657e18 (tag: 6.1.2-rc1) revise change log and VERSION file for version 6.1.2-rc1
+1657e18 revise change log and VERSION file for version 6.1.2-rc1
 7684abf (tag: 5.6.0) revise change log and VERSION file for version 5.6.0
 fd0ca5f revise change log and VERSION file for version 5.6.0-rc9
 9dcd573 NOJIRA: min length for autosuggest is now 1
