@@ -1495,12 +1495,7 @@ def doHierarchyView(form, config):
     institution, updateType, updateactionlabel = basicSetup(form, config)
     port = ''
     protocol = 'https'
-    if query == 'taxonomy':
-        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s'
-    elif query == 'places':
-        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s'
-    else:
-        link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s&vocab=' + query
+    link = protocol + '://' + hostname + port + '/cspace/' + institution + '/record/all/%s'
     for row in res:
         prettyName = row[0].replace('"', "'")
         if len(prettyName) > 0 and prettyName[0] == '@':
