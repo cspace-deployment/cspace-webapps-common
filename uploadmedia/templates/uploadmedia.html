@@ -9,6 +9,9 @@
           //disable buttons and show butterfly while working
           function flap(x) {
             if (x == true) {
+              $('#bmu_queue').css({
+                display: "none"
+              });
               $('#waitingImage').css({
                 display: "block"
               });
@@ -26,6 +29,9 @@
                 display: "none"
               });
               $('#upload').css({
+                display: "block"
+              });
+              $('#bmu_queue').css({
                 display: "block"
               });
             }
