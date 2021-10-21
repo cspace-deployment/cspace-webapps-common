@@ -942,9 +942,13 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
                 msg += '<span class="error"> Materials: term "%s" not found, field not updated.</span>' % form.get('ma.' + index)
             if updateItems['taxon'] == '' and form.get('ta.' + index):
                 msg += '<span class="error"> Taxon: term "%s" not found, field not updated.</span>' % form.get('ta.' + index)
-        if fieldset in ['placeanddate', 'fullmonty']:
-            # msg += 'place and date'
-            pass
+        if fieldset == 'fullmonty':
+            if updateItems['contentPlace'] == '' and form.get('pd.' + index):
+                msg += '<span class="error"> Place depicted: term "%s" not found, field not updated.</span>' % form.get('pd.' + index)
+            if updateItems['objectProductionPlace'] == '' and form.get('pp.' + index):
+                msg += '<span class="error"> Production place: term "%s" not found, field not updated.</span>' % form.get('pp.' + index)
+            if updateItems['objectProductionPerson'] == '' and form.get('pe.' + index):
+                msg += '<span class="error"> Production person: term "%s" not found, field not updated.</span>' % form.get('pe.' + index)
 
         newItems = {}
         for item in updateItems.keys():
