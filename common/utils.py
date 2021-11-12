@@ -799,19 +799,24 @@ def doSearch(context, prmz, request):
 
         otherfields = []
         for p in prmz.FIELDS[displayFields]:
-            try:
-                multi = len(rowDict[p['solrfield']]) if '_ss' in p['solrfield'] else 0
-                if p['fieldtype'] == 'constant':
-                    value2use = p['solrfield']
+            if p['fieldtype'] == 'constant':
+                otherfields.append({'label': p['label'], 'name': p['name'], 'multi': 0, 'value': p['solrfield']})
+            elif p['fieldtype'] == 'present':
+                multi = 0
+                if p['solrfield'] in rowDict and rowDict[p['solrfield']] != []:
+                    value2use = 'yes'
                 else:
-                    value2use = rowDict[p['solrfield']]
+                    value2use = 'no'
+                otherfields.append({'label': p['label'], 'name': p['name'], 'multi': 0, 'value': value2use})
+            elif p['solrfield'] in rowDict:
+                value2use = rowDict[p['solrfield']]
+                multi = len(rowDict[p['solrfield']]) if '_ss' in p['solrfield'] else 0
                 if type(p['fieldtype']) == type([]) and p['fieldtype'][1] != 'default':
                     value2use = [p['fieldtype'][1][v] for v in value2use]
                     otherfields.append({'label': p['label'], 'name': p['name'], 'multi': multi, 'value': value2use, 'special': p['fieldtype'][0]})
                 else:
                     otherfields.append({'label': p['label'], 'name': p['name'], 'multi': multi, 'value': value2use})
-            except:
-                # raise
+            else:
                 otherfields.append({'label': p['label'], 'name': p['name'], 'multi': 0, 'value': ''})
         item['otherfields'] = otherfields
         context['items'].append(item)
