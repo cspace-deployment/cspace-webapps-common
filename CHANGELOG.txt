@@ -3,10 +3,15 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.5-rc1
-Fri Oct  8 10:54:40 PDT 2021
+This is version 6.1.5-rc2
+Mon Nov 29 09:28:31 PST 2021
 
-43c337c (HEAD -> master, origin/master, origin/HEAD) CSW-530: update javascript packages used by Django webapps
+df854f2 (HEAD -> master, origin/master, origin/HEAD) CSW-528: create displayable 'pseudovariable' for 'has images?' in portals
+77bbf00 CSW-508: xir webapps now detect 3 more missing / incorrect authority terms
+addf934 CSW-516: hide bmu job queue during uploads
+351c82e CSW-534: generate correct vocab/authority url in hierarchy viewer
+dfc0b10 (tag: 6.1.5-rc1) revise CHANGELOG.txt and bump version to 6.1.5-rc1
+43c337c CSW-530: update javascript packages used by Django webapps
 87cada5 CSW-516: disable ui controls while bmu webapp is at work using a promise
 7e52318 CSW-516: better disabling of ui controls while bmu webapp is at work
 69992ca CSW-471: typo in symlinking
