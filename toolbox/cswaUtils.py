@@ -924,7 +924,7 @@ def doTheUpdate(CSIDs, form, config, fieldset, refNames2find):
         if fieldset in ['registration', 'fullmonty']:
             if updateItems['fieldCollector'] == '' and form.get('cl.' + index):
                 msg += '<span class="error"> Field Collector: term "%s" not found, field not updated.</span>' % form.get('cl.' + index)
-        if fieldset in ['hsrinfo', 'places', 'keyinfo', 'placeanddate', 'objtypecm', 'fullmonty']:
+        if fieldset in ['hsrinfo', 'places', 'keyinfo', 'places', 'objtypecm', 'fullmonty']:
             if updateItems['pahmaFieldCollectionPlace'] == '' and form.get('cp.' + index):
                 if form.get('cp.' + index) == cswaDB.getCSIDDetail(config, index, 'fieldcollectionplace'):
                     pass
@@ -1561,7 +1561,7 @@ def doListGovHoldings(form, config):
         for field in site:
             if not field:
                 field = ''
-        html += '<td align="left"><a href="' + link + str(cswaDB.getCSID('placeName',site[0], config)[0]) + '">' + site[0] + '</td>'
+        html += '<td align="left"><a href="' + link + str(cswaDB.getCSID('placeName',site[0], config)[0]) + '&vocab=place">' + site[0] + '</td>'
         html += '<td align="left">' + (site[2] or '') + "</td>"
         html += '<td align="left">' + (site[3] or '') + "</td>"
         html += '</tr>'
