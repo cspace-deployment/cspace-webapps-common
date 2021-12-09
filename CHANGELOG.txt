@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.5-rc3
-Fri Dec  3 09:49:44 PST 2021
+This is version 6.1.5-rc4
+Wed Dec  8 16:00:00 PST 2021
 
-84390ae (HEAD -> master, tag: 6.1.5-rc2, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.5-rc2
+a43cfe4 (HEAD -> master) CSW-585: pahma xir toolbox webapp fails on 'place and date' fieldset
+c82f30e (origin/master, origin/HEAD) CSW-583: fix incorrect link in government holdings
+5d1798d (tag: 6.1.5-rc3) revise CHANGELOG.txt and bump version to 6.1.5-rc3
+84390ae (tag: 6.1.5-rc2) revise CHANGELOG.txt and bump version to 6.1.5-rc2
 df854f2 CSW-528: create displayable 'pseudovariable' for 'has images?' in portals
 77bbf00 CSW-508: xir webapps now detect 3 more missing / incorrect authority terms
 addf934 CSW-516: hide bmu job queue during uploads
