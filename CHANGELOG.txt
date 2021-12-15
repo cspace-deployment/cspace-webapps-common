@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.5-rc6
-Wed Dec  8 16:53:41 PST 2021
+This is version 6.1.5
+Wed Dec 15 12:28:00 PST 2021
 
-d3de8ce (HEAD -> master) CSW-585: open gov. holding outlinks in new window/tab
-55334f1 (tag: 6.1.5-rc5, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.5-rc5
+c7b14ca (HEAD -> master, tag: 6.1.5-rc6, origin/master, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.5-rc6
+d3de8ce CSW-585: open gov. holding outlinks in new window/tab
+55334f1 (tag: 6.1.5-rc5) revise CHANGELOG.txt and bump version to 6.1.5-rc5
 622aac8 CSW-585: fix regression introduced by previous commmit
 bcca385 (tag: 6.1.5-rc4) revise CHANGELOG.txt and bump version to 6.1.5-rc4
 a43cfe4 CSW-585: pahma xir toolbox webapp fails on 'place and date' fieldset
