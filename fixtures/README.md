@@ -33,8 +33,8 @@ search.json                                                                    1
 toolbox.json                                                                   100%  206     0.2KB/s   00:00    
 uploadTricoder.json                                                            100% 7590     7.4KB/s   00:00    
 fixtures jblowe$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
+On branch main
+Your branch is up-to-date with 'origin/main'.
 Changes not staged for commit:
   (use "git add <file>..." to update what will be committed)
   (use "git checkout -- <file>..." to discard changes in working directory)

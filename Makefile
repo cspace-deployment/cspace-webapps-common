@@ -8,6 +8,6 @@ test:
 clean:
 	git clean -fd
 	# git reset --hard
-	git checkout master
+	git checkout main
 	git pull -v
 
