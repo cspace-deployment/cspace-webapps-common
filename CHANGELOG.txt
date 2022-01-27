@@ -3,12 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.6-rc1
-Fri Dec 17 15:30:08 PST 2021
+This is version 6.1.6-rc2
+Thu Jan 27 12:30:56 PST 2022
 
-e10ea35 (HEAD -> main) CSW-574: change 'master' to 'main' in this repo
+47dc865 (HEAD -> main) CSC-1862: update pahmalegacydepartment in Toolbox webapp
+8dda0dc (tag: 6.1.6-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc1
+e10ea35 CSW-574: change 'master' to 'main' in this repo
 fe797ee CSW-574: get rid of superfluous file that mentions 'master'
-fb460c4 (tag: 6.1.5, origin/main) revise CHANGELOG.txt and bump version to 6.1.5
+fb460c4 (tag: 6.1.5) revise CHANGELOG.txt and bump version to 6.1.5
 c7b14ca (tag: 6.1.5-rc6) revise CHANGELOG.txt and bump version to 6.1.5-rc6
 d3de8ce CSW-585: open gov. holding outlinks in new window/tab
 55334f1 (tag: 6.1.5-rc5) revise CHANGELOG.txt and bump version to 6.1.5-rc5
