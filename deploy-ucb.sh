@@ -1,11 +1,12 @@
 #!/bin/bash
-# a helper for deploying the django webapps to ucb deployments on rtl 'managed servers'
+# a helper for deploying the django webapps to ucb ENVIRONMENTs on rtl 'managed servers'
 #
 # while it does work, it is really more of an example script...
 # ymmv! use it if it really helps!
 #
 
 VERSION=""  # Default to no version
+ENVIRONMENT="prod" # Default to production environment
 WHOLE_LIST="bampfa botgarden cinefiles pahma ucjeps"
 
 while [[ $# -gt 0 ]] ;
@@ -16,13 +17,18 @@ do
     '-h' )
       echo "usage:"
       echo
+      echo "./deploy_ucb.sh -a [-v VERSION] [-e {dev,prod,pycharm}] MUSEUM (or -a for all museums)"
+      echo
       echo "to deploy a particular version for all ucb museums(i.e. tag)"
-      echo "./deploy_ucb.sh -a -v 5.1.0-rc3"
+      echo "./deploy_ucb.sh -a -v 5.1.0-rc3 -e prod"
       echo
       echo "to deploy a particular version (i.e. tag) for pahma and cinefiles"
-      echo "./deploy_ucb.sh pahma -v 5.1.0-rc3 cinefiles"
+      echo "./deploy_ucb.sh pahma -v 5.1.0-rc3 cinefiles -e dev"
       echo
       echo "nb: assumes you have the two needed repos set up in the standard RTL way. See the README.md for details."
+      echo "    if no version is specified, this repo is copied and used as the source ... i.e. including"
+      echo "    uncommitted changes. Good for testing!"
+      echo "    if no environment is specified, production is assumed"
       echo
       exit 0
     ;;
@@ -33,6 +39,9 @@ do
     '-v' )
       VERSION=$1 ; shift;
     ;;
+    '-e' )
+      ENVIRONMENT=$1 ; shift
+    ;;
     * )
     if [[ ! $MUSEUMS =~ .*$opt.* ]]
     then
@@ -42,26 +51,11 @@ do
   esac
 done
 
-# make sure the ucb custom repo is clean and tidy
-cd ~/cspace-webapps-ucb/
-git clean -fd
-git reset --hard
-git checkout main
-git pull -v
-cd ~/cspace-webapps-common/
-
-# backup the existing config files
-./backup-config.sh
+echo "museums:     ${MUSEUMS}"
+echo "environment: ${ENVIRONMENT}"
+echo "version:     ${VERSION}"
 
 for t in $MUSEUMS
 do
-  echo "Cleaning up to deploy ${t}..."
-  # make sure the repo is clean and tidy for each tenant
-  git clean -fd
-  git reset --hard
-  git checkout main
-  git pull -v
-  # now set things up
-  ./setup.sh configure prod $VERSION
-  ./setup.sh deploy ${t} $VERSION
+  ./setup.sh deploy ${t} ${ENVIRONMENT} ${VERSION}
 done
