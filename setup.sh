@@ -47,6 +47,7 @@ function buildjs() {
   fi
 
   npm install
+  export NODE_OPTIONS=--openssl-legacy-provider
   ./node_modules/.bin/webpack
   # disable eslint for now, until we address the errors it detects
   #./node_modules/.bin/eslint client_modules/js/app.js
@@ -64,11 +65,19 @@ function make_runtime_dir() {
 
 function build_django() {
   buildjs $1
+
+  # now we can go ahead and complete the configuration
+  $PYTHON manage.py migrate --noinput
+  $PYTHON manage.py loaddata fixtures/*.json
+  # get rid of the existing static_root to force django to rebuild it from scratch
+  rm -rf static_root/
+  $PYTHON manage.py collectstatic --noinput
+
   # the runtime directory is ~/YYYYMMDD/M
   # (where M is the museum and YYYYMMDD is today's date)
   # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
   # rsync the "prepped and configged" files to the runtime directory
-  rsync -av --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
+  rsync -a --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
 
   # we assume the user has all the needed config files for this museum in ~/config
   rm -rf ${RUNDIR}/config/
@@ -79,14 +88,6 @@ function build_django() {
   grep 'hostname' ${RUNDIR}/config/main.cfg
   echo "*************************************************************************************************"
 
-  ./setup.sh disable imageserver
-
-  # now we can go ahead and complete the configuration
-  $PYTHON manage.py migrate --noinput
-  $PYTHON manage.py loaddata fixtures/*.json
-  # get rid of the existing static_root to force django to rebuild it from scratch
-  rm -rf static_root/
-  $PYTHON manage.py collectstatic --noinput
 }
 
 function check_version() {
@@ -153,7 +154,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
     echo
     exit 1
   else
-    cd ""${BASEDIR}""
+    cd "${BASEDIR}"
   fi
 
   if [[ ! -d "${CONFIGDIR}" ]]; then
@@ -172,7 +173,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
 
   if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
     echo "Can't deploy tenant ${TENANT}: ${CONFIGDIR}/${TENANT} does not exist"
-    echo 1
+    echo
     exit
   fi
 

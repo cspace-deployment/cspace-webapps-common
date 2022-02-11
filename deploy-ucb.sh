@@ -17,7 +17,7 @@ do
     '-h' )
       echo "usage:"
       echo
-      echo "./deploy_ucb.sh -a [-v VERSION] [-e {dev,prod,pycharm}] MUSEUM (or -a for all museums)"
+      echo "./deploy_ucb.sh [-v VERSION] [-e {dev,prod,pycharm}] MUSEUM (or -a for all museums)"
       echo
       echo "to deploy a particular version for all ucb museums(i.e. tag)"
       echo "./deploy_ucb.sh -a -v 5.1.0-rc3 -e prod"
