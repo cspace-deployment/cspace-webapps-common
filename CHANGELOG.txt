@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.6-rc3
-Thu Jan 27 16:46:16 PST 2022
+This is version 6.1.6-rc4
+Fri Feb 11 13:52:07 PST 2022
 
-efbf0c5 (HEAD -> main) CSC-1862: update pahmalegacydepartment in Toolbox webapp
-92767b9 (tag: 6.1.6-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc2
+56e873f (HEAD -> main) CSC-1862: update pahmalegacydepartment in Toolbox webapp again
+b22be1b (tag: 6.1.6-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc3
+efbf0c5 CSC-1862: update pahmalegacydepartment in Toolbox webapp
+92767b9 (tag: 6.1.6-rc2) revise CHANGELOG.txt and bump version to 6.1.6-rc2
 47dc865 CSC-1862: update pahmalegacydepartment in Toolbox webapp
 8dda0dc (tag: 6.1.6-rc1) revise CHANGELOG.txt and bump version to 6.1.6-rc1
 e10ea35 CSW-574: change 'master' to 'main' in this repo
