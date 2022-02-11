@@ -371,7 +371,6 @@ def getLegacyDepts(form, csid, ld):
         ("Unassociated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment22)'Unassociated funerary objects'"),
         ("Registration", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment50)'Registration'"),
         ("Loans in", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment55)'Loans in'"),
-        ("Retired catalogs", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment90)'Retired catalogs'"),
         ("(not assigned)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment95)'(not assigned)'")
     ]
 
