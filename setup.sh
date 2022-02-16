@@ -194,6 +194,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
   if [[ $VERSION != "" ]]; then
     THIS_REPO=`git config --get remote.origin.url`
     git clone ${THIS_REPO} ~/working_dir
+    cd ~/working_dir/
     git checkout ${VERSION}
   else
     rsync -a . ~/working_dir
