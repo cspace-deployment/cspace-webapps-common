@@ -3,13 +3,15 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.6-rc6
-Wed Feb 16 08:09:41 PST 2022
+This is version 6.1.6-rc7
+Wed Feb 16 08:24:59 PST 2022
 
-ec0166b (HEAD -> main) NOJIRA: minor refactor of bmu nightly reporting script
+eb7a2c6 (HEAD -> main) CSW-609: deploy-ucb.sh only runs in correct repo
+686bf67 (tag: 6.1.6-rc6, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc6
+ec0166b NOJIRA: minor refactor of bmu nightly reporting script
 7d029c1 CSW-609: fix typos, reorg webapp setup.sh script a bit
 b72a0fe CSW-609: additional bulletproofing of webapps deployment scripts
-c258830 (tag: 6.1.6-rc5, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc5
+c258830 (tag: 6.1.6-rc5) revise CHANGELOG.txt and bump version to 6.1.6-rc5
 b94bdee CSC-1862: update pahmalegacydepartment in Toolbox webapp again: remove 'retired catalogs'
 05622f6 (tag: 6.1.6-rc4) revise CHANGELOG.txt and bump version to 6.1.6-rc4
 56e873f CSC-1862: update pahmalegacydepartment in Toolbox webapp again
