@@ -55,6 +55,8 @@ echo "museums:     ${MUSEUMS}"
 echo "environment: ${ENVIRONMENT}"
 echo "version:     ${VERSION}"
 
+cd ~/cspace-webapps-common/
+
 for t in $MUSEUMS
 do
   ./setup.sh deploy ${t} ${ENVIRONMENT} ${VERSION}
