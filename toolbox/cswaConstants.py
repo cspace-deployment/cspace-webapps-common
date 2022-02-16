@@ -366,9 +366,9 @@ def getLegacyDepts(form, csid, ld):
         ("Still and motion photography", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment18)'Still and motion photography'"),
         ("Human remains", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment20)'Human remains'"),
         ("Faunal remains", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment21)'Faunal remains'"),
-        ("Associated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment22)'Associated funerary objects'"),
         ("Mixed faunal and human remains", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment22)'Mixed faunal and human remains'"),
-        ("Unassociated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment22)'Unassociated funerary objects'"),
+        ("Associated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment23)'Associated funerary objects'"),
+        ("Unassociated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment24)'Unassociated funerary objects'"),
         ("Registration", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment50)'Registration'"),
         ("Loans in", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment55)'Loans in'"),
         ("(not assigned)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment95)'(not assigned)'")
