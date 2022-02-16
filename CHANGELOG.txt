@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.6-rc8
-Wed Feb 16 08:51:01 PST 2022
+This is version 6.1.6
+Wed Feb 16 14:31:02 PST 2022
 
-d105b9f (HEAD -> main) CSW-609: handle an os-specific npm-depedency
-83bd725 (tag: 6.1.6-rc7, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc7
+6f71a38 (HEAD -> main, tag: 6.1.6-rc8, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc8
+d105b9f CSW-609: handle an os-specific npm-depedency
+83bd725 (tag: 6.1.6-rc7) revise CHANGELOG.txt and bump version to 6.1.6-rc7
 eb7a2c6 CSW-609: deploy-ucb.sh only runs in correct repo
 686bf67 (tag: 6.1.6-rc6) revise CHANGELOG.txt and bump version to 6.1.6-rc6
 ec0166b NOJIRA: minor refactor of bmu nightly reporting script
