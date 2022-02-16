@@ -4,42 +4,44 @@ OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
 This is version 6.1.6
-Wed Feb 16 14:31:02 PST 2022
+Wed Feb 16 15:09:12 PST 2022
 
-6f71a38 (HEAD -> main, tag: 6.1.6-rc8, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6-rc8
+f8f35ce (HEAD -> main) CSC-1862: update pahmalegacydepartment in Toolbox webapp again: fix short ids
+cb5910c (tag: 6.1.6, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6
+6f71a38 revise CHANGELOG.txt and bump version to 6.1.6-rc8
 d105b9f CSW-609: handle an os-specific npm-depedency
-83bd725 (tag: 6.1.6-rc7) revise CHANGELOG.txt and bump version to 6.1.6-rc7
+83bd725 revise CHANGELOG.txt and bump version to 6.1.6-rc7
 eb7a2c6 CSW-609: deploy-ucb.sh only runs in correct repo
-686bf67 (tag: 6.1.6-rc6) revise CHANGELOG.txt and bump version to 6.1.6-rc6
+686bf67 revise CHANGELOG.txt and bump version to 6.1.6-rc6
 ec0166b NOJIRA: minor refactor of bmu nightly reporting script
 7d029c1 CSW-609: fix typos, reorg webapp setup.sh script a bit
 b72a0fe CSW-609: additional bulletproofing of webapps deployment scripts
-c258830 (tag: 6.1.6-rc5) revise CHANGELOG.txt and bump version to 6.1.6-rc5
+c258830 revise CHANGELOG.txt and bump version to 6.1.6-rc5
 b94bdee CSC-1862: update pahmalegacydepartment in Toolbox webapp again: remove 'retired catalogs'
-05622f6 (tag: 6.1.6-rc4) revise CHANGELOG.txt and bump version to 6.1.6-rc4
+05622f6 revise CHANGELOG.txt and bump version to 6.1.6-rc4
 56e873f CSC-1862: update pahmalegacydepartment in Toolbox webapp again
-b22be1b (tag: 6.1.6-rc3) revise CHANGELOG.txt and bump version to 6.1.6-rc3
+b22be1b revise CHANGELOG.txt and bump version to 6.1.6-rc3
 efbf0c5 CSC-1862: update pahmalegacydepartment in Toolbox webapp
-92767b9 (tag: 6.1.6-rc2) revise CHANGELOG.txt and bump version to 6.1.6-rc2
+92767b9 revise CHANGELOG.txt and bump version to 6.1.6-rc2
 47dc865 CSC-1862: update pahmalegacydepartment in Toolbox webapp
-8dda0dc (tag: 6.1.6-rc1) revise CHANGELOG.txt and bump version to 6.1.6-rc1
+8dda0dc revise CHANGELOG.txt and bump version to 6.1.6-rc1
 e10ea35 CSW-574: change 'master' to 'main' in this repo
 fe797ee CSW-574: get rid of superfluous file that mentions 'master'
 fb460c4 (tag: 6.1.5) revise CHANGELOG.txt and bump version to 6.1.5
-c7b14ca (tag: 6.1.5-rc6) revise CHANGELOG.txt and bump version to 6.1.5-rc6
+c7b14ca revise CHANGELOG.txt and bump version to 6.1.5-rc6
 d3de8ce CSW-585: open gov. holding outlinks in new window/tab
-55334f1 (tag: 6.1.5-rc5) revise CHANGELOG.txt and bump version to 6.1.5-rc5
+55334f1 revise CHANGELOG.txt and bump version to 6.1.5-rc5
 622aac8 CSW-585: fix regression introduced by previous commmit
-bcca385 (tag: 6.1.5-rc4) revise CHANGELOG.txt and bump version to 6.1.5-rc4
+bcca385 revise CHANGELOG.txt and bump version to 6.1.5-rc4
 a43cfe4 CSW-585: pahma xir toolbox webapp fails on 'place and date' fieldset
 c82f30e CSW-583: fix incorrect link in government holdings
-5d1798d (tag: 6.1.5-rc3) revise CHANGELOG.txt and bump version to 6.1.5-rc3
-84390ae (tag: 6.1.5-rc2) revise CHANGELOG.txt and bump version to 6.1.5-rc2
+5d1798d revise CHANGELOG.txt and bump version to 6.1.5-rc3
+84390ae revise CHANGELOG.txt and bump version to 6.1.5-rc2
 df854f2 CSW-528: create displayable 'pseudovariable' for 'has images?' in portals
 77bbf00 CSW-508: xir webapps now detect 3 more missing / incorrect authority terms
 addf934 CSW-516: hide bmu job queue during uploads
 351c82e CSW-534: generate correct vocab/authority url in hierarchy viewer
-dfc0b10 (tag: 6.1.5-rc1) revise CHANGELOG.txt and bump version to 6.1.5-rc1
+dfc0b10 revise CHANGELOG.txt and bump version to 6.1.5-rc1
 43c337c CSW-530: update javascript packages used by Django webapps
 87cada5 CSW-516: disable ui controls while bmu webapp is at work using a promise
 7e52318 CSW-516: better disabling of ui controls while bmu webapp is at work
