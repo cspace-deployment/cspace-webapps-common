@@ -44,10 +44,12 @@ function buildjs() {
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
     export TENANT="$TENANT"
     perl -i -pe 's/..\/..\/suggest/\/$ENV{TENANT}\/suggest/' client_modules/js/PublicSearch.js
+  else
+    # newer npm versions than those on RTL servers need this
+    export NODE_OPTIONS=--openssl-legacy-provider
   fi
 
   npm install
-  export NODE_OPTIONS=--openssl-legacy-provider
   ./node_modules/.bin/webpack
   # disable eslint for now, until we address the errors it detects
   #./node_modules/.bin/eslint client_modules/js/app.js
