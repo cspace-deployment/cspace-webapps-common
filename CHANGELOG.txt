@@ -4,10 +4,12 @@ OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
 This is version 6.1.6
-Wed Feb 16 15:09:12 PST 2022
+Wed Feb 16 15:41:40 PST 2022
 
-f8f35ce (HEAD -> main) CSC-1862: update pahmalegacydepartment in Toolbox webapp again: fix short ids
-cb5910c (tag: 6.1.6, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6
+a5cd4b9 (HEAD -> main) CSW-609: ensure correct tag is checked out during deploy
+6161c9e (origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6
+f8f35ce CSC-1862: update pahmalegacydepartment in Toolbox webapp again: fix short ids
+cb5910c (tag: 6.1.6) revise CHANGELOG.txt and bump version to 6.1.6
 6f71a38 revise CHANGELOG.txt and bump version to 6.1.6-rc8
 d105b9f CSW-609: handle an os-specific npm-depedency
 83bd725 revise CHANGELOG.txt and bump version to 6.1.6-rc7
