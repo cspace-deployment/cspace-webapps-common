@@ -97,9 +97,9 @@ function check_version() {
   if [[ $VERSION != "" ]]; then
     TAGS=$(git tag --list ${VERSION})
     if [[ ${TAGS} ]]; then
-      echo 'will build version $VERSION'
+      echo "will build version $VERSION"
     else
-      echo 'could not find version $VERSION'
+      echo "could not find version $VERSION"
       exit 1
     fi
 
