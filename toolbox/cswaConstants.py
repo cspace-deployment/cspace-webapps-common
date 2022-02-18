@@ -1,14 +1,8 @@
-#!/usr/bin/env /usr/bin/python
-# -*- coding: UTF-8 -*-
-
 import csv, sys, time, os, datetime
 import configparser
 from os import path
 
 SITE_ROOT = path.dirname(path.realpath(__file__))
-
-#reload(sys)
-# sys.setdefaultencoding('utf-8')
 
 def getStyle(schemacolor1):
     return '''
@@ -349,7 +343,9 @@ def getLegacyDepts(form, csid, ld):
 
     legacydeptlist = [
         ("Native California (archaeology and ethnology)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment01)'Native California (archaeology and ethnology)'"),
+        ("Nonnative California (archaeology and ethnology)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(NonnativeCaliforniaarchaeologyandethnology1645142411253)'Nonnative California (archaeology and ethnology)'"),
         ("Native US and Canada (except California)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment03)'Native US and Canada (except California)'"),
+        ("Nonnative US and Canada (except California)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(NonnativeUSandCanadaexceptCalifornia1645142411311)'Nonnative US and Canada (except California)'"),
         ("Mexico, Central America, and Caribbean area", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment05)'Mexico, Central America, and Caribbean area'"),
         ("South America (except Ancient Peru)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment06)'South America (except Ancient Peru)'"),
         ("Ancient Peru", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment07)'Ancient Peru'"),
@@ -371,6 +367,7 @@ def getLegacyDepts(form, csid, ld):
         ("Unassociated funerary objects", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment24)'Unassociated funerary objects'"),
         ("Registration", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment50)'Registration'"),
         ("Loans in", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment55)'Loans in'"),
+        ("Archives", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(Archives1645142411361)'Archives'"),
         ("(not assigned)", "urn:cspace:pahma.cspace.berkeley.edu:vocabularies:name(pahmaTmsLegacyDepartments):item:name(pahmaTMSLegacyDepartment95)'(not assigned)'")
     ]
 
