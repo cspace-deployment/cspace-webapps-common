@@ -1,4 +1,4 @@
-# python makeStreamingVersions.python jobnumber <file_metadata>
+# python2 makeStreamingVersions.py jobnumber <file_metadata>
 #
 #
 # e.g.
@@ -44,7 +44,7 @@ if __name__ == "__main__":
     else:
         print
         print "usage: %s <jobname> <filename_extra>" % sys.argv[0]
-        print "time python /var/www/pahma/uploadmedia/makeStreamingVersions.py /srv/nfs/image_upload_cache_pahma/2015-11-10-09-09-09 500k.aac"
+        print "time python2 /var/www/pahma/uploadmedia/makeStreamingVersions.py /srv/nfs/image_upload_cache_pahma/2015-11-10-09-09-09 500k.aac"
         sys.exit(1)
 
     OUTPUTFILE = "%s_streaming.temp2.csv" % JOBFILE
