@@ -129,7 +129,7 @@ def checkSteps(images):
 
 
 def usage():
-    print("usage: python checkRuns.py <bmu_directory> <jobs missing duplicates images csids> <full summary>")
+    print("usage: python3 checkRuns.py <bmu_directory> <jobs missing duplicates images csids> <full summary>")
 
 
 ########## Main ##############

@@ -111,8 +111,8 @@ do
 done < $INPUTFILE
 
 trace ">>>>>>>>>>>>>>> End of Blob Creation, starting Media and Relation record creation process: `date` "
-trace "python $UPLOADSCRIPT $OUTPUTFILE $MEDIACONFIG >> $TRACELOG"
-python $UPLOADSCRIPT $OUTPUTFILE $MEDIACONFIG >> $TRACELOG 2>&1
+trace "python3 $UPLOADSCRIPT $OUTPUTFILE $MEDIACONFIG >> $TRACELOG"
+python3 $UPLOADSCRIPT $OUTPUTFILE $MEDIACONFIG >> $TRACELOG 2>&1
 trace "Media record and relations created."
 
 mv $INPUTFILE $JOB.original.csv

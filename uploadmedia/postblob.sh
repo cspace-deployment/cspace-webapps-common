@@ -53,8 +53,8 @@ else
     trace "input file: $INPUTFILE"
 fi
 trace ">>>>>>>>>>>>>>> Starting Blob, Media, and Relation record creation process: `date` "
-trace "python $UPLOADSCRIPT $INPUTFILE $MEDIACONFIG >> $TRACELOG"
-python $UPLOADSCRIPT $INPUTFILE $MEDIACONFIG >> $TRACELOG 2>&1
+trace "python3 $UPLOADSCRIPT $INPUTFILE $MEDIACONFIG >> $TRACELOG"
+python3 $UPLOADSCRIPT $INPUTFILE $MEDIACONFIG >> $TRACELOG 2>&1
 trace "Media record and relations created."
 
 mv $INPUTFILE $JOB.original.csv
