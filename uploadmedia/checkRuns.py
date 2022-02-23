@@ -78,6 +78,7 @@ def checkJobs(jobs, joberrors, report_type):
     statsfile = f'/var/cspace/monitor/{sys.argv[4]}.bmu.stats.csv'
     fh = open(statsfile, 'w')
     stats = csv.writer(fh, delimiter="\t")
+    stats.writerow(('date', 'count'))
     [stats.writerow(r) for r in ingested]
 
     print("\ntotal number of jobs found: %s " % len(jobs.keys()))
