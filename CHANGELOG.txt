@@ -3,11 +3,20 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.1.6
-Wed Feb 16 15:41:40 PST 2022
+This is version 6.2.0-rc1
+Fri Mar  4 08:37:20 PST 2022
 
-a5cd4b9 (HEAD -> main) CSW-609: ensure correct tag is checked out during deploy
-6161c9e (origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.1.6
+e3d0efa (HEAD -> main) CSW-513: initial version of bmu improvements for ucjeps
+dfa93b8 (origin/main, origin/HEAD) CSW-620: add cors header so imageserver can serve 3d images
+5a86231 CSW-612: some bmu metrics-measuring scripts
+4f814f9 CSC-1862: add 3 'final' terms to pahmatmslegacydepartment list in xIR webapps
+648ac11 NOJIRA: fix quotes used in setup.sh
+1e551f0 CSW-611: need to set proper python versions for bmu batch scripts
+2ad4ae2 CSW-611: need to set proper python version for old streaming help scripts
+4d1ef7c NOJIRA: delete superflous file
+bc3963f revise CHANGELOG.txt and bump version to 6.1.6
+a5cd4b9 CSW-609: ensure correct tag is checked out during deploy
+6161c9e revise CHANGELOG.txt and bump version to 6.1.6
 f8f35ce CSC-1862: update pahmalegacydepartment in Toolbox webapp again: fix short ids
 cb5910c (tag: 6.1.6) revise CHANGELOG.txt and bump version to 6.1.6
 6f71a38 revise CHANGELOG.txt and bump version to 6.1.6-rc8
