@@ -3,8 +3,8 @@
     {% for item in items %}
     <div class="grid">
         <div class="tiny" style="padding-bottom: 4px;">
-            <a target="portal" href="/{{ institution }}/internal/search?maxresults=1&displayType=full&csid={{ item.csid }}">{{ item.accession }}</a>
-            <a target="cspace" href="{{ cspaceserver }}/collectionspace/ui/{{ institution }}/html/{{ csrecordtype }}.html?csid={{ item.media }}">
+            <a target="portal" href="/{{ institution }}/search/search?maxresults=1&displayType=full&csid={{ item.csid }}">{{ item.accession }}</a>
+            <a target="cspace" href="{{ cspaceserver }}/cspace/{{ url_institution }}/record/{{ csrecordtype }}/{{ item.media }}">
                 <img src="{% static 'common/images/open_cspace.png' %}" class="cspaceLink"></a>
         </div>
         {% if item.blobs %}

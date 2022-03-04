@@ -237,11 +237,16 @@
                             <th>object number</th>
                             <th>image number</th>
                             <th>found in CSpace?</th>
+                            <th>Number of media</th>
+                            <th>Orientation</th>
+                            <th>Delete from Job?</th>
                         </tr>
                         {% for o in objectnumbers %}
                             <tr>
                                 <td>{{ o.0 }}</td>
-                                <td>{{ o.1 }}</td>
+                                <td>
+                                    <a target="portal" href="/{{ institution }}/search/search?maxresults=1&displayType=full&keyword_qualifier=exact&keyword={{ o.1  }}">{{ o.1 }}</a>
+                                </td>
                                 <td>{{ o.2 }}</td>
                                 <td>
                                     {% if o.4 == 0 %}
@@ -251,6 +256,23 @@
                                     {% else %}
                                         <span style="color: green">{{ o.5 }}</span>
                                     {% endif %}
+                                </td>
+                                <td>
+                                    {% if o.6|length == 0 %}
+                                        None
+                                    {% else %}
+                                        {{ o.6|length }}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if o.7 == 'Portrait' %}
+                                        <span style="color: green">{{ o.7 }}</span>
+                                    {% else %}
+                                        <span class="error">{{ o.7 }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="">Delete</a>
                                 </td>
                             </tr>
                         {% endfor %}
