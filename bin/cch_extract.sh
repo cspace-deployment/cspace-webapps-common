@@ -8,7 +8,7 @@
 
 source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR={${HOME}/extracts
+HOMEDIR=${HOME}/extracts
 CCH_DIR=$HOMEDIR/cch/current
 CCH_LOG=$HOMEDIR/cch/cch_extract.log
 HOST="${BAMPFA_SERVER}"

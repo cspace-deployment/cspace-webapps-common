@@ -31,7 +31,7 @@ elif [[ "$1" != "taxon" && "$1" != "unverified" && "$1" != "common" ]]; then
 fi
 
 source ${HOME}/pipeline-config.sh
-HOMEDIR={${HOME}/extracts
+HOMEDIR=${HOME}/extracts
 CCH_DIR=$HOMEDIR/cch/current
 CCH_LOG=$HOMEDIR/cch/cch_extract.log
 HOST="${BAMPFA_SERVER}"

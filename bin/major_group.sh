@@ -2,7 +2,7 @@
 
 source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR={${HOME}/extracts
+HOMEDIR=${HOME}/extracts
 
 HOST="${BAMPFA_SERVER}"
 PORT="${BAMPFA_PORT}"
