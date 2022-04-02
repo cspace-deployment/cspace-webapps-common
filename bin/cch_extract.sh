@@ -3,15 +3,16 @@
 # does not include major group filter to exclude algae, bryophytes, and lichen
 # 08/01/2013 include other numbers in annovoucher query.
 # 10/11/2019 fieldloccounty/state/country fields are now refnames
-#            updated regexp_replace to use getdispl(); 
+#            updated regexp_replace to use getdispl();
 #            changed where clause to use fieldlocstate IN instead of OR
 
+source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=/home/app_webapps/extracts
+HOMEDIR={${HOME}/extracts
 CCH_DIR=$HOMEDIR/cch/current
 CCH_LOG=$HOMEDIR/cch/cch_extract.log
-HOST="dba-postgres-prod-45.ist.berkeley.edu"
-PORT="5310"
+HOST="${BAMPFA_SERVER}"
+PORT="${BAMPFA_PORT}"
 DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
 
@@ -72,7 +73,7 @@ select
 	case
 		when lg.vcoordinates like '%; Meridian%'
 		then regexp_replace(lg.vcoordinates, '^(TRS: )(.*)(; Meridian.*)$', '\2')
-		when lg.vcoordinates like 'TRS: %' 
+		when lg.vcoordinates like 'TRS: %'
 		then regexp_replace(lg.vcoordinates, '^(TRS: )(.*)$', '\2')
 		else lg.vcoordinates
 	end as TRSCoordinates,

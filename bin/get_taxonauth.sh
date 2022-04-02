@@ -30,8 +30,15 @@ elif [[ "$1" != "taxon" && "$1" != "unverified" && "$1" != "common" ]]; then
 	exit
 fi
 
-YYMMDD=`date +%y%m%d`
-HOMEDIR=/home/app_webapps/extracts
+source ${HOME}/pipeline-config.sh
+HOMEDIR={${HOME}/extracts
+CCH_DIR=$HOMEDIR/cch/current
+CCH_LOG=$HOMEDIR/cch/cch_extract.log
+HOST="${BAMPFA_SERVER}"
+PORT="${BAMPFA_PORT}"
+DBNAME="ucjeps_domain_ucjeps"
+DBUSER="reporter_ucjeps"
+
 AUTH_DIR=$HOMEDIR/taxonauth
 AUTH_FILE=$AUTH_DIR/$1_auth.txt
 AUTH_LOG=$AUTH_DIR/taxonauth_export.log
@@ -45,7 +52,7 @@ cd $AUTH_DIR
 
 date >> $AUTH_LOG
 
-psql -h dba-postgres-prod-45.ist.berkeley.edu -p 5310 -d ucjeps_domain_ucjeps -U reporter_ucjeps << HP_END >> $AUTH_LOG
+psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $AUTH_LOG
 
 create temp table tmp_taxon_auth as
 select

@@ -1,7 +1,14 @@
 #!/bin/bash
 
+source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=/home/app_webapps/extracts
+HOMEDIR={${HOME}/extracts
+
+HOST="${BAMPFA_SERVER}"
+PORT="${BAMPFA_PORT}"
+DBNAME="ucjeps_domain_ucjeps"
+DBUSER="reporter_ucjeps"
+
 MG_DIR=$HOMEDIR/major_group
 MG_LOG=$HOMEDIR/major_group/major_group.log
 MG_FILE=$HOMEDIR/major_group/major_group.txt
@@ -12,7 +19,7 @@ rm $MG_FILE
 echo 'query START time: ' `date` >> $MG_LOG
 
 #psql -d ucjeps_domain_ucjeps -U reporter_ucjeps << HP_END >> $MG_LOG
-psql -h dba-postgres-prod-45.ist.berkeley.edu -p 5310 -d ucjeps_domain_ucjeps -U reporter_ucjeps << HP_END >> $MG_LOG
+psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $MG_LOG
 
 create temp table tmp_major_group_accn as
 select

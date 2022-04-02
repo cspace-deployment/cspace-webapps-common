@@ -3,14 +3,21 @@
 # does not include major group filter to exclude algae, bryophytes, and lichen
 # 08/01/2013 include other numbers in annovoucher query.
 
+source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=/home/app_webapps/extracts
+HOMEDIR={${HOME}/extracts
+
+HOST="${BAMPFA_SERVER}"
+PORT="${BAMPFA_PORT}"
+DBNAME="ucjeps_domain_ucjeps"
+DBUSER="reporter_ucjeps"
+
 CCH_DIR=$HOMEDIR/cch/current
 CCH_LOG=$HOMEDIR/cch/cch_extract.log
 
 date >> $CCH_LOG
 
-psql -h dba-postgres-prod-45.ist.berkeley.edu -p 5310 -d ucjeps_domain_ucjeps -U reporter_ucjeps << HP_END >> $CCH_LOG
+psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $CCH_LOG
 
 create temp table tmp_cch_accessions as
 select

@@ -1,15 +1,23 @@
-rm -rf ~/services
+#!/bin/bash
+# this script refreshes the webapps jrxml directory with all the report jrxml
+# the ireport webapp needs them!
+rm -rf ${HOME}/services
+# make the directory if it doesn't exist
+if [ ! -d ${HOME}/jrxml ]
+then
+   mkdir ${HOME}/jrxml
+fi
 git clone https://github.com/cspace-deployment/services.git
-cd ~/services
+cd ${HOME}/services
 git checkout origin/bampfa_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ~/jrxml
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOME}/jrxml
 git checkout origin/botgarden_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ~/jrxml
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOME}/jrxml
 git checkout origin/cinefiles_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ~/jrxml
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOME}/jrxml
 git checkout origin/pahma_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ~/jrxml
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOME}/jrxml
 git checkout origin/ucjeps_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ~/jrxml
-cd ~
-rm -rf ~/services
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOME}/jrxml
+cd
+rm -rf ${HOME}/services
