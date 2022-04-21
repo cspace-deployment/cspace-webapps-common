@@ -109,7 +109,7 @@ Note: Before running `pip install -r pycharm_requirements.txt`, make sure that y
 # clone your fork of the github repo to wherever you want to deploy the webapps
 # by default, the two repos go in your home directory; if you change the
 # location, you'll need to edit setup.sh to indicate this.
-cd ~
+cd
 git clone https://github.com/<mygithubid>/cspace-webapps-common.git my_test_project
 cd my_test_project/
 # resolve the Python requirements
