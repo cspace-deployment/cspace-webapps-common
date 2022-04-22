@@ -132,7 +132,7 @@ LOGIN_URL = f'/{PROJECT_NAME}/accounts/login'
 LOGIN_REDIRECT_URL = f'/{PROJECT_NAME}/landing'
 
 # we use our special tmp dir for BMU file uploads
-# set by importing webapps-global-config above
+# set by importing webapps_global_config above
 # FILE_UPLOAD_TEMP_DIR
 
 # LOGGING is set up in the extra_*.py modules
@@ -175,5 +175,5 @@ AUTHENTICATION_BACKENDS = (
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 
 # we need this to ensure that our webapp proxying works.
-# set by importing webapps-global-config above
+# set by importing webapps_global_config above
 #CSRF_COOKIE_DOMAIN
