@@ -14,12 +14,12 @@
 # 2. 'deploy':
 #     a. copies and configures the code for one of the 5 UCB deployments
 #     b. "npm builds" the needed js components
-#     c. if running on a UCB server (which is detected automatically), rsyncs the code to the runtime directory
+#     c. if running on a UCB server (i.e. ubuntu, which is detected automatically), rsyncs the code to the runtime directory
 # 3. other maintainance functions: 'disable' or 'enable' individual webapps
 #
 
 # exit on errors...
-# TODO: uncomment this someday when the script really can be expected to run to completion without errors
+# TODO: uncomment this someday when the script really can be expected to run to completion without errors in all circumstances
 # set -e
 
 COMMAND=$1
@@ -170,13 +170,13 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
   if [[ ! -f "cspace_django_site/extra_${DEPLOYMENT}.py" ]]; then
     echo "Can't configure '${DEPLOYMENT}': use 'pycharm', 'dev', or 'prod'"
     echo
-    exit
+    exit 1
   fi
 
   if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
     echo "Can't deploy tenant ${TENANT}: ${CONFIGDIR}/${TENANT} does not exist"
     echo
-    exit
+    exit 1
   fi
 
   # check for indicated version (tag), if provided...
@@ -225,7 +225,7 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
   build_django ${TENANT}
   echo
   echo "*************************************************************************************************"
-  echo "Don't forget to check cspace_django_site/main.cfg if necessary and the rest of the"
+  echo "Don't forget to check config/${TENANT}/main.cfg if necessary and the rest of the"
   echo "configuration files in config/ (these are .cfg, .json, and .csv files mostly)"
   echo "*************************************************************************************************"
   echo

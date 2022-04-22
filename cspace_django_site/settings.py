@@ -17,6 +17,7 @@ except ImportError:
     sys.exit(1)
 
 from cspace_django_site.installed_apps import INSTALLED_APPS
+from cspace_django_site.webapps_global_config import *
 
 # generate a secret if there isn't one already
 try:
@@ -33,9 +34,6 @@ except ImportError:
 
 # Application definition, set in installed_apps.py on a per museum basis
 # INSTALLED_APPS =
-
-# in place of /tmp, we give the bmu its very own temp space for uploading large files
-FILE_UPLOAD_TEMP_DIR = '/var/cspace/bmutmp'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,7 +132,8 @@ LOGIN_URL = f'/{PROJECT_NAME}/accounts/login'
 LOGIN_REDIRECT_URL = f'/{PROJECT_NAME}/landing'
 
 # we use our special tmp dir for BMU file uploads
-FILE_UPLOAD_TEMP_DIR = '/var/cspace/bmutmp'
+# set by importing webapps-global-config above
+# FILE_UPLOAD_TEMP_DIR
 
 # LOGGING is set up in the extra_*.py modules
 
@@ -176,4 +175,5 @@ AUTHENTICATION_BACKENDS = (
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 
 # we need this to ensure that our webapp proxying works.
-CSRF_COOKIE_DOMAIN = '.cspace.berkeley.edu'
+# set by importing webapps-global-config above
+#CSRF_COOKIE_DOMAIN

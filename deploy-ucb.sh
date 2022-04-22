@@ -1,7 +1,7 @@
 #!/bin/bash
-# a helper for deploying the django webapps to ucb ENVIRONMENTs on rtl 'managed servers'
+# a helper for deploying the django webapps to ucb environments on rtl 'managed servers'
 #
-# while it does work, it is really more of an example script...
+# while it does work, it is still rather primitive...
 # ymmv! use it if it really helps!
 #
 
@@ -55,7 +55,10 @@ echo "museums:     ${MUSEUMS}"
 echo "environment: ${ENVIRONMENT}"
 echo "version:     ${VERSION}"
 
-cd ~/cspace-webapps-common/
+cd ${HOME}/cspace-webapps-common/
+
+# update bin directory
+cp bin/* ${HOME}/bin
 
 for t in $MUSEUMS
 do

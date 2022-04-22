@@ -36,7 +36,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'timestamp',
-            'filename': os.path.join(os.path.sep, 'var', 'cspace', 'django', f'{PROJECT_NAME}.webapps.log'),
+            'filename': os.path.join(WEBAPPS_LOG_DIR, f'{PROJECT_NAME}.webapps.log'),
             'maxBytes': 32 * 1024 * 1024,
             'backupCount': 8,
             'encoding': 'utf8',
