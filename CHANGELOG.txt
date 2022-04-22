@@ -3,16 +3,18 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc2
-Thu Apr 21 17:10:47 PDT 2022
+This is version 6.2.0-rc3
+Thu Apr 21 17:18:31 PDT 2022
 
-b86a23f (HEAD -> main) CSW-638: now add cspace_django_site/webapps-global-config.py
+975db18 (HEAD -> main) CSW-638: extra setting need to import webapps-global-config
+789585a (tag: 6.2.0-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.2.0-rc2
+b86a23f CSW-638: now add cspace_django_site/webapps-global-config.py
 ceccdcc CSW-609: improve script that update jrxml files for ireports webapp
 83f5d0c CSW-638: get some global parameters from webapp-global-config
 8883c3e CSW-638: remove 'file-based caching' altogether from webapps (imageserver)
 2668773 NOJIRA: update package-lock.json
 843924c NOJIRA: tiny edits to webapps README.md
-47fe8c0 (origin/main, origin/HEAD) CSW-629: add checkCache.py to this webapp 'app user' bin directory
+47fe8c0 CSW-629: add checkCache.py to this webapp 'app user' bin directory
 7b6773d CSW-629: fix typo in webapps bin/ scripts
 e189f7c CSW-629: bampfa drupal website extraction scripts are defunct
 f8eb623 CSW-629: initial refactoring bin/ scripts for aws environment
