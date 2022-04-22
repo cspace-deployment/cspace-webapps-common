@@ -1,6 +1,10 @@
+# settings needed for Production
 import os
 
-# settings needed for Production
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_NAME = os.path.basename(BASE_DIR)
+
+from cspace_django_site.webapps_global_config import *
 
 try:
     # get the tracking id for Prod
@@ -17,9 +21,6 @@ TEMPLATE_DEBUG = DEBUG
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/2.2/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
-
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_NAME = os.path.basename(BASE_DIR)
 
 # 8 rotating logs, 16MB each, named '<museum>.webapps.log.txt', only INFO or higher
 # emailing of ERROR level messages deferred for now: we'd need to configure all that

@@ -4,6 +4,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_NAME = os.path.basename(BASE_DIR)
 
+from cspace_django_site.webapps_global_config import *
+
 try:
     # get the tracking id for Dev
     from cspace_django_site.trackingids import trackingids
