@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc3
-Thu Apr 21 17:18:31 PDT 2022
+This is version 6.2.0-rc4
+Thu Apr 21 17:34:28 PDT 2022
 
-975db18 (HEAD -> main) CSW-638: extra setting need to import webapps-global-config
-789585a (tag: 6.2.0-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.2.0-rc2
+9180407 (HEAD -> main) CSW-638: rename webapps-global-config.py
+a9095d1 (tag: 6.2.0-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.2.0-rc3
+975db18 CSW-638: extra setting need to import webapps-global-config
+789585a (tag: 6.2.0-rc2) revise CHANGELOG.txt and bump version to 6.2.0-rc2
 b86a23f CSW-638: now add cspace_django_site/webapps-global-config.py
 ceccdcc CSW-609: improve script that update jrxml files for ireports webapp
 83f5d0c CSW-638: get some global parameters from webapp-global-config
