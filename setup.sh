@@ -77,7 +77,7 @@ function build_project() {
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
     echo "symlinking ${RUNDIR}/${TENANT} as /var/www/${TENANT}"
     rm -f /var/www/${TENANT}
-    ln -s ${RUNDIR}/${TENANT} /var/www/${TENANT}
+    ln -s ${RUNDIR} /var/www/${TENANT}
   fi
 
   echo "*************************************************************************************************"
@@ -110,7 +110,25 @@ fi
 
 if [[ "${COMMAND}" = "deploy" ]]; then
 
+  if [[ ! ${USER} == 'app_cspace' ]]; then
+    echo
+    echo "USER is 'app_cspace', assuming deployment is on AWS/EC2"
+    export GLOBAL=aws
+    echo
+  elif [[ ! ${USER} == 'app_webapps' ]]; then
+    echo
+    echo "Assuming deployment is on RTL server"
+    export GLOBAL=rtl
+    echo
+  else
+    echo
+    echo "Assuming deployment is local"
+    export GLOBAL=local
+    echo
+  fi
+
   if [[ ! -d "${BASEDIR}" ]]; then
+    echo
     echo "The repo containing the webapps (${BASEDIR}) does not exist"
     echo "Please either create it (e.g. by cloning it from github)"
     echo "or edit this script to set the correct path"
@@ -121,6 +139,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   fi
 
   if [[ ! -d "${CONFIGDIR}" ]]; then
+    echo
     echo "The repo containing the configuration files (${CONFIGDIR}) does not exist"
     echo "Please either create it (e.g. by cloning it from github)"
     echo "or edit this script to set the correct path"
@@ -129,12 +148,14 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   fi
 
   if [[ ! -f "cspace_django_site/extra_${DEPLOYMENT}.py" ]]; then
+    echo
     echo "Can't configure '${DEPLOYMENT}': use 'pycharm', 'dev', or 'prod'"
     echo
     exit 1
   fi
 
   if [[ ! -d "${CONFIGDIR}/${TENANT}" ]]; then
+    echo
     echo "Can't deploy tenant ${TENANT}: ${CONFIGDIR}/${TENANT} does not exist"
     echo
     exit 1
@@ -155,6 +176,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   fi
 
   if [[ -e ${RUNDIR} ]]; then
+    echo
     echo "Cowardly refusal to overwrite existing runtime directory ${RUNDIR}"
     echo "Remove or rename ${RUNDIR}, then try again."
     exit 1
@@ -179,6 +201,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   cd ${HOME}/working_dir
 
   cp cspace_django_site/extra_${DEPLOYMENT}.py cspace_django_site/extra_settings.py
+  cp cspace_django_site/webapps_global_config_${GLOBAL}.py cspace_django_site/webapps_global_config.py
 
   rm -f config/*
   rm -f fixtures/*
