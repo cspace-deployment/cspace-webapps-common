@@ -1,4 +1,4 @@
 WEBAPPS_LOGS_DIR='logs'
-WEBAPPS_CONFIG_DIR='{HOME}/config'
+WEBAPPS_CONFIG_DIR='~/config'
 FILE_UPLOAD_TEMP_DIR='/tmp'
 CSRF_COOKIE_DOMAIN='.cspace.berkeley.edu'
