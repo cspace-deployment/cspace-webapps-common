@@ -21,7 +21,6 @@
 # exit on errors...
 # TODO: uncomment this someday when the script really can be expected to run to completion without errors in all circumstances
 # set -e
-set -x
 
 export COMMAND=$1
 # the second parameter can stand for 2 different things!
