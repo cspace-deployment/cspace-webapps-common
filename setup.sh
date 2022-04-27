@@ -10,63 +10,50 @@
 #
 # this bash script does the following:
 #
-# 1. 'configure' copies the appropriate "extra settings" file for the environment
-# 2. 'deploy':
+# 1. 'deploy':
 #     a. copies and configures the code for one of the 5 UCB deployments
 #     b. "npm builds" the needed js components
-#     c. if running on a UCB server (i.e. ubuntu, which is detected automatically), rsyncs the code to the runtime directory
-# 3. other maintainance functions: 'disable' or 'enable' individual webapps
-#
+#     c. if running on a UCB server (i.e. ubuntu, which is detected automatically),
+#        rsyncs the code to the runtime directory and makes symlinks in /var/www
+# 2. other maintainance functions: 'disable' or 'enable' individual webapps
+# 3. 'show' show what apps are installed
 
 # exit on errors...
 # TODO: uncomment this someday when the script really can be expected to run to completion without errors in all circumstances
 # set -e
+set -x
 
-COMMAND=$1
-# the second parameter can stand for several different things!
-WEBAPP=$2
-TENANT=$2
-DEPLOYMENT=$3
+export COMMAND=$1
+# the second parameter can stand for 2 different things!
+export WEBAPP=$2
+export TENANT=$2
+export DEPLOYMENT=$3
 
 # nb: version is optional. if not present, current repo, with or without changes is used...
-VERSION="$4"
+export VERSION="$4"
 
-CONFIGDIR=~/cspace-webapps-ucb
-BASEDIR=~/cspace-webapps-common
+export CONFIGDIR=${HOME}/cspace-webapps-ucb
+export BASEDIR=${HOME}/cspace-webapps-common
 
-PYTHON=python3
+export PYTHON=python3
 
-YYYYMMDD=$(date +%Y%m%d)
-RUNDIR=~/${YYYYMMDD}/${TENANT}
+export YYYYMMDD=$(date +%Y%m%d)
+export RUNDIR=${HOME}/${YYYYMMDD}/${TENANT}
 
-function buildjs() {
+function build_project() {
   # TODO: fix this hack to make the small amount of js work for all the webapps
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    export TENANT="$TENANT"
     perl -i -pe 's/..\/..\/suggest/\/$ENV{TENANT}\/suggest/' client_modules/js/PublicSearch.js
   else
     # newer npm versions than those on RTL servers need this
     export NODE_OPTIONS=--openssl-legacy-provider
   fi
 
+  # build the javascript
   npm install
   ./node_modules/.bin/webpack
   # disable eslint for now, until we address the errors it detects
   #./node_modules/.bin/eslint client_modules/js/app.js
-}
-
-function make_runtime_dir() {
-  if [[ -e ${RUNDIR} ]]; then
-    echo "Cowardly refusal to overwrite existing runtime directory ${RUNDIR}"
-    echo "Remove or rename ${RUNDIR}, then try again."
-    exit 1
-  fi
-  echo "Making and populating runtime directory ${RUNDIR}"
-  mkdir -p ${RUNDIR}
-}
-
-function build_django() {
-  buildjs $1
 
   # now we can go ahead and complete the configuration
   $PYTHON manage.py migrate --noinput
@@ -75,38 +62,28 @@ function build_django() {
   rm -rf static_root/
   $PYTHON manage.py collectstatic --noinput
 
-  # the runtime directory is ~/YYYYMMDD/M
+  # the runtime directory is ${HOME}/YYYYMMDD/M
   # (where M is the museum and YYYYMMDD is today's date)
   # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
   # rsync the "prepped and configged" files to the runtime directory
   rsync -a --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
 
-  # we assume the user has all the needed config files for this museum in ~/config
+  # we assume the user has all the needed config files for this museum in ${HOME}/config
   rm -rf ${RUNDIR}/config/
-  ln -s ~/config/$TENANT ${RUNDIR}/config
+  ln -s ${HOME}/config/${TENANT} ${RUNDIR}/config
+
+  # on RTL ubuntu servers, go ahead and symlink the runtime directory to
+  # the location apache/passenger expects
+  if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo "symlinking ${RUNDIR}/${TENANT} as /var/www/${TENANT}"
+    rm -f /var/www/${TENANT}
+    ln -s ${RUNDIR}/${TENANT} /var/www/${TENANT}
+  fi
 
   echo "*************************************************************************************************"
-  echo "The configured CSpace system is:"
+  echo "The configured CSpace system is in:"
   grep 'hostname' ${RUNDIR}/config/main.cfg
   echo "*************************************************************************************************"
-
-}
-
-function check_version() {
-
-  if [[ $VERSION != "" ]]; then
-    TAGS=$(git tag --list ${VERSION})
-    if [[ ${TAGS} ]]; then
-      echo "will build version $VERSION"
-    else
-      echo "could not find version $VERSION"
-      exit 1
-    fi
-
-  else
-    echo
-    echo "No version specified; deploying code as is, not from clean repo."
-  fi
 }
 
 if [ $# -lt 2 -a "$1" != 'show' ]; then
@@ -126,28 +103,12 @@ if [ $# -lt 2 -a "$1" != 'show' ]; then
 fi
 
 if [[ ! -e manage.py ]]; then
-  echo "No manage.py found. This script must be run in the django project directory"
+  echo "No manage.py found. This script must be run from within the django project directory"
   echo
   exit 1
 fi
 
-if [[ "${COMMAND}" = "disable" ]]; then
-  perl -i -pe "s/('${WEBAPP}')/# \1/" cspace_django_site/installed_apps.py
-  perl -i -pe "s/(path)/# \1/ if /${WEBAPP}/" cspace_django_site/urls.py
-  echo "Disabled ${WEBAPP}"
-elif [[ "${COMMAND}" = "enable" ]]; then
-  perl -i -pe "s/# *('${WEBAPP}')/\1/" cspace_django_site/installed_apps.py
-  perl -i -pe "s/# *(path)/\1/ if /${WEBAPP}/" cspace_django_site/urls.py
-  python manage.py migrate --noinput
-  python manage.py collectstatic --noinput
-  echo "Enabled ${WEBAPP}"
-elif [[ "${COMMAND}" = "show" ]]; then
-  echo
-  echo "Installed apps:"
-  echo
-  echo -e "from cspace_django_site.installed_apps import INSTALLED_APPS\nfor i in INSTALLED_APPS: print(i)" | $PYTHON
-  echo
-elif [[ "${COMMAND}" = "deploy" ]]; then
+if [[ "${COMMAND}" = "deploy" ]]; then
 
   if [[ ! -d "${BASEDIR}" ]]; then
     echo "The repo containing the webapps (${BASEDIR}) does not exist"
@@ -180,33 +141,49 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
   fi
 
   # check for indicated version (tag), if provided...
-  check_version
+  if [[ $VERSION != "" ]]; then
+    TAGS=$(git tag --list ${VERSION})
+    if [[ ${TAGS} ]]; then
+      echo "will build version $VERSION"
+    else
+      echo "could not find version $VERSION"
+      exit 1
+    fi
+  else
+    echo
+    echo "No version specified; deploying code as is, not from clean repo."
+  fi
 
-  # ok, everything checks out... let's get going...
+  if [[ -e ${RUNDIR} ]]; then
+    echo "Cowardly refusal to overwrite existing runtime directory ${RUNDIR}"
+    echo "Remove or rename ${RUNDIR}, then try again."
+    exit 1
+  fi
+  echo "Making and populating runtime directory ${RUNDIR}"
+  mkdir -p ${RUNDIR}
 
-  # create the runtime directory
-  make_runtime_dir
+  # ok, everything checks out... let's get going..
 
-  # do all configuration in ~/working_dir, which becomes the runtime directory
-  # if version is specified, make a 'clean' clone and checkout the version
+  # do all configuration in ${HOME}/working_dir, which is then rync'd to the runtime directory
+  # if version is specified, make a 'clean' clone and checkout the tag
   # otherwise make copy of this exact repo and do the configuration work there
-  rm -rf ~/working_dir
+  rm -rf ${HOME}/working_dir
   if [[ $VERSION != "" ]]; then
     THIS_REPO=`git config --get remote.origin.url`
-    git clone ${THIS_REPO} ~/working_dir
-    cd ~/working_dir/
+    git clone ${THIS_REPO} ${HOME}/working_dir
+    cd ${HOME}/working_dir/
     git checkout ${VERSION}
   else
-    rsync -a . ~/working_dir
+    rsync -a . ${HOME}/working_dir
   fi
-  cd ~/working_dir
+  cd ${HOME}/working_dir
 
   cp cspace_django_site/extra_${DEPLOYMENT}.py cspace_django_site/extra_settings.py
 
   rm -f config/*
   rm -f fixtures/*
 
-  # use 'default' configuration for this tenant from github, only initially for configuration
+  # use 'default' configuration for this tenant from github, only initially, for configuration
   cp ${CONFIGDIR}/${TENANT}/config/* config
   cp ${CONFIGDIR}/${TENANT}/fixtures/* fixtures
   # note that in some cases, this cp will overwrite customized files in the underlying contributed apps
@@ -222,12 +199,28 @@ elif [[ "${COMMAND}" = "deploy" ]]; then
   $PYTHON common/setversion.py
 
   # build js library, populate static dirs, rsync code to runtime dir if needed, etc.
-  build_django ${TENANT}
+  build_project
   echo
   echo "*************************************************************************************************"
   echo "Don't forget to check config/${TENANT}/main.cfg if necessary and the rest of the"
   echo "configuration files in config/ (these are .cfg, .json, and .csv files mostly)"
   echo "*************************************************************************************************"
+  echo
+elif [[ "${COMMAND}" = "disable" ]]; then
+  perl -i -pe "s/('${WEBAPP}')/# \1/" cspace_django_site/installed_apps.py
+  perl -i -pe "s/(path)/# \1/ if /${WEBAPP}/" cspace_django_site/urls.py
+  echo "Disabled ${WEBAPP}"
+elif [[ "${COMMAND}" = "enable" ]]; then
+  perl -i -pe "s/# *('${WEBAPP}')/\1/" cspace_django_site/installed_apps.py
+  perl -i -pe "s/# *(path)/\1/ if /${WEBAPP}/" cspace_django_site/urls.py
+  python manage.py migrate --noinput
+  python manage.py collectstatic --noinput
+  echo "Enabled ${WEBAPP}"
+elif [[ "${COMMAND}" = "show" ]]; then
+  echo
+  echo "Installed apps:"
+  echo
+  echo -e "from cspace_django_site.installed_apps import INSTALLED_APPS\nfor i in INSTALLED_APPS: print(i)" | $PYTHON
   echo
 else
   echo "${COMMAND} is not a recognized command."
