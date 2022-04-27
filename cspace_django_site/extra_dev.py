@@ -45,7 +45,8 @@ LOGGING = {
         },
     },
     'loggers': {
-        'django': {
+        # TODO: why does this work, even required: '' as logger
+        '': {
             'handlers': ['logfile'],
             'level': 'INFO',
             'propagate': True,

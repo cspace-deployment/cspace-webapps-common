@@ -55,6 +55,7 @@ LOGGING = {
         #     'level': 'ERROR',
         #     'propagate': False,
         # },
+        # TODO: why does this work, even required: '' as logger
         '': {
             'handlers': ['logfile'],
             'level': 'INFO',
