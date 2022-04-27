@@ -110,12 +110,12 @@ fi
 
 if [[ "${COMMAND}" = "deploy" ]]; then
 
-  if [[ ! ${USER} == 'app_cspace' ]]; then
+  if [[ ! "${USER}" == 'app_cspace' ]]; then
     echo
     echo "USER is 'app_cspace', assuming deployment is on AWS/EC2"
     export GLOBAL=aws
     echo
-  elif [[ ! ${USER} == 'app_webapps' ]]; then
+  elif [[ ! "${USER}" == 'app_webapps' ]]; then
     echo
     echo "Assuming deployment is on RTL server"
     export GLOBAL=rtl
