@@ -513,7 +513,8 @@ def getHierarchies(form, known_authorities):
         ("Ethnographic File Codes", "ethusecode"),
         ("Materials", "material_ca"),
         ("Taxonomy", "taxonomy"),
-        ("Object Name", "objectname")
+        ("Object Name", "objectname"),
+        ("Object Class", "objectclass")
     ]
 
     authorities = '''
