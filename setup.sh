@@ -126,6 +126,19 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     echo
   fi
 
+  if [[ ! -d "${CONFIGDIR}" ]]; then
+    echo
+    echo "The repo containing the configuration files (${CONFIGDIR}) does not exist"
+    echo "Please either create it (e.g. by cloning it from github)"
+    echo "or edit this script to set the correct path"
+    echo
+    exit 1
+  else
+    cd "${CONFIGDIR}"
+    git checkout main
+    git pull -v
+  fi
+
   if [[ ! -d "${BASEDIR}" ]]; then
     echo
     echo "The repo containing the webapps (${BASEDIR}) does not exist"
@@ -135,15 +148,6 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     exit 1
   else
     cd "${BASEDIR}"
-  fi
-
-  if [[ ! -d "${CONFIGDIR}" ]]; then
-    echo
-    echo "The repo containing the configuration files (${CONFIGDIR}) does not exist"
-    echo "Please either create it (e.g. by cloning it from github)"
-    echo "or edit this script to set the correct path"
-    echo
-    exit 1
   fi
 
   if [[ ! -f "cspace_django_site/extra_${DEPLOYMENT}.py" ]]; then
@@ -193,7 +197,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     THIS_REPO=`git config --get remote.origin.url`
     git clone ${THIS_REPO} ${HOME}/working_dir
     cd ${HOME}/working_dir/
-    git checkout ${VERSION}
+    git -c advice.detachedHead=false checkout ${VERSION}
   else
     rsync -a . ${HOME}/working_dir
   fi
