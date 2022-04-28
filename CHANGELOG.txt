@@ -3,10 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc7
-Thu Apr 28 07:44:44 PDT 2022
+This is version 6.2.0-rc8
+Thu Apr 28 10:23:45 PDT 2022
 
-36b458d (HEAD -> main, origin/main, origin/HEAD) NOJIRA: ireports helper app needs to look in correct locations
+31e911d (HEAD -> main) CSW-634: django deploy script setup.sh was too noisy
+b4dc0e4 (tag: 6.2.0-rc7, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.2.0-rc7
+36b458d NOJIRA: ireports helper app needs to look in correct locations
 084e8b3 NOJIRA: ireports helper app needs only look in one location for .jrxml
 bf8fc0f CSW-634: no need for -x anymore
 86397e8 CSW-634: use correct tests in django webapps deployment script
