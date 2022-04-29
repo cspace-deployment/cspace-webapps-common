@@ -215,20 +215,18 @@ def getProhibitedLocations(config, request):
 def getHandlers(form, institution):
     selected = form.get('handlerRefName')
 
-
     if institution == 'bampfa':
         handlerlist = [
-            ('Kelly Bennett', 'KB'),
-            ('Gary Bogus', 'GB'),
-            ('Lisa Calden', 'LC'),
+            ('John Alexander', 'JA'),
             ('Stephanie Cannizzo', 'SC'),
+            ('Laura Graziano', 'LG'),
             ('Laura Hansen', 'LH'),
-            ('Jenny Heffernon', 'JH'),
-            ('Tracy Jones', 'TJ'),
+            ('Lynn Kimura', 'LK'),
             ('Michael Meyers', 'MM'),
             ('Scott Orloff', 'SO'),
-            ('Pamela Pack', 'PP'),
-            ('Julia White', 'JW'),
+            ('Benjamin Peters', 'BP'),
+            ('Stephanie Reeves', 'SR'),
+            ('Orlando Antonio Sánchez', 'OS')
         ]
     else:
 
