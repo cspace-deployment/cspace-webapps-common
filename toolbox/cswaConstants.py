@@ -221,7 +221,7 @@ def getHandlers(form, institution):
             ('Stephanie Cannizzo', 'SC'),
             ('Laura Graziano', 'LG'),
             ('Laura Hansen', 'LH'),
-            ('Lynn Kimura', 'LK'),
+            ('Lynne Kimura', 'LK'),
             ('Michael Meyers', 'MM'),
             ('Scott Orloff', 'SO'),
             ('Benjamin Peters', 'BP'),
