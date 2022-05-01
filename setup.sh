@@ -74,7 +74,7 @@ function build_project() {
   # on RTL ubuntu servers, go ahead and symlink the runtime directory to
   # the location apache/passenger expects
   if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    echo "symlinking ${RUNDIR}/${TENANT} as /var/www/${TENANT}"
+    echo "symlinking ${RUNDIR} as /var/www/${TENANT}"
     rm -f /var/www/${TENANT}
     ln -s ${RUNDIR} /var/www/${TENANT}
   fi
