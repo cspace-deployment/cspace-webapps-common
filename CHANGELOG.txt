@@ -3,11 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc9
-Fri Apr 29 08:35:35 PDT 2022
+This is version 6.2.0-rc10
+Sun May  1 09:50:22 PDT 2022
 
-f5161eb (HEAD -> main) CSW-653: revise bampfa handler list in move webapps
-56e139b (origin/main, origin/HEAD) CSW-641: add object class to hierarchy view dropdowns
+fb8181e (HEAD -> main) CSW-634: typo in django setup.sh
+cb6e812 (origin/main, origin/HEAD) CSW-653: fix typo in bampfa handler list
+4147776 (tag: 6.2.0-rc9) revise CHANGELOG.txt and bump version to 6.2.0-rc9
+f5161eb CSW-653: revise bampfa handler list in move webapps
+56e139b CSW-641: add object class to hierarchy view dropdowns
 ce5aafc (tag: 6.2.0-rc8) revise CHANGELOG.txt and bump version to 6.2.0-rc8
 31e911d CSW-634: django deploy script setup.sh was too noisy
 b4dc0e4 (tag: 6.2.0-rc7) revise CHANGELOG.txt and bump version to 6.2.0-rc7
