@@ -26,11 +26,14 @@ source ${HOME}/pipeline-config.sh
 # a given object prefix (dev, qa, or prod).
 # Then one only needs to know the URL for the manifest to get a list of the rest of the objects.
 # manifest URL is https://ucjepsextracts.s3.us-west-2.amazonaws.com/${BL_ENVIRONMENT}/MANIFEST.TXT
-
+# For example:
+# wget -qO- https://ucjepsextracts.s3.us-west-2.amazonaws.com/dev/MANIFEST.TXT | xargs -n1 wget
 /usr/bin/aws s3api list-objects --bucket "ucjepsextracts" --prefix "${BL_ENVIRONMENT}/" | \
 /usr/bin/jq -r '.Contents[].Key' | \
 /usr/bin/sed "s/^${BL_ENVIRONMENT}\//https:\/\/ucjepsextracts.s3.us-west-2.amazonaws.com\/${BL_ENVIRONMENT}\//" > \
 /tmp/MANIFEST.TXT
 
 /usr/bin/aws s3 cp /tmp/MANIFEST.TXT s3://ucjepsextracts/${BL_ENVIRONMENT}/
+
+/usr/bin/rm -f /tmp/MANIFEST.TXT
 
