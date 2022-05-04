@@ -3,33 +3,39 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc10
-Sun May  1 09:50:22 PDT 2022
+This is version 6.2.0-rc11
+Wed May  4 08:26:12 PDT 2022
 
-fb8181e (HEAD -> main) CSW-634: typo in django setup.sh
-cb6e812 (origin/main, origin/HEAD) CSW-653: fix typo in bampfa handler list
-4147776 (tag: 6.2.0-rc9) revise CHANGELOG.txt and bump version to 6.2.0-rc9
+99a264e (HEAD -> main) CSW-634: django webapp config files no longer need provide logo url
+20abba1 (origin/main, origin/HEAD) Merge pull request #4 from felder/felder_extractpush
+eadf7df Adding comments.
+9bedd3a Adding object manifest.
+c6d05e5 Adding push mechanism for ucjeps extracts.
+2285d6b (tag: 6.2.0-rc10) revise CHANGELOG.txt and bump version to 6.2.0-rc10
+fb8181e CSW-634: typo in django setup.sh
+cb6e812 CSW-653: fix typo in bampfa handler list
+4147776 revise CHANGELOG.txt and bump version to 6.2.0-rc9
 f5161eb CSW-653: revise bampfa handler list in move webapps
 56e139b CSW-641: add object class to hierarchy view dropdowns
-ce5aafc (tag: 6.2.0-rc8) revise CHANGELOG.txt and bump version to 6.2.0-rc8
+ce5aafc revise CHANGELOG.txt and bump version to 6.2.0-rc8
 31e911d CSW-634: django deploy script setup.sh was too noisy
-b4dc0e4 (tag: 6.2.0-rc7) revise CHANGELOG.txt and bump version to 6.2.0-rc7
+b4dc0e4 revise CHANGELOG.txt and bump version to 6.2.0-rc7
 36b458d NOJIRA: ireports helper app needs to look in correct locations
 084e8b3 NOJIRA: ireports helper app needs only look in one location for .jrxml
 bf8fc0f CSW-634: no need for -x anymore
 86397e8 CSW-634: use correct tests in django webapps deployment script
 a5e5f94 CSW-634: django webapps deployment script can determine platform
 907685e CSW-634: django deploy script auto-detects server type
-308b49f (tag: 6.2.0-rc6) revise CHANGELOG.txt and bump version to 6.2.0-rc6
+308b49f revise CHANGELOG.txt and bump version to 6.2.0-rc6
 356dc5b CSW-634: additional refactoring of django deployment scripts in support of aws/ec2
 128948b NOJIRA: fix unnoticed bug in django logging in dev environment
-385d571 (tag: 6.2.0-rc5) revise CHANGELOG.txt and bump version to 6.2.0-rc5
+385d571 revise CHANGELOG.txt and bump version to 6.2.0-rc5
 6a2ab03 CSW-638: use correct log dir parameter in webapps-global-config
-f7d96ea (tag: 6.2.0-rc4) revise CHANGELOG.txt and bump version to 6.2.0-rc4
+f7d96ea revise CHANGELOG.txt and bump version to 6.2.0-rc4
 9180407 CSW-638: rename webapps-global-config.py
-a9095d1 (tag: 6.2.0-rc3) revise CHANGELOG.txt and bump version to 6.2.0-rc3
+a9095d1 revise CHANGELOG.txt and bump version to 6.2.0-rc3
 975db18 CSW-638: extra setting need to import webapps-global-config
-789585a (tag: 6.2.0-rc2) revise CHANGELOG.txt and bump version to 6.2.0-rc2
+789585a revise CHANGELOG.txt and bump version to 6.2.0-rc2
 b86a23f CSW-638: now add cspace_django_site/webapps-global-config.py
 ceccdcc CSW-609: improve script that update jrxml files for ireports webapp
 83f5d0c CSW-638: get some global parameters from webapp-global-config
@@ -42,8 +48,8 @@ e189f7c CSW-629: bampfa drupal website extraction scripts are defunct
 f8eb623 CSW-629: initial refactoring bin/ scripts for aws environment
 d8a6214 CSW-629: initial add of bin/ contents for app_webapps
 7b0c623 Merge pull request #3 from cspace-deployment/dependabot/npm_and_yarn/minimist-1.2.6
-e18b3ab (origin/dependabot/npm_and_yarn/minimist-1.2.6) Bump minimist from 1.2.5 to 1.2.6
-02ef912 (tag: 6.2.0-rc1) revise CHANGELOG.txt and bump version to 6.2.0-rc1
+e18b3ab Bump minimist from 1.2.5 to 1.2.6
+02ef912 revise CHANGELOG.txt and bump version to 6.2.0-rc1
 e3d0efa CSW-513: initial version of bmu improvements for ucjeps
 dfa93b8 CSW-620: add cors header so imageserver can serve 3d images
 5a86231 CSW-612: some bmu metrics-measuring scripts
