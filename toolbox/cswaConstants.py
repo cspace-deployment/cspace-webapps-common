@@ -410,14 +410,13 @@ def selectWebapp(form, webappconfig):
         if tool == 'landing':
             continue
         try:
-            # check to see that all the needed values are available...
-            logo = webappconfig.get('info','logo')
+            # just check to see that all the needed values are available... we don't use them right here
             schemacolor1 = webappconfig.get('info','schemacolor1')
             institution = webappconfig.get('info','institution')
             serverlabel = webappconfig.get('info','serverlabel')
+            updateactionlabel = webappconfig.get(tool,'updateactionlabel')
 
             apptitle = webappconfig.get(tool,'apptitle')
-            updateactionlabel = webappconfig.get(tool,'updateactionlabel')
             updateType = webappconfig.get(tool,'updatetype')
             apptitles[apptitle] = updateType
         except:
