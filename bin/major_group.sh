@@ -13,9 +13,9 @@ MG_DIR=${HOMEDIR}/major_group
 MG_LOG=${HOMEDIR}/major_group/major_group.log
 MG_FILE=${HOMEDIR}/major_group/major_group.txt
 
-if [ ! -d "MG_DIR" ]; then
-	mkdir MG_DIR
-	echo "Made directory MG_DIR"
+if [ ! -d "${MG_DIR}" ]; then
+	mkdir ${MG_DIR}
+	echo "Made directory ${MG_DIR}"
 fi
 
 # remove previous file, if any

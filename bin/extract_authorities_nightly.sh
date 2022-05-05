@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 
+source ${HOME}/pipeline-config.sh
+
 WORKINGDIR="${HOMEDIR}/extracts/ucjeps-authorities"
-# make the directory if it doesn't exist
+# make the working directory if it doesn't exist
 if [ ! -d ${WORKINGDIR} ]
 then
    mkdir -p ${WORKINGDIR}
 fi
+
 ${HOME}/bin/extract_authorities.sh orgauthorities/225e44ef-7f3d-4660-a4d6 ${WORKINGDIR}/nomenclature.xml 2>&1 | /usr/bin/ts '[%Y-%m-%d %H:%M:%S]'
 ${HOME}/bin/extract_authorities.sh orgauthorities/751023ec-d953-45f9-a0a8 ${WORKINGDIR}/determination.xml 2>&1 | /usr/bin/ts '[%Y-%m-%d %H:%M:%S]'
 ${HOME}/bin/extract_authorities.sh orgauthorities/a71f4ab6-221a-4202-bf75 ${WORKINGDIR}/institution.xml 2>&1 | /usr/bin/ts '[%Y-%m-%d %H:%M:%S]'
