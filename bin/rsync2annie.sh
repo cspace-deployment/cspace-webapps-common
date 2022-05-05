@@ -1,3 +1,4 @@
+# this script is defunct; replaced by ucjepsextracts2s3.sh
 rsync -v -e "ssh -i ${HOME}/.ssh/id_rsa" ${HOME}/extracts/cch/*.gz cspace@cynips.bnhm.berkeley.edu:/usr/local/web/ucjeps_web/cspace/
 rsync -v -e "ssh -i ${HOME}/.ssh/id_rsa" ${HOME}/extracts/major_group/*.gz cspace@cynips.bnhm.berkeley.edu:/usr/local/web/ucjeps_web/cspace/
 rsync -v -e "ssh -i ${HOME}/.ssh/id_rsa" ${HOME}/extracts/taxonauth/*.gz cspace@cynips.bnhm.berkeley.edu:/usr/local/web/ucjeps_web/cspace/

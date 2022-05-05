@@ -31,15 +31,16 @@ elif [[ "$1" != "taxon" && "$1" != "unverified" && "$1" != "common" ]]; then
 fi
 
 source ${HOME}/pipeline-config.sh
-HOMEDIR=${HOME}/extracts
-CCH_DIR=$HOMEDIR/cch/current
-CCH_LOG=$HOMEDIR/cch/cch_extract.log
-HOST="${BAMPFA_SERVER}"
-PORT="${BAMPFA_PORT}"
+WORKINGDIR=${HOMEDIR}/extracts
+CCH_DIR=${WORKINGDIR}/cch/current
+CCH_LOG=${WORKINGDIR}/cch/cch_extract.log
+HOST="${UCJEPS_SERVER}"
+# NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
+CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
-AUTH_DIR=$HOMEDIR/taxonauth
+AUTH_DIR=${WORKINGDIR}/taxonauth
 AUTH_FILE=$AUTH_DIR/$1_auth.txt
 AUTH_LOG=$AUTH_DIR/taxonauth_export.log
 
@@ -52,7 +53,7 @@ cd $AUTH_DIR
 
 date >> $AUTH_LOG
 
-psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $AUTH_LOG
+psql -d "$CONNECTSTRING" -U $DBUSER << HP_END >> $AUTH_LOG
 
 create temp table tmp_taxon_auth as
 select

@@ -1,5 +1,5 @@
-# Replaces rsync2annie.sh with a push mechanism to S3 for AWS.
 #!/bin/bash
+# Replaces rsync2annie.sh with a push mechanism to S3 for AWS.
 
 EXTRACTSDIR="/cspace/extracts"
 BL_ENVIRONMENT=`/usr/bin/curl -s -m 5 http://169.254.169.254/latest/meta-data/tags/instance/BL_ENVIRONMENT`
@@ -11,29 +11,29 @@ fi
 
 source ${HOME}/pipeline-config.sh
 
-/usr/bin/aws s3 rm s3://ucjepsextracts/ --recursive --exclude "*" --include "${BL_ENVIRONMENT}/*"
+/usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --recursive --exclude "*" --include "ucjeps/*"
 
-/usr/bin/aws s3 cp ${EXTRACTSDIR}/cch/*.gz s3://ucjepsextracts/${BL_ENVIRONMENT}/
-/usr/bin/aws s3 cp ${EXTRACTSDIR}/major_group/*.gz s3://ucjepsextracts/${BL_ENVIRONMENT}/
-/usr/bin/aws s3 cp ${EXTRACTSDIR}/taxonauth/*.gz s3://ucjepsextracts/${BL_ENVIRONMENT}/
-/usr/bin/aws s3 cp ${EXTRACTSDIR}/ucjeps-authorities/authorities.tgz s3://ucjepsextracts/${BL_ENVIRONMENT}/
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/cch/*.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/major_group/*.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/taxonauth/*.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/ucjeps-authorities/authorities.tgz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
 
-/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.public.csv.gz s3://ucjepsextracts/${BL_ENVIRONMENT}/
-/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.media.csv.gz s3://ucjepsextracts/${BL_ENVIRONMENT}/
+/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.public.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
+/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.media.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps
 
 # Since S3 is not a traditional filesystem, directory browsing is not possible in the traditional sense.
-# Instead we create a file named MANIFEST.TXT that contains URLs to all the items in the bucket for 
+# Instead we create a file named MANIFEST.TXT that contains URLs to all the items in the bucket for
 # a given object prefix (dev, qa, or prod).
 # Then one only needs to know the URL for the manifest to get a list of the rest of the objects.
-# manifest URL is https://ucjepsextracts.s3.us-west-2.amazonaws.com/${BL_ENVIRONMENT}/MANIFEST.TXT
+# manifest URL is https://cspace-extracts-prod.s3.us-west-2.amazonaws.com/ucjeps/MANIFEST.TXT
 # For example:
-# wget -qO- https://ucjepsextracts.s3.us-west-2.amazonaws.com/dev/MANIFEST.TXT | xargs -n1 wget
-/usr/bin/aws s3api list-objects --bucket "ucjepsextracts" --prefix "${BL_ENVIRONMENT}/" | \
+# wget -qO- https://cspace-extracts-prod.s3.us-west-2.amazonaws.com/ucjeps/MANIFEST.TXT | xargs -n1 wget
+/usr/bin/aws s3api list-objects --bucket "cspace-extracts-${BL_ENVIRONMENT}" --prefix "ucjeps/" | \
 /usr/bin/jq -r '.Contents[].Key' | \
-/usr/bin/sed "s/^${BL_ENVIRONMENT}\//https:\/\/ucjepsextracts.s3.us-west-2.amazonaws.com\/${BL_ENVIRONMENT}\//" > \
+/usr/bin/sed "s/^cspace\-extracts\-${BL_ENVIRONMENT}\//https:\/\/cspace-extracts-${BL_ENVIRONMENT}.s3.us-west-2.amazonaws.com\/ucjeps\//" > \
 /tmp/MANIFEST.TXT
 
-/usr/bin/aws s3 cp /tmp/MANIFEST.TXT s3://ucjepsextracts/${BL_ENVIRONMENT}/
+/usr/bin/aws s3 cp /tmp/MANIFEST.TXT s3://cspace-extracts-${BL_ENVIRONMENT}/
 
 /usr/bin/rm -f /tmp/MANIFEST.TXT
 

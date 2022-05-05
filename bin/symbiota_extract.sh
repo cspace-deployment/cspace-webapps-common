@@ -5,15 +5,16 @@
 
 source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=${HOME}/extracts
+WORKINGDIR=${HOMEDIR}/extracts
 
-HOST="${BAMPFA_SERVER}"
-PORT="${BAMPFA_PORT}"
+HOST="${UCJEPS_SERVER}"
+# NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
+CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
-CCH_DIR=$HOMEDIR/cch/current
-CCH_LOG=$HOMEDIR/cch/cch_extract.log
+CCH_DIR=${WORKINGDIR}/cch/current
+CCH_LOG=${WORKINGDIR}/cch/cch_extract.log
 
 date >> $CCH_LOG
 

@@ -8,20 +8,21 @@
 
 source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=${HOME}/extracts
-CCH_DIR=$HOMEDIR/cch/current
-CCH_LOG=$HOMEDIR/cch/cch_extract.log
-HOST="${BAMPFA_SERVER}"
-PORT="${BAMPFA_PORT}"
+WORKINGDIR=${HOMEDIR}/extracts
+CCH_DIR=${WORKINGDIR}/cch/current
+CCH_LOG=${WORKINGDIR}/cch/cch_extract.log
+HOST="${UCJEPS_SERVER}"
+# NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
+CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
 # clean out any data from previous runs
-rm $CCH_DIR/*
+rm -f $CCH_DIR/*
 
 date >> $CCH_LOG
 
-psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $CCH_LOG
+psql -d "$CONNECTSTRING" -U $DBUSER << HP_END >> $CCH_LOG
 
 create temp table tmp_cch_accessions as
 select

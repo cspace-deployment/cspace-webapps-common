@@ -2,24 +2,28 @@
 
 source ${HOME}/pipeline-config.sh
 YYMMDD=`date +%y%m%d`
-HOMEDIR=${HOME}/extracts
 
-HOST="${BAMPFA_SERVER}"
-PORT="${BAMPFA_PORT}"
+HOST="${UCJEPS_SERVER}"
+# NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
+CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
-MG_DIR=$HOMEDIR/major_group
-MG_LOG=$HOMEDIR/major_group/major_group.log
-MG_FILE=$HOMEDIR/major_group/major_group.txt
+MG_DIR=${HOMEDIR}/major_group
+MG_LOG=${HOMEDIR}/major_group/major_group.log
+MG_FILE=${HOMEDIR}/major_group/major_group.txt
+
+if [ ! -d "MG_DIR" ]; then
+	mkdir MG_DIR
+	echo "Made directory MG_DIR"
+fi
 
 # remove previous file, if any
-rm $MG_FILE
+rm -f $MG_FILE
 
 echo 'query START time: ' `date` >> $MG_LOG
 
-#psql -d ucjeps_domain_ucjeps -U reporter_ucjeps << HP_END >> $MG_LOG
-psql -h $HOST -p $PORT -d $DBNAME -U $DBUSER << HP_END >> $MG_LOG
+psql -d "$CONNECTSTRING" -U $DBUSER << HP_END >> $MG_LOG
 
 create temp table tmp_major_group_accn as
 select
@@ -58,4 +62,3 @@ ls -l *.gz >> $MG_LOG
 rm -f $MG_FILE
 
 echo '' >> $MG_LOG
-
