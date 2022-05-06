@@ -3,11 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.2.0-rc11
-Wed May  4 08:26:12 PDT 2022
+This is version 6.2.0-rc12
+Fri May  6 11:02:12 PDT 2022
 
-99a264e (HEAD -> main) CSW-634: django webapp config files no longer need provide logo url
-20abba1 (origin/main, origin/HEAD) Merge pull request #4 from felder/felder_extractpush
+9c61e3a (HEAD -> main) CSW-513: check file in bmu should work even if images are not present
+26b1f44 (origin/main, origin/HEAD) CSW-634: further refactoring of cron jobs
+a96da79 CSW-634: furthere revisions to ucjeps extract scripts
+341b8f5 CSW-634: minor revisions to ucjeps extract script for robustness
+391132e CSW-634: add and update a ton of scripts used in cron jobs
+74b2e61 (tag: 6.2.0-rc11) revise CHANGELOG.txt and bump version to 6.2.0-rc11
+99a264e CSW-634: django webapp config files no longer need provide logo url
+20abba1 Merge pull request #4 from felder/felder_extractpush
 eadf7df Adding comments.
 9bedd3a Adding object manifest.
 c6d05e5 Adding push mechanism for ucjeps extracts.
