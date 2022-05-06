@@ -7,17 +7,12 @@ if [ ! -d ${HOMEDIR}/jrxml ]
 then
    mkdir ${HOMEDIR}/jrxml
 fi
-git clone https://github.com/cspace-deployment/services.git
+git clone https://github.com/cspace-deployment/services.git ${HOME}/services
 cd ${HOME}/services
-git checkout origin/bampfa_5.1
+git checkout origin/ucb_6.0
+# copy 'core' reports
 cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOMEDIR}/jrxml
-git checkout origin/botgarden_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOMEDIR}/jrxml
-git checkout origin/cinefiles_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOMEDIR}/jrxml
-git checkout origin/pahma_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOMEDIR}/jrxml
-git checkout origin/ucjeps_5.1
-cp services/report/3rdparty/jasper-cs-report/src/main/resources/*.jrxml ${HOMEDIR}/jrxml
+# copy reports for all tenants
+cp services/report/3rdparty/jasper-cs-report/src/main/resources/tenants/*/*.jrxml ${HOMEDIR}/jrxml
 cd
 rm -rf ${HOME}/services

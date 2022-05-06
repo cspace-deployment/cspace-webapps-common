@@ -1,7 +1,10 @@
 #!/bin/bash
 # Replaces rsync2annie.sh with a push mechanism to S3 for AWS.
 
-EXTRACTSDIR="/cspace/extracts"
+source ${HOME}/pipeline-config.sh
+
+EXTRACTSDIR="${HOMEDIR}/extracts"
+
 BL_ENVIRONMENT=`/usr/bin/curl -s -m 5 http://169.254.169.254/latest/meta-data/tags/instance/BL_ENVIRONMENT`
 
 if [[ -z $BL_ENVIRONMENT || ( "$BL_ENVIRONMENT" != "dev" && "$BL_ENVIRONMENT" != "qa" && "$BL_ENVIRONMENT" != "prod" ) ]]; then
