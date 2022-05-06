@@ -244,8 +244,8 @@ def uploadmedia(request):
 
 
 def checkOrientation(image_file):
-    image = Image.open(image_file)
     try:
+        image = Image.open(image_file)
         image_size = image.size
         if image_size[0] < image_size[1]:
                 return 'Portrait'
