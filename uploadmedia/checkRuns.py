@@ -75,7 +75,7 @@ def checkJobs(jobs, joberrors, report_type):
     if report_type == 'summary': print('most recent %s jobs:\n' % len(output_lines))
     print('\n'.join(output_lines))
 
-    statsfile = f'/var/cspace/monitor/{sys.argv[4]}.bmu.stats.csv'
+    statsfile = f'/cspace/monitor/{sys.argv[4]}.bmu.stats.csv'
     fh = open(statsfile, 'w')
     stats = csv.writer(fh, delimiter="\t")
     stats.writerow(('date', 'count'))

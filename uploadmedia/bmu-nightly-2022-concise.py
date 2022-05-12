@@ -17,7 +17,9 @@ from copy import deepcopy
 
 # In[2]:
 
-data_dir = '/var/cspace/monitor'
+data_location = sys.argv[1]
+
+data_dir = data_location
 image_dir = '/var/www/static'
 html_path = ''
 html_file = '/var/www/static/bmu_stats.html'
