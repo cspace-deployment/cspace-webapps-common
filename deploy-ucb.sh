@@ -68,7 +68,7 @@ echo "version:     ${VERSION}"
 cd ${HOME}/cspace-webapps-common/
 
 # update bin directory
-cp bin/* ${HOME}/bin
+cp -r bin/* ${HOME}/bin
 
 for t in $MUSEUMS
 do
