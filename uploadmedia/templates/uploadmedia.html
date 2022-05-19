@@ -239,7 +239,6 @@
                             <th>found in CSpace?</th>
                             <th>Number of media</th>
                             <th>Orientation</th>
-                            <th>Delete from Job?</th>
                         </tr>
                         {% for o in objectnumbers %}
                             <tr>
@@ -270,9 +269,6 @@
                                     {% else %}
                                         <span class="error">{{ o.7 }}</span>
                                     {% endif %}
-                                </td>
-                                <td>
-                                    <a href="">Delete</a>
                                 </td>
                             </tr>
                         {% endfor %}
