@@ -3,10 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.3.0-rc1
-Thu May 12 15:20:39 PDT 2022
+This is version 6.3.0-rc2
+Thu May 19 13:15:06 PDT 2022
 
-4c97efd (HEAD -> main, origin/main, origin/HEAD) CSW-634: revised BMU helper scripts for AWS/EC2
+62fb420 (HEAD -> main) CSW-626: improve usage message in cps3.sh
+f874bf2 CSW-626: initial refactoring to have BMU use S3 for media cache
+1d705e2 CSW-513: eliminate unimplemented 'delete image' option from BMU template
+9ee8045 CSW-628: mark two legacy versions of 'postblob.sh' as such
+e9b5207 CSW-634: use correct CSRF_COOKIE_DOMAIN for local/dev deployments
+f04dfc1 (tag: 6.3.0-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc1
+4c97efd CSW-634: revised BMU helper scripts for AWS/EC2
 6ae391b CSW-634: minor revisions to webapps deploy scripts for AWS/EC2
 0031b81 CSW-634: revise webapps CSRF_COOKIE_DOMAIN for AWS/ECS
 814c7f5 CSW-634: add pahma 'hierarchies' apparatus to bin directory of webapps
