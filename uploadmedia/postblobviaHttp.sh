@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# this better be here!
+# TODO: legacy code, but perhaps useful for examples? otherwise, remove
 source ~/venv/bin/activate
 
 # modify these for each deployment...
