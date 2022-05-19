@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ $# -ne 3 ]] ; then
-  echo "filepath museum direction (from/to)"
+  echo "three arguments required: filepath museum direction (from/to)"
   exit 1
 fi
 
