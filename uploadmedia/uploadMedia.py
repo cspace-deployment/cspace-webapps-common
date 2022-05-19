@@ -7,6 +7,7 @@ from requests.auth import HTTPBasicAuth
 import time
 from os import path
 from xml.sax.saxutils import escape
+import subprocess
 import traceback
 import configparser
 
@@ -110,11 +111,25 @@ def makePayload(payload, mh, institution):
     # print(payload)
     return payload
 
+
+def get_from_s3(filename):
+    p_object = subprocess.Popen(
+        [path.join('.', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
+    pid = ''
+    if p_object._child_created:
+        pid = p_object.pid
+        print('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}, pid {pid}')
+    else:
+        print('bmu ERROR:', filename + f': Child returned {p_object.returncode}, pid {pid}')
+
+
 def uploadblob(mediaElements, config, http_parms):
 
     url = "%s/cspace-services/%s" % (http_parms.server, 'blobs')
     filename = mediaElements['name']
-    fullpath = path.join(http_parms.cache_path, filename)
+    # bring the media file over from s3
+    get_from_s3(filename)
+    fullpath = path.join('/tmp', filename)
 
     # by default, django processes multipart forms in memory
     # we need to work around this for large BMU uploads. The MultipartEncoder is the answer!

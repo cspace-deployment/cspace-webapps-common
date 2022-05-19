@@ -5,6 +5,7 @@ import codecs
 import re
 import json
 import logging
+import subprocess
 from os import path, listdir
 from os.path import isfile, isdir, join
 from xml.sax.saxutils import escape
@@ -252,13 +253,26 @@ def writeCsv(filename, items, writeheader):
     filehandle.close()
 
 
+def send_to_s3(filename):
+    p_object = subprocess.Popen(
+        [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'])
+    pid = ''
+    if p_object._child_created:
+        pid = p_object.pid
+        loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
+    else:
+        loginfo('bmu ERROR:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
+
+
 # following function borrowed from Django docs, w modifications
 def handle_uploaded_file(f):
-    destination = open(path.join(TEMPIMAGEDIR, '%s') % f.name, 'wb')
+    destination = open(path.join('/tmp', '%s') % f.name, 'wb')
     with destination:
         for chunk in f.chunks():
             destination.write(chunk)
     destination.close()
+    # send_to_s3 assumes the file will be found in /tmp
+    send_to_s3(f.name)
 
 
 def assignValue(defaultValue, override, imageData, exifvalue, refnameList):
