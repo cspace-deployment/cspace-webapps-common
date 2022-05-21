@@ -1,13 +1,11 @@
 #!/bin/bash
 
-if ! grep -q " $1 " <<< " prod dev "; then
-    echo "please specify and argument, either dev or prod"
-fi
-
-ENVIRONMENT=$1
+source ~/bin/set_environment.sh
 
 COMPONENTS=("cspace-solr-ucb" "cspace-webapps-common" "projects/radiance")
-SCRIPTS=("utilities/redeploy-etl.sh VERSION ${ENVIRONMENT}" "deploy-ucb.sh -a -v VERSION -e ${ENVIRONMENT}" "deploy-all.sh VERSION ${ENVIRONMENT}")
+
+# nb: on aws, blacklight deployment use the 'prod' environment always
+SCRIPTS=("utilities/redeploy-etl.sh VERSION ${ENVIRONMENT}" "deploy-ucb.sh -a -v VERSION -e prod" "deploy-all.sh VERSION prod")
 
 for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     REPO=${COMPONENTS[$i]}
@@ -22,8 +20,9 @@ for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     DATE=`date +%Y%m%d%H%M`
     echo "${SCRIPT}"
     cd
+    rm config
+    ln -s /cspace/webapp_configs/config-${ENVIRONMENT} config
     eval "${SCRIPT} > release-${REPO/\//-}-${DATE}.txt 2>&1 &"
 done
 
 wait
-
