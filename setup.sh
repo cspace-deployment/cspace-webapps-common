@@ -12,7 +12,7 @@
 #
 # 1. 'deploy':
 #     a. copies and configures the code for one of the 5 UCB deployments
-#     b. "npm builds" the needed js components
+#     b. "npm install" builds the needed js components
 #     c. if running on a UCB server (i.e. ubuntu, which is detected automatically),
 #        rsyncs the code to the runtime directory and makes symlinks in /var/www
 # 2. other maintainance functions: 'disable' or 'enable' individual webapps
@@ -36,8 +36,9 @@ export BASEDIR=${HOME}/cspace-webapps-common
 
 export PYTHON=python3
 
-export YYYYMMDD=$(date +%Y%m%d)
-export RUNDIR=${HOME}/${YYYYMMDD}/${TENANT}
+# we don't export this value as others might be using it
+YYYYMMDDHHMM=$(date +%Y%m%d%H%M)
+export RUNDIR=${HOME}/${YYYYMMDDHHMM}/${TENANT}
 
 function build_project() {
   # TODO: fix this hack to make the small amount of js work for all the webapps
@@ -61,8 +62,8 @@ function build_project() {
   rm -rf static_root/
   $PYTHON manage.py collectstatic --noinput
 
-  # the runtime directory is ${HOME}/YYYYMMDD/M
-  # (where M is the museum and YYYYMMDD is today's date)
+  # the runtime directory is ${HOME}/YYYYMMDDHHMM/M
+  # (where M is the museum and YYYYMMDDHHMM is today's date)
   # if not Linux, e.g. Darwin (= development), configure everything in the current directory ...
   # rsync the "prepped and configged" files to the runtime directory
   rsync -a --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
