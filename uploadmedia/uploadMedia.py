@@ -14,6 +14,8 @@ import configparser
 from cswaExtras import postxml, relationsPayload, getCSID
 from utils4groups import add2group, create_group
 
+BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
+
 # NB: this is set in utils, but we cannot import that Django module in this ordinary script due to dependencies
 FIELDS2WRITE = 'name size objectnumber date creator contributor rightsholder imagenumber handling approvedforweb'.split(' ')
 
@@ -113,14 +115,14 @@ def makePayload(payload, mh, institution):
 
 
 def get_from_s3(filename):
-    p_object = subprocess.Popen(
-        [path.join('.', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
-    pid = ''
-    if p_object._child_created:
-        pid = p_object.pid
-        print('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}, pid {pid}')
+    # run bmu s3 copy script (synchronously)
+    p_object = subprocess.run(
+        [path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
+    if p_object.returncode == 0:
+        print([path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
+        print('bmu s3 cp ', filename, 'succeeded')
     else:
-        print('bmu ERROR:', filename + f': Child returned {p_object.returncode}, pid {pid}')
+        print('bmu s3 cp ERROR:', filename)
 
 
 def uploadblob(mediaElements, config, http_parms):
