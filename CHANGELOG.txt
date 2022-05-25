@@ -3,13 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.3.0-rc4
-Mon May 23 09:35:20 PDT 2022
+This is version 6.3.0-rc5
+Wed May 25 16:39:34 PDT 2022
 
-0eec577 (HEAD -> main) CSW-628: bmu s3 copy script needs to run synchronously, etc.
+663bc3e (HEAD -> main) CSW-634: django webapps setup.sh needs to make correct config dir symlinks
+5b8057c CSW-634: further bulletproofing of bmu metrics graphs code
+04c35fe (tag: 6.3.0-rc4, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc4
+0eec577 CSW-628: bmu s3 copy script needs to run synchronously, etc.
 52a1298 CSW-628: script to 'detect environment', for use by bmu and other components
 46c92bd CSW-628: more bulletproofing of bmu s3 helper script
-f435b79 (tag: 6.3.0-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc3
+f435b79 (tag: 6.3.0-rc3) revise CHANGELOG.txt and bump version to 6.3.0-rc3
 73040a8 CSW-634: 'deploy-all-3.sh' now autodetects ec2 environment
 4ae220f CSW-634: name runtime dirs for webapps down to the minute
 0563ccc (tag: 6.3.0-rc2) revise CHANGELOG.txt and bump version to 6.3.0-rc2
