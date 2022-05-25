@@ -22,6 +22,11 @@
 # TODO: uncomment this someday when the script really can be expected to run to completion without errors in all circumstances
 # set -e
 
+# TODO: this script sets env vars but is not part of this repo or deployment suite
+# it is found in the cspace-solr-ucb repo in utilities/
+# there is only one place where this is used: in finding the webapp config directories
+source ~/set_platform.sh
+
 export COMMAND=$1
 # the second parameter can stand for 2 different things!
 export WEBAPP=$2
@@ -68,9 +73,9 @@ function build_project() {
   # rsync the "prepped and configged" files to the runtime directory
   rsync -a --delete --exclude node_modules --exclude .git --exclude .gitignore . ${RUNDIR}
 
-  # we assume the user has all the needed config files for this museum in ${HOME}/config
+  # we assume the user has all the needed config files for this museum in ${HOMEDIR}/config
   rm -rf ${RUNDIR}/config/
-  ln -s ${HOME}/config/${TENANT} ${RUNDIR}/config
+  ln -s ${HOMEDIR}/config/${TENANT} ${RUNDIR}/config
 
   # on RTL ubuntu servers, go ahead and symlink the runtime directory to
   # the location apache/passenger expects
