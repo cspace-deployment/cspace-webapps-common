@@ -73,7 +73,10 @@ for key in 'botgarden cinefiles pahma ucjeps'.split(' '):
     print(f'<h3>{key}</h3>', file=scaffold)
     print(f'<h4><a href="{key}.nightly.report.txt">nightly report</a></h4>', file=scaffold)
 
-    print(min(group_df['date']), max(group_df['date']))
+    try:
+        print(min(group_df['date']), max(group_df['date']))
+    except:
+        continue
 
     recent = 60
     fig, ax = plt.subplots(figsize=(fig_width,fig_height))
@@ -94,23 +97,26 @@ for key in 'botgarden cinefiles pahma ucjeps'.split(' '):
     print(f'<a href="{html_path}/{imagefile}.png"><image width="600px" src="{html_path}/{imagefile}.png"></a>', file=scaffold)
 
     for c in charts:
-        fig, ax = plt.subplots(figsize=(fig_width,fig_height))
-        by_time_unit = group_df.resample(rule=c[1], on='date')['count'].sum()
-        by_time_unit.plot(kind='bar', color = c[3])
-        plt.grid(True)
-        plt.title(f'{key} media uploaded {c[0]}')
-        plt.xlabel(c[2])
-        #dFmt = mdates.DateFormatter('%Y-%m-%d')
-        #ax.xaxis.set_major_formatter(dFmt)
-        plt.ylabel('Number of files')
-        plt.yscale('log')
+        try:
+            fig, ax = plt.subplots(figsize=(fig_width,fig_height))
+            by_time_unit = group_df.resample(rule=c[1], on='date')['count'].sum()
+            by_time_unit.plot(kind='bar', color = c[3])
+            plt.grid(True)
+            plt.title(f'{key} media uploaded {c[0]}')
+            plt.xlabel(c[2])
+            #dFmt = mdates.DateFormatter('%Y-%m-%d')
+            #ax.xaxis.set_major_formatter(dFmt)
+            plt.ylabel('Number of files')
+            plt.yscale('log')
 
-        fig.autofmt_xdate()
-        ax.set_xticks(np.arange(0, len(by_time_unit)+1, int(len(by_time_unit)/15)))
+            fig.autofmt_xdate()
+            ax.set_xticks(np.arange(0, len(by_time_unit)+1, int(len(by_time_unit)/15)))
 
-        imagefile = f'%s-bmu-media-%s' % (key, c[0].replace(' ','-'))
-        plt.savefig(f'{image_dir}/{imagefile}')
-        #plt.show()
-        print(f'<a href="{html_path}/{imagefile}.png"><image width="600px" src="{html_path}/{imagefile}.png"></a>', file=scaffold)
+            imagefile = f'%s-bmu-media-%s' % (key, c[0].replace(' ','-'))
+            plt.savefig(f'{image_dir}/{imagefile}')
+            #plt.show()
+            print(f'<a href="{html_path}/{imagefile}.png"><image width="600px" src="{html_path}/{imagefile}.png"></a>', file=scaffold)
+        except:
+            pass
 
 print('</html>', file=scaffold)
