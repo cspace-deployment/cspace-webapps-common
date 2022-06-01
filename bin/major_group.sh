@@ -9,9 +9,9 @@ DBNAME="ucjeps_domain_ucjeps"
 DBUSER="reporter_ucjeps"
 CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
-MG_DIR=${HOMEDIR}/major_group
-MG_LOG=${HOMEDIR}/major_group/major_group.log
-MG_FILE=${HOMEDIR}/major_group/major_group.txt
+MG_DIR=${HOMEDIR}/extract/major_group
+MG_LOG=${MG_DIR}/major_group.log
+MG_FILE=${MG_DIR}/major_group/major_group.txt
 
 if [ ! -d "${MG_DIR}" ]; then
 	mkdir ${MG_DIR}
