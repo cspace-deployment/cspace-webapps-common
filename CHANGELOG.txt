@@ -3,12 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.3.0-rc5
-Wed May 25 16:39:34 PDT 2022
+This is version 6.3.0-rc6
+Wed Jun  1 17:05:21 PDT 2022
 
-663bc3e (HEAD -> main) CSW-634: django webapps setup.sh needs to make correct config dir symlinks
+4d2d460 (HEAD -> main) NOJIRA: inline code reformat only
+839fe2e CSW-634: 'deploy-all-3.sh' does not need to make config links
+53d89e3 CSW-654: use correct directories for ucjeps major_group extract
+e15570d CSW-687: revised barcode generator webapps using 'pull' not 'push'
+8e5e863 (tag: 6.3.0-rc5, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc5
+663bc3e CSW-634: django webapps setup.sh needs to make correct config dir symlinks
 5b8057c CSW-634: further bulletproofing of bmu metrics graphs code
-04c35fe (tag: 6.3.0-rc4, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc4
+04c35fe (tag: 6.3.0-rc4) revise CHANGELOG.txt and bump version to 6.3.0-rc4
 0eec577 CSW-628: bmu s3 copy script needs to run synchronously, etc.
 52a1298 CSW-628: script to 'detect environment', for use by bmu and other components
 46c92bd CSW-628: more bulletproofing of bmu s3 helper script
