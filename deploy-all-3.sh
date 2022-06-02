@@ -20,8 +20,6 @@ for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     DATE=`date +%Y%m%d%H%M`
     echo "${SCRIPT}"
     cd
-    rm config
-    ln -s /cspace/webapp_configs/config-${ENVIRONMENT} config
     eval "${SCRIPT} > release-${REPO/\//-}-${DATE}.txt 2>&1 &"
 done
 
