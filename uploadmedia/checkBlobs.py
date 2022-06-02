@@ -202,7 +202,7 @@ def get_tifftags(fn, ret):
     # im = Image.open(fn)
     ret['format'] = im.format
     # The file format of the source file. For images created by the library itself
-    # (via a factory function, or by running a method on an existing image), this attribute is set to None.  
+    # (via a factory function, or by running a method on an existing image), this attribute is set to None.
     ret['mode'] = im.mode
     # Image mode. This is a string specifying the pixel format used by the image.
     # Typical values are "1", "L", "RGB", or "CMYK." See Concepts for a full list.
@@ -285,6 +285,10 @@ def getListOfFiles(blobpath, inputFile):
         records.append(tif)
     count = len(records)
     return records, count
+
+
+def check_one_file(filename):
+    pass
 
 
 def doChecks(args):
