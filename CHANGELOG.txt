@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.3.0-rc7
-Thu Jun  2 15:40:37 PDT 2022
+This is version 6.3.0
+Wed Jun  8 17:18:43 PDT 2022
 
-464b4be (HEAD -> main) CSW-654: correct typo in major_groups extract script
-047cf7d (tag: 6.3.0-rc6, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc6
+0dedc74 (HEAD -> main, tag: 6.3.0-rc7, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0-rc7
+464b4be CSW-654: correct typo in major_groups extract script
+047cf7d (tag: 6.3.0-rc6) revise CHANGELOG.txt and bump version to 6.3.0-rc6
 4d2d460 NOJIRA: inline code reformat only
 839fe2e CSW-634: 'deploy-all-3.sh' does not need to make config links
 53d89e3 CSW-654: use correct directories for ucjeps major_group extract
