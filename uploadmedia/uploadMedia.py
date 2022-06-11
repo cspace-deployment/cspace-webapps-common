@@ -117,7 +117,8 @@ def makePayload(payload, mh, institution):
 def get_from_s3(filename):
     # run bmu s3 copy script (synchronously)
     p_object = subprocess.run(
-        [path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
+        [path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'],
+        timeout=60)
     if p_object.returncode == 0:
         print([path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
         print('bmu s3 cp ', filename, 'succeeded')

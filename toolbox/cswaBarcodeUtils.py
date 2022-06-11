@@ -5,6 +5,7 @@ def send_to_s3(dataType, printerDir, filepath, bare_filename):
     sys.stderr.write(os.path.join(script_path, 'toolbox', 'cp_only_s3.sh') + f'{filepath} barcode/{dataType}/{printerDir}/{bare_filename}')
     p_object = subprocess.Popen(
         [os.path.join(script_path, 'toolbox', 'cp_only_s3.sh'), f'{filepath}', f'barcode/{dataType}/{printerDir}/{bare_filename}'])
+    p_object.wait(timeout=60)
     pid = ''
     if p_object._child_created:
         pid = p_object.pid
@@ -43,4 +44,3 @@ def uploadCmdrWatch(location, printerDir, dataType, filenameinfo, data, config):
     except:
         os.unlink(barcode_path)
         return '<span style="color:red;">could not transmit %s to S3. Check parameters and connection</span>' % f'barcode/{dataType}/{printerDir}/{bare_filename}'
-    

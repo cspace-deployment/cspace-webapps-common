@@ -182,6 +182,8 @@ def runjob(jobnumber, context, request):
                 loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
                 status = 'jobfailed'
         if file_is_OK:
+            # start a bmu job asynchronously. do not wait for job to finish before returning to user
+            # process will terminate when job finishes.
             p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
             pid = ''
             if p_object._child_created:

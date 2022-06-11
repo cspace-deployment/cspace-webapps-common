@@ -256,6 +256,8 @@ def writeCsv(filename, items, writeheader):
 def send_to_s3(filename):
     p_object = subprocess.Popen(
         [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'])
+    # wait 60 seconds for the s3 copy to complete
+    p_object.wait(timeout=60)
     pid = ''
     if p_object._child_created:
         pid = p_object.pid
