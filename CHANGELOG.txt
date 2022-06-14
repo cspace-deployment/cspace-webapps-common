@@ -3,11 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.3.1
-Fri Jun 10 17:23:06 PDT 2022
+This is version 6.4.0-rc1
+Tue Jun 14 09:26:39 PDT 2022
 
-de2e945 (HEAD -> main) CSW-691: BMU, etc. should wait for and if necessary timeout S3 copies
-e9b8335 (tag: 6.3.0, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.0
+904aad8 (HEAD -> main) CSW-634: minor refactoring of new 'bmu-run.py' script
+fcc4a54 CSW-688: revise cinefiles bmu to handle qc in new ec2/s3 environment
+5aabb33 (tag: 6.3.1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.1
+de2e945 CSW-691: BMU, etc. should wait for and if necessary timeout S3 copies
+e9b8335 (tag: 6.3.0) revise CHANGELOG.txt and bump version to 6.3.0
 0dedc74 revise CHANGELOG.txt and bump version to 6.3.0-rc7
 464b4be CSW-654: correct typo in major_groups extract script
 047cf7d revise CHANGELOG.txt and bump version to 6.3.0-rc6
