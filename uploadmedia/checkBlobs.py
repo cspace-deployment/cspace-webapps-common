@@ -2,8 +2,10 @@ import csv
 import sys
 import codecs
 import psycopg2
+import subprocess
 import re
 
+from os import path
 from PIL import Image
 from PIL.ExifTags import TAGS
 import configparser
@@ -13,6 +15,7 @@ import time
 from os import listdir, environ
 from os.path import isfile, join, getsize
 
+BASE_DIR = path.dirname(path.dirname(path.abspath(__file__)))
 
 def getBits(img):
     if img.mode == '1':
@@ -335,7 +338,7 @@ def doChecks(args):
         print('MEDIA: %s files found in directory %s' % (count, args[2]))
         outputFile = args[3]
 
-    elif args[1] == 'file':
+    elif args[1] == 'file' or args[1] == 's3':
 
         if len(args) < 5:
             sys.exit('Usage: %s file imagedir inputfile reportname' % args[0])
@@ -359,6 +362,17 @@ def doChecks(args):
         elapsedtimetotal = time.time()
         row = []
         try:
+            if args[1] == 's3':
+                filename = tif['name']
+                p_object = subprocess.run(
+                    [path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, 'cinefiles', 'from'], timeout=60)
+                if p_object.returncode == 0:
+                    # print([path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, 'cinefiles', 'from'])
+                    print('bmu s3 cp ', filename, 'succeeded')
+                    tif['fullpathtofile'] = f'/tmp/{filename}'
+                else:
+                    print('bmu s3 cp ERROR:', filename)
+                    raise
             get_tifftags(tif['fullpathtofile'], tif)
         except:
             print("image file info extract failed on file", i, tif['fullpathtofile'])

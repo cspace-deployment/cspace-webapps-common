@@ -172,7 +172,7 @@ def runjob(jobnumber, context, request):
             # test file content
             input_file = getJobfile(jobnumber) + '.step1.csv'
             report_file = getJobfile(jobnumber) + '.check.csv'
-            file_is_OK = doChecks(('', 'file', JOBDIR % '', input_file, report_file))
+            file_is_OK = doChecks(('', 's3', JOBDIR % '', input_file, report_file))
             # if ok continue
             # otherwise ... bail
             if file_is_OK:
@@ -182,8 +182,7 @@ def runjob(jobnumber, context, request):
                 loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
                 status = 'jobfailed'
         if file_is_OK:
-            # start a bmu job asynchronously. do not wait for job to finish before returning to user
-            # process will terminate when job finishes.
+            # TODO: need to keep track of pip and tidy up somehow when job completes.
             p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
             pid = ''
             if p_object._child_created:
