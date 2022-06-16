@@ -254,17 +254,14 @@ def writeCsv(filename, items, writeheader):
 
 
 def send_to_s3(filename):
-    p_object = subprocess.Popen(
-        [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'])
-    # wait 60 seconds for the s3 copy to complete
-    p_object.wait(timeout=60)
+    p_object = subprocess.run(
+        [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'], timeout=60)
     pid = ''
-    if p_object._child_created:
+    if p_object.returncode == 0:
         pid = p_object.pid
         loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
     else:
         loginfo('bmu ERROR:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
-
 
 # following function borrowed from Django docs, w modifications
 def handle_uploaded_file(f):
