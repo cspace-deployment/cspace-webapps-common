@@ -182,8 +182,9 @@ def runjob(jobnumber, context, request):
                 loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
                 status = 'jobfailed'
         if file_is_OK:
-            # TODO: need to keep track of pip and tidy up somehow when job completes.
-            p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
+            # 'fire and forget' this batch job
+            p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS],
+                        shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
             pid = ''
             if p_object._child_created:
                 pid = p_object.pid
