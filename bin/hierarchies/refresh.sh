@@ -10,3 +10,5 @@ time psql -U $USERNAME -d "$CONNECTSTRING" -c "select utils.refreshculturehierar
 time psql -U $USERNAME -d "$CONNECTSTRING" -c "select utils.refreshmaterialhierarchytable();"
 time psql -U $USERNAME -d "$CONNECTSTRING" -c "select utils.refreshtaxonhierarchytable();"
 time psql -U $USERNAME -d "$CONNECTSTRING" -c "select utils.refreshobjectplacelocationtable();"
+
+cd ${HOME}/bin/hierarchies ; ./checkstatus.sh pahma | mail -r "cspace-support@lists.berkeley.edu" -s "hierarchies refresh" "${PAHMA_CONTACT}"
