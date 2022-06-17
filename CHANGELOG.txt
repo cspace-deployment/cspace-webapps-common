@@ -3,13 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc2
-Fri Jun 17 12:55:15 PDT 2022
+This is version 6.4.0-rc3
+Fri Jun 17 15:12:29 PDT 2022
 
-a1a605f (HEAD -> main) CSW-634: make-metrics.sh should be run daily with other analytics
+848ac3c (HEAD -> main) CSW-634: put webapps metrics in correct dir; tidy up ucjeps extracts notification
+b5c6659 (origin/main, origin/HEAD) CSW-634: add the analytics scripts to bin directory
+a0d7f53 (tag: 6.4.0-rc2) revise CHANGELOG.txt and bump version to 6.4.0-rc2
+a1a605f CSW-634: make-metrics.sh should be run daily with other analytics
 87e119e CSW-634: refactor hierarchies refresh a bit
 b01c05b CSW-634: make-metrics.sh needs to be executable
-a9d0563 (origin/main, origin/HEAD) CSW-634: a script to wrap various metrics reports
+a9d0563 CSW-634: a script to wrap various metrics reports
 f41026b CSW-700: use 'subprocess.run' not Popen in bmu batch process
 445148b CSW-700: correct behavior of 'fire and forget' bmu online job submission
 9f238b0 (tag: 6.4.0-rc1) revise CHANGELOG.txt and bump version to 6.4.0-rc1
