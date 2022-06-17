@@ -3,12 +3,19 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc1
-Tue Jun 14 09:26:39 PDT 2022
+This is version 6.4.0-rc2
+Fri Jun 17 12:55:15 PDT 2022
 
-904aad8 (HEAD -> main) CSW-634: minor refactoring of new 'bmu-run.py' script
+a1a605f (HEAD -> main) CSW-634: make-metrics.sh should be run daily with other analytics
+87e119e CSW-634: refactor hierarchies refresh a bit
+b01c05b CSW-634: make-metrics.sh needs to be executable
+a9d0563 (origin/main, origin/HEAD) CSW-634: a script to wrap various metrics reports
+f41026b CSW-700: use 'subprocess.run' not Popen in bmu batch process
+445148b CSW-700: correct behavior of 'fire and forget' bmu online job submission
+9f238b0 (tag: 6.4.0-rc1) revise CHANGELOG.txt and bump version to 6.4.0-rc1
+904aad8 CSW-634: minor refactoring of new 'bmu-run.py' script
 fcc4a54 CSW-688: revise cinefiles bmu to handle qc in new ec2/s3 environment
-5aabb33 (tag: 6.3.1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.3.1
+5aabb33 (tag: 6.3.1) revise CHANGELOG.txt and bump version to 6.3.1
 de2e945 CSW-691: BMU, etc. should wait for and if necessary timeout S3 copies
 e9b8335 (tag: 6.3.0) revise CHANGELOG.txt and bump version to 6.3.0
 0dedc74 revise CHANGELOG.txt and bump version to 6.3.0-rc7
