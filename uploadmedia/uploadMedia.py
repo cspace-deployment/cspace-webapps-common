@@ -5,7 +5,7 @@ import requests
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from requests.auth import HTTPBasicAuth
 import time
-from os import path
+from os import path, remove
 from xml.sax.saxutils import escape
 import subprocess
 import traceback
@@ -144,6 +144,7 @@ def uploadblob(mediaElements, config, http_parms):
     elapsedtime = time.time()
 
     response = requests.post(url, data=m, headers={'Content-Type': m.content_type}, auth=HTTPBasicAuth(http_parms.username, http_parms.password))
+    remove(fullpath)
 
     if response.status_code != 201:
         print("blob creation failed!")

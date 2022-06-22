@@ -5,7 +5,7 @@ import psycopg2
 import subprocess
 import re
 
-from os import path
+from os import path, remove
 from PIL import Image
 from PIL.ExifTags import TAGS
 import configparser
@@ -374,6 +374,9 @@ def doChecks(args):
                     print('bmu s3 cp ERROR:', filename)
                     raise
             get_tifftags(tif['fullpathtofile'], tif)
+            # if we got the file from s3, we should remove it from /tmp
+            if args[1] == 's3':
+                remove(fullpath)
         except:
             print("image file info extract failed on file", i, tif['fullpathtofile'])
             file_is_OK = False
