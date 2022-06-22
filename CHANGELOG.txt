@@ -3,11 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc3
-Fri Jun 17 15:12:29 PDT 2022
+This is version 6.4.0-rc4
+Wed Jun 22 13:41:51 PDT 2022
 
-848ac3c (HEAD -> main) CSW-634: put webapps metrics in correct dir; tidy up ucjeps extracts notification
-b5c6659 (origin/main, origin/HEAD) CSW-634: add the analytics scripts to bin directory
+90c370a (HEAD -> main) CSW-702: eliminate superfluous message from s3 copy from bmu log
+ae9046b CSW-702: get rid of bmu temp files when done
+ee04255 (tag: 6.4.0-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0-rc3
+848ac3c CSW-634: put webapps metrics in correct dir; tidy up ucjeps extracts notification
+b5c6659 CSW-634: add the analytics scripts to bin directory
 a0d7f53 (tag: 6.4.0-rc2) revise CHANGELOG.txt and bump version to 6.4.0-rc2
 a1a605f CSW-634: make-metrics.sh should be run daily with other analytics
 87e119e CSW-634: refactor hierarchies refresh a bit
