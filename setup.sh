@@ -24,7 +24,7 @@
 
 # TODO: this script sets env vars but is not part of this repo or deployment suite
 # it is found in the cspace-solr-ucb repo in utilities/
-# there is only one place where this is used: in finding the webapp config directories
+# there is only one place where this is used: in finding the webapp config directories, via HOMEDIR
 source ~/set_platform.sh
 
 export COMMAND=$1
@@ -39,7 +39,10 @@ export VERSION="$4"
 export CONFIGDIR=${HOME}/cspace-webapps-ucb
 export BASEDIR=${HOME}/cspace-webapps-common
 
-export PYTHON=python3
+# NB: we need python3, in fact python>=3.8 but the command for this varies from system to
+# system. using 'python' below works for RTL deployments on EC2 running Ubuntu 20.x
+# YYMV!
+export PYTHON=python
 
 # we don't export this value as others might be using it
 YYYYMMDDHHMM=$(date +%Y%m%d%H%M)
@@ -140,6 +143,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     echo
     exit 1
   else
+    echo "updating ${CONFIGDIR} to HEAD of main branch"
     cd "${CONFIGDIR}"
     git checkout main
     git pull -v
@@ -206,8 +210,8 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     git -c advice.detachedHead=false checkout ${VERSION}
   else
     rsync -a . ${HOME}/working_dir
+    cd ${HOME}/working_dir
   fi
-  cd ${HOME}/working_dir
 
   cp cspace_django_site/extra_${DEPLOYMENT}.py cspace_django_site/extra_settings.py
   cp cspace_django_site/webapps_global_config_${GLOBAL}.py cspace_django_site/webapps_global_config.py
