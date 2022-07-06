@@ -1,6 +1,6 @@
 # "generic" list of dependencies (i.e. not OS-specific)
-# Python>=3.8, but Django <3 for now
-django
+# Python>=3.8, Django >4 now
+django>4
 Pillow
 PyGreSQL
 Pygments
