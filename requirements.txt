@@ -1,6 +1,6 @@
 # "generic" list of dependencies (i.e. not OS-specific)
 # Python>=3.8, but Django <3 for now
-django<3.0
+django
 Pillow
 PyGreSQL
 Pygments
@@ -23,7 +23,6 @@ pandas
 psycopg2
 pyasn1
 pymongo
-pysmb
 requests
 requests_toolbelt
 six
