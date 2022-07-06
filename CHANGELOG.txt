@@ -3,12 +3,15 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc5
-Wed Jul  6 15:26:36 PDT 2022
+This is version 6.4.0-rc6
+Wed Jul  6 16:04:21 PDT 2022
 
-2633919 (HEAD -> main) CSW-706: changes to support django v4.0
+3a7fa01 (HEAD -> main) CSW-706: setup.sh should use 'default' venv python on ec2
+c8f18ce CSW-706: update static file handling to support django v4.0
+ef895c7 (tag: 6.4.0-rc5, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0-rc5
+2633919 CSW-706: changes to support django v4.0
 1920248 CSW-706: upgrade to lastest django (4.x)
-1e73380 (tag: 6.4.0-rc4, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0-rc4
+1e73380 (tag: 6.4.0-rc4) revise CHANGELOG.txt and bump version to 6.4.0-rc4
 90c370a CSW-702: eliminate superfluous message from s3 copy from bmu log
 ae9046b CSW-702: get rid of bmu temp files when done
 ee04255 (tag: 6.4.0-rc3) revise CHANGELOG.txt and bump version to 6.4.0-rc3
