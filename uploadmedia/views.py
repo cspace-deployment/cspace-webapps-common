@@ -182,15 +182,15 @@ def runjob(jobnumber, context, request):
                 loginfo('bmu ERROR:  process', jobnumber + " QC check failed.", context, request)
                 status = 'jobfailed'
         if file_is_OK:
-            # 'fire and forget' this batch job
-            p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS],
-                        shell=True, stdin=None, stdout=None, stderr=None, close_fds=True)
-            pid = ''
+            # start a bmu job asynchronously. do not wait for job to finish before returning to user
+            # process will terminate when job finishes.
+            # TODO: figure out how to 'fire and forget' this batch job so it does nat make zombies
+            p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
+            sleep(1)
             if p_object._child_created:
-                pid = p_object.pid
-                loginfo('bmu online job submitted:', jobnumber + f': Child returned {p_object.returncode}, pid {pid}', context, request)
+                loginfo('bmu online job submitted:', jobnumber + f': Child returned {p_object.returncode}', context, request)
             else:
-                loginfo('bmu ERROR:', jobnumber + f': Child returned {p_object.returncode}, pid {pid}', context, request)
+                loginfo('bmu ERROR:', jobnumber + f': Child returned {p_object.returncode}', context, request)
     except OSError as e:
         loginfo('error', "ERROR: Execution failed: %s" % e, context, request)
         status = 'jobfailed'
@@ -362,10 +362,10 @@ def startjob(request, filename):
         (jobnumber, step, csv ) = filename.split('.')
         context['jobnumber'] = jobnumber
         context['filename'] = filename
+        loginfo('bmu', '%s :: %s' % ('uploadmedia online job submission requested', filename), {}, {})
         runjob(jobnumber, context, request)
         # give the job a chance to start to ensure the queue listing is updated properly.
         time.sleep(1)
-        loginfo('bmu', '%s :: %s' % ('uploadmedia online job submission requested', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to start job', filename), {}, {})
     return redirect('../bmu_showqueue')

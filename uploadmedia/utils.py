@@ -213,8 +213,8 @@ def getBMUoptions():
 def get_exif(fn):
     ret = {}
     if 'image' in fn.content_type:
-        i = Image.open(fn)
         try:
+            i = Image.open(fn)
             info = i._getexif()
             for tag, value in info.items():
                 decoded = TAGS.get(tag, tag)
@@ -256,12 +256,10 @@ def writeCsv(filename, items, writeheader):
 def send_to_s3(filename):
     p_object = subprocess.run(
         [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'], timeout=60)
-    pid = ''
     if p_object.returncode == 0:
-        pid = p_object.pid
-        loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
+        loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}', {}, {})
     else:
-        loginfo('bmu ERROR:', filename + f': Child returned {p_object.returncode}, pid {pid}', {}, {})
+        loginfo('bmu ERROR:', filename + f': Child returned {p_object.returncode}', {}, {})
 
 # following function borrowed from Django docs, w modifications
 def handle_uploaded_file(f):
