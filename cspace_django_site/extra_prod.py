@@ -22,7 +22,7 @@ TEMPLATE_DEBUG = DEBUG
 # See https://docs.djangoproject.com/en/2.2/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 
-# 8 rotating logs, 16MB each, named '<museum>.webapps.log.txt', only INFO or higher
+# 8 rotating logs, 32MB each, named '<museum>.webapps.log.txt', only INFO or higher
 # emailing of ERROR level messages deferred for now: we'd need to configure all that
 LOGGING = {
     'version': 1,

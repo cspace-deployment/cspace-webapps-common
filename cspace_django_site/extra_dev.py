@@ -10,9 +10,9 @@ try:
     # get the tracking id for Dev
     from cspace_django_site.trackingids import trackingids
 
-    UA_TRACKING_ID = trackingids['webapps-dev'][0]
+    UA_TRACKING_ID = trackingids['webapps-qa'][0]
 except:
-    print('UA tracking ID not found for Development. It should be "webapps-dev" in "trackingids.py"')
+    print('UA tracking ID not found for QA. It should be "webapps-qa" in "trackingids.py"')
     exit(0)
 
 DEBUG = True
@@ -22,7 +22,7 @@ TEMPLATE_DEBUG = DEBUG
 # See https://docs.djangoproject.com/en/2.2/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ['*']
 
-# 8 rotating logs, 16MB each, named '<museum>.webapps.log.txt', only INFO or higher
+# 8 rotating logs, 32MB each, named '<museum>.webapps.log.txt', only INFO or higher
 # emailing of ERROR level messages deferred for now: we'd need to configure all that
 LOGGING = {
     'version': 1,

@@ -6,5 +6,6 @@
 
 trackingids = {
     'webapps-prod': ('UA-54952024-5', 'UCB Webapps'),
+    'webapps-qa': ('UA-54952024-6', 'UCB Webapps QA'),
     'webapps-dev': ('UA-54952024-6', 'UCB Webapps Development'),
 }
