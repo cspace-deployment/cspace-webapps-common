@@ -9,7 +9,7 @@
     "clipboard": "^2.0.8",
     "imagesloaded": "^4.1.4",
     "jquery": "^3.6.0",
-    "jquery-ui": "^1.13.0",
+    "jquery-ui": "^1.13.2",
     "masonry-layout": "^4.2.2",
     "react": "^17.0.2",
     "react-autosuggest": "^10.1.0",
