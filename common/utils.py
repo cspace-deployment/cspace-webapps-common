@@ -605,7 +605,12 @@ def doSearch(context, prmz, request):
     elif 'csv' in requestObject:
         displayFields = 'inCSV'
     else:
-        displayFields = context['displayType'] + 'Display'
+        if context['displayType'] in ['full', 'grid', 'list']:
+            displayFields = context['displayType'] + 'Display'
+        else:
+            context['errormsg'] = f"Invalid display type: {context['displayType']}"
+            context['displayType'] = 'list'
+            return context
 
     facetfields = getfields('Facet', 'solrfield', prmz)
     if 'summarize' in requestObject or 'downloadstats' in requestObject:
