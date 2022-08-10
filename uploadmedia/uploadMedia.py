@@ -120,28 +120,28 @@ def get_from_s3(filename):
         [path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'],
         timeout=60)
     if p_object.returncode == 0:
-        print([path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
         print('bmu s3 cp ', filename, 'succeeded')
     else:
+        print([path.join(BASE_DIR, 'uploadmedia', 'cps3.sh'), filename, config.get('info', 'institution'), 'from'])
         print('bmu s3 cp ERROR:', filename)
 
 
 def uploadblob(mediaElements, config, http_parms):
+
+    elapsedtime = time.time()
 
     url = "%s/cspace-services/%s" % (http_parms.server, 'blobs')
     filename = mediaElements['name']
     # bring the media file over from s3
     get_from_s3(filename)
     fullpath = path.join('/tmp', filename)
+    print('file %s fetch from s3 %8.2f s.' % (filename, time.time() - elapsedtime))
 
     # by default, django processes multipart forms in memory
     # we need to work around this for large BMU uploads. The MultipartEncoder is the answer!
     m = MultipartEncoder(
-        fields={'submit': 'OK',
-                'file': (filename, open(fullpath, 'rb'))}
+        fields={'submit': 'OK', 'file': (filename, open(fullpath, 'rb'))}
     )
-
-    elapsedtime = time.time()
 
     response = requests.post(url, data=m, headers={'Content-Type': m.content_type}, auth=HTTPBasicAuth(http_parms.username, http_parms.password))
     remove(fullpath)
@@ -353,7 +353,7 @@ if __name__ == "__main__":
                 objectCSIDs.append(mediaElements['objectCSID'])
             r.append(mediaElements['blobCSID'])
 
-            # for PAHMA, each uploaded image becomes the primary, in turn
+            # TODO: for PAHMA, each uploaded image becomes the primary, in turn
             # i.e. the last image in a set of images for the same object becomes the primary
             if http_parms.institution == 'pahma':
                 primary_payload = """<?xml version="1.0" encoding="utf-8" standalone="yes"?>

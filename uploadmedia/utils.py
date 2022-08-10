@@ -83,7 +83,7 @@ def getJoblist(request):
             pass
             imagefilenames = []
         else:
-            # we only need to count lines if the file is with range...
+            # we only need to count lines if the file is within range...
             linecount, imagefilenames = checkFile(join(jobpath, f))
         parts = f.split('.')
         if 'original' in parts[1]:
@@ -126,7 +126,8 @@ def checkFile(filename):
     lines = [l for l in file_handle.read().splitlines() if "not found" not in l]
     images = [f.split("\t")[0] for f in lines]
     images = [f.split("|")[0] for f in images]
-    return len(lines), images
+    # all files handled by bmu have a header, so deduct 1 from line count but never lt 0
+    return max(len(lines) - 1, 0), images
 
 
 def getQueue(jobtypes):
