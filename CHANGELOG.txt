@@ -3,12 +3,20 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc8
-Fri Jul  8 13:24:26 PDT 2022
+This is version 6.4.0-rc9
+Wed Aug 17 14:14:07 PDT 2022
 
-8fef91c (HEAD -> main) CSW-692: references to dev should not refer to qa in django settings
+2273d27 (HEAD -> main, origin/main, origin/HEAD) HMP-243: compute some usage metrics for blacklight portals
+0c7126c CSW-704: correct counts in BMU job queue, log s3 copy info
+3054d22 CSW-719: handle invalid parameters in public portal queries gracefully
+2a4a0e4 Merge pull request #5 from cspace-deployment/dependabot/npm_and_yarn/jquery-ui-1.13.2
+9b90837 Merge pull request #6 from cspace-deployment/dependabot/npm_and_yarn/terser-5.14.2
+3b28a0e Bump terser from 5.9.0 to 5.14.2
+14b98a5 Bump jquery-ui from 1.13.0 to 1.13.2
+9a89a30 (tag: 6.4.0-rc8) revise CHANGELOG.txt and bump version to 6.4.0-rc8
+8fef91c CSW-692: references to dev should not refer to qa in django settings
 32b990d CSW-700: refactor bmu upload code a bit to catch problems better
-1b2135f (tag: 6.4.0-rc7, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0-rc7
+1b2135f (tag: 6.4.0-rc7) revise CHANGELOG.txt and bump version to 6.4.0-rc7
 2337777 CSW-706: require django>4, dont just let pip pick the latest
 b0276dc (tag: 6.4.0-rc6) revise CHANGELOG.txt and bump version to 6.4.0-rc6
 3a7fa01 CSW-706: setup.sh should use 'default' venv python on ec2
