@@ -12,15 +12,29 @@ if [[ -z $BL_ENVIRONMENT || ( "$BL_ENVIRONMENT" != "dev" && "$BL_ENVIRONMENT" !=
 fi
 BL_ENVIRONMENT="blacklight-${BL_ENVIRONMENT}"
 
+s=0
 if [[ "$3" == "to" ]] ; then
-  /usr/bin/aws s3 cp --quiet "/tmp/$1" s3://${BL_ENVIRONMENT}/bmu/$2/$1
-  echo "/usr/bin/aws s3 cp '/tmp/$1' s3://${BL_ENVIRONMENT}/bmu/$2/$1"
-  rm "/tmp/$1"
+  for i in {1..2}; do
+    echo "/usr/bin/aws s3 cp '/tmp/$1' s3://${BL_ENVIRONMENT}/bmu/$2/$1"
+    /usr/bin/aws s3 cp --quiet "/tmp/$1" s3://${BL_ENVIRONMENT}/bmu/$2/$1 && s=0 && break || s=$?
+    echo "failed with exit code $s. retrying. attempt $i"
+    sleep 1
+  done
+  rm -f "/tmp/$1"
+  exit $s
 elif [[ "$3" == "from" ]] ; then
-  /usr/bin/aws s3 cp --quiet "s3://${BL_ENVIRONMENT}/bmu/$2/$1" /tmp
-  echo "/usr/bin/aws s3 cp 's3://${BL_ENVIRONMENT}/bmu/$2/$1' /tmp"
+  for i in {1..2}; do
+    echo "/usr/bin/aws s3 cp 's3://${BL_ENVIRONMENT}/bmu/$2/$1' /tmp"
+    /usr/bin/aws s3 cp --quiet "s3://${BL_ENVIRONMENT}/bmu/$2/$1" /tmp
+    s=$?
+    [ -e "/tmp/$1" ] && exit 0
+    echo "failed with exit code $s. retrying. attempt $i"
+    sleep 1
+  done
+  # did not work
+  echo "copy 'from' failed. giving up."
+  exit 1
 else
   echo "direction must be either from or to"
   exit 1
 fi
-
