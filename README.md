@@ -58,12 +58,10 @@ cd cspace-webapps-common
 # on a Mac *most* of this is in XCode Tools... consider 'sudo pip' if you know what you are doing
 # other code managers such as homebrew can help with this too.
 pip install -r pycharm_requirements.txt
-# configure Django for your environment. 'pycharm' is the least demanding.
-# note that you'll need npm and node installed on your system.
-./setup.sh configure pycharm
-# deploy a tenant. 'default' points to 'nightly.collectionspace.org'. otherwise, roll your own.
-./setup.sh deploy default
-# if it all works...
+# deploy a tenant for 'development' (pycharm). 'default' points to 'nightly.collectionspace.org'. otherwise, roll your own.
+./setup.sh deploy pahma pycharm
+# if it all works... the runtime is set up in working_dir
+cd ~/working_dir/
 python manage.py runserver
 # if the server comes up OK, you should see a landing page in your browser at
 http://localhost:8000
