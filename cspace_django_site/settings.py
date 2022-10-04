@@ -171,6 +171,9 @@ AUTHENTICATION_BACKENDS = (
     'authn.authn.CSpaceAuthN',
 )
 
+# new django 4 thing, it seems
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # we need this to ensure that forms with lots of fields in them work.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 
