@@ -93,6 +93,8 @@ echo 'DEPLOY DEPLOY DEPLOY!'
 echo "========================================================================================"
 echo
 
+DATE=`date +%Y%m%d%H%M`
+
 for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     REPO=${COMPONENTS[$i]}
     SCRIPT=${SCRIPTS[$i]}
@@ -102,7 +104,6 @@ for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     git clean -fd
     SCRIPT=${SCRIPT/VERSION/$TAG}
     SCRIPT="${HOME}/${REPO}/${SCRIPT}"
-    DATE=`date +%Y%m%d%H%M`
     echo "${SCRIPT}"
     cd
     eval "${SCRIPT} > release-${REPO/\//-}-${DATE}.txt 2>&1 &"
@@ -111,3 +112,8 @@ done
 echo
 echo "Waiting for deploys to complete. Should only be a few minutes at most, please be patient"
 wait
+
+echo
+echo "Checking for errors..."
+echo
+grep -i error release-*-${DATE}.txt
