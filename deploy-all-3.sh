@@ -116,4 +116,4 @@ wait
 echo
 echo "Checking for errors..."
 echo
-grep -i error release-*-${DATE}.txt
+grep -i "error:" release-*-${DATE}.txt
