@@ -175,7 +175,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   fi
 
   # check for indicated version (tag), if provided...
-  if [[ $VERSION != "" ]]; then
+  if [[ $VERSION != "main" ]]; then
     TAGS=$(git tag --list ${VERSION})
     if [[ ${TAGS} ]]; then
       echo "will build version $VERSION"
@@ -185,7 +185,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     fi
   else
     echo
-    echo "No version specified; deploying code as is, not from clean repo."
+    echo "'main'specified; deploying code as is, not from clean repo."
   fi
 
   if [[ -e ${RUNDIR} ]]; then
@@ -203,7 +203,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
   # if version is specified, make a 'clean' clone and checkout the tag
   # otherwise make copy of this exact repo and do the configuration work there
   rm -rf ${HOME}/working_dir
-  if [[ $VERSION != "" ]]; then
+  if [[ $VERSION != "main" ]]; then
     THIS_REPO=`git config --get remote.origin.url`
     git clone ${THIS_REPO} ${HOME}/working_dir
     cd ${HOME}/working_dir/
