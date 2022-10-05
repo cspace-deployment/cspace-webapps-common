@@ -1,13 +1,13 @@
 """
 Django settings for cspace_django_project project.
-
 """
 import os
 import sys
 import logging
+from pathlib import Path
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_NAME = os.path.basename(BASE_DIR)
 
 try:
@@ -19,15 +19,11 @@ except ImportError:
 from cspace_django_site.installed_apps import INSTALLED_APPS
 from cspace_django_site.webapps_global_config import *
 
-# generate a secret if there isn't one already
-try:
-    from cspace_django_site.secret_key import *
-except ImportError:
-    SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
-    from cspace_django_site.secret_key_gen import *
-
-    generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
-    from cspace_django_site.secret_key import *
+# generate a secret each time
+SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
+from cspace_django_site.secret_key_gen import *
+generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
+from cspace_django_site.secret_key import *
 
 # this is set in the various "extra_*.py" files
 # ALLOWED_HOSTS = []

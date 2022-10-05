@@ -10,14 +10,7 @@ config/*.csv
 config/*.xml
 config/*.json
 fixtures/*.json
-client_modules/static_assets/cspace_django_site/images/header-logo.png
-cspace_django_site/project_urls.py
-cspace_django_site/urls.py
-cspace_django_site/project_apps.py
-cspace_django_site/installed_apps.py
 cspace_django_site/secret_key.py
-cspace_django_site/extra_settings.py
-cspace_django_site/main.cfg
 
 # npm / webpack stuff
 webpack_dist
