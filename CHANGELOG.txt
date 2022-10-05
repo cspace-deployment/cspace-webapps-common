@@ -3,10 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc5
-Fri Sep 16 15:04:04 PDT 2022
+This is version 6.4.0-rc6
+Wed Oct  5 14:00:38 PDT 2022
 
-bc9d3f6 (HEAD -> main, origin/main, origin/HEAD) CSW-714: have the BMU retry failed S3 copies, and report exit codes
+f3642f2 (HEAD -> main) HMP-743: refactor 'primary' deployment script, and children
+88285fe (origin/main, origin/HEAD) CSW-744: suppress warning messages from migration in deploy
+714de08 NOJIRA: update and correct README.md
+3a4a036 (tag: 6.4.0-rc5) revise CHANGELOG.txt and bump version to 6.4.0-rc5
+bc9d3f6 CSW-714: have the BMU retry failed S3 copies, and report exit codes
 0203ee6 revise CHANGELOG.txt and bump version to 6.4.0-rc9
 2273d27 HMP-243: compute some usage metrics for blacklight portals
 0c7126c CSW-704: correct counts in BMU job queue, log s3 copy info
