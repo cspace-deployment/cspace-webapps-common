@@ -4,9 +4,11 @@ OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
 This is version 6.4.0
-Wed Oct  5 19:29:36 PDT 2022
+Wed Oct  5 19:49:04 PDT 2022
 
-822d4d1 (HEAD -> main, origin/main, origin/HEAD) CSW-743: need to import the generated secret
+a14e337 (HEAD -> main) CSW-743: further refactoring of deploy-all-3.sh
+556ef1c (origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0
+822d4d1 CSW-743: need to import the generated secret
 dd59c93 CSW-743: use correct directory for generating secrets
 a79c7f9 CSW-743: update settings.py for secrets hack
 0256ac8 CSW-743: work around django secrets problem for now
