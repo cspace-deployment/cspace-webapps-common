@@ -63,7 +63,10 @@ function build_project() {
   # disable eslint for now, until we address the errors it detects
   #./node_modules/.bin/eslint client_modules/js/app.js
 
+  # TODO: for now, generate secret here and not in settings.py
+  $PYTHON -c "from secret_key_gen import *; generate_secret_key('secret_key.py');"
   # now we can go ahead and complete the configuration
+  $PYTHON manage.py makemigrations
   $PYTHON manage.py migrate --noinput
   $PYTHON manage.py loaddata fixtures/*.json
   # get rid of the existing static_root to force django to rebuild it from scratch
