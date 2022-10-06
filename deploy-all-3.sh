@@ -33,22 +33,7 @@ function show_parms() {
     echo
 }
 
-# check the command line parameters
-if [ $# -eq 1 ]; then
-    TARGET="$1"
-else
-    usage
-fi
-
-if ! grep -q " ${TARGET} " <<< " release recent main "; then
-    usage
-fi
-
-echo "========================================================================================"
-echo "Deploy all 3 blacklight stack components: Solr, Django webapps, Blacklight Portals"
-echo "========================================================================================"
-# do this loop twice: once to update and check components, once to actually deploy
-for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
+function set_parms() {
     REPO=${COMPONENTS[$i]}
     SCRIPT=${SCRIPTS[$i]}
     cd ${HOME}/${REPO}
@@ -70,6 +55,25 @@ for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     SCRIPT=${SCRIPT/VERSION/$TAG}
     SCRIPT="${HOME}/${REPO}/${SCRIPT}"
     DATE=`date +%Y%m%d%H%M`
+}
+
+# check the command line parameters
+if [ $# -eq 1 ]; then
+    TARGET="$1"
+else
+    usage
+fi
+
+if ! grep -q " ${TARGET} " <<< " release recent main "; then
+    usage
+fi
+
+echo "========================================================================================"
+echo "Deploy all 3 blacklight stack components: Solr, Django webapps, Blacklight Portals"
+echo "========================================================================================"
+# do this loop twice: once to update and check components, once to actually deploy
+for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
+    set_parms
     show_parms
 done
 
@@ -96,15 +100,7 @@ echo
 DATE=`date +%Y%m%d%H%M`
 
 for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
-    REPO=${COMPONENTS[$i]}
-    SCRIPT=${SCRIPTS[$i]}
-    cd ${HOME}/${REPO}
-    git checkout main
-    git pull -v
-    git clean -fd
-    SCRIPT=${SCRIPT/VERSION/$TAG}
-    SCRIPT="${HOME}/${REPO}/${SCRIPT}"
-    echo "${SCRIPT}"
+    set_parms
     cd
     eval "${SCRIPT} > release-${REPO/\//-}-${DATE}.txt 2>&1 &"
 done
