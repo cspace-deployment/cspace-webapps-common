@@ -64,7 +64,9 @@ function build_project() {
   #./node_modules/.bin/eslint client_modules/js/app.js
 
   # TODO: for now, generate secret here and not in settings.py
+  cd cspace_django_site
   $PYTHON -c "from secret_key_gen import *; generate_secret_key('secret_key.py');"
+  cd ..
   # now we can go ahead and complete the configuration
   $PYTHON manage.py makemigrations
   $PYTHON manage.py migrate --noinput
