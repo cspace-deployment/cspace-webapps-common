@@ -24,7 +24,7 @@ from cspace_django_site.webapps_global_config import *
 # SETTINGS_DIR = os.path.abspath(os.path.dirname(__file__))
 # from cspace_django_site.secret_key_gen import *
 # generate_secret_key(os.path.join(SETTINGS_DIR, 'secret_key.py'))
-# from cspace_django_site.secret_key import *
+from cspace_django_site.secret_key import *
 
 # this is set in the various "extra_*.py" files
 # ALLOWED_HOSTS = []
