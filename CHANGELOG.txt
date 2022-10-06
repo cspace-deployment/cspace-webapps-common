@@ -3,11 +3,19 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0-rc6
-Wed Oct  5 14:00:38 PDT 2022
+This is version 6.4.0
+Wed Oct  5 19:29:36 PDT 2022
 
-f3642f2 (HEAD -> main) HMP-743: refactor 'primary' deployment script, and children
-88285fe (origin/main, origin/HEAD) CSW-744: suppress warning messages from migration in deploy
+822d4d1 (HEAD -> main, origin/main, origin/HEAD) CSW-743: need to import the generated secret
+dd59c93 CSW-743: use correct directory for generating secrets
+a79c7f9 CSW-743: update settings.py for secrets hack
+0256ac8 CSW-743: work around django secrets problem for now
+0fdfb67 CSW-743: repair secret_key_gen.py
+5e8dd9d CSW-743: revise handling of secret_key.py in settings.py
+543fa7b HMP-743: use the same deploy timestamp in 'primary' deployment script
+fbab2b8 (tag: 6.4.0-rc6) revise CHANGELOG.txt and bump version to 6.4.0-rc6
+f3642f2 HMP-743: refactor 'primary' deployment script, and children
+88285fe CSW-744: suppress warning messages from migration in deploy
 714de08 NOJIRA: update and correct README.md
 3a4a036 (tag: 6.4.0-rc5) revise CHANGELOG.txt and bump version to 6.4.0-rc5
 bc9d3f6 CSW-714: have the BMU retry failed S3 copies, and report exit codes
