@@ -376,7 +376,7 @@ def doChecks(args):
             get_tifftags(tif['fullpathtofile'], tif)
             # if we got the file from s3, we should remove it from /tmp
             if args[1] == 's3':
-                remove(fullpath)
+                remove(tif['fullpathtofile'])
         except:
             print("image file info extract failed on file", i, tif['fullpathtofile'])
             file_is_OK = False
