@@ -14,7 +14,7 @@ CCH_LOG=${WORKINGDIR}/cch/cch_extract.log
 HOST="${UCJEPS_SERVER}"
 # NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
-DBUSER="reporter_ucjeps"
+DBUSER="${UCJEPS_USER}"
 CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
 # clean out any data from previous runs

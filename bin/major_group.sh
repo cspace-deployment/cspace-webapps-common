@@ -6,7 +6,7 @@ YYMMDD=`date +%y%m%d`
 HOST="${UCJEPS_SERVER}"
 # NB: port is now part of the HOST parameter, see pipeline-config.sh
 DBNAME="ucjeps_domain_ucjeps"
-DBUSER="reporter_ucjeps"
+DBUSER="${UCJEPS_USER}"
 CONNECTSTRING="host=$HOST dbname=$DBNAME sslmode=prefer"
 
 MG_DIR=${HOMEDIR}/extracts/major_group
