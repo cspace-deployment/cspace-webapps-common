@@ -260,7 +260,8 @@ def send_to_s3(filename):
     if p_object.returncode == 0:
         loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}', {}, {})
     else:
-        loginfo('bmu ERROR:', filename + f': Child returned {p_object.returncode}', {}, {})
+        loginfo('bmu s3 cp ERROR:', filename + f': Child returned {p_object.returncode}', {}, {})
+        raise
 
 # following function borrowed from Django docs, w modifications
 def handle_uploaded_file(f):

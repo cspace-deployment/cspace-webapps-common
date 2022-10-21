@@ -122,15 +122,12 @@ def prepareFiles(request, BMUoptions, context):
             images.append(imageinfo)
 
         except:
-            raise
-            # we still upload the file, anyway...
             try:
-                handle_uploaded_file(afile)
+                images.append({'name': afile.name, 'size': afile.size,
+                               'error': 'problem uploading file or extracting image metadata, this file will be skipped'})
             except:
                 sys.stderr.write("error! file=%s %s" % (afile.name, traceback.format_exc()))
 
-            images.append({'name': afile.name, 'size': afile.size,
-                           'error': 'problem uploading file or extracting image metadata, not processed'})
 
     if len(images) > 0:
         jobinfo['jobnumber'] = jobnumber
