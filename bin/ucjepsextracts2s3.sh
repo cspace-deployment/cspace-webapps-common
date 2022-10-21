@@ -12,8 +12,6 @@ if [[ -z $BL_ENVIRONMENT || ( "$BL_ENVIRONMENT" != "dev" && "$BL_ENVIRONMENT" !=
 	exit 1
 fi
 
-source ${HOME}/pipeline-config.sh
-
 /usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --recursive --exclude "*" --include "ucjeps/*"
 
 /usr/bin/aws s3 sync ${EXTRACTSDIR}/cch s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
