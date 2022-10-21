@@ -3,10 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.0
-Wed Oct 12 15:50:49 PDT 2022
+This is version 6.5.0-rc1
+Fri Oct 21 09:04:54 PDT 2022
 
-30d60ec (HEAD -> main, origin/main, origin/HEAD) CSW-752: bmu fails to delete images in s3 cache correctly
+a5c4a07 (HEAD -> main) CSW-759: bmu now catches a few more errors, e.g. when s3 cp fails
+d49b0a6 CSW-711: minor refactoring of bmu-invoking cron scripts; remove rjaffe as nightly report recipient
+7a4bbbe CSW-756: use (newly implemented) postgres roles for ucjeps extracts
+f77ad77 CSW-654: remove redundant invocation of pipeline-config.sh in ucjepsextracts2s3.sh
+7afa7a7 CSW-704: correct counts displayed in bmu job queue
+316f8fe (tag: 6.4.0, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.0
+30d60ec CSW-752: bmu fails to delete images in s3 cache correctly
 7451934 revise CHANGELOG.txt and bump version to 6.4.0
 a14e337 CSW-743: further refactoring of deploy-all-3.sh
 556ef1c revise CHANGELOG.txt and bump version to 6.4.0
