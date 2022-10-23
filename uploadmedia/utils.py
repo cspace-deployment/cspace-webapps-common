@@ -94,9 +94,9 @@ def getJoblist(request):
             status = 'job started'
         elif 'step1' in parts[1]:
             status = 'pending'
+        # there is no step2 anymore
         elif 'step2' in parts[1]:
             continue
-        # we are in fact keeping the step2 files for now, but let's not show them...
         # elif 'step2' in parts[1]: status = 'blobs in progress'
         elif 'step3' in parts[1]:
             status = 'media in progress'
@@ -105,7 +105,8 @@ def getJoblist(request):
         elif 'check' in parts[1]:
             status = 'check'
         else:
-            status = 'unknown'
+            # if there's another type of file, just ignore it for now
+            continue
         jobkey = parts[0]
         if not jobkey in jobdict: jobdict[jobkey] = []
         jobdict[jobkey].append([f, status, linecount, imagefilenames])
