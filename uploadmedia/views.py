@@ -297,7 +297,6 @@ def checkimagefilenames(request):
             seen[objitems[1]] = payload
         file_handle.close()
     except:
-        raise
         checked_objects = []
     elapsedtime = time.time() - elapsedtime
     context = setContext(context, elapsedtime)
