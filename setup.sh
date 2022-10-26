@@ -40,9 +40,9 @@ export CONFIGDIR=${HOME}/cspace-webapps-ucb
 export BASEDIR=${HOME}/cspace-webapps-common
 
 # NB: we need python3, in fact python>=3.8 but the command for this varies from system to
-# system. using 'python' below works for RTL deployments on EC2 running Ubuntu 20.x
+# system. using 'python3' below works for RTL deployments on EC2 running Ubuntu 20.x
 # YYMV!
-export PYTHON=python
+export PYTHON=python3
 
 # we don't export this value as others might be using it
 YYYYMMDDHHMM=$(date +%Y%m%d%H%M)
@@ -190,7 +190,7 @@ if [[ "${COMMAND}" = "deploy" ]]; then
     fi
   else
     echo
-    echo "'main'specified; deploying code as is, not from clean repo."
+    echo "'main' specified; deploying code as is, not from clean repo."
   fi
 
   if [[ -e ${RUNDIR} ]]; then
