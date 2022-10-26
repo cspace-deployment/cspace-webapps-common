@@ -394,9 +394,8 @@ def createObjectXML(objectinfo):
 
     root = etree.fromstring(content)
     for elementname in objectinfo:
-        if elementname in objectinfo:
-            element = root.find('.//' + elementname)
-            element.text = objectinfo[elementname]
+        element = root.find('.//' + elementname)
+        element.text = objectinfo[elementname]
 
     uri = 'collectionobjects'
     payload = '<?xml version="1.0" encoding="UTF-8"?>\n' + etree.tostring(root, encoding='utf-8')
