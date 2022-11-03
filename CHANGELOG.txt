@@ -3,16 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 2.4.1
-Thu Nov  3 13:20:26 PDT 2022
+This is version 6.4.1
+Thu Nov  3 13:22:10 PDT 2022
 
-73d8aa5 (HEAD -> main) CSW-725: revise bmu to handle ucjeps cr2 files, etc.
+60252ef (HEAD -> main, tag: 2.4.1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 2.4.1
+73d8aa5 CSW-725: revise bmu to handle ucjeps cr2 files, etc.
 24df8f0 CSW-763: we no longer need to run the CCH extract; it is obsolete
 63cfd31 NOJIRA: make-metrics.sh should compute metrics for webapps, too
 c8210bf NOJIRA: tidy up toolbox update logic a bit
 795bece NOJIRA: let's be more specific about which python webapps should use
 3d15d5f NOJIRA: update package-lock.json as recommended by npm and npx
-7e2c90e (origin/main, origin/HEAD) CSW-759: fix longstanding tiny bug in bmu checkfile function
+7e2c90e CSW-759: fix longstanding tiny bug in bmu checkfile function
 102352f CSW-725: don't display a link for unknown file types in bmu workflow
 1ed1b95 (tag: 6.5.0-rc1) revise CHANGELOG.txt and bump version to 6.5.0-rc1
 a5c4a07 CSW-759: bmu now catches a few more errors, e.g. when s3 cp fails
