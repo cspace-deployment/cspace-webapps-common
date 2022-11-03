@@ -16,7 +16,7 @@ cat > ${HTML_FILE}<<HERE
 </ul>
 HERE
 
-for m in bampfa botgarden cinefiles pahma ucjeps
+for m in bampfa botgarden cinefiles pahma ucjeps webapps
   do
     echo "<h3>${m}</h3><ul>" >> ${HTML_FILE}
     for f in *${m}*.html
