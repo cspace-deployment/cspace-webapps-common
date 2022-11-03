@@ -6,6 +6,7 @@ import re
 import json
 import logging
 import subprocess
+import urllib.parse
 from os import path, listdir
 from os.path import isfile, isdir, join
 from xml.sax.saxutils import escape
@@ -13,6 +14,9 @@ from xml.sax.saxutils import escape
 from common import cspace  # we use the config file reading function
 from common.utils import deURN, loginfo
 from cspace_django_site import settings
+from grouper.grouputils import getfromCSpace
+from xml.etree.ElementTree import fromstring
+from uploadmedia.getNumber import getNumber
 
 config = cspace.getConfig(path.join(settings.BASE_DIR, 'config'), 'uploadmedia')
 TEMPIMAGEDIR = config.get('files', 'directory')
@@ -105,8 +109,8 @@ def getJoblist(request):
         elif 'check' in parts[1]:
             status = 'check'
         else:
-            # if there's another type of file, just ignore it for now
-            continue
+            # if there's an unrecognized type of file, use its 2nd element as the status
+            status = parts[1]
         jobkey = parts[0]
         if not jobkey in jobdict: jobdict[jobkey] = []
         jobdict[jobkey].append([f, status, linecount, imagefilenames])
@@ -129,6 +133,53 @@ def checkFile(filename):
     images = [f.split("|")[0] for f in images]
     # all files handled by bmu have a header, so deduct 1 from line count but never lt 0
     return max(len(lines), 0), images
+
+
+def checkimage(filename, request):
+    try:
+        dummy, objectnumber, imagenumber, extra = getNumber(filename, INSTITUTION)
+        asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', urllib.parse.quote_plus(objectnumber), 10)
+        (objecturl, objectx, dummy, itemtime) = getfromCSpace(asquery, request)
+        if objectx is None:
+            totalItems = 0
+        else:
+            objectx = fromstring(objectx)
+            totalItems = objectx.find('.//totalItems')
+            totalItems = int(totalItems.text)
+            try:
+                csid = objectx.find('.//csid').text
+                csidquery = f'media?rtObj={csid}'
+                (objecturl, objectx, dummy, itemtime) = getfromCSpace(csidquery, request)
+                objectx = fromstring(objectx)
+                media = [m.text for m in objectx.findall('.//csid')]
+            except:
+                csid = ''
+                media = []
+        orientation = checkOrientation(path.join('/tmp', filename))
+        payload = (objectnumber, filename) + upload_type_check(totalItems) + (media, orientation)
+    except:
+        payload = (objectnumber, filename, 0, 'problem with check', [], 'Unknown')
+    return payload
+
+
+def checkOrientation(image_file):
+    try:
+        image = Image.open(image_file)
+        image_size = image.size
+        if image_size[0] < image_size[1]:
+                return 'Portrait'
+        return 'Landscape'
+    except:
+        return 'Could not tell'
+
+
+def upload_type_check(num_items):
+    if num_items == 0:
+        return (num_items, 'Not found')
+    if num_items > 1:
+        return (num_items, f'Duplicated {num_items} times!')
+    else:
+        return (num_items, 'Found')
 
 
 def getQueue(jobtypes):
@@ -241,38 +292,47 @@ def writeCsv(filename, items, writeheader):
     writer.writerow(writeheader)
     for item in items:
         row = []
-        for x in writeheader:
-            if x in item.keys():
-                cell = str(item[x])
-                cell = cell.strip()
-                cell = cell.replace('"', '')
-                cell = cell.replace('\n', '')
-                cell = cell.replace('\r', '')
+        for i, x in enumerate(writeheader):
+            if type(item) == type({}):
+                if x in item.keys():
+                    cell = str(item[x])
+                    cell = cell.strip()
+                    cell = cell.replace('"', '')
+                    cell = cell.replace('\n', '')
+                    cell = cell.replace('\r', '')
+                else:
+                    cell = ''
+                row.append(cell)
             else:
-                cell = ''
-            row.append(cell)
+                row.append(item[i])
         writer.writerow(row)
     filehandle.close()
 
 
 def send_to_s3(filename):
-    p_object = subprocess.run(
-        [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'], timeout=60)
-    if p_object.returncode == 0:
-        loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}', {}, {})
-    else:
-        loginfo('bmu s3 cp ERROR:', filename + f': Child returned {p_object.returncode}', {}, {})
+    try:
+        p_object = subprocess.run(
+            [path.join(POSTBLOBPATH, 'cps3.sh'), filename, INSTITUTION, 'to'], timeout=60)
+        if p_object.returncode == 0:
+            loginfo('bmu s3 cp submitted:', filename + f': Child returned {p_object.returncode}', {}, {})
+        else:
+            loginfo('bmu s3 cp ERROR:', filename + f': Child returned {p_object.returncode}', {}, {})
+    except:
+        loginfo('bmu s3 cp unhandled ERROR:', filename, {}, {})
         raise
 
+
 # following function borrowed from Django docs, w modifications
-def handle_uploaded_file(f):
+def handle_uploaded_file(f, request):
     destination = open(path.join('/tmp', '%s') % f.name, 'wb')
     with destination:
         for chunk in f.chunks():
             destination.write(chunk)
     destination.close()
     # send_to_s3 assumes the file will be found in /tmp
+    checked_image_info = checkimage(f.name, request)
     send_to_s3(f.name)
+    return checked_image_info
 
 
 def assignValue(defaultValue, override, imageData, exifvalue, refnameList):

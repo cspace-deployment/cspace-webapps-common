@@ -12,9 +12,7 @@
         <th>Job Errors</th>
         <th>Job Flag</th>
         <th>Download Job Files</th>
-        <th/>
         <th>View Job Files</th>
-        <th></th>
         <th></th>
     </tr>
     </thead>
@@ -61,19 +59,9 @@
 
                 {% endfor %}
             </td>
-            <td/>
             <td>
                 {% for j in jobinfo %}
                     <a href="bmu_showresults?filename={{ j.0 }}&status={{ j.1 }}">{{ j.1 }}</a>
-                {% endfor %}
-            </td>
-            <td>
-                {% for j in jobinfo %}
-                    {% if j.1 == 'ingested' %}
-                        <a href="bmu_checkimagefilenames?filename={{ j.0 }}">Check File</a>
-                    {% elif j.1 == 'pending' %}
-                        <a href="bmu_checkimagefilenames?filename={{ j.0 }}">Check File</a>
-                    {% endif %}
                 {% endfor %}
             </td>
             <td>

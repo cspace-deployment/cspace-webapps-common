@@ -7,7 +7,6 @@ urlpatterns = [
     path('', views.uploadmedia, name='uploadmedia'),
     path('bmu_uploadfiles', views.uploadmedia, name='bmu_uploadfiles'),
     # path('rest/<action>', views.rest, name='rest'),
-    path('bmu_checkimagefilenames', views.checkimagefilenames, name='bmu_checkimagefilenames'),
     path('bmu_showqueue', views.showqueue, name='bmu_showqueue'),
     path('bmu_downloadresults/<filename>', views.downloadresults, name='bmu_downloadresults'),
     path('bmu_showresults', views.showresults, name='bmu_showresults'),

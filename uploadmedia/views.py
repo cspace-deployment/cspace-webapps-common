@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import sys
 import traceback
-import urllib.parse
 #from common.cspace import logged_in_or_basicauth
 from django.shortcuts import render, HttpResponse, redirect
 
@@ -20,10 +19,6 @@ from uploadmedia.utils import getJobfile, getJoblist, reformat, rendermedia
 from uploadmedia.specialhandling import specialhandling
 from uploadmedia.checkBlobs import doChecks
 from common.utils import loginfo
-
-from grouper.grouputils import getfromCSpace
-
-from xml.etree.ElementTree import fromstring
 
 # read common config file, just for the version info
 from common.appconfig import loadConfiguration
@@ -74,6 +69,7 @@ def prepareFiles(request, BMUoptions, context):
     jobnumber = context['jobnumber']
     jobinfo = {}
     images = []
+    checked_images = []
     for lineno, afile in enumerate(request.FILES.getlist('imagefiles')):
         try:
             loginfo('bmu', ("%s %s: %s %s (%s %s)" % ('id', lineno + 1, 'name', afile.name, 'size', afile.size)), context, request)
@@ -92,7 +88,7 @@ def prepareFiles(request, BMUoptions, context):
                 # add the Displayname just in case...
                 imageinfo['%sDisplayname' % override[2]] = dname
 
-            handle_uploaded_file(afile)
+            checked_images.append(handle_uploaded_file(afile, request))
 
             for option in ['handling', 'approvedforweb']:
                 if option in request.POST:
@@ -133,6 +129,8 @@ def prepareFiles(request, BMUoptions, context):
         jobinfo['jobnumber'] = jobnumber
 
         writeCsv(getJobfile(jobnumber) + '.step1.csv', images, FIELDS2WRITE)
+        writeCsv(getJobfile(jobnumber) + '.check.csv', checked_images, 'objectnumber,filename,items,status,media csids,orientation'.split(','))
+
         jobinfo['estimatedtime'] = '%8.1f' % (len(images) * 10 / 60.0)
 
         if 'createmedia' in request.POST:
@@ -183,7 +181,7 @@ def runjob(jobnumber, context, request):
             # process will terminate when job finishes.
             # TODO: figure out how to 'fire and forget' this batch job so it does nat make zombies
             p_object = subprocess.Popen([path.join(POSTBLOBPATH, 'postblob.sh'), INSTITUTION, getJobfile(jobnumber), BATCHPARAMETERS])
-            sleep(1)
+            time.sleep(1)
             if p_object._child_created:
                 loginfo('bmu online job submitted:', jobnumber + f': Child returned {p_object.returncode}', context, request)
             else:
@@ -241,78 +239,6 @@ def uploadmedia(request):
 
     return render(request, 'uploadmedia.html', context)
 
-
-def checkOrientation(image_file):
-    try:
-        image = Image.open(image_file)
-        image_size = image.size
-        if image_size[0] < image_size[1]:
-                return 'Portrait'
-        return 'Landscape'
-    except:
-        return 'Could not tell'
-
-
-@login_required()
-def checkimagefilenames(request):
-    elapsedtime = time.time()
-    context = setConstants(request, im)
-    try:
-        filename = request.GET['filename']
-        (jobnumber, step, csv ) = filename.split('.')
-        context['jobnumber'] = jobnumber
-        context['filename'] = filename
-        file_handle = open(getJobfile(filename), 'r')
-        lines = file_handle.read().splitlines()
-        # TODO the delimiters used should be rationalized someday
-        if '|' in lines[0]:
-            delim = '|'
-        else:
-            delim = '\t'
-        recordtypes = [tuple(list(f.split(delim)[i] for i in [0, 2, 7, 8])) for f in lines]
-        seen = {}
-        checked_objects = []
-        for objitems in recordtypes[1:]:
-            asquery = '%s?as=%s_common:%s%%3D%%27%s%%27&wf_deleted=false&pgSz=%s' % ('collectionobjects', 'collectionobjects', 'objectNumber', urllib.parse.quote_plus(objitems[1]), 10)
-            (objecturl, objectx, dummy, itemtime) = getfromCSpace(asquery, request)
-            if objectx is None:
-                totalItems = 0
-            else:
-                objectx = fromstring(objectx)
-                totalItems = objectx.find('.//totalItems')
-                totalItems = int(totalItems.text)
-                try:
-                    csid = objectx.find('.//csid').text
-                    csidquery = f'media?rtObj={csid}'
-                    (objecturl, objectx, dummy, itemtime) = getfromCSpace(csidquery, request)
-                    objectx = fromstring(objectx)
-                    media = [m.text for m in objectx.findall('.//csid')]
-                except:
-                    csid = ''
-                    media = []
-            media_file = getJobfile(objitems[0])
-            orientation = checkOrientation(media_file)
-            payload = objitems + upload_type_check(totalItems, objitems) + (media, orientation)
-            checked_objects.append(payload)
-            seen[objitems[1]] = payload
-        file_handle.close()
-    except:
-        checked_objects = []
-    elapsedtime = time.time() - elapsedtime
-    context = setContext(context, elapsedtime)
-    context['objectnumbers'] = checked_objects
-    context['url_institution'] = context['institution'].replace('botgarden', 'ucbg')
-
-    return render(request, 'uploadmedia.html', context)
-
-def upload_type_check(num_items, objitem):
-    handling = objitem[3]
-    if num_items == 0:
-        return (num_items, 'Not found')
-    if num_items > 1:
-        return (num_items, f'Duplicated {num_items} times!')
-    else:
-        return (num_items, 'Found')
 
 @login_required()
 def downloadresults(request, filename):
