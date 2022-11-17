@@ -129,8 +129,7 @@ def prepareFiles(request, BMUoptions, context):
         jobinfo['jobnumber'] = jobnumber
 
         writeCsv(getJobfile(jobnumber) + '.step1.csv', images, FIELDS2WRITE)
-        writeCsv(getJobfile(jobnumber) + '.check.csv', checked_images, 'objectnumber,filename,items,status,media csids,orientation'.split(','))
-
+        writeCsv(getJobfile(jobnumber) + '.check.csv', checked_images, 'objectnumber,filename,items,status,media count,orientation,media csids'.split(','))
         jobinfo['estimatedtime'] = '%8.1f' % (len(images) * 10 / 60.0)
 
         if 'createmedia' in request.POST:
@@ -297,7 +296,7 @@ def startjob(request, filename):
 def deletejob(request, filename):
     try:
         remove(getJobfile(filename))
-        loginfo('bmu', '%s :: %s' % ('uploadmedia job deleted', filename), {}, {})
+        loginfo('bmu', '%s :: %s' % ('pending uploadmedia job deleted', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to delete job', filename), {}, {})
     return redirect('../bmu_showqueue')
