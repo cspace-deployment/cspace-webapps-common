@@ -155,17 +155,28 @@ def checkimage(filename, request):
                 csid = ''
                 media = []
         orientation = checkOrientation(path.join('/tmp', filename))
-        payload = (objectnumber, filename) + upload_type_check(totalItems) + (media, orientation)
+        payload = (objectnumber, filename) + upload_type_check(totalItems) + (len(media), orientation, media)
     except:
-        payload = (objectnumber, filename, 0, 'problem with check', [], 'Unknown')
+        payload = (objectnumber, filename, 0, 'problem with check', 0, 'Unknown', [])
     return payload
 
 
 def checkOrientation(image_file):
     try:
         image = Image.open(image_file)
-        image_size = image.size
-        if image_size[0] < image_size[1]:
+        # CR2 files have a value for _title_orientation, other image types may not.
+        # if it doesn't exist, assume "normal orientation" (1)
+        try:
+            orientation = image._tile_orientation
+        except:
+            orientation = 1
+        width = image.width
+        height = image.height
+        if orientation == 6:
+            # orientation = 90 degree CCW, so reverse 'em
+            width = image.height
+            height = image.width
+        if width < height:
                 return 'Portrait'
         return 'Landscape'
     except:
@@ -367,6 +378,7 @@ def reformat(filecontent):
     result = result.replace('\n','<tr><td>')
     result = result.replace('\t','<td>')
     result = result.replace('|','<td>')
+    result = result.replace('Not Found','<span class="error">Not Found</span>')
     result = result.replace('False','<span class="error">False</span>')
     result += '</table>'
     return '<table width="100%"><tr><td>\n' + result
