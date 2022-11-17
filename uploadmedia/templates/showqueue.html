@@ -28,7 +28,7 @@
                 {% endif %}
             </td>
             {% if jobsummary.4 == 'problem' %}
-                <td style="max-width: 600px;">
+                <td style="max-width: 300px;">
                     <span style="color: red">{{ jobsummary.2 }} media file{{ jobsummary.2|pluralize }} failed to load.</span>
                     {% for image in jobsummary.3 %}
                         {{ image }}

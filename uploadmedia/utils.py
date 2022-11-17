@@ -131,8 +131,7 @@ def checkFile(filename):
     lines = [l for l in file_handle.read().splitlines() if "not found" not in l]
     images = [f.split("\t")[0] for f in lines]
     images = [f.split("|")[0] for f in images]
-    # all files handled by bmu have a header, so deduct 1 from line count but never lt 0
-    return max(len(lines), 0), images
+    return len(lines), images
 
 
 def checkimage(filename, request):
