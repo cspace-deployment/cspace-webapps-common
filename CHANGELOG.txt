@@ -3,10 +3,18 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.1
-Thu Nov  3 13:22:10 PDT 2022
+This is version 6.4.2-rc1
+Thu Dec  1 14:36:12 PST 2022
 
-60252ef (HEAD -> main, tag: 2.4.1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 2.4.1
+bd775d4 (HEAD -> main, origin/main, origin/HEAD) CSW-712: correct bmu UI check file header display
+e00f141 CSW-712: refactor bmu batch script 'uploadMedia.py' to better recognize cr2 orientation
+26ed8fc CSW-712: back out cr2 handling from generic bmu; they can ask for it if they need it
+aedbaeb Merge pull request #7 from cspace-deployment/dependabot/npm_and_yarn/loader-utils-1.4.2
+92d1ac0 CSW-725: minor ux improvements in bmu job queue
+daac803 CSW-77: backout a few ignores in .gitignore
+8ff4691 Bump loader-utils from 1.4.0 to 1.4.2
+d76650c (tag: 6.4.1) revise CHANGELOG.txt and bump version to 6.4.1
+60252ef revise CHANGELOG.txt and bump version to 2.4.1
 73d8aa5 CSW-725: revise bmu to handle ucjeps cr2 files, etc.
 24df8f0 CSW-763: we no longer need to run the CCH extract; it is obsolete
 63cfd31 NOJIRA: make-metrics.sh should compute metrics for webapps, too
@@ -15,7 +23,7 @@ c8210bf NOJIRA: tidy up toolbox update logic a bit
 3d15d5f NOJIRA: update package-lock.json as recommended by npm and npx
 7e2c90e CSW-759: fix longstanding tiny bug in bmu checkfile function
 102352f CSW-725: don't display a link for unknown file types in bmu workflow
-1ed1b95 (tag: 6.5.0-rc1) revise CHANGELOG.txt and bump version to 6.5.0-rc1
+1ed1b95 revise CHANGELOG.txt and bump version to 6.5.0-rc1
 a5c4a07 CSW-759: bmu now catches a few more errors, e.g. when s3 cp fails
 d49b0a6 CSW-711: minor refactoring of bmu-invoking cron scripts; remove rjaffe as nightly report recipient
 7a4bbbe CSW-756: use (newly implemented) postgres roles for ucjeps extracts
