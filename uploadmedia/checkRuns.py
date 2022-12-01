@@ -166,6 +166,8 @@ for filename in os.listdir(DIR):
     except:
         # skip .csv files that don't match the pattern
         continue
+    # we don't need to examine the following types of files
+    if step in ('archive', 'check'): continue
     FH = open(os.path.join(DIR, filename), 'r')
     delimx = '\t'
     for i, line in enumerate(FH.readlines()):
