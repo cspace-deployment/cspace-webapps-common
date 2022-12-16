@@ -3,10 +3,10 @@ import re
 import time, datetime
 import csv
 import solr
-import html
 import os
 import logging
 
+from urllib.parse import quote
 from os import path, popen
 from copy import deepcopy
 from cspace_django_site import settings
@@ -699,10 +699,10 @@ def doSearch(context, prmz, request):
             searchTerm = ' OR '.join(ORs)
             if ' ' in searchTerm and not ' TO ' in searchTerm: searchTerm = ' (' + searchTerm + ') '
             queryterms.append(searchTerm)
-            urlterms.append('%s=%s' % (p, html.escape(requestObject[p])))
+            urlterms.append('%s=%s' % (p, quote(requestObject[p])))
             if p + '_qualifier' in requestObject:
                 # print('qualifier:',requestObject[p+'_qualifier'])
-                urlterms.append('%s=%s' % (p + '_qualifier', html.escape(requestObject[p + '_qualifier'])))
+                urlterms.append('%s=%s' % (p + '_qualifier', quote(requestObject[p + '_qualifier'])))
         querystring = ' AND '.join(queryterms)
 
         if urlterms != []:
