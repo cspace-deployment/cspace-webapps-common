@@ -6,3 +6,4 @@ select 'utils.object_place_location', count(*) from utils.object_place_location 
 select 'utils.object_place_temp', count(*) from utils.object_place_temp ;
 select 'utils.placename_hierarchy', count(*) from utils.placename_hierarchy ;
 select 'utils.taxon_hierarchy', count(*) from utils.taxon_hierarchy ;
+select 'utils.objectclass_hierarchy', count(*) from utils.objectclass_hierarchy ;
