@@ -22,8 +22,8 @@ BEGIN
        objectclass_hierarchy text,
        csid_hierarchy text );
 
-    CREATE INDEX uth_tcsid_ndx on utils.objectclass_hierarchy ( objectclasscsid );
-    CREATE INDEX uth_tname_ndx on utils.objectclass_hierarchy ( objectclass );
+    CREATE INDEX uth_occsid_ndx on utils.objectclass_hierarchy ( objectclasscsid );
+    CREATE INDEX uth_ocname_ndx on utils.objectclass_hierarchy ( objectclass );
   END IF;
 END;
 $$
