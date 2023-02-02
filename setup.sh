@@ -254,8 +254,8 @@ elif [[ "${COMMAND}" = "disable" ]]; then
 elif [[ "${COMMAND}" = "enable" ]]; then
   perl -i -pe "s/# *('${WEBAPP}')/\1/" cspace_django_site/installed_apps.py
   perl -i -pe "s/# *(path)/\1/ if /${WEBAPP}/" cspace_django_site/urls.py
-  python manage.py migrate --noinput
-  python manage.py collectstatic --noinput
+  $PYTHON manage.py migrate --noinput
+  $PYTHON manage.py collectstatic --noinput
   echo "Enabled ${WEBAPP}"
 elif [[ "${COMMAND}" = "show" ]]; then
   echo
