@@ -3,10 +3,21 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.2-rc1
-Thu Dec  1 14:36:12 PST 2022
+This is version 6.4.2-rc2
+Thu Feb  2 17:09:45 PST 2023
 
-bd775d4 (HEAD -> main, origin/main, origin/HEAD) CSW-712: correct bmu UI check file header display
+8cb9ab5 (HEAD -> main) HMP-271: add code removed from crontab to bmu-monitor.sh
+c191e37 (origin/main, origin/HEAD) NOJIRA: remove devops email from BMU notifications; minor refactor of webapps deploy script
+0dca9cc CSW-796: correct index names for object class hierarchy
+edf28ab Merge pull request #9 from jblowe/main
+2184de4 CSW-796: initial refactoring to add object class to utils
+49d2e05 CSW-795: bmu s3 copy to/from script needed some quotes
+1d4b537 Merge pull request #8 from cspace-deployment/dependabot/npm_and_yarn/json5-and-babel-loader-2.2.3
+3713dd7 Bump json5 and babel-loader
+76a0e83 CSW-636: encode 'emailable url' in portals in improve sharability
+655f08b CSW-774: handle new bmu file types properly in counting
+4650c85 (tag: 6.4.2-rc1) revise CHANGELOG.txt and bump version to 6.4.2-rc1
+bd775d4 CSW-712: correct bmu UI check file header display
 e00f141 CSW-712: refactor bmu batch script 'uploadMedia.py' to better recognize cr2 orientation
 26ed8fc CSW-712: back out cr2 handling from generic bmu; they can ask for it if they need it
 aedbaeb Merge pull request #7 from cspace-deployment/dependabot/npm_and_yarn/loader-utils-1.4.2
