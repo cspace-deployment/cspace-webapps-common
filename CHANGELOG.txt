@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.2-rc2
-Thu Feb  2 17:09:45 PST 2023
+This is version 6.4.2
+Thu Feb  9 13:17:52 PST 2023
 
-8cb9ab5 (HEAD -> main) HMP-271: add code removed from crontab to bmu-monitor.sh
-c191e37 (origin/main, origin/HEAD) NOJIRA: remove devops email from BMU notifications; minor refactor of webapps deploy script
+f4eb409 (HEAD -> main, tag: 6.4.2-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.2-rc2
+8cb9ab5 HMP-271: add code removed from crontab to bmu-monitor.sh
+c191e37 NOJIRA: remove devops email from BMU notifications; minor refactor of webapps deploy script
 0dca9cc CSW-796: correct index names for object class hierarchy
 edf28ab Merge pull request #9 from jblowe/main
 2184de4 CSW-796: initial refactoring to add object class to utils
