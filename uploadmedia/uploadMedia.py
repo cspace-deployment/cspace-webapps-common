@@ -312,10 +312,6 @@ if __name__ == "__main__":
     outputFile = outputFile.replace('.step1.csv', '.step3.csv')
     outputfh = csv.writer(open(outputFile, 'w'), delimiter="\t")
 
-    # do media checking alongside the uploading to s3
-    #checkFile = outputFile.replace('.step3.csv', '.check.csv')
-    #checkfh = csv.writer(open(checkFile, 'w'), delimiter="\t")
-
     # the first row of the file is a header
     columns = records[0]
     del records[0]
