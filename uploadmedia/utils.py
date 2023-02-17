@@ -109,8 +109,11 @@ def getJoblist(request):
         elif 'check' in parts[1]:
             status = 'check'
         else:
+            # if there's another type of file, just ignore it for now
+            continue
+            # TODO: need to decide just what to do with other file types...
             # if there's an unrecognized type of file, use its 2nd element as the status
-            status = parts[1]
+            # status = parts[1]
         jobkey = parts[0]
         if not jobkey in jobdict: jobdict[jobkey] = []
         jobdict[jobkey].append([f, status, linecount, imagefilenames])
