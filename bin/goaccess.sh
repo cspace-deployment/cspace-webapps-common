@@ -19,3 +19,6 @@ cp /var/www/static/stats_pahma_${YEAR}_${MONTH}.html /var/www/static/stats_pahma
 cp /var/www/static/stats_bampfa_${YEAR}_${MONTH}.html /var/www/static/stats_bampfa.html
 cp /var/www/static/stats_webapps_${YEAR}_${MONTH}.html /var/www/static/stats_webapps.html
 
+# tidy up the mess left behind
+rm -rf /tmp/goaccess*
+
