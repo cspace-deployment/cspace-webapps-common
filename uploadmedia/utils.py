@@ -175,8 +175,8 @@ def checkOrientation(image_file):
             orientation = 1
         width = image.width
         height = image.height
-        if orientation == 6:
-            # orientation = 90 degree CCW, so reverse 'em
+        if orientation == 6 or orientation == 8:
+            # orientation 6 = 90 degree CCW or 8 = 90 CCW, so reverse 'em
             width = image.height
             height = image.width
         if width < height:
