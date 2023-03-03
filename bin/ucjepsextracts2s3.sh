@@ -12,19 +12,29 @@ if [[ -z $BL_ENVIRONMENT || ( "$BL_ENVIRONMENT" != "dev" && "$BL_ENVIRONMENT" !=
 	exit 1
 fi
 
-/usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --recursive --exclude "*" --include "ucjeps/*"
+/usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --quiet --recursive --exclude "*" --include "ucjeps/*"
 
 /usr/bin/aws s3 sync ${EXTRACTSDIR}/cch s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet \
                  --exclude "*" --include "*.gz"
 /usr/bin/aws s3 sync ${EXTRACTSDIR}/major_group s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet \
                  --exclude "*" --include "*.gz"
 /usr/bin/aws s3 sync ${EXTRACTSDIR}/taxonauth s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet \
                  --exclude "*" --include "*.gz"
 
-/usr/bin/aws s3 cp ${EXTRACTSDIR}/ucjeps-authorities/authorities.tgz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/
-
-/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.public.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/
-/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.media.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/ucjeps_soft-deletes.tab.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
+/usr/bin/aws s3 cp ${EXTRACTSDIR}/ucjeps-authorities/authorities.tgz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
+/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.public.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
+# allmedia is ... well ... all the media files; media is just those 'media only' files found in the media portal
+/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.media.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
+/usr/bin/aws s3 cp ${SOLR_CACHE_DIR}/4solr.ucjeps.allmedia.csv.gz s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
 
 # Since S3 is not a traditional filesystem, directory browsing is not possible in the traditional sense.
 # Instead we create a file named MANIFEST.TXT that contains URLs to all the items in the bucket for
@@ -38,7 +48,14 @@ fi
 /usr/bin/sed "s/^/https:\/\/cspace-extracts-${BL_ENVIRONMENT}.s3.us-west-2.amazonaws.com\//" > \
 /tmp/MANIFEST.TXT
 
-/usr/bin/aws s3 cp /tmp/MANIFEST.TXT s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/
+/usr/bin/aws s3 cp /tmp/MANIFEST.TXT s3://cspace-extracts-${BL_ENVIRONMENT}/ucjeps/ \
+                 --quiet
+
+echo "Extracts copied to S3"
+echo
+echo "(These links will work if you are signed in to the UCB VPN)"
+echo
+cat /tmp/MANIFEST.TXT
 
 /usr/bin/rm -f /tmp/MANIFEST.TXT
 
