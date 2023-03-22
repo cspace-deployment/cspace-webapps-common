@@ -3,10 +3,24 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.2
-Thu Feb  9 13:17:52 PST 2023
+This is version 6.4.3
+Wed Mar 22 16:43:52 PDT 2023
 
-f4eb409 (HEAD -> main, tag: 6.4.2-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.2-rc2
+6b57960 (HEAD -> main, origin/main, origin/HEAD) NOJIRA: update package.json to v2 format
+b270fa5 CSW-817: use django APPEND_SLASH setting (for ucjeps archive)
+f4511d6 NOJIRA: update package.json to address 'vulnerabilities'
+0066be6 CSW-821: fix orientation detection in ucjeps bmu
+900f427 CSW-812: run-ucjeps-extracts.sh 'soft-delete' script needs parameter
+ffd6705 CSW-804: utility script to extract imageserver activity from django logs
+2476e57 CSW-812: set_environment.sh can and perhaps should be +x
+f834166 CSW-812: extract UCJEPS 'soft deletes' and send them to UCJEPS
+058e690 CSW-721: tidy up (files in /tmp) after goaccess
+dae4fea CSW-787: remove old version of ucjeps 'image file evaluation' script
+9159d17 CSW-737: make the hierarchies notification cron job into an actual script in ~/bin
+b0274f0 CSW-725: skip unknown file types in bmu workflow
+450d77c CSW-712: tidy up check file comments in uploadmedia.py
+6b727ff (tag: 6.4.2) revise CHANGELOG.txt and bump version to 6.4.2
+f4eb409 (tag: 6.4.2-rc2) revise CHANGELOG.txt and bump version to 6.4.2-rc2
 8cb9ab5 HMP-271: add code removed from crontab to bmu-monitor.sh
 c191e37 NOJIRA: remove devops email from BMU notifications; minor refactor of webapps deploy script
 0dca9cc CSW-796: correct index names for object class hierarchy
