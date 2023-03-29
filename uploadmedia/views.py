@@ -296,6 +296,7 @@ def startjob(request, filename):
 def deletejob(request, filename):
     try:
         remove(getJobfile(filename))
+        remove(getJobfile(filename.replace('step1','check')))
         loginfo('bmu', '%s :: %s' % ('pending uploadmedia job deleted', filename), {}, {})
     except:
         loginfo('bmu', '%s :: %s' % ('ERROR: uploadmedia tried and failed to delete job', filename), {}, {})
