@@ -377,10 +377,10 @@ def starthtml(form, updateType, config):
     location1 = str(form.get("lo.location1")) if form.get("lo.location1") else ''
     location2 = str(form.get("lo.location2")) if form.get("lo.location2") else ''
     otherfields = '''
-	  <tr><th><span class="cell">start location:</span></th>
-	  <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-          <th><span class="cell">end location:</span></th>
-          <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
+    <tr><th><span class="cell">start location:</span></th>
+    <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+    <th><span class="cell">end location:</span></th>
+    <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
     '''
 
     if updateType == 'keyinfo':
@@ -389,12 +389,12 @@ def starthtml(form, updateType, config):
         fieldset, selected = cswaConstants.getFieldset(form, institution)
 
         otherfields = '''
-	    <tr><th><span class="cell">start location:</span></th>
-	    <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+        <tr><th><span class="cell">start location:</span></th>
+        <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
         <th><span class="cell">end location:</span></th>
         <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th>
         <th><th><span class="cell">set:</span></th><th>''' + fieldset + '''</th></tr>
-    '''
+        '''
         otherfields += '''
         <tr></tr>'''
 
@@ -426,7 +426,7 @@ def starthtml(form, updateType, config):
         otherfields = '''
         <tr>
         <th><span class="cell">start location:</span></th>
-	    <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+        <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
         <th><span class="cell">end location:</span></th>
         <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th>
         <th><th><span class="cell">set:</span></th><th>''' + fieldset + '''</th>
@@ -459,12 +459,12 @@ def starthtml(form, updateType, config):
         <th><input id="ob.objno2" class="cell" type="text" size="40" name="ob.objno2" value="''' + objno2 + '''" class="xspan"></th></tr>
         '''
         otherfields += '''
-	  <tr><th><span class="cell">destination:</span></th>
-	  <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-          <th><span class="cell">reason:</span></th><th>''' + reasons + '''</th>
-          <tr><th><span class="cell">crate:</span></th>
-          <th><input id="lo.crate" class="cell" type="text" size="40" name="lo.crate" value="''' + crate + '''" class="xspan"></th>
-          <th><span class="cell">handler:</span></th><th>''' + handlers + '''</th></tr>
+        <tr><th><span class="cell">destination:</span></th>
+        <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+        <th><span class="cell">reason:</span></th><th>''' + reasons + '''</th>
+        <tr><th><span class="cell">crate:</span></th>
+        <th><input id="lo.crate" class="cell" type="text" size="40" name="lo.crate" value="''' + crate + '''" class="xspan"></th>
+        <th><span class="cell">handler:</span></th><th>''' + handlers + '''</th></tr>
         '''
 
     elif updateType == 'grpinfo':
@@ -472,8 +472,8 @@ def starthtml(form, updateType, config):
         fieldset, selected = cswaConstants.getFieldset(form, institution)
 
         otherfields = '''
-            <tr><th><span class="cell">group:</span></th>
-            <th><input id="gr.group" class="cell" type="text" size="40" name="gr.group" value="''' + grpinfo + '''" class="xspan"></th>
+        <tr><th><span class="cell">group:</span></th>
+        <th><input id="gr.group" class="cell" type="text" size="40" name="gr.group" value="''' + grpinfo + '''" class="xspan"></th>
         <th><th><span class="cell">set:</span></th><th>''' + fieldset + '''</th></tr>'''
         otherfields += '''
         <tr></tr>'''
@@ -504,12 +504,12 @@ def starthtml(form, updateType, config):
     elif updateType == 'movecrate':
         crate = str(form.get("lo.crate")) if form.get("lo.crate") else ''
         otherfields = '''
-	  <tr><th><span class="cell">from:</span></th>
-	  <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-          <th><span class="cell">to:</span></th>
-          <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
-          <tr><th><span class="cell">crate:</span></th>
-          <th><input id="lo.crate" class="cell" type="text" size="40" name="lo.crate" value="''' + crate + '''" class="xspan"></th></tr>
+        <tr><th><span class="cell">from:</span></th>
+        <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+        <th><span class="cell">to:</span></th>
+        <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
+        <tr><th><span class="cell">crate:</span></th>
+        <th><input id="lo.crate" class="cell" type="text" size="40" name="lo.crate" value="''' + crate + '''" class="xspan"></th></tr>
     '''
 
         handlers, selected = cswaConstants.getHandlers(form, institution)
@@ -541,14 +541,14 @@ def starthtml(form, updateType, config):
         crate1 = str(form.get("lo.crate1")) if form.get("lo.crate1") else ''
         crate2 = str(form.get("lo.crate2")) if form.get("lo.crate2") else ''
         otherfields = '''
-	      <tr><th><span class="cell">from location:</span></th>
-	      <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-	      <th><span class="cell">to location:</span></th>
-          <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
-          <tr><th><span class="cell">crate (optional):</span></th>
-          <th><input id="lo.crate1" class="cell" type="text" size="40" name="lo.crate1" value="''' + crate1 + '''" class="xspan"></th>
-          <th><span class="cell">crate (optional):</span></th>
-          <th><input id="lo.crate2" class="cell" type="text" size="40" name="lo.crate2" value="''' + crate2 + '''" class="xspan"></th></tr>
+        <tr><th><span class="cell">from location:</span></th>
+        <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+        <th><span class="cell">to location:</span></th>
+        <th><input id="lo.location2" class="cell" type="text" size="40" name="lo.location2" value="''' + location2 + '''" class="xspan"></th></tr>
+        <tr><th><span class="cell">crate (optional):</span></th>
+        <th><input id="lo.crate1" class="cell" type="text" size="40" name="lo.crate1" value="''' + crate1 + '''" class="xspan"></th>
+        <th><span class="cell">crate (optional):</span></th>
+        <th><input id="lo.crate2" class="cell" type="text" size="40" name="lo.crate2" value="''' + crate2 + '''" class="xspan"></th></tr>
     '''
 
         handlers, selected = cswaConstants.getHandlers(form, institution)
@@ -560,31 +560,31 @@ def starthtml(form, updateType, config):
     elif updateType == 'bedlist':
         location1 = str(form.get("lo.location1")) if form.get("lo.location1") else ''
         otherfields = '''
-	  <tr>
-          <th><span rowspan="2" class="cell">bed:</span></th>
-	      <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
-          <th>
-          <table><tr>''' + groupbyelement + '''</tr>
+        <tr>
+            <th><span rowspan="2" class="cell">bed:</span></th>
+            <th><input id="lo.location1" class="cell" type="text" size="40" name="lo.location1" value="''' + location1 + '''" class="xspan"></th>
+            <th>
+                <table><tr>''' + groupbyelement + '''</tr>
                  <tr>''' + deadoralive + '''</tr>
                  <tr>''' + reporttypeelement + '''</tr>
-          </table>
-          </th>
-      </tr>
-      </tr>'''
+                </table>
+            </th>
+        </tr>
+        </tr>'''
 
     elif updateType == 'locreport':
         taxName = str(form.get('ut.taxon')) if form.get('ut.taxon') else ''
         otherfields = '''
-	  <tr><th><span class="cell">taxonomic name:</span></th>
-	  <th><input id="ut.taxon" class="cell" type="text" size="40" name="ut.taxon" value="''' + taxName + '''" class="xspan"></th>
-          ''' + deadoralive + '''</tr> '''
+        <tr><th><span class="cell">taxonomic name:</span></th>
+        <th><input id="ut.taxon" class="cell" type="text" size="40" name="ut.taxon" value="''' + taxName + '''" class="xspan"></th>
+        ''' + deadoralive + '''</tr> '''
 
     elif updateType == 'holdings':
         place = str(form.get('px.place')) if form.get('px.place') else ''
         otherfields = '''
-	  <tr><th><span class="cell">collection place:</span></th>
-	  <th><input id="px.place" class="cell" type="text" size="40" name="px.place" value="''' + place + '''" class="xspan"></th>
-          ''' + deadoralive + '''</tr> '''
+        <tr><th><span class="cell">collection place:</span></th>
+        <th><input id="px.place" class="cell" type="text" size="40" name="px.place" value="''' + place + '''" class="xspan"></th>
+        ''' + deadoralive + '''</tr> '''
 
     elif updateType == 'advsearch':
         location1 = str(form.get("lo.location1")) if form.get("lo.location1") else ''
