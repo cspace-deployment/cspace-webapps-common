@@ -1,7 +1,6 @@
 from PIL import Image
 from PIL.ExifTags import TAGS
 import csv
-import codecs
 import re
 import json
 import logging
@@ -129,7 +128,7 @@ def getJoblist(request):
 
 
 def checkFile(filename):
-    file_handle = open(filename, encoding="utf-8")
+    file_handle = open(filename, mode="r", encoding="utf-8")
     # eliminate rows for which an object was not found...
     lines = [l for l in file_handle.read().splitlines() if "not found" not in l]
     images = [f.split("\t")[0] for f in lines]
@@ -300,7 +299,7 @@ def getCSID(objectnumber):
 
 
 def writeCsv(filename, items, writeheader):
-    filehandle = codecs.open(filename, 'w', 'utf-8')
+    filehandle = open(filename, mode="w", encoding="utf-8")
     writer = csv.writer(filehandle, delimiter='|')
     writer.writerow(writeheader)
     for item in items:
