@@ -129,7 +129,7 @@ def getJoblist(request):
 
 
 def checkFile(filename):
-    file_handle = open(filename)
+    file_handle = open(filename, encoding="utf-8")
     # eliminate rows for which an object was not found...
     lines = [l for l in file_handle.read().splitlines() if "not found" not in l]
     images = [f.split("\t")[0] for f in lines]
