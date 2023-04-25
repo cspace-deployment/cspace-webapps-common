@@ -3,10 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.3
-Wed Mar 22 16:43:52 PDT 2023
+This is version 6.4.4-rc1
+Tue Apr 25 14:28:05 PDT 2023
 
-6b57960 (HEAD -> main, origin/main, origin/HEAD) NOJIRA: update package.json to v2 format
+b4bfc0e (HEAD -> main) CSW-837: a few more bmu job files to open in proper 'utf-8 mode'
+fc71a2a (origin/main, origin/HEAD) CSW-837: open all bmu job files in proper 'utf-8 mode'
+55a69cf CSW-837: open bmu job files in 'utf-mode'
+8271f5f NOJIRA: code reformat only
+7a04eca CSW-819: update contact email for web analytics
+78beb4e CSW-831: delete all job artifacts when deleting a bmu job
+6688313 (tag: 6.4.3) revise CHANGELOG.txt and bump version to 6.4.3
+6b57960 NOJIRA: update package.json to v2 format
 b270fa5 CSW-817: use django APPEND_SLASH setting (for ucjeps archive)
 f4511d6 NOJIRA: update package.json to address 'vulnerabilities'
 0066be6 CSW-821: fix orientation detection in ucjeps bmu
