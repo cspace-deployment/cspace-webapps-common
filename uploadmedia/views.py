@@ -241,7 +241,7 @@ def uploadmedia(request):
 
 @login_required()
 def downloadresults(request, filename):
-    f = open(getJobfile(filename), 'r')
+    f = open(getJobfile(filename), mode="r", encoding="utf-8")
     response = HttpResponse(f, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="%s"' % filename
     return response
@@ -258,7 +258,7 @@ def showresults(request):
     filename = request.GET['filename']
     context['filename'] = filename
     context['jobstatus'] = request.GET['status']
-    f = open(getJobfile(filename), 'r')
+    f = open(getJobfile(filename), mode="r", encoding="utf-8")
     filecontent = f.read()
     if status == 'showmedia':
         context['derivativegrid'] = 'Medium'

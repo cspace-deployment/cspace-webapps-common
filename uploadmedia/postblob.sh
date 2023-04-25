@@ -26,8 +26,6 @@ mv $JOB.step1.csv $JOB.inprogress.csv
 INPUTFILE=$JOB.inprogress.csv
 OUTPUTFILE=$JOB.step3.csv
 LOGDIR=$IMGDIR
-CURLLOG="$LOGDIR/curl.log"
-CURLOUT="$LOGDIR/curl.out"
 TRACELOG="$JOB.trace.log"
 
 rm -f $OUTPUTFILE
