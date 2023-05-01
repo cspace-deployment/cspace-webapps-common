@@ -12,8 +12,8 @@ function usage() {
   echo
   echo "$0 release | recent | main"
   echo "   release = last 'real' release, e.g. 2.6.0, as opposed to a release candidate, e.g. 2.6.0-rc3"
-  echo "   latest  = most recent tag (might be a release or a release candidate)"
-  echo "   main    = tip of the main branch. who knows."
+  echo "   recent  = most recent tag (might be a release or a release candidate)"
+  echo "   main    = tip of the main branch, as is, no update from github. who knows."
   echo
   exit 0
 }
@@ -68,6 +68,12 @@ if ! grep -q " ${TARGET} " <<< " release recent main "; then
     usage
 fi
 
+if [[ "${ENVIRONMENT}" == 'prod' && "${TARGET}" != 'release' ]]; then
+    echo "On Production, this script will only deploy releases, not release candidates or 'main'"
+    echo "Please try again"
+    exit 1
+fi
+
 echo "========================================================================================"
 echo "Deploy all 3 blacklight stack components: Solr, Django webapps, Blacklight Portals"
 echo "========================================================================================"
@@ -76,12 +82,6 @@ for (( i=0; i<${#COMPONENTS[@]}; i++ )); do
     set_parms
     show_parms
 done
-
-if [[ "${ENVIRONMENT}" == 'prod' && "${TARGET}" != 'release' ]]; then
-    echo "On Production, this script will only deploy releases, not release candidates or 'main'"
-    echo "Please try again"
-    exit 1
-fi
 
 read -r -p "Continue with deploy? [y/N] " response
 if [[ ! "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
