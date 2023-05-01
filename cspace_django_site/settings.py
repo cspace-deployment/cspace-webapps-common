@@ -177,6 +177,10 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 # let's use this nice feature
 APPEND_SLASH = True
 
+# this needs to be set so that the load balancer and waf work on aws
+CSRF_TRUSTED_ORIGINS = ['https://*.cspace.berkeley.edu', 'http://localhost', 'https://localhost',
+                        'http://127.0.0.1', 'https://127.0.0.1']
+
 # we need this to ensure that our webapp proxying works.
 # set by importing webapps_global_config above
 #CSRF_COOKIE_DOMAIN
