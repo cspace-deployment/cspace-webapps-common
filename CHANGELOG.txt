@@ -3,11 +3,15 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.4-rc1
-Tue Apr 25 14:28:05 PDT 2023
+This is version 6.4.4-rc2
+Mon May  1 10:16:41 PDT 2023
 
-b4bfc0e (HEAD -> main) CSW-837: a few more bmu job files to open in proper 'utf-8 mode'
-fc71a2a (origin/main, origin/HEAD) CSW-837: open all bmu job files in proper 'utf-8 mode'
+2cfbc2a (HEAD -> main) CSW-844: refactor and improve bin/analytics.sh to reduce temp space used, etc.
+59117fe CSW-845: add CSRF_TRUSTED_ORIGINS to django settings.py (for waf, etc.)
+9d7ec73 NOJIRA: minor refactoring of deploy-all-3.sh, the blacklight stack deployment script
+08931e6 (tag: 6.4.4-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.4-rc1
+b4bfc0e CSW-837: a few more bmu job files to open in proper 'utf-8 mode'
+fc71a2a CSW-837: open all bmu job files in proper 'utf-8 mode'
 55a69cf CSW-837: open bmu job files in 'utf-mode'
 8271f5f NOJIRA: code reformat only
 7a04eca CSW-819: update contact email for web analytics
