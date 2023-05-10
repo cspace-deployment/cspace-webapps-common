@@ -32,5 +32,5 @@ echo
 echo "</pre><h4>ImageServer request errors</h4><pre>"
 wc -l imageserver.errors.csv
 echo "</pre></html>"
-gzip imageserver.gets.csv
-rm imageserver.errors.csv
+gzip -f imageserver.gets.csv
+# rm imageserver.errors.csv
