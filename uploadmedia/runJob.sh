@@ -1,6 +1,6 @@
-##
+#!/bin/bash
 #
-# run a single
+# run a single bmu job
 #
 # invoke as ./runJob.sh YYYY-MM-DD-HH-MM-SS
 #
