@@ -1,5 +1,5 @@
 #!/bin/bash
-LOGS=/var/log/apache2/webapps*/*/*ssl-access.log
+LOGS=/var/log/apache2/webapps*/*/*access.log
 source ${HOME}/pipeline-config.sh
 
 echo "Q&D access log analysis"
@@ -7,13 +7,13 @@ echo
 echo "500s:"
 echo
 grep " 500 " $LOGS | grep -v -i bot | grep -v imageserver | perl -pe 's/^.*?\[//;s/ .*?\"/ "/;s/ "\-" .*//' |\
- sort -t ' ' -k 4.9,4.12n -k 4.5,4.7M -k 4.2,4.3n -k 4.14,4.15n -k 4.17,4.18n -k 4.20,4.21n | tac | head -20
+ sort -t ' ' -k 1.8,1.11rn -k 1.3,1.5rM -k 1.1,1.2rn -k 1.13,1.14rn -k 1.15,1.16rn -k 1.17,1.19rn | head -20
 echo
 
 echo "403:"
 echo
 grep " 403 " $LOGS | grep -v -i bot | grep -v imageserver | perl -pe 's/^.*?\[//;s/ .*?\"/ "/;s/ "\-" .*//' |\
- sort -t ' ' -k 4.9,4.12n -k 4.5,4.7M -k 4.2,4.3n -k 4.14,4.15n -k 4.17,4.18n -k 4.20,4.21n | tac | head -20
+ sort -t ' ' -k 1.8,1.11rn -k 1.3,1.5rM -k 1.1,1.2rn -k 1.13,1.14rn -k 1.15,1.16rn -k 1.17,1.19rn | head -20
 echo
 
 echo "Dates:"
