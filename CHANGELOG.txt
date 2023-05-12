@@ -3,10 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.4-rc3
-Wed May 10 17:20:45 PDT 2023
+This is version 6.4.4-rc4
+Fri May 12 16:05:47 PDT 2023
 
-0fbb864 (HEAD -> main, origin/main, origin/HEAD) CSW-844: checklogs.sh now checks for 403s
+40abc49 (HEAD -> main) CSW-817: two new bmu help script: 'rerun job' and 'delete media'
+57bf8ed NOJIRA: minor improvements to 'run single bmu job' script
+3f98c1b CSW-844: analytics script should sort results better
+69ad5d8 (tag: 6.4.4-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.4-rc3
+0fbb864 CSW-844: checklogs.sh now checks for 403s
 c84b1f8 CSW-844: further refactoring of webapps analytics for effiency and accuracy
 f27e7bf NOJIRA: improve error detection in blacklight 'all 3' deployment script
 1e6c879 (tag: 6.4.4-rc2) revise CHANGELOG.txt and bump version to 6.4.4-rc2
