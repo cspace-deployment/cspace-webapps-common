@@ -112,4 +112,5 @@ wait
 echo
 echo "Checking for errors..."
 echo
-grep -i error release-*-${DATE}.txt | grep -v _add_error_
+# TODO rather ad hoc check for errors. prolly does not really work all that well...
+grep -i error release-*-${DATE}.txt | grep -v _add_error_  | grep -v app/views/errors
