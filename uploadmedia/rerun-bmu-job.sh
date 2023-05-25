@@ -26,18 +26,19 @@ JOB_PREFIX=${ORIGINAL/.original.csv/}
 #cp ${ORIGINAL} ${STEP1}
 # TODO for now, for ucjeps, we must reinstate the original CR2 names
 perl -pe 's/.JPG/.CR2/' ${ORIGINAL} > ${STEP1}
-# copy job files to a safe place
+echo saving job files...
 for f in original.csv processed.csv trace.log
 do
   mv "${BMU_DIR}/${JOB}.${f}" "${BMU_DIR}/${JOB}.saved${f}"
 done
 # run it
+echo starting bmu re-rerun
 time /var/www/${MUSEUM}/uploadmedia/postblob.sh ${MUSEUM} ${JOB_PREFIX} uploadmedia_batch  >> /cspace/bmu/${MUSEUM}/batches.log 2>&1
-# delete previous images
 # set env vars (using bmu config file)
 perl -pe 's/ *= */=/g;s/^(\w+)/export \1/;s/^\[/#[/' /var/www/ucjeps/config/uploadmedia_batch.cfg > /tmp/bmu.cfg
 source /tmp/bmu.cfg
 rm /tmp/bmu.cfg
+echo "deleting `wc -l ${BMU_DIR}/${JOB}.savedmediacsids.csv | cut -f1 -d " "` previous images"
 for CSID in `cat ${BMU_DIR}/${JOB}.savedmediacsids.csv`
 do
   echo curl -S --stderr - -X DELETE https://${hostname}/cspace-services/media/$CSID --basic -u "<redacted>"
