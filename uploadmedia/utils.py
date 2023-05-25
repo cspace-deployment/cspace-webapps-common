@@ -89,29 +89,29 @@ def getJoblist(request):
             # we only need to count lines if the file is within range...
             linecount, imagefilenames = checkFile(join(jobpath, f))
         parts = f.split('.')
-        if 'original' in parts[1]:
+        if 'original' == parts[1]:
             status = 'submitted'
-        elif 'processed' in parts[1]:
+        elif 'processed' == parts[1]:
             status = 'ingested'
-        elif 'inprogress' in parts[1]:
+        elif 'inprogress' == parts[1]:
             status = 'job started'
-        elif 'step1' in parts[1]:
+        elif 'step1' == parts[1]:
             status = 'pending'
         # there is no step2 anymore
-        elif 'step2' in parts[1]:
+        elif 'step2' == parts[1]:
             continue
         # elif 'step2' in parts[1]: status = 'blobs in progress'
-        elif 'step3' in parts[1]:
+        elif 'step3' == parts[1]:
             status = 'media in progress'
-        elif 'trace' in parts[1]:
+        elif 'trace' == parts[1]:
             status = 'run log'
-        elif 'check' in parts[1]:
+        elif 'check' == parts[1]:
             status = 'check'
         else:
             # if there's another type of file, just ignore it for now
             continue
             # TODO: need to decide just what to do with other file types...
-            # if there's an unrecognized type of file, use its 2nd element as the status
+            # e.g. if there's an unrecognized type of file, use its 2nd element as the status
             # status = parts[1]
         jobkey = parts[0]
         if not jobkey in jobdict: jobdict[jobkey] = []
