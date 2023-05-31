@@ -89,29 +89,29 @@ def getJoblist(request):
             # we only need to count lines if the file is within range...
             linecount, imagefilenames = checkFile(join(jobpath, f))
         parts = f.split('.')
-        if 'original' == parts[1]:
+        if 'original' in parts[1]:
             status = 'submitted'
-        elif 'processed' == parts[1]:
+        elif 'processed' in parts[1]:
             status = 'ingested'
-        elif 'inprogress' == parts[1]:
+        elif 'inprogress' in parts[1]:
             status = 'job started'
-        elif 'step1' == parts[1]:
+        elif 'step1' in parts[1]:
             status = 'pending'
         # there is no step2 anymore
-        elif 'step2' == parts[1]:
+        elif 'step2' in parts[1]:
             continue
         # elif 'step2' in parts[1]: status = 'blobs in progress'
-        elif 'step3' == parts[1]:
+        elif 'step3' in parts[1]:
             status = 'media in progress'
-        elif 'trace' == parts[1]:
+        elif 'trace' in parts[1]:
             status = 'run log'
-        elif 'check' == parts[1]:
+        elif 'check' in parts[1]:
             status = 'check'
         else:
             # if there's another type of file, just ignore it for now
             continue
             # TODO: need to decide just what to do with other file types...
-            # e.g. if there's an unrecognized type of file, use its 2nd element as the status
+            # if there's an unrecognized type of file, use its 2nd element as the status
             # status = parts[1]
         jobkey = parts[0]
         if not jobkey in jobdict: jobdict[jobkey] = []
@@ -385,7 +385,7 @@ def reformat(filecontent):
     result += '</table>'
     return '<table width="100%"><tr><td>\n' + result
 
-# this somewhat desperate function makes an grid display from 'processed' files
+# this somewhat desperate function makes a grid display from 'processed' files
 def rendermedia(filecontent):
     result = deURN(filecontent)
     rows = result.split('\n')
@@ -399,6 +399,9 @@ def rendermedia(filecontent):
         media = {'otherfields': []}
         media['counter'] = counter
         for i,r in enumerate(row):
+            if i > len(FIELDS) - 1:
+                loginfo('bmu',f'error: row is too long: {row}', {}, {})
+                continue
             if FIELDS[i] == 'objectnumber':
                 media['accession'] = row[i]
             elif FIELDS[i] == 'name':
