@@ -3,11 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.4-rc6
-Wed May 31 08:31:05 PDT 2023
+This is version 6.4.4
+Wed May 31 14:20:22 PDT 2023
 
-ccc4552 (HEAD -> main) NOJIRA: minor refactoring to bulletproof bmu job queue rendering
-10c6ea4 (tag: 6.4.4-rc5, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.4-rc5
+f2fc7fa (HEAD -> main, origin/main, origin/HEAD) NOJIRA: recover some bulletproof bmu job queue rendering changes
+786bac7 (tag: 6.4.4-rc6) revise CHANGELOG.txt and bump version to 6.4.4-rc6
+ccc4552 NOJIRA: minor refactoring to bulletproof bmu job queue rendering
+10c6ea4 (tag: 6.4.4-rc5) revise CHANGELOG.txt and bump version to 6.4.4-rc5
 b6fe0d1 NOJIRA: script to tidy up release candidate tags (*-rcNN)
 4553435 CSW-817: minor refactoring of how bmu job files are handled
 bb92fea CSW-817: further revisions to 'rerun bmu job' script
