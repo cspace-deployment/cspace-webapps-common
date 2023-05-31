@@ -1,7 +1,7 @@
 test:
 	echo 'starting tests `date`'
-	bash ./setup.sh configure pycharm
-	bash ./setup.sh deploy pahma
+	bash ./deploy-ucb.sh -a -e pycharm
+	cd ../working_dir
 	coverage run manage.py test
 	coverage report
 
