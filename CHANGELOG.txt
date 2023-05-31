@@ -3,15 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.4.4-rc5
-Thu May 25 11:28:52 PDT 2023
+This is version 6.4.4-rc6
+Wed May 31 08:31:05 PDT 2023
 
-b6fe0d1 (HEAD -> main) NOJIRA: script to tidy up release candidate tags (*-rcNN)
+ccc4552 (HEAD -> main) NOJIRA: minor refactoring to bulletproof bmu job queue rendering
+10c6ea4 (tag: 6.4.4-rc5, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.4-rc5
+b6fe0d1 NOJIRA: script to tidy up release candidate tags (*-rcNN)
 4553435 CSW-817: minor refactoring of how bmu job files are handled
 bb92fea CSW-817: further revisions to 'rerun bmu job' script
 376f046 CSW-817: add time keeping to bmu s3 transfer script
 116de8a NOJIRA: minor improvements to error detection in webapps deployment script
-c22d042 (tag: 6.4.4-rc4, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.4.4-rc4
+c22d042 (tag: 6.4.4-rc4) revise CHANGELOG.txt and bump version to 6.4.4-rc4
 40abc49 CSW-817: two new bmu help script: 'rerun job' and 'delete media'
 57bf8ed NOJIRA: minor improvements to 'run single bmu job' script
 3f98c1b CSW-844: analytics script should sort results better
