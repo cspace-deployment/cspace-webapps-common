@@ -17,8 +17,8 @@ BL_ENVIRONMENT="blacklight-${BL_ENVIRONMENT}"
 
 s=0
 if [[ "$3" == "to" ]] ; then
-  for i in {1..2}; do
-    echo "/usr/bin/aws s3 cp '/tmp/$1' s3://${BL_ENVIRONMENT}/bmu/$2/$1"
+  for i in {1..1}; do
+    echo "/usr/bin/aws s3 cp '/tmp/$1' 's3://${BL_ENVIRONMENT}/bmu/$2/$1'"
     ${TIME_COMMAND} /usr/bin/aws s3 cp --quiet "/tmp/$1" "s3://${BL_ENVIRONMENT}/bmu/$2/$1" && s=0 && break || s=$?
     echo "failed with exit code $s. retrying. attempt $i"
     sleep 1
@@ -26,7 +26,7 @@ if [[ "$3" == "to" ]] ; then
   rm -f "/tmp/$1"
   exit $s
 elif [[ "$3" == "from" ]] ; then
-  for i in {1..2}; do
+  for i in {1..1}; do
     echo "/usr/bin/aws s3 cp 's3://${BL_ENVIRONMENT}/bmu/$2/$1' /tmp"
     ${TIME_COMMAND} /usr/bin/aws s3 cp --quiet "s3://${BL_ENVIRONMENT}/bmu/$2/$1" /tmp
     s=$?
