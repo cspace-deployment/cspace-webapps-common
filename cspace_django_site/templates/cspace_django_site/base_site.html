@@ -35,7 +35,7 @@
         <tr style="background-color: #f7f7f7">
             <td style="vertical-align: middle">
                 {% if timestamp %}Current time: {{ timestamp }}. {% endif %}
-                {% if elapsedtime %} Elapsed time: {{ elapsedtime }}. {% endif %}
+                {% if elapsedtime %} Elapsed time: {{ elapsedtime|floatformat:2 }} seconds. {% endif %}
                 {% if version %} This is
                     {% if serverlabel %}
                         the <span style="color: {{ serverlabelcolor }}">{{ serverlabel }}</span> deployment of
@@ -47,7 +47,7 @@
                 <a href="https://ophd.berkeley.edu/policies-and-procedures/nondiscrimination-policy-statement">nondiscrimination</a> &amp;
                 <a href="https://security.berkeley.edu/policy/privacy-statement-uc-berkeley-websites">privacy</a>
             </td>
-            <td style="vertical-align: middle"><img style="vertical-align: middle" src="{% static "cspace_django_site/images/header-logo-cspace.png" %}" height="30px"></td>
+            <td style="vertical-align: middle"><img style="vertical-align: middle" src="{% static 'cspace_django_site/images/header-logo-cspace.png' %}" height="30px"></td>
         </tr>
         </tbody>
     </table>
