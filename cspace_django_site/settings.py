@@ -174,6 +174,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 # we need this to ensure that forms with lots of fields in them work.
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 200000
 
+# default is now 100 for max files, and that's way too low, None means unlimited
+DATA_UPLOAD_MAX_NUMBER_FILES = None
+
 # let's use this nice feature
 APPEND_SLASH = True
 
