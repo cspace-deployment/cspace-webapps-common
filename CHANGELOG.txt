@@ -3,10 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.5.0-rc1
-Tue Jun 13 16:23:49 PDT 2023
+This is version 6.5.0-rc2
+Fri Jun 16 14:26:55 PDT 2023
 
-80b4532 (HEAD -> main, origin/main, origin/HEAD) CSW-817: eliminate now superfluous retry of copy in bmu s3 cp script
+30ffd92 (HEAD -> main, origin/main, origin/HEAD) CSW-871: django webapps now need DATA_UPLOAD_MAX_NUMBER_FILES set
+4c2dc0f (tag: 6.5.0-rc1) revise CHANGELOG.txt and bump version to 6.5.0-rc1
+80b4532 CSW-817: eliminate now superfluous retry of copy in bmu s3 cp script
 7a6f5b7 NOJIRA: tweak formatting of 'elapsed time' in webapp footers
 496b450 HMP-170: update Makefile so Travis tests will work
 d13c50b (tag: 6.4.4) revise CHANGELOG.txt and bump version to 6.4.4
