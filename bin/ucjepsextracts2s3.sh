@@ -5,12 +5,7 @@ source ${HOME}/pipeline-config.sh
 
 EXTRACTSDIR="${HOMEDIR}/extracts"
 
-BL_ENVIRONMENT=`/usr/bin/curl -s -m 5 http://169.254.169.254/latest/meta-data/tags/instance/BL_ENVIRONMENT`
-
-if [[ -z $BL_ENVIRONMENT || ( "$BL_ENVIRONMENT" != "dev" && "$BL_ENVIRONMENT" != "qa" && "$BL_ENVIRONMENT" != "prod" ) ]]; then
-	echo "Could not fetch BL_ENVIRONMENT, are you sure you're on AWS?"
-	exit 1
-fi
+source ~/bin/set_environment.sh
 
 /usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --quiet --recursive --exclude "*" --include "ucjeps/*"
 
