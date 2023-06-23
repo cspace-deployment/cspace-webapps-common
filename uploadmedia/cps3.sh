@@ -9,7 +9,7 @@ if [[ $# -ne 3 ]] ; then
 fi
 
 # sets BL_ENVIRONMENT
-source ~/bin/set_environment.sh
+source ~/bin/set_environment.sh || { echo 'could not set environment set_environment.sh failed'; exit 1; }
 
 s=0
 if [[ "$3" == "to" ]] ; then

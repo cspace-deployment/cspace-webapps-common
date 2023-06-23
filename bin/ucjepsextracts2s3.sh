@@ -5,7 +5,7 @@ source ${HOME}/pipeline-config.sh
 
 EXTRACTSDIR="${HOMEDIR}/extracts"
 
-source ~/bin/set_environment.sh
+source ~/bin/set_environment.sh || { echo 'could not set environment set_environment.sh failed'; exit 1; }
 
 /usr/bin/aws s3 rm s3://cspace-extracts-${BL_ENVIRONMENT} --quiet --recursive --exclude "*" --include "ucjeps/*"
 
