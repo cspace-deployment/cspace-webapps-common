@@ -3,10 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.5.0-rc4
-Thu Jun 22 15:55:55 PDT 2023
+This is version 6.5.0
+Fri Jun 23 08:38:39 PDT 2023
 
-441d454 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #11 from jblowe/main
+c730efe (HEAD -> main) CSW-873: check exit code of (revised) set_environment.sh
+6c18b1a (tag: 6.5.0-rc4, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.5.0-rc4
+441d454 Merge pull request #11 from jblowe/main
 cb35fc8 CSW-877: use IMDSv2 to identify instance we are running on
 def6a73 (tag: 6.5.0-rc2) revise CHANGELOG.txt and bump version to 6.5.0-rc2
 30ffd92 CSW-871: django webapps now need DATA_UPLOAD_MAX_NUMBER_FILES set
