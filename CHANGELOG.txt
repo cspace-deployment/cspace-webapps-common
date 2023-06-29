@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.0-rc1
-Mon Jun 26 09:04:13 PDT 2023
+This is version 6.6.0-rc2
+Thu Jun 29 08:11:56 PDT 2023
 
-7a7954f (HEAD -> main, tag: 6.5.0, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.5.0
+5ff1fb6 (HEAD -> main, tag: 6.6.0-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.0-rc1
+7a7954f (tag: 6.5.0) revise CHANGELOG.txt and bump version to 6.5.0
 6441af4 CSW-873: bin/ucjepsextracts2s3.sh used incorrect instance env. var
 07c9553 revise CHANGELOG.txt and bump version to 6.5.0
 c730efe CSW-873: check exit code of (revised) set_environment.sh
