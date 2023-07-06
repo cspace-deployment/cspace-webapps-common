@@ -236,6 +236,7 @@ def getHandlers(form, institution):
             ("Leslie Freund", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7475)'Leslie Freund'"),
             ("Natasha Johnson", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'"),
             ("Linda Waterfield", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'Linda Waterfield'"),
+            ("Melissa LaFortune", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'")
         ]
 
     handlers = '''
