@@ -3,11 +3,12 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.5.1-rc2
-Fri Jul  7 15:46:19 PDT 2023
+This is version 6.6.0-rc3
+Fri Jul  7 15:53:40 PDT 2023
 
-37ec0dc (HEAD -> main, tag: 6.5.1-rc1) revise CHANGELOG.txt and bump version to 6.5.1-rc1
-0110dea (origin/main, origin/HEAD) Merge pull request #14 from lkvoong/CSW-887
+0884dde (HEAD -> main, tag: 6.5.1-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.5.1-rc2
+37ec0dc (tag: 6.5.1-rc1) revise CHANGELOG.txt and bump version to 6.5.1-rc1
+0110dea Merge pull request #14 from lkvoong/CSW-887
 299e53e CSW-887: update closing bracket line 77
 ee5844c Merge pull request #13 from lkvoong/CSW-887
 997ce2f CSC-887: Add M. LaFortune to getCollMan, tricoderUsers; Update N. Johnson in tricoderUsers
