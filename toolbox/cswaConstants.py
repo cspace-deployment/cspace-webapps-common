@@ -53,7 +53,7 @@ def tricoderUsers():
     return{'A1732177': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7827)'Michael T. Black'",
               'A1676856': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(8700)'Raksmey Mam'",
               'A0951620': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7475)'Leslie Freund'",
-              'A1811681': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'",
+              'E10149033': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'",
               'A2346921': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(9090)'Corri MacEwen'",
               'A2055958': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(8683)'Alicja Egbert'",
               'A2507976': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(8731)'Tya Ates'",
@@ -74,7 +74,8 @@ def tricoderUsers():
               'A2204739': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(PaigeWalker1351201763000)'PaigeWalker'",
               'A0701434': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7248)'Madeleine W. Fang'",
               'A2532024': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'LindaWaterfield'",
-              'A2581770': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(JonOligmueller1372192617217)'JonOligmueller'"}
+              'A2581770': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(JonOligmueller1372192617217)'JonOligmueller'",
+              'E10605207': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'")
 
 
 def infoHeaders(fieldSet):
@@ -707,6 +708,7 @@ def getCollMan(form, csid, cm):
         ("Leslie Freund", "Leslie Freund"),
         ("Alicja Egbert", "Alicja Egbert"),
         ("Victoria Bradshaw", "Victoria Bradshaw"),
+        ("Melissa LaFortune", "Melissa LaFortune"),
         ("Uncertain", "uncertain"),
         ("None (Registration)", "No collection manager (Registration)")
     ]
