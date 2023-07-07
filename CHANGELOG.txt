@@ -3,10 +3,17 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.0-rc2
-Thu Jun 29 08:11:56 PDT 2023
+This is version 6.5.1-rc1
+Fri Jul  7 15:36:55 PDT 2023
 
-5ff1fb6 (HEAD -> main, tag: 6.6.0-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.0-rc1
+0110dea (HEAD -> main, origin/main, origin/HEAD) Merge pull request #14 from lkvoong/CSW-887
+299e53e CSW-887: update closing bracket line 77
+ee5844c Merge pull request #13 from lkvoong/CSW-887
+997ce2f CSC-887: Add M. LaFortune to getCollMan, tricoderUsers; Update N. Johnson in tricoderUsers
+3e2e3f9 Merge pull request #12 from lkvoong/CSW-887
+5148302 CSW-887: Add Melissa LaFortune, new Coll Mgr, to Handler lisat
+98255e6 (tag: 6.6.0-rc2) revise CHANGELOG.txt and bump version to 6.6.0-rc2
+5ff1fb6 (tag: 6.6.0-rc1) revise CHANGELOG.txt and bump version to 6.6.0-rc1
 7a7954f (tag: 6.5.0) revise CHANGELOG.txt and bump version to 6.5.0
 6441af4 CSW-873: bin/ucjepsextracts2s3.sh used incorrect instance env. var
 07c9553 revise CHANGELOG.txt and bump version to 6.5.0
