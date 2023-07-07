@@ -75,7 +75,7 @@ def tricoderUsers():
               'A0701434': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7248)'Madeleine W. Fang'",
               'A2532024': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'LindaWaterfield'",
               'A2581770': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(JonOligmueller1372192617217)'JonOligmueller'",
-              'E10605207': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'")
+              'E10605207': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(MelissaLaFortune1688602785605)'Melissa LaFortune'"}
 
 
 def infoHeaders(fieldSet):
@@ -237,7 +237,7 @@ def getHandlers(form, institution):
             ("Leslie Freund", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7475)'Leslie Freund'"),
             ("Natasha Johnson", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'"),
             ("Linda Waterfield", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'Linda Waterfield'"),
-            ("Melissa LaFortune", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'")
+            ("Melissa LaFortune", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(MelissaLaFortune1688602785605)'Melissa LaFortune'")
         ]
 
     handlers = '''
