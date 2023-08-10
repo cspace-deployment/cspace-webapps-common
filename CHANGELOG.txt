@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.0-rc3
-Fri Jul  7 15:53:40 PDT 2023
+This is version 6.6.1-rc1
+Wed Aug  9 17:45:34 PDT 2023
 
-0884dde (HEAD -> main, tag: 6.5.1-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.5.1-rc2
+1688f31 (HEAD -> main, tag: 6.6.0, origin/main, origin/HEAD) Merge pull request #15 from lkvoong/CSW-887
+81c4e05 CSW-887: Update LaFortune urn to prod value
+aa81ae9 (tag: 6.6.0-rc3) revise CHANGELOG.txt and bump version to 6.6.0-rc3
+0884dde (tag: 6.5.1-rc2) revise CHANGELOG.txt and bump version to 6.5.1-rc2
 37ec0dc (tag: 6.5.1-rc1) revise CHANGELOG.txt and bump version to 6.5.1-rc1
 0110dea Merge pull request #14 from lkvoong/CSW-887
 299e53e CSW-887: update closing bracket line 77
@@ -73,7 +76,7 @@ dae4fea CSW-787: remove old version of ucjeps 'image file evaluation' script
 b0274f0 CSW-725: skip unknown file types in bmu workflow
 450d77c CSW-712: tidy up check file comments in uploadmedia.py
 6b727ff (tag: 6.4.2) revise CHANGELOG.txt and bump version to 6.4.2
-f4eb409 revise CHANGELOG.txt and bump version to 6.4.2-rc2
+f4eb409 (tag: 6.4.2-rc2) revise CHANGELOG.txt and bump version to 6.4.2-rc2
 8cb9ab5 HMP-271: add code removed from crontab to bmu-monitor.sh
 c191e37 NOJIRA: remove devops email from BMU notifications; minor refactor of webapps deploy script
 0dca9cc CSW-796: correct index names for object class hierarchy
@@ -84,7 +87,7 @@ edf28ab Merge pull request #9 from jblowe/main
 3713dd7 Bump json5 and babel-loader
 76a0e83 CSW-636: encode 'emailable url' in portals in improve sharability
 655f08b CSW-774: handle new bmu file types properly in counting
-4650c85 revise CHANGELOG.txt and bump version to 6.4.2-rc1
+4650c85 (tag: 6.4.2-rc1) revise CHANGELOG.txt and bump version to 6.4.2-rc1
 bd775d4 CSW-712: correct bmu UI check file header display
 e00f141 CSW-712: refactor bmu batch script 'uploadMedia.py' to better recognize cr2 orientation
 26ed8fc CSW-712: back out cr2 handling from generic bmu; they can ask for it if they need it
@@ -124,7 +127,7 @@ fbab2b8 revise CHANGELOG.txt and bump version to 6.4.0-rc6
 f3642f2 HMP-743: refactor 'primary' deployment script, and children
 88285fe CSW-744: suppress warning messages from migration in deploy
 714de08 NOJIRA: update and correct README.md
-3a4a036 revise CHANGELOG.txt and bump version to 6.4.0-rc5
+3a4a036 (tag: 6.4.0-rc5) revise CHANGELOG.txt and bump version to 6.4.0-rc5
 bc9d3f6 CSW-714: have the BMU retry failed S3 copies, and report exit codes
 0203ee6 revise CHANGELOG.txt and bump version to 6.4.0-rc9
 2273d27 HMP-243: compute some usage metrics for blacklight portals
@@ -145,20 +148,20 @@ c8f18ce CSW-706: update static file handling to support django v4.0
 ef895c7 revise CHANGELOG.txt and bump version to 6.4.0-rc5
 2633919 CSW-706: changes to support django v4.0
 1920248 CSW-706: upgrade to lastest django (4.x)
-1e73380 revise CHANGELOG.txt and bump version to 6.4.0-rc4
+1e73380 (tag: 6.4.0-rc4) revise CHANGELOG.txt and bump version to 6.4.0-rc4
 90c370a CSW-702: eliminate superfluous message from s3 copy from bmu log
 ae9046b CSW-702: get rid of bmu temp files when done
-ee04255 revise CHANGELOG.txt and bump version to 6.4.0-rc3
+ee04255 (tag: 6.4.0-rc3) revise CHANGELOG.txt and bump version to 6.4.0-rc3
 848ac3c CSW-634: put webapps metrics in correct dir; tidy up ucjeps extracts notification
 b5c6659 CSW-634: add the analytics scripts to bin directory
-a0d7f53 revise CHANGELOG.txt and bump version to 6.4.0-rc2
+a0d7f53 (tag: 6.4.0-rc2) revise CHANGELOG.txt and bump version to 6.4.0-rc2
 a1a605f CSW-634: make-metrics.sh should be run daily with other analytics
 87e119e CSW-634: refactor hierarchies refresh a bit
 b01c05b CSW-634: make-metrics.sh needs to be executable
 a9d0563 CSW-634: a script to wrap various metrics reports
 f41026b CSW-700: use 'subprocess.run' not Popen in bmu batch process
 445148b CSW-700: correct behavior of 'fire and forget' bmu online job submission
-9f238b0 revise CHANGELOG.txt and bump version to 6.4.0-rc1
+9f238b0 (tag: 6.4.0-rc1) revise CHANGELOG.txt and bump version to 6.4.0-rc1
 904aad8 CSW-634: minor refactoring of new 'bmu-run.py' script
 fcc4a54 CSW-688: revise cinefiles bmu to handle qc in new ec2/s3 environment
 5aabb33 (tag: 6.3.1) revise CHANGELOG.txt and bump version to 6.3.1
@@ -489,9 +492,9 @@ e966f6a revise change log and VERSION file for version 5.3.0-rc3
 4818721 CSW-204: update Django to 2.2.8
 6e9b2fd Merge pull request #1 from cesarvh/master
 124eab3 CC-940: Fixed to extract display name from nagprainventoryname
-f4ebbf2 revise change log and VERSION file for version 5.3.0-rc2
+f4ebbf2 (tag: 5.3.0-rc2) revise change log and VERSION file for version 5.3.0-rc2
 df1e04a CSW-199: re-insert several Django settings: TIME_ZONE, USE_TZ, etc.
-549fe0c revise change log and VERSION file for version 5.3.0-rc1
+549fe0c (tag: 5.3.0-rc1) revise change log and VERSION file for version 5.3.0-rc1
 19be0e7 CSW-180: restore cacheing code to imageserver
 bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
 53f8f0f CSW-179: one fieldset in xIR tools had data dependencies
@@ -499,47 +502,47 @@ bf17181 CSW-151: don't allow deleted authority terms to be saved in xIR webapps
 dfcca67 CSW-166: keep CSRF_COOKIE_DOMAIN parameter in django settings, for now, perhaps forever
 9e369f2 CSW-99: improve reliability and clarity of django webapps deployment scripts
 7bd50b4 NOJIRA: update Pillow fro security
-340e79b (tag: 5.2.0) revise change log and VERSION file for version 5.2.0-rc18
+340e79b (tag: 5.2.0-rc18, tag: 5.2.0) revise change log and VERSION file for version 5.2.0-rc18
 33f8fb9 NOJIRA: ireports form does not need an 'action' attribute
-24b7722 revise change log and VERSION file for version 5.2.0-rc17
+24b7722 (tag: 5.2.0-rc17) revise change log and VERSION file for version 5.2.0-rc17
 b1d187e CSW-99: more bulletproofing for webapps deploy script
-15d4afd revise change log and VERSION file for version 5.2.0-rc16
+15d4afd (tag: 5.2.0-rc16) revise change log and VERSION file for version 5.2.0-rc16
 35d59df CSW-157: improve portal search ux on 'reset': leave defaults in place
 9a92ab2 CSW-157: code reformat only
 75fb869 CSW-157: repair toolbox, broken by an earlier fix to Portals
-4b54dde revise change log and VERSION file for version 5.2.0-rc15
+4b54dde (tag: 5.2.0-rc15) revise change log and VERSION file for version 5.2.0-rc15
 2142254 CSW-156: make 'emailable URLs work again in portals
-3371f04 revise change log and VERSION file for version 5.2.0-rc14
+3371f04 (tag: 5.2.0-rc14) revise change log and VERSION file for version 5.2.0-rc14
 0fb59d9 CWS-150: recover ability to return reports with different mime types
-2fa32e9 revise change log and VERSION file for version 5.2.0-rc13
+2fa32e9 (tag: 5.2.0-rc13) revise change log and VERSION file for version 5.2.0-rc13
 511a45f CWS-150: bulletproof iReports webapp a bit
-7b17ad4 revise change log and VERSION file for version 5.2.0-rc12
+7b17ad4 (tag: 5.2.0-rc12) revise change log and VERSION file for version 5.2.0-rc12
 0fdd767 CSW-140: need to transfer barcode print file as binary
-24f9304 revise change log and VERSION file for version 5.2.0-rc11
+24f9304 (tag: 5.2.0-rc11) revise change log and VERSION file for version 5.2.0-rc11
 2f6d80d CSW-55: incremental improvements to ireports webapp
 164abb3 CSW-135: fix Bulk Object Edit: XML and python3 dict handling
-a63f64e revise change log and VERSION file for version 5.2.0-rc10
+a63f64e (tag: 5.2.0-rc10) revise change log and VERSION file for version 5.2.0-rc10
 de75655 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
 d2f166d CSW-55: ireports webapp now return the correct MIMEtype with response
 c873541 CSW-101: set logging to WARNING everywhere
-7a1d976 revise change log and VERSION file for version 5.2.0-rc9
+7a1d976 (tag: 5.2.0-rc9) revise change log and VERSION file for version 5.2.0-rc9
 5ed0713 CSW-101: refactor logging: now 8 rotating logs 8 MB each
 ec6514f CSW-101: use our spiffy new image cache for prod deployments
 a3bf6fa CSW-101: correct reference URL only
-5f84ac2 revise change log and VERSION file for version 5.2.0-rc8
+5f84ac2 (tag: 5.2.0-rc8) revise change log and VERSION file for version 5.2.0-rc8
 e6a5315 CSW-101: now use the right values for LOGIN_URL and LOGIN_REDIRECT_URL
-a34ff92 revise change log and VERSION file for version 5.2.0-rc7
+a34ff92 (tag: 5.2.0-rc7) revise change log and VERSION file for version 5.2.0-rc7
 66e0194 CSW-101: zip returns an iterator in python3
 9abea72 CSW-101: LOGIN_URL and LOGIN_REDIRECT_URL seem to have changed
 12da851 CSW-101: the bmu 'check runs' script needs to open files properly
-62e63df revise change log and VERSION file for version 5.2.0-rc6
+62e63df (tag: 5.2.0-rc6) revise change log and VERSION file for version 5.2.0-rc6
 17f55d1 CSW-101: 'suggestpostres' should write error log if connection can't be made
 2aee3da CSW-101: small amount of refactoring and bulletproofing for move webapps
-6d02579 revise change log and VERSION file for version 5.2.0-rc5
+6d02579 (tag: 5.2.0-rc5) revise change log and VERSION file for version 5.2.0-rc5
 82e0c27 CSW-101: additional refactoring of bmu uploadMedia.py script for python3
 f5c1b43 CSW-101: 'request-toolbelt' module now needed by uploadMedia.py
 9a27b98 CSW-101: refactor solr autosuggest to not use 'filter'
-4fbea97 revise change log and VERSION file for version 5.2.0-rc4
+4fbea97 (tag: 5.2.0-rc4) revise change log and VERSION file for version 5.2.0-rc4
 f9f5bb2 CSW-99: set default log level to 'WARNING'; add dir to template directories
 7ae38ee CSW-69: quote_plus encode objectnumber to ensure proper search
 ead0ce0 Merge branch 'master' of https://github.com/cspace-deployment/cspace-webapps-common
@@ -547,15 +550,15 @@ eedc7cc CSW-99: deploy-ucb.sh should verify latest code
 07f7e0c CSW-101: use the 'modern' version of loginfo' for bmu
 429f32c CSW-101: need a lambda to make a sort go in toolbox; and a bit of refactoring
 6cd41eb python3 returns a tuple for an exceptions
-1ace66c revise change log and VERSION file for version 5.2.0-rc3
+1ace66c (tag: 5.2.0-rc3) revise change log and VERSION file for version 5.2.0-rc3
 fac3b62 CSW-101: a few more places to encode payload
 2c59ca6 CSW-101: toolbox needs to encode payload, too
 91385f5 CSW-101: dict keys sort differently in python3
 3a6f116 CSW-101: 'requests' returns a different 'info' object in python3
 c53aea0 CSW-99: use the setup script that is in the repo
-86ef2df revise change log and VERSION file for version 5.2.0-rc2
+86ef2df (tag: 5.2.0-rc2) revise change log and VERSION file for version 5.2.0-rc2
 d437632 CSW-99: add the initial version of the CHANGELOG to this repo
-cc1345e CSW-99: update readme for new deployment options and repo names
+cc1345e (tag: 5.2.0-rc1) CSW-99: update readme for new deployment options and repo names
 f5df950 CSW-101: landing page needs to point to correct webapp url
 ab2cc6f CSW-99: revise webapps deploy script
 3b5850c CSW-99: update version of django to 2.2.4
