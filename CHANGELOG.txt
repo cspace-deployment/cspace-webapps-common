@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.1-rc1
-Wed Aug  9 17:45:34 PDT 2023
+This is version 6.6.1
+Tue Sep 12 15:45:53 PDT 2023
 
-1688f31 (HEAD -> main, tag: 6.6.0, origin/main, origin/HEAD) Merge pull request #15 from lkvoong/CSW-887
+820fae6 (HEAD -> main, tag: 6.6.1-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.1-rc1
+1688f31 (tag: 6.6.0) Merge pull request #15 from lkvoong/CSW-887
 81c4e05 CSW-887: Update LaFortune urn to prod value
 aa81ae9 (tag: 6.6.0-rc3) revise CHANGELOG.txt and bump version to 6.6.0-rc3
 0884dde (tag: 6.5.1-rc2) revise CHANGELOG.txt and bump version to 6.5.1-rc2
