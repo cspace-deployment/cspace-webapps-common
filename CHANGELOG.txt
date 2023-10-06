@@ -4,9 +4,11 @@ OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
 This is version 6.6.1-rc3
-Fri Oct  6 12:19:31 PDT 2023
+Fri Oct  6 12:34:42 PDT 2023
 
-2fb5bad (HEAD -> main, tag: 6.6.1-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.1-rc2
+c923ccc (HEAD -> main, origin/main, origin/HEAD) CSW-901: add missing closing single quotes for BAMPFA handlerlist
+10e038e revise CHANGELOG.txt and bump version to 6.6.1-rc3
+2fb5bad (tag: 6.6.1-rc2) revise CHANGELOG.txt and bump version to 6.6.1-rc2
 40436d4 Merge pull request #16 from lkvoong/CSW-901
 2306645 CSW-901: Update BAMPFA handler list
 f86167e revise CHANGELOG.txt and bump version to 6.6.1
