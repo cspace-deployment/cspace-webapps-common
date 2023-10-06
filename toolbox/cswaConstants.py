@@ -219,8 +219,8 @@ def getHandlers(form, institution):
     if institution == 'bampfa':
         handlerlist = [
             ('John Alexander', 'JA'),
-            ('Claire Frost, 'CF'),
-            ('Anthony Graham, 'AG'),
+            ('Claire Frost', 'CF'),
+            ('Anthony Graham', 'AG'),
             ('Laura Graziano', 'LG'),
             ('Laura Hansen', 'LH'),
             ('Michael Meyers', 'MM'),
