@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.1-rc3
-Fri Oct  6 12:34:42 PDT 2023
+This is version 6.6.1
+Wed Oct 11 10:27:49 PDT 2023
 
-c923ccc (HEAD -> main, origin/main, origin/HEAD) CSW-901: add missing closing single quotes for BAMPFA handlerlist
+ec5dae7 (HEAD -> main, tag: 6.6.1-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.1-rc3
+c923ccc CSW-901: add missing closing single quotes for BAMPFA handlerlist
 10e038e revise CHANGELOG.txt and bump version to 6.6.1-rc3
 2fb5bad (tag: 6.6.1-rc2) revise CHANGELOG.txt and bump version to 6.6.1-rc2
 40436d4 Merge pull request #16 from lkvoong/CSW-901
