@@ -75,7 +75,9 @@ def tricoderUsers():
               'A0701434': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7248)'Madeleine W. Fang'",
               'A2532024': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'LindaWaterfield'",
               'A2581770': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(JonOligmueller1372192617217)'JonOligmueller'",
-              'E10605207': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'"}
+              'E10605207': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'",
+              'E10692689': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(ZacharyWilliams1699471133816)'Zachary Williams'",
+              'E10381396': "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(OliviaRovelli1696964627073)'Olivia Rovelli'"}
 
 
 def infoHeaders(fieldSet):
@@ -236,7 +238,9 @@ def getHandlers(form, institution):
             ("Leslie Freund", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7475)'Leslie Freund'"),
             ("Natasha Johnson", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(7652)'Natasha Johnson'"),
             ("Linda Waterfield", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(LindaWaterfield1358535276741)'Linda Waterfield'"),
-            ("Melissa LaFortune", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'")
+            ("Melissa LaFortune", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(Melissa1688061985576)'Melissa LaFortune'"),
+            ("Zachary Williams", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(ZacharyWilliams1699471133816)'Zachary Williams'"),
+            ("Olivia Rovelli", "urn:cspace:pahma.cspace.berkeley.edu:personauthorities:name(person):item:name(OliviaRovelli1696964627073)'Olivia Rovelli'")
         ]
 
     handlers = '''
@@ -708,6 +712,8 @@ def getCollMan(form, csid, cm):
         ("Alicja Egbert", "Alicja Egbert"),
         ("Victoria Bradshaw", "Victoria Bradshaw"),
         ("Melissa LaFortune", "Melissa LaFortune"),
+        ("Zachary Williams", "Zachary Williams"),
+        ("Olivia Rovelli", "Olivia Rovelli"),
         ("Uncertain", "uncertain"),
         ("None (Registration)", "No collection manager (Registration)")
     ]
