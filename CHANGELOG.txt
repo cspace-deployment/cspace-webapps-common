@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.2
-Fri Nov 17 16:43:59 PST 2023
+This is version 6.6.3-rc1
+Wed Jan 17 16:17:39 PST 2024
 
-47c5860 (HEAD -> main, tag: 6.6.2-rc2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.2-rc2
+f7d87b2 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #18 from lkvoong/CSW-907
+e98096f CSW-907: add new PAHMA object status terms
+d3c6c4b (tag: 6.6.2, origin/7ad96c9) revise CHANGELOG.txt and bump version to 6.6.2
+47c5860 (tag: 6.6.2-rc2) revise CHANGELOG.txt and bump version to 6.6.2-rc2
 7b43c64 Merge pull request #17 from lkvoong/CSW-910
 910b0c5 CSW-910: Add new collection mgrs Z Williams, O Rovelli to Toolbox lists
 e953352 (tag: 6.6.2-rc1) revise CHANGELOG.txt and bump version to 6.6.2-rc1
