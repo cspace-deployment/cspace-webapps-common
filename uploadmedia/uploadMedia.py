@@ -168,6 +168,11 @@ def uploadmedia(mediaElements, config, http_parms):
 
         messages = []
         #messages.append("posting to media REST API...")
+
+        # set identificationNumber to imagenumber for PAHMA mediaonly records
+        if mediaElements['handling'] == 'mediaonly' and http_parms.institution == 'pahma':
+            mediaElements['objectnumber'] = mediaElements['imagenumber']
+
         payload = makePayload(media_payload, mediaElements, http_parms.institution)
         (url, data, mediaCSID, elapsedtime) = postxml('POST', uri, http_parms.realm, http_parms.server, http_parms.username, http_parms.password, payload)
         messages.append('mediacsid %s elapsedtime %8.2f s.' % (mediaCSID, elapsedtime))
