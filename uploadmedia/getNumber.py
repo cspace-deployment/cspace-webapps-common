@@ -35,8 +35,10 @@ def getNumber(filename,institution):
         imagenumber = filenameparts[1].replace('p','')
     # for pahma it suffices to split on underscore...
     elif institution == 'pahma':
-        objectnumber = filename
-        objectnumber = objectnumber.split('_')[0]
+        # objectnumber is filename before first understore to be used for object record
+        # imagenumber is filename before first dot; to be used for mediaonly bmu handling option
+        objectnumber = filename.split('_')[0]
+        imagenumber = filename.split('.')[0]
     elif institution == 'botgarden':
         # 12.1234_1_CL.jpg
         # i.e. accession number_image order_Initials of creator
