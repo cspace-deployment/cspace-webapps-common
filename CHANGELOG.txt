@@ -3,10 +3,14 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.6.3
-Mon Jan 29 11:04:34 PST 2024
+This is version 6.7.0-rc1
+Wed May 15 15:12:38 PDT 2024
 
-0f1e81e (HEAD -> main, tag: 6.6.3-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.6.3-rc1
+83f66c2 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #19 from lkvoong/CSW-922
+b0f8a52 CSW-922: set PAHMA mediaonly identificationNumber to filename w/o ext
+2a02b69 CSW-922: for PAHMA, objectnumber before underscore, imagenumber before dot
+e58ff9f (tag: 6.6.3) revise CHANGELOG.txt and bump version to 6.6.3
+0f1e81e (tag: 6.6.3-rc1) revise CHANGELOG.txt and bump version to 6.6.3-rc1
 f7d87b2 Merge pull request #18 from lkvoong/CSW-907
 e98096f CSW-907: add new PAHMA object status terms
 d3c6c4b (tag: 6.6.2, origin/7ad96c9) revise CHANGELOG.txt and bump version to 6.6.2
