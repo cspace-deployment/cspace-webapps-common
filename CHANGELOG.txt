@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.7.0
-Tue Jun  4 10:24:30 PDT 2024
+This is version 6.7.1-rc1
+Fri Jul  5 12:18:56 PDT 2024
 
-d44979a (HEAD -> main, tag: 6.7.0-rc3, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.7.0-rc3
+9681700 (HEAD -> main, tag: 6.7.0, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 6.7.0
+d44979a (tag: 6.7.0-rc3) revise CHANGELOG.txt and bump version to 6.7.0-rc3
 e325920 (tag: 6.7.0-rc2) revise CHANGELOG.txt and bump version to 6.7.0-rc2
 17fa68d (tag: 6.7.0-rc1) revise CHANGELOG.txt and bump version to 6.7.0-rc1
 83f66c2 Merge pull request #19 from lkvoong/CSW-922
