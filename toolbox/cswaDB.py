@@ -61,7 +61,7 @@ replace(concat(l.termdisplayName,
      ': ',regexp_replace(cb.computedcrate, '^.*\\)''(.*)''$', '\\1')),' ','0') AS locationkey,
 m.locationdate,
 cc.objectnumber objectnumber,
-cc.numberofobjects objectCount,
+ocg.objectcount objectCount,
 tg.bampfatitle,
 rc.subjectcsid movementCsid,
 lc.refname movementRefname,
@@ -95,6 +95,9 @@ LEFT OUTER JOIN bampfatitlegroup tg ON (h4.id = tg.id)
 left outer join hierarchy h5 ON (cc.id = h5.parentid AND h5.name = 'collectionobjects_bampfa:bampfaObjectProductionPersonGroupList' AND (h5.pos = 0 OR h5.pos IS NULL))
 left outer join bampfaobjectproductionpersongroup pg ON (h5.id = pg.id)
 
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'Number of pieces')
+
 join misc ms on (cc.id=ms.id and ms.lifecyclestate <> 'deleted')
 
 WHERE
@@ -115,7 +118,7 @@ replace(concat(l.termdisplayName,
      ': ',regexp_replace(ca.computedcrate, '^.*\\)''(.*)''$', '\\1')),' ','0') AS locationkey,
 m.locationdate,
 cc.objectnumber objectnumber,
-cc.numberofobjects objectCount,
+ocg.objectcount objectCount,
 (case when ong.objectName is NULL then '' else regexp_replace(ong.objectName, '^.*\\)''(.*)''$', '\\1') end) objectName,
 rc.subjectcsid movementCsid,
 lc.refname movementRefname,
@@ -143,6 +146,9 @@ join collectionobjects_common cc on (h3.id = cc.id and cc.computedcurrentlocatio
 left outer join collectionobjects_anthropology ca on (ca.id=cc.id)
 left outer join hierarchy h5 on (cc.id = h5.parentid and h5.name = 'collectionobjects_common:objectNameList' and h5.pos=0)
 left outer join objectnamegroup ong on (ong.id=h5.id)
+
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 
 left outer join collectionobjects_pahma cp on (cp.id=cc.id)
 
@@ -312,7 +318,7 @@ replace(concat(l.termdisplayName,
 m.locationdate,
 cc.objectnumber objectnumber,
 (case when ong.objectName is NULL then '' else regexp_replace(ong.objectName, '^.*\\)''(.*)''$', '\\1') end) objectName,
-cc.numberofobjects objectCount,
+ocg.objectcount objectCount,
 case when (pfc.item is not null and pfc.item <> '') then
 substring(pfc.item, position(')''' IN pfc.item)+2, LENGTH(pfc.item)-position(')''' IN pfc.item)-2)
 end AS fieldcollectionplace,
@@ -383,6 +389,9 @@ left outer join collectionobjects_pahma_pahmaobjectstatuslist pobs ON (pobs.id =
 
 left outer join hierarchy h5 on (cc.id=h5.parentid and h5.primarytype = 'assocPeopleGroup' and (h5.pos=0 or h5.pos is null))
 left outer join assocpeoplegroup apg on (apg.id=h5.id)
+
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
  
 left outer join collectionobjects_common_briefdescriptions bd on (bd.id=cc.id and bd.pos=0)
 left outer join collectionobjects_common_contentplaces conp on (conp.id=cc.id and conp.pos=0)
@@ -605,7 +614,7 @@ def getgrouplist(group, num2ret, config):
         '' as locationdate,
         cc.objectnumber objectnumber,
         tg.bampfatitle,
-        cc.numberofobjects objectCount,
+        ocg.objectcount objectCount,
         '' as movementCsid,
         '' as movementRefname,
         hx2.name as objectCsid,
@@ -633,6 +642,9 @@ def getgrouplist(group, num2ret, config):
 
         left outer join hierarchy h5 ON (cc.id = h5.parentid AND h5.name = 'collectionobjects_bampfa:bampfaObjectProductionPersonGroupList' AND (h5.pos = 0 OR h5.pos IS NULL))
         left outer join bampfaobjectproductionpersongroup pg ON (h5.id = pg.id)
+
+        left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+        left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'Number of pieces')
 
         WHERE
         gc.title='""" + group + """'
@@ -729,7 +741,7 @@ cc.computedcurrentlocation AS locrefname,
 '' AS locdate,
 cc.objectnumber objectnumber,
 (case when ong.objectName is NULL then '' else regexp_replace(ong.objectName, '^.*\\)''(.*)''$', '\\1') end) objectName,
-cc.numberofobjects objectCount,
+ocg.objectcount objectCount,
 case when (pfc.item is not null and pfc.item <> '') then
  substring(pfc.item, position(')''' IN pfc.item)+2, LENGTH(pfc.item)-position(')''' IN pfc.item)-2)
 end AS fieldcollectionplace,
@@ -800,6 +812,9 @@ left outer join assocpeoplegroup apg on (apg.id=h5.id)
 left outer join collectionobjects_common_briefdescriptions bd on (bd.id=cc.id and bd.pos=0)
 left outer join collectionobjects_common_contentplaces conp on (conp.id=cc.id and conp.pos=0)
 left outer join collectionobjects_common_fieldcollectors pc on (pc.id=cc.id and pc.pos=0)
+
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 
 FULL OUTER JOIN relations_common rc6 ON (rc6.subjectcsid = hx2.name AND rc6.objectdocumenttype = 'Acquisition')
 FULL OUTER JOIN hierarchy h7 ON (h7.name = rc6.objectcsid)
@@ -929,7 +944,7 @@ cc.computedcurrentlocation AS locrefname,
 '' AS locdate,
 cc.objectnumber objectnumber,
 (case when ong.objectName is NULL then '' else regexp_replace(ong.objectName, '^.*\\)''(.*)''$', '\\1') end) objectName,
-cc.numberofobjects objectCount,
+ocg.objectcount objectCount,
 case when (pfc.item is not null and pfc.item <> '') then
  substring(pfc.item, position(')''' IN pfc.item)+2, LENGTH(pfc.item)-position(')''' IN pfc.item)-2)
 end AS fieldcollectionplace,
@@ -996,6 +1011,9 @@ left outer join assocpeoplegroup apg on (apg.id=h5.id)
 left outer join collectionobjects_common_briefdescriptions bd on (bd.id=cc.id and bd.pos=0)
 left outer join collectionobjects_common_contentplaces conp on (conp.id=cc.id and conp.pos=0)
 left outer join collectionobjects_common_fieldcollectors pc on (pc.id=cc.id and pc.pos=0)
+
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 
 FULL OUTER JOIN relations_common rc6 ON (rc6.subjectcsid = h1.name AND rc6.objectdocumenttype = 'Acquisition')
 FULL OUTER JOIN hierarchy h7 ON (h7.name = rc6.objectcsid)
@@ -1138,7 +1156,7 @@ def getobjinfo(museumNumber, config):
     getobjects = """
     SELECT co.objectnumber,
     n.objectname,
-    co.numberofobjects,
+    ocg.objectcount,
     regexp_replace(fcp.item, '^.*\\)''(.*)''$', '\\1') AS fieldcollectionplace,
     regexp_replace(apg.assocpeople, '^.*\\)''(.*)''$', '\\1') AS culturalgroup,
     regexp_replace(pef.item, '^.*\\)''(.*)''$', '\\1') AS  ethnographicfilecode
@@ -1150,6 +1168,8 @@ LEFT OUTER JOIN collectionobjects_pahma_pahmaethnographicfilecodelist pef on (pe
 LEFT OUTER JOIN collectionobjects_common_responsibledepartments cm ON (co.id=cm.id AND cm.pos=0)
 LEFT OUTER JOIN hierarchy h2 ON (co.id=h2.parentid AND h2.primarytype='assocPeopleGroup' AND h2.pos=0)
 LEFT OUTER JOIN assocpeoplegroup apg ON apg.id=h2.id
+LEFT OUTER JOIN hierarchy hocg ON (co.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+LEFT OUTER JOIN objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 JOIN misc ON misc.id = co.id AND misc.lifecyclestate <> 'deleted'
 WHERE co.objectnumber = '%s' LIMIT 1""" % museumNumber
 
@@ -1311,9 +1331,11 @@ left outer join assocpeoplegroup apg on (apg.id=h2.id)
 
 WHERE h1.name = '%s'""" % csid
     elif detail == 'objcount':
-        query = """SELECT cc.numberofobjects
+        query = """SELECT ocg.objectcount
 FROM collectionobjects_common cc
 left outer join hierarchy h1 on (cc.id=h1.id)
+left outer join hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+left outer join objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 WHERE h1.name = '%s'""" % csid
     elif detail == 'objNumber':
         query = """SELECT cc.objectnumber
@@ -1365,7 +1387,7 @@ def getObjDetailsByOwner(config, owner):
 
     query = """SELECT DISTINCT cc.objectnumber AS "Museum No.",
     cp.sortableobjectnumber AS "sort number",
-    cc.numberofobjects AS "pieces",
+    ocg.objectcount AS "pieces",
     ong.objectname AS "object name",
     fcd.datedisplaydate AS "collection date",
     STRING_AGG(DISTINCT(ac.acquisitionreferencenumber), ', ') AS "Acc. No.",
@@ -1379,6 +1401,8 @@ JOIN misc ms ON (ms.id = cc.id AND ms.lifecyclestate <> 'deleted')
 JOIN places_common pc ON (pc.refname = fcp.item)
 JOIN hierarchy h1 ON (h1.parentid = pc.id AND h1.name = 'places_anthropology:anthropologyPlaceOwnerGroupList')
 JOIN anthropologyplaceownergroup pog ON (pog.id = h1.id)
+LEFT OUTER JOIN hierarchy hocg ON (cc.id = hocg.parentid and hocg.primarytype = 'objectCountGroup')
+LEFT OUTER JOIN objectcountgroup ocg ON (hocg.id = ocg.id and getdispl(ocg.objectcounttype) = 'piece count')
 FULL OUTER JOIN hierarchy h2 ON (h2.parentid = cc.id AND h2.name = 'collectionobjects_common:objectNameList' AND h2.pos = 0)
 FULL OUTER JOIN objectnamegroup ong ON (ong.id = h2.id)
 FULL OUTER JOIN hierarchy h3 ON (h3.id = cc.id)
@@ -1389,7 +1413,7 @@ FULL OUTER JOIN hierarchy h5 ON (h5.parentid = cc.id AND h5.pos = 0 AND h5.name 
 FULL OUTER JOIN structureddategroup fcd ON (fcd.id = h5.id)
 WHERE REGEXP_REPLACE(pog.anthropologyplaceowner, '^.*\)''(.*)''$', '\\1') ILIKE '%""" + owner + """%'
 OR (pog.anthropologyplaceowner IS NULL AND pog.anthropologyplaceownershipnote ILIKE '%""" + owner + """%')
-GROUP BY cc.objectnumber, cp.sortableobjectnumber, cc.numberofobjects, ong.objectname, fcd.datedisplaydate, fcp.item, pog.anthropologyplaceowner, pog.anthropologyplaceownershipnote, pc.placenote
+GROUP BY cc.objectnumber, cp.sortableobjectnumber, ocg.objectcount, ong.objectname, fcd.datedisplaydate, fcp.item, pog.anthropologyplaceowner, pog.anthropologyplaceownershipnote, pc.placenote
 ORDER BY REGEXP_REPLACE(fcp.item, '^.*\)''(.*)''$', '\\1'), pog.anthropologyplaceownershipnote, cp.sortableobjectnumber
 """
 
