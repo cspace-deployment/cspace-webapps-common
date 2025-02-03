@@ -3,10 +3,13 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.7.1
-Wed Jul 17 08:53:55 PDT 2024
+This is version 6.7.2-rc1
+Mon Feb  3 12:02:06 PST 2025
 
-08583f4 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #20 from lkvoong/CSW-937
+e65e8d4 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #21 from lkvoong/CSW-945
+cc2fd46 CSW-945: Update objectCount fields for CSpace 8.0.0 schema change.
+ba2af8b (tag: 6.7.1) revise CHANGELOG.txt and bump version to 6.7.1
+08583f4 Merge pull request #20 from lkvoong/CSW-937
 eb9a052 CSC-937/CS-9131: add revised base_CS-9131.html file for PROD analytics
 67edf40 (tag: 6.7.1-rc1) revise CHANGELOG.txt and bump version to 6.7.1-rc1
 9681700 (tag: 6.7.0) revise CHANGELOG.txt and bump version to 6.7.0
