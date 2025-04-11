@@ -2,6 +2,10 @@
 <html lang="{{ LANGUAGE_CODE|default:'en-us' }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
     <title>{% block title %}{% endblock %}</title>
+
+    <!-- HMP-380 -->
+    <script async src=”https://siteimproveanalytics.com/js/siteanalyze_6294756.js”></script>
+
     {% block scripts %}
         <script type="text/javascript" src="{% static 'app.bundle.js' %}"></script>
         <script type="text/javascript">
