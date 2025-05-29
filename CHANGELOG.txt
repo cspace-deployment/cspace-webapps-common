@@ -3,10 +3,16 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 6.7.2-rc1
-Mon Feb  3 12:02:06 PST 2025
+This is version 7.0.0-rc1
+Thu May 29 10:24:32 PDT 2025
 
-e65e8d4 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #21 from lkvoong/CSW-945
+cc0b8a5 (HEAD -> main, origin/main, origin/HEAD) Merge pull request #23 from felder/felder_HMP-380
+e4216da [HMP-380] switching double quote to single quote
+748da69 Merge pull request #22 from felder/felder_HMP-380
+62d8b30 [HMP-380] probably want this here too
+6d50d01 [HMP-380] adding siteimprove script
+08704c5 (tag: 6.7.2-rc1) revise CHANGELOG.txt and bump version to 6.7.2-rc1
+e65e8d4 Merge pull request #21 from lkvoong/CSW-945
 cc2fd46 CSW-945: Update objectCount fields for CSpace 8.0.0 schema change.
 ba2af8b (tag: 6.7.1) revise CHANGELOG.txt and bump version to 6.7.1
 08583f4 Merge pull request #20 from lkvoong/CSW-937
