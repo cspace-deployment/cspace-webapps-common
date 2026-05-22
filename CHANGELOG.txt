@@ -3,10 +3,11 @@ CHANGELOG for cspace-webapps-common
 OK, it is not a *real* change log, but a list of changes resulting from git log
 sometimes with some human annotation after the fact.
 
-This is version 7.0.2
-Thu May  7 09:47:04 PDT 2026
+This is version 7.0.3-rc1
+Fri May 22 14:12:26 PDT 2026
 
-9638b38 (HEAD -> main, tag: 7.0.2-rc1, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 7.0.2-rc1
+44bd47b (HEAD -> main, tag: 7.0.2, origin/main, origin/HEAD) revise CHANGELOG.txt and bump version to 7.0.2
+9638b38 (tag: 7.0.2-rc1) revise CHANGELOG.txt and bump version to 7.0.2-rc1
 8239ec3 (tag: 7.0.1) revise CHANGELOG.txt and bump version to 7.0.1
 dc77bcb (tag: 7.0.1-rc1) revise CHANGELOG.txt and bump version to 7.0.1-rc1
 8c17d1a (tag: 7.0.0) revise CHANGELOG.txt and bump version to 7.0.0
