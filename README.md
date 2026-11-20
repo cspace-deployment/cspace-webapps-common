@@ -5,6 +5,10 @@
 This Django project supports easy access to various CollectionSpace services. To preview
 several deployments of this project at UC Berkeley, visit: https://webapps.cspace.berkeley.edu.
 
+For developers and ops: the [CollectionSpace hosting inventory](https://drive.google.com/file/d/1l4In1IwlmcXnb_7g05Sk5YJgMP3r6OQR/view) (PDF; UC Berkeley sign-in
+required) lists what runs today on the hosts of these webapps (the imageserver and the legacy BMU, `uploadmedia`, among
+them), Solr, the ETL and Glimmer.
+
 The following components are provided with this project:
 
 #### Core Applications (user-facing apps that you might actually use)
